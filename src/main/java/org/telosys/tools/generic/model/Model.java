@@ -79,23 +79,14 @@ public interface Model {
 	 */
     public String getDatabaseProductName() ;
     
-//    /**
-//     * Returns an entity for the given name (or null if not found)
-//     *
-//     * @param entityName
-//     * @return
-//     */
-//    public Entity getEntity(String entityName) ;
-
-//    /**
-//     * Returns the number of entities currently defined in the model
-//     *
-//     * @return
-//     */
-//    public final int getNumberOfEntities() {
-//        return entities.size();
-//    }
-
+    /**
+     * Returns the entity having the given id <br>
+     * (or null if no entity for the given id)
+     * @param entityUniqueId
+     * @return
+     */
+    public Entity getEntityById(String entityUniqueId) ;
+    
     /**
      * Returns all the entities defined in the model <br>
 	 * This information is MENDATORY, it must be provided by all models implementations <br>

@@ -28,12 +28,20 @@ public interface Entity
 {
 	/**
 	 * Returns all the attributes defined for this entity <br>
-	 * This information is MENDATORY, it must be provided by all models implementations <br>
+	 * This information is MANDATORY, it must be provided by all models implementations <br>
 	 * It cannot be null, if no attribute the implementation is supposed to return a void list
 	 * @return
 	 */
 	public List<Attribute> getAttributes() ;
 
+	/**
+	 * Returns the entity class name without the package ( ie : "MyClass" ) <br>
+	 * This information is MANDATORY, it must be provided by all models implementations<br>
+	 * It cannot be null or void
+	 * @return
+	 */
+	public String getClassName() ;
+	
 	/**
 	 * Returns the database catalog of the table mapped with this entity<br> 
 	 * If not supported by the model implementation : 'null'
@@ -70,33 +78,33 @@ public interface Entity
 	public String getDatabaseType() ;
 
 	/**
-	 * Returns the Java class full name ( ie : "my.package.MyClass" )
+	 * Returns the entity class full name ( ie : "my.package.MyClass" for a Java Class )
 	 * @return
 	 */
-	public String getFullName(); // TODO useful ????
+	public String getFullName();
+
+//	/**
+//	 * Returns the entity unique id. <br>
+//	 * A string identifying uniquely the entity in the model <br>
+//	 * ( ie : the class name or the table name depending on the model type)
+//	 * @return
+//	 */
+//	public String getId();
 
 	/**
 	 * Returns a list of all the links defined for the current entity<br>
-	 * This information is MENDATORY, it must be provided by all models implementations<br>
+	 * This information is MANDATORY, it must be provided by all models implementations<br>
 	 * It cannot be null, if no link the implementation is supposed to return a void list
 	 * @return
 	 */
 	public List<Link> getLinks() ;
 
 	/**
-	 * Returns the Java class name without the package ( ie : "MyClass" ) <br>
-	 * This information is MENDATORY, it must be provided by all models implementations<br>
-	 * It cannot be null or void
-	 * @return
-	 */
-	public String getName() ;
-	
-	/**
-	 * Returns the Java class package or void ( ie : "my.package" or "" ) <br> 
+	 * Returns the entity class package or void ( ie : "my.package" or "" ) <br> 
 	 * If not supported by the model implementation : 'null'
 	 * @return
 	 */
-	public String getPackage() ;
+	public String getPackageName() ;
 
 	/**
 	 * Returns TRUE if the database type of the entity is 'TABLE' <br>
