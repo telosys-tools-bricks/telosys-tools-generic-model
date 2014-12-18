@@ -63,9 +63,10 @@ public interface Link {
 	//-------------------------------------------------------------------------------------
 	/**
 	 * Returns the type of the link <br>
-	 * e.g. : java.util.List, Book, Person, ...<br>
-	 * for OneToMany/ManyToMany : the collection short type ( 'java.util.List', ...) <br>
-	 * for ManyToOne/OneToOne   : the targeted entity short type ( 'Person', 'Customer', ... ) <br>
+	 * If the type is a collection the full type is returned ( e.g. 'java.util.List', 'java.util.Set',...) <br>
+	 * If the type is an entity the simple type is returned ( 'Person', 'Customer', 'Book', ... ) <br>
+	 * For OneToMany/ManyToMany : the collection type ( 'java.util.List', ...) <br>
+	 * For ManyToOne/OneToOne   : the targeted entity short type ( 'Person', 'Customer', ... ) <br>
 	 * @return
 	 */
 	public String getFieldType() ;

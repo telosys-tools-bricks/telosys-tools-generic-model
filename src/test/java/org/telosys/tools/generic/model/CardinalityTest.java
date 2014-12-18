@@ -23,14 +23,28 @@ public class CardinalityTest {
 	@Test
 	public void test2() {
 		System.out.println("Cardinality test2 : ");
-		Cardinality cardinality = Cardinality.MANY_TO_ONE ;
-		System.out.println(" . " + cardinality + " : " + cardinality.getValue() + " / '" + cardinality.getText() + "'" );
+		check2(Cardinality.ONE_TO_ONE);
+		check2(Cardinality.ONE_TO_MANY);
+		check2(Cardinality.MANY_TO_ONE);
+		check2(Cardinality.MANY_TO_MANY);
+	}
+	public void check2(Cardinality cardinality) {
+		System.out.println(" check2 : " + cardinality + " : " + cardinality.getValue() + " / '" + cardinality.getText() + "'" );
 		switch ( cardinality ) {
+		case ONE_TO_ONE :
+			assertEquals("OneToOne",  cardinality.getText() );
+			break;
+		case ONE_TO_MANY :
+			assertEquals("OneToMany",  cardinality.getText() );
+			break;
 		case MANY_TO_ONE :
-			System.out.println("MANY_TO_ONE");
+			assertEquals("ManyToOne",  cardinality.getText() );
+			break;
+		case MANY_TO_MANY :
+			assertEquals("ManyToMany",  cardinality.getText() );
 			break;
 		default :
-			System.out.println("OTHER");
+			fail("unexpected cardinality");
 			break;
 		}
 	}
