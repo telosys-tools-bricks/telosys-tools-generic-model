@@ -18,11 +18,7 @@ package org.telosys.tools.generic.model;
 import java.util.List;
 
 /**
- * @author laguerin
- *
- */
-/**
- * @author laguerin
+ * @author Laurent Guerin
  *
  */
 public interface Link {
@@ -66,9 +62,9 @@ public interface Link {
 
 	//-------------------------------------------------------------------------------------
 	/**
-	 * Returns the 'simple type' of the link <br>
-	 * e.g. : List, List<Person>, Person, ...<br>
-	 * for OneToMany/ManyToMany : the collection short type ( 'List', ...)<br>
+	 * Returns the type of the link <br>
+	 * e.g. : java.util.List, Book, Person, ...<br>
+	 * for OneToMany/ManyToMany : the collection short type ( 'java.util.List', ...) <br>
 	 * for ManyToOne/OneToOne   : the targeted entity short type ( 'Person', 'Customer', ... ) <br>
 	 * @return
 	 */
