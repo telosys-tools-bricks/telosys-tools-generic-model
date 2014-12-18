@@ -80,12 +80,22 @@ public interface Model {
     public String getDatabaseProductName() ;
     
     /**
-     * Returns the entity having the given id <br>
-     * (or null if no entity for the given id)
-     * @param entityUniqueId
+     * Returns the instance of the entity having the given class name <br>
+     * (or null if no entity found)
+     * @param entityClassName
      * @return
      */
-    public Entity getEntityById(String entityUniqueId) ;
+    public Entity getEntityByClassName(String entityClassName) ;
+    
+    /**
+     * Returns the instance of the entity having the given table name <br>
+     * (or null if no entity found)<br>
+     * Supported only by a model based on a database schema <br>
+     * (if not supported always return 'null')
+     * @param entityTableName
+     * @return
+     */
+    public Entity getEntityByTableName(String entityTableName) ;
     
     /**
      * Returns all the entities defined in the model <br>

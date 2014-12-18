@@ -36,7 +36,8 @@ public interface Entity
 
 	/**
 	 * Returns the entity class name without the package ( ie : "MyClass" ) <br>
-	 * This information is MANDATORY, it must be provided by all models implementations<br>
+	 * This information is MANDATORY, it must be provided by all models implementations <br>
+	 * It must be unique in the model <br>
 	 * It cannot be null or void
 	 * @return
 	 */
@@ -64,8 +65,9 @@ public interface Entity
 	public String getDatabaseSchema() ;
 	
 	/**
-	 * Returns the database table mapped with this entity<br> 
-	 * If not supported by the model implementation : 'null'
+	 * Returns the database table mapped with this entity <br> 
+	 * If not supported by the model implementation : 'null'  <br> 
+	 * If provided, it must be unique in the model <br>
 	 * @return
 	 */
 	public String getDatabaseTable(); 
