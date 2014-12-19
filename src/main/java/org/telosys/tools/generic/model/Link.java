@@ -40,6 +40,7 @@ public interface Link {
 	//-------------------------------------------------------------------------------------
 	/**
 	 * Returns the name of the target table (table referenced by the link) 
+	 * Can be null (if no database schema)
 	 * @return
 	 */
 	public String getTargetTableName() ;
@@ -80,7 +81,8 @@ public interface Link {
 
 	/**
 	 * Returns the name of the link in the 'owning side' <br>
-	 * Typically for JPA 'mappedBy'
+	 * Typically for JPA 'mappedBy' <br>
+	 * Can be null 
 	 * @return
 	 */
 	public String getMappedBy() ;
@@ -93,6 +95,11 @@ public interface Link {
 	public boolean isSelected() ; 
 	
 	//--------------------------------------------------------------------------
+	/**
+	 * Returns the name of the table name <br>
+	 * Can be null (if no database schema)
+	 * @return
+	 */
 	public String getSourceTableName() ;
 
 	//--------------------------------------------------------------------------
@@ -103,7 +110,8 @@ public interface Link {
 	public boolean isInverseSide() ;
 
 	/**
-	 * Returns the link id of the inverse side 
+	 * Returns the link id of the inverse side <br>
+	 * Can be null if no inverse side 
 	 * @return
 	 */
 	public String getInverseSideLinkId() ;
@@ -163,6 +171,7 @@ public interface Link {
 
 	/**
 	 * Returns the cascade options of the link : "ALL", "MERGE", "PERSIST", "REFRESH", "REMOVE" <br>
+	 * Can be null if no 'cascade options'
 	 * @return
 	 */
 	public CascadeOptions getCascadeOptions() ;
@@ -213,7 +222,7 @@ public interface Link {
 
 	/**
 	 * Returns the name of the Join Table used to generate the link <br>
-	 * There's no guarantee that this Foreign Key still exist
+	 * NB : can be null if the link doesn't have a 'join table'
 	 * @return
 	 */
 	public String getJoinTableName() ;

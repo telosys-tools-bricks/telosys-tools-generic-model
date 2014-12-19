@@ -284,22 +284,22 @@ public interface Attribute {
 	 */
 	public String getTableGeneratorValueColumnName() ;
 
-	/**
-	 * Returns the recommended type for the attribute <br>
-	 * usually the simple type ( 'int', 'BigDecimal', 'Date' ) <br>
-	 * sometimes the full type ( if the simple type is considered as ambiguous ) <br>
-	 * Examples for Java : 'int', 'BigDecimal', 'Date', 'java.util.Date', 'java.sql.Date'
-	 * @return
-	 */
-	public String getType(); // TODO useful ????
-
-	/**
-	 * Returns the Java wrapper type corresponding to the attribute's primitive type <br>
-	 * Examples : 'Float' for 'float', 'Integer' for 'int', 'Boolean' for 'boolean', ... <br>
-	 * The attribute's type is returned as is if it's not a primitive type
-	 * @return
-	 */
-	public String getWrapperType(); // TODO useful ????
+//	/**
+//	 * Returns the recommended type for the attribute <br>
+//	 * usually the simple type ( 'int', 'BigDecimal', 'Date' ) <br>
+//	 * sometimes the full type ( if the simple type is considered as ambiguous ) <br>
+//	 * Examples for Java : 'int', 'BigDecimal', 'Date', 'java.util.Date', 'java.sql.Date'
+//	 * @return
+//	 */
+//	public String getType(); // TODO useful ????
+//
+//	/**
+//	 * Returns the Java wrapper type corresponding to the attribute's primitive type <br>
+//	 * Examples : 'Float' for 'float', 'Integer' for 'int', 'Boolean' for 'boolean', ... <br>
+//	 * The attribute's type is returned as is if it's not a primitive type
+//	 * @return
+//	 */
+//	public String getWrapperType(); // TODO useful ????
 	
 	/**
 	 * Returns TRUE if the attribute has a 'Sequence Generator' <br>
