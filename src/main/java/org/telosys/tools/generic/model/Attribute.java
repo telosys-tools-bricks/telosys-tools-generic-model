@@ -419,11 +419,4 @@ public interface Attribute {
 	 */
 	public boolean isUsedInForeignKey() ;
 
-	/**
-	 * Returns TRUE if the attribute is embedded (useful for NoSQL databases)<br>
-	 * If not supported by the model implementation : 'false' 
-	 * @return
-	 */
-	public boolean isEmbedded() ;
-
 }

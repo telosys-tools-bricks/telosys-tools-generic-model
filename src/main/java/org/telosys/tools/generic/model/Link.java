@@ -235,4 +235,12 @@ public interface Link {
 	 */
 	public String getComparableString() ; 
 	
+	//--------------------------------------------------------------------------
+	/**
+	 * Returns TRUE if the entity referenced by the link is embedded (useful for NoSQL databases)<br>
+	 * If not supported by the model implementation : 'false' 
+	 * @return
+	 */
+	public boolean isEmbedded() ;
+	
 }
