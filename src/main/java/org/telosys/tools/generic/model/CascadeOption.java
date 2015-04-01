@@ -47,7 +47,7 @@ public enum CascadeOption {
 	/**
 	 * 
 	 */
-	ALL(4, "REMOVE");
+	ALL(4, "ALL");
 	
 	//---------------------------------------------------
 	private final int    value ;

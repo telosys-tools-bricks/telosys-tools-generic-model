@@ -15,6 +15,9 @@
  */
 package org.telosys.tools.generic.model;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Object containing a set of selected 'cascade options'
  * 
@@ -73,6 +76,16 @@ public class CascadeOptions {
 	 */
 	public boolean isCascadeRemove() {
 		return cascadeOptions[CascadeOption.REMOVE.getValue()] == CascadeOption.REMOVE ;
+	}
+	
+	public List<CascadeOption> getActiveOptions() {
+		LinkedList<CascadeOption> list = new LinkedList<CascadeOption>() ;
+		for ( CascadeOption cascadeOption : cascadeOptions ) {
+			if ( cascadeOption != null ) {
+				list.add(cascadeOption);
+			}
+		}
+		return list;
 	}
 	
 	/* (non-Javadoc)

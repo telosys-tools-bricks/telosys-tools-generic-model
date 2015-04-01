@@ -94,4 +94,30 @@ public class CascadeOptionsTest {
 		assertTrue(s.indexOf("MERGE") >= 0 );
 		assertTrue(s.indexOf("REMOVE") < 0 );
 	}
+
+	@Test
+	public void test4() {
+		System.out.println("\nCascadeOptionsTest : test4 : ");
+		CascadeOptions cascadeOptions = new CascadeOptions();
+
+		System.out.println("toString() = " + cascadeOptions.toString());		
+		assertEquals(0,	cascadeOptions.getActiveOptions().size() );
+		
+		cascadeOptions.add(CascadeOption.MERGE);
+		System.out.println("toString() = " + cascadeOptions.toString());		
+		assertEquals(1,	cascadeOptions.getActiveOptions().size() );
+
+		cascadeOptions.add(CascadeOption.MERGE);
+		System.out.println("toString() = " + cascadeOptions.toString());		
+		assertEquals(1,	cascadeOptions.getActiveOptions().size() );
+
+		cascadeOptions.add(CascadeOption.PERSIST);
+		System.out.println("toString() = " + cascadeOptions.toString());		
+		assertEquals(2,	cascadeOptions.getActiveOptions().size() );
+
+		cascadeOptions.add(CascadeOption.ALL);
+		System.out.println("toString() = " + cascadeOptions.toString());		
+		assertEquals(3,	cascadeOptions.getActiveOptions().size() );
+
+	}
 }
