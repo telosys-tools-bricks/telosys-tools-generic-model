@@ -15,6 +15,7 @@
  */
 package org.telosys.tools.generic.model;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,8 +25,10 @@ import java.util.List;
  * @author Laurent Guerin
  *
  */
-public class CascadeOptions {
+public class CascadeOptions implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	private final static String CASCADE_ALL = "ALL";
 
 	private final CascadeOption cascadeOptions[] = new CascadeOption[CascadeOption.values().length];
