@@ -48,4 +48,52 @@ public class CardinalityTest {
 			break;
 		}
 	}
+
+	@Test
+	public void test3() {
+		System.out.println("Cardinality test3 : ");
+		
+		assertTrue(Cardinality.ONE_TO_MANY.isToMany() );
+		assertFalse(Cardinality.ONE_TO_MANY.isToOne());
+		
+		assertTrue(Cardinality.MANY_TO_MANY.isToMany() );
+		assertFalse(Cardinality.MANY_TO_MANY.isToOne() );
+
+		assertFalse(Cardinality.MANY_TO_ONE.isToMany() );
+		assertTrue(Cardinality.MANY_TO_ONE.isToOne() );
+
+		assertFalse(Cardinality.ONE_TO_ONE.isToMany() );
+		assertTrue(Cardinality.ONE_TO_ONE.isToOne() );
+
+		assertFalse(Cardinality.UNDEFINED.isToMany() );
+		assertFalse(Cardinality.UNDEFINED.isToOne() );
+
+		Cardinality cardinality = null ;
+		
+		cardinality = Cardinality.ONE_TO_MANY ;
+		System.out.println(cardinality);
+		assertTrue(cardinality.isToMany());
+		assertFalse(cardinality.isToOne());
+
+		cardinality = Cardinality.MANY_TO_MANY ;
+		System.out.println(cardinality);
+		assertTrue(cardinality.isToMany());
+		assertFalse(cardinality.isToOne());
+		
+		cardinality = Cardinality.MANY_TO_ONE ;
+		System.out.println(cardinality);
+		assertFalse(cardinality.isToMany());
+		assertTrue(cardinality.isToOne());
+		
+		cardinality = Cardinality.ONE_TO_ONE ;
+		System.out.println(cardinality);
+		assertFalse(cardinality.isToMany());
+		assertTrue(cardinality.isToOne());
+		
+		cardinality = Cardinality.UNDEFINED ;
+		System.out.println(cardinality);
+		assertFalse(cardinality.isToMany());
+		assertFalse(cardinality.isToOne());
+		
+	}
 }

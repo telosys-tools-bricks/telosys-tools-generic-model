@@ -74,4 +74,24 @@ public enum Cardinality {
 	public String getText() {
 		return this.text;
 	}
+	
+	/**
+	 * Returns true if the cardinality is "MANY_TO_ONE" or "ONE_TO_ONE"
+	 * @return
+	 */
+	public boolean isToOne() {
+		if ( this == MANY_TO_ONE ) return true ;
+		if ( this == ONE_TO_ONE ) return true ;
+		return false ;
+	}
+
+	/**
+	 * Returns true if the cardinality is "ONE_TO_MANY" or "MANY_TO_MANY"
+	 * @return
+	 */
+	public boolean isToMany() {
+		if ( this == ONE_TO_MANY ) return true ;
+		if ( this == MANY_TO_MANY ) return true ;
+		return false ;
+	}
 }
