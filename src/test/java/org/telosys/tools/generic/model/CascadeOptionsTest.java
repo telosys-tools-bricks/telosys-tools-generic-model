@@ -1,6 +1,10 @@
 package org.telosys.tools.generic.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
 
 import org.junit.Test;
 
@@ -11,6 +15,21 @@ public class CascadeOptionsTest {
 		System.out.println("\nCascadeOptionsTest : test0 : ");
 		System.out.println("CascadeOption.values().length = " + CascadeOption.values().length);
 		assertEquals(5, CascadeOption.values().length );
+	}
+	
+	@Test
+	public void testInitialState() {
+		System.out.println("\nCascadeOptionsTest : initial state ");
+		CascadeOptions cascadeOptions = new CascadeOptions();
+		//--- All cascade options are supposed to be "false"
+		assertFalse(cascadeOptions.isCascadeAll());
+		assertFalse(cascadeOptions.isCascadeMerge());
+		assertFalse(cascadeOptions.isCascadePersist());
+		assertFalse(cascadeOptions.isCascadeRefresh());
+		assertFalse(cascadeOptions.isCascadeRemove());
+		//--- List of "active options" is supposed to be void
+		List<CascadeOption> activeOptions = cascadeOptions.getActiveOptions();
+		assertEquals(0, activeOptions.size());
 	}
 	
 	@Test
