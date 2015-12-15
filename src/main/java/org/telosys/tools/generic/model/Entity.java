@@ -124,4 +124,11 @@ public interface Entity
 	 */
 	public Boolean isViewType() ;
 
+	/**
+	 * Returns a list of warnings about the current entity <br>
+	 * e.g. "No primary key" for an entity based on a table in a database model <br>
+	 * @return a list of warnings or null if none
+	 */
+	public List<String> getWarnings() ;
+
 }
