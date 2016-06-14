@@ -15,6 +15,8 @@
  */
 package org.telosys.tools.generic.model;
 
+import java.math.BigDecimal;
+
 /**
  * This interface describe an abstract attribute that must be implemented 
  * by each attribute in a concrete model 
@@ -184,7 +186,8 @@ public interface Attribute {
 	 * If not supported by the model implementation : 'null'
 	 * @return
 	 */
-	public Integer getMaxValue() ;
+//	public Integer getMaxValue() ;
+	public BigDecimal getMaxValue() ;
 
 	/**
 	 * Returns the "minimum" length if any (null if none) <br> 
@@ -198,7 +201,8 @@ public interface Attribute {
 	 * If not supported by the model implementation : 'null'
 	 * @return
 	 */
-	public Integer getMinValue() ;
+//	public Integer getMinValue() ;
+	public BigDecimal getMinValue() ;
 
 	/**
 	 * Returns the name of the attribute <br> 
