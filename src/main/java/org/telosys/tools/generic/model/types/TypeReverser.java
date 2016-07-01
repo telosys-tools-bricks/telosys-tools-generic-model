@@ -28,9 +28,15 @@ import org.telosys.tools.generic.model.DateType;
  */
 public class TypeReverser {
 
+	public final static TypeReverser typeReverser = new TypeReverser() ;
+	public final static TypeReverser getInstance() {
+		return typeReverser ;
+	}
+	
+	
 	private final HashMap<String,String> types = new HashMap<String,String>();
 
-	public TypeReverser() {
+	private TypeReverser() {
 		super();
 		
 		//--- Java primitive types
@@ -58,13 +64,13 @@ public class TypeReverser {
 		types.put(java.lang.Double.class.getCanonicalName(),     NeutralType.DOUBLE ) ;
 		types.put(java.math.BigDecimal.class.getCanonicalName(), NeutralType.DECIMAL ) ;
 		
-		types.put(java.nio.ByteBuffer.class.getCanonicalName(),  NeutralType.BINARY ) ;
+//		types.put(java.nio.ByteBuffer.class.getCanonicalName(),  NeutralType.BINARY ) ;
 
 		//--- Java object - SQL Types
 		types.put(java.sql.Date.class.getCanonicalName(),      NeutralType.DATE ) ;
 		types.put(java.sql.Time.class.getCanonicalName(),      NeutralType.TIME ) ;
 		types.put(java.sql.Timestamp.class.getCanonicalName(), NeutralType.TIMESTAMP ) ;
-		types.put(java.sql.Clob.class.getCanonicalName(),      NeutralType.LONGTEXT ) ;
+		types.put(java.sql.Clob.class.getCanonicalName(),      NeutralType.STRING ) ;
 		types.put(java.sql.Blob.class.getCanonicalName(),      NeutralType.BINARY ) ;
 		
 	}
@@ -79,14 +85,19 @@ public class TypeReverser {
 		else {
 			// Ambiguous types : java.util.Date
 			if ( java.util.Date.class.getCanonicalName().equals(javaType) ) {
-				switch ( dateType ) {
-				case DATE_ONLY :
-					return NeutralType.DATE ;
-				case TIME_ONLY :
-					return NeutralType.TIME ;
-				case DATE_AND_TIME :
-					return NeutralType.TIMESTAMP ;
-				default :
+				if ( dateType != null ) {
+					switch ( dateType ) {
+					case DATE_ONLY :
+						return NeutralType.DATE ;
+					case TIME_ONLY :
+						return NeutralType.TIME ;
+					case DATE_AND_TIME :
+						return NeutralType.TIMESTAMP ;
+					default :
+						return NeutralType.DATE ;
+					}
+				}
+				else {
 					return NeutralType.DATE ;
 				}
 			}

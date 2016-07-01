@@ -169,11 +169,14 @@ public abstract class TypeConverter {
 		}
 	}
 
+	/**
+	 * Returns the LanguageType that suits as well as possible with the given attribute's characteristics
+	 * @param attribute
+	 * @return
+	 */
 	public final LanguageType getType(Attribute attribute) {
 		
-		// TODO
-//		String neutralType = attribute.getNeutralType();
-		String neutralType = "???";
+		String neutralType = attribute.getNeutralType();
 		
 		int typeInfo = 0 ;		
 		if ( attribute.isNotNull() ) {

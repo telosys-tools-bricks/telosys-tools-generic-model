@@ -205,11 +205,19 @@ public interface Attribute {
 	public BigDecimal getMinValue() ;
 
 	/**
-	 * Returns the name of the attribute <br> 
+	 * Returns the attribute's name <br> 
 	 * This information is MENDATORY, it must be provided by all models implementations
 	 * @return
 	 */
 	public String getName();
+
+	/**
+	 * Returns the original neutral type defined in the model <br> 
+	 * e.g. "string", "int", "decimal", etc <br>
+	 * This information is MENDATORY, it must be provided by all models implementations <br>
+	 * @return
+	 */
+	public String getNeutralType();
 
 	/**
 	 * Returns the validation "pattern" (Reg Exp) if any, (null if none) <br> 

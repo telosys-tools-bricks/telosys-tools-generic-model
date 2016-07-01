@@ -2,10 +2,14 @@ package org.telosys.tools.generic.model.types;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.telosys.tools.generic.model.types.AttributeTypeInfo.*;
+import static org.telosys.tools.generic.model.types.AttributeTypeInfo.NONE;
+import static org.telosys.tools.generic.model.types.AttributeTypeInfo.NOT_NULL;
+import static org.telosys.tools.generic.model.types.AttributeTypeInfo.OBJECT_TYPE;
+import static org.telosys.tools.generic.model.types.AttributeTypeInfo.PRIMITIVE_TYPE;
+import static org.telosys.tools.generic.model.types.AttributeTypeInfo.SQL_TYPE;
+import static org.telosys.tools.generic.model.types.AttributeTypeInfo.UNSIGNED_TYPE;
 
 import java.math.BigDecimal;
-import java.nio.ByteBuffer;
 
 import org.junit.Test;
 
@@ -185,45 +189,45 @@ public class TypeConverterForJavaTest  {
 		check( getType(tc, NeutralType.TIMESTAMP, PRIMITIVE_TYPE + SQL_TYPE ), java.sql.Timestamp.class); // not compatible (no Prim type => SQL Time)	
 	}
 
-	@Test
-	public void testLongText() {
-		System.out.println("--- ");
-		TypeConverter tc = new TypeConverterForJava() ;
-		
-		// Supposed to always return BigDecimal (in any cases) 
-		check( getType(tc, NeutralType.LONGTEXT, NONE ), String.class);
-		check( getType(tc, NeutralType.LONGTEXT, NOT_NULL ), String.class);
-		
-		check( getType(tc, NeutralType.LONGTEXT, PRIMITIVE_TYPE ), String.class);
-		check( getType(tc, NeutralType.LONGTEXT, UNSIGNED_TYPE ), String.class);
-		check( getType(tc, NeutralType.LONGTEXT, PRIMITIVE_TYPE + UNSIGNED_TYPE ), String.class);
-		
-		check( getType(tc, NeutralType.LONGTEXT, OBJECT_TYPE ), String.class);
-		check( getType(tc, NeutralType.LONGTEXT, NOT_NULL + OBJECT_TYPE ), String.class);
-
-		check( getType(tc, NeutralType.LONGTEXT, SQL_TYPE ), java.sql.Clob.class);	 // SQL CLOB	
-		check( getType(tc, NeutralType.LONGTEXT, NOT_NULL + SQL_TYPE ), java.sql.Clob.class); // SQL CLOB	
-		check( getType(tc, NeutralType.LONGTEXT, OBJECT_TYPE + SQL_TYPE ), java.sql.Clob.class); // SQL CLOB	
-		
-		check( getType(tc, NeutralType.LONGTEXT, PRIMITIVE_TYPE + OBJECT_TYPE ), String.class); // not compatible (no Prim type => String)
-		check( getType(tc, NeutralType.LONGTEXT, PRIMITIVE_TYPE + SQL_TYPE ), java.sql.Clob.class); // not compatible (no Prim type => SQL CLOB)	
-	}
+//	@Test
+//	public void testLongText() {
+//		System.out.println("--- ");
+//		TypeConverter tc = new TypeConverterForJava() ;
+//		
+//		// Supposed to always return BigDecimal (in any cases) 
+//		check( getType(tc, NeutralType.LONGTEXT, NONE ), String.class);
+//		check( getType(tc, NeutralType.LONGTEXT, NOT_NULL ), String.class);
+//		
+//		check( getType(tc, NeutralType.LONGTEXT, PRIMITIVE_TYPE ), String.class);
+//		check( getType(tc, NeutralType.LONGTEXT, UNSIGNED_TYPE ), String.class);
+//		check( getType(tc, NeutralType.LONGTEXT, PRIMITIVE_TYPE + UNSIGNED_TYPE ), String.class);
+//		
+//		check( getType(tc, NeutralType.LONGTEXT, OBJECT_TYPE ), String.class);
+//		check( getType(tc, NeutralType.LONGTEXT, NOT_NULL + OBJECT_TYPE ), String.class);
+//
+//		check( getType(tc, NeutralType.LONGTEXT, SQL_TYPE ), java.sql.Clob.class);	 // SQL CLOB	
+//		check( getType(tc, NeutralType.LONGTEXT, NOT_NULL + SQL_TYPE ), java.sql.Clob.class); // SQL CLOB	
+//		check( getType(tc, NeutralType.LONGTEXT, OBJECT_TYPE + SQL_TYPE ), java.sql.Clob.class); // SQL CLOB	
+//		
+//		check( getType(tc, NeutralType.LONGTEXT, PRIMITIVE_TYPE + OBJECT_TYPE ), String.class); // not compatible (no Prim type => String)
+//		check( getType(tc, NeutralType.LONGTEXT, PRIMITIVE_TYPE + SQL_TYPE ), java.sql.Clob.class); // not compatible (no Prim type => SQL CLOB)	
+//	}
 
 	@Test
 	public void testBinary() {
 		System.out.println("--- ");
 		TypeConverter tc = new TypeConverterForJava() ;
 		
-		// Supposed to always return BigDecimal (in any cases) 
-		check( getType(tc, NeutralType.BINARY, NONE ), ByteBuffer.class);
+		// 
+		check( getType(tc, NeutralType.BINARY, NONE ),      byte[].class);
 		check( getType(tc, NeutralType.BINARY, NOT_NULL ),  byte[].class);
 		
 		check( getType(tc, NeutralType.BINARY, PRIMITIVE_TYPE ),  byte[].class);
 		check( getType(tc, NeutralType.BINARY, UNSIGNED_TYPE ),  byte[].class);
 		check( getType(tc, NeutralType.BINARY, PRIMITIVE_TYPE + UNSIGNED_TYPE ),  byte[].class);
 		
-		check( getType(tc, NeutralType.BINARY, OBJECT_TYPE ),  ByteBuffer.class);
-		check( getType(tc, NeutralType.BINARY, NOT_NULL + OBJECT_TYPE ),  ByteBuffer.class);
+		check( getType(tc, NeutralType.BINARY, OBJECT_TYPE ),  byte[].class);
+		check( getType(tc, NeutralType.BINARY, NOT_NULL + OBJECT_TYPE ),  byte[].class);
 
 		check( getType(tc, NeutralType.BINARY, SQL_TYPE ), java.sql.Blob.class);	 // SQL BLOB	
 		check( getType(tc, NeutralType.BINARY, NOT_NULL + SQL_TYPE ), java.sql.Blob.class); // SQL BLOB	

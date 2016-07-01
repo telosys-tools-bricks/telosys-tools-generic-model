@@ -45,6 +45,6 @@ public final class NeutralType {
     public static final String TIMESTAMP = "timestamp";
     
     public static final String BINARY   = "binary";   // BLOB
-    public static final String LONGTEXT = "longtext"; // CLOB
+    // public static final String LONGTEXT = "longtext"; // CLOB
 
 }

@@ -39,14 +39,14 @@ public class TypeConverterForJava extends TypeConverter {
 		declareObjectType(NeutralType.DATE,      buildJavaType(java.util.Date.class) );
 		declareObjectType(NeutralType.TIME,      buildJavaType(java.util.Date.class) );
 		declareObjectType(NeutralType.TIMESTAMP, buildJavaType(java.util.Date.class) );
-		declareObjectType(NeutralType.LONGTEXT,  buildJavaType(java.lang.String.class) );
-		declareObjectType(NeutralType.BINARY,    buildJavaType(java.nio.ByteBuffer.class) );
+//		declareObjectType(NeutralType.LONGTEXT,  buildJavaType(java.lang.String.class) );
+//		declareObjectType(NeutralType.BINARY,    buildJavaType(java.nio.ByteBuffer.class) );
 
 		//--- Object SQL types 
 		declareObjectSqlType(NeutralType.DATE,      buildJavaType(java.sql.Date.class) );
 		declareObjectSqlType(NeutralType.TIME,      buildJavaType(java.sql.Time.class) );
 		declareObjectSqlType(NeutralType.TIMESTAMP, buildJavaType(java.sql.Timestamp.class) );
-		declareObjectSqlType(NeutralType.LONGTEXT,  buildJavaType(java.sql.Clob.class) );
+//		declareObjectSqlType(NeutralType.LONGTEXT,  buildJavaType(java.sql.Clob.class) );
 		declareObjectSqlType(NeutralType.BINARY,    buildJavaType(java.sql.Blob.class) );
 		
 		//--- Primitive types 
