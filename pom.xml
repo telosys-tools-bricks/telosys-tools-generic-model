@@ -17,6 +17,11 @@
 	
 	<dependencies>
 		<!-- for compilation -->
+		<dependency>
+			<groupId>${project.parent.groupId}</groupId>
+			<artifactId>telosys-tools-commons</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
 		
 		<!-- for tests -->
 	</dependencies>

@@ -102,6 +102,13 @@ public class TypeConverterForJavaTest  {
 		check(lt, short.class);		
 		lt = getType(tc, NeutralType.SHORT, UNSIGNED_TYPE + SQL_TYPE ); // not compatible (primitive type has priority)
 		check(lt, short.class);		
+
+		
+		check( getType(tc, NeutralType.SHORT, OBJECT_TYPE ), Short.class);
+		check( getType(tc, NeutralType.SHORT, OBJECT_TYPE + NOT_NULL), Short.class);
+		check( getType(tc, NeutralType.SHORT, SQL_TYPE), Short.class);
+		check( getType(tc, NeutralType.SHORT, SQL_TYPE + NOT_NULL), Short.class);
+		check( getType(tc, NeutralType.SHORT, SQL_TYPE + OBJECT_TYPE), Short.class);
 	}
 
 	@Test

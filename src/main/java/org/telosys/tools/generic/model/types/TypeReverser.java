@@ -34,11 +34,15 @@ public class TypeReverser {
 	}
 	
 	
-	private final HashMap<String,String> types = new HashMap<String,String>();
+	private final HashMap<String,String>            types     = new HashMap<String,String>();
+	private final HashMap<String,AttributeTypeInfo> typesInfo = new HashMap<String,AttributeTypeInfo>();
 
 	private TypeReverser() {
 		super();
 		
+		//----------------------------------------------------------------------------------------
+		// Mapping Java type --> neutral type
+		//----------------------------------------------------------------------------------------
 		//--- Java primitive types
 		types.put(boolean.class.getSimpleName(), NeutralType.BOOLEAN ) ;
 		types.put(byte.class.getSimpleName(),    NeutralType.BYTE ) ;
@@ -73,9 +77,49 @@ public class TypeReverser {
 		types.put(java.sql.Clob.class.getCanonicalName(),      NeutralType.STRING ) ;
 		types.put(java.sql.Blob.class.getCanonicalName(),      NeutralType.BINARY ) ;
 		
+		
+		//----------------------------------------------------------------------------------------
+		// Mapping Java type --> type info ( primitive type, unsigned type, object type, sql type )
+		//----------------------------------------------------------------------------------------
+		AttributeTypeInfo primitiveType = new AttributeTypeInfo("", AttributeTypeInfo.PRIMITIVE_TYPE);
+		AttributeTypeInfo objectType    = new AttributeTypeInfo("", AttributeTypeInfo.OBJECT_TYPE);
+		AttributeTypeInfo sqlType       = new AttributeTypeInfo("", AttributeTypeInfo.SQL_TYPE);
+		//--- Java primitive types
+		typesInfo.put(boolean.class.getSimpleName(), primitiveType ) ;
+		typesInfo.put(byte.class.getSimpleName(),    primitiveType) ;
+		typesInfo.put(short.class.getSimpleName(),   primitiveType ) ;
+		typesInfo.put(int.class.getSimpleName(),     primitiveType ) ;
+		typesInfo.put(long.class.getSimpleName(),    primitiveType) ;
+		typesInfo.put(float.class.getSimpleName(),   primitiveType) ;
+		typesInfo.put(double.class.getSimpleName(),  primitiveType ) ;
+		typesInfo.put(byte[].class.getSimpleName(),  primitiveType ) ;
+
+		//--- Java object - standard types
+		typesInfo.put(java.lang.String.class.getCanonicalName(),     objectType ) ;
+		typesInfo.put(java.lang.Boolean.class.getCanonicalName(),    objectType ) ;
+		typesInfo.put(java.lang.Byte.class.getCanonicalName(),       objectType ) ;
+		typesInfo.put(java.lang.Short.class.getCanonicalName(),      objectType ) ;
+		typesInfo.put(java.lang.Integer.class.getCanonicalName(),    objectType ) ;
+		typesInfo.put(java.lang.Long.class.getCanonicalName(),       objectType ) ;
+		typesInfo.put(java.lang.Float.class.getCanonicalName(),      objectType ) ;
+		typesInfo.put(java.lang.Double.class.getCanonicalName(),     objectType ) ;
+		typesInfo.put(java.math.BigDecimal.class.getCanonicalName(), objectType ) ;
+
+		//--- Java object - SQL Types
+		typesInfo.put(java.sql.Date.class.getCanonicalName(),      sqlType ) ;
+		typesInfo.put(java.sql.Time.class.getCanonicalName(),      sqlType ) ;
+		typesInfo.put(java.sql.Timestamp.class.getCanonicalName(), sqlType ) ;
+		typesInfo.put(java.sql.Clob.class.getCanonicalName(),      sqlType ) ;
+		typesInfo.put(java.sql.Blob.class.getCanonicalName(),      sqlType ) ;
 	}
 
 
+	/**
+	 * Returns the neutral type corresponding to the given Java type
+	 * @param javaType
+	 * @param dateType
+	 * @return
+	 */
 	public String getNeutralType(String javaType, DateType dateType) {
 		String neutralType= types.get(javaType) ;
 		if ( neutralType != null ) {
@@ -104,6 +148,24 @@ public class TypeReverser {
 			else {
 				throw new IllegalStateException("Unexpected java type '" + javaType + "'");
 			}
+		}
+	}
+	
+	/**
+	 * Returns the neutral type information corresponding to the given Java type <br>
+	 * ( contains info like "primitive type expected", "object type expected", "unsigned type expected", etc ) <br>
+	 * @param javaType
+	 * @return
+	 */
+	public AttributeTypeInfo getTypeInfo(String javaType) {
+	
+		AttributeTypeInfo typeInfo = typesInfo.get(javaType) ;
+		if ( typeInfo != null ) {
+			// Found
+			return typeInfo ; 
+		}
+		else {
+			throw new IllegalStateException("Unexpected java type '" + javaType + "'");
 		}
 	}
 }

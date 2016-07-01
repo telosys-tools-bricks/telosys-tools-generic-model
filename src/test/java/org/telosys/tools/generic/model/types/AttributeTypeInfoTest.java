@@ -129,4 +129,19 @@ public class AttributeTypeInfoTest  {
 		assertTrue( attributeTypeInfo.isUnsignedTypeExpected() );
 		assertFalse( attributeTypeInfo.isSqlTypeExpected() );
 	}
+
+	@Test
+	public void test12() {
+		int typeInfo = 0 ;
+		typeInfo += NOT_NULL ;
+		typeInfo += OBJECT_TYPE ;
+		
+		AttributeTypeInfo attributeTypeInfo = new AttributeTypeInfo(NeutralType.SHORT, typeInfo );
+		System.out.println(attributeTypeInfo);
+		assertTrue( attributeTypeInfo.isNotNull() );
+		assertFalse( attributeTypeInfo.isPrimitiveTypeExpected() );
+		assertTrue( attributeTypeInfo.isObjectTypeExpected() );
+		assertFalse( attributeTypeInfo.isUnsignedTypeExpected() );
+		assertFalse( attributeTypeInfo.isSqlTypeExpected() );
+	}
 }

@@ -431,4 +431,36 @@ public interface Attribute {
 	 */
 	public boolean isUsedInForeignKey() ;
 
+	/**
+	 * Returns TRUE if a primitive type is expected for this attribute <br>
+	 * e.g. for Java : short, boolean, float, etc <br>
+	 * If not supported by the model implementation : 'false'
+	 * @return
+	 */
+    public boolean isPrimitiveTypeExpected() ;
+
+	/**
+	 * Returns TRUE if an object type is expected for this attribute <br>
+	 * e.g. for Java : Short, Boolean, Float, BigDecimal, etc <br>
+	 * If not supported by the model implementation : 'false'
+	 * @return
+	 */
+    public boolean isObjectTypeExpected() ;
+
+	/**
+	 * Returns TRUE if an unsigned type is expected for this attribute <br>
+	 * e.g. for C# : ushort, uint, ulong, etc <br>
+	 * If not supported by the model implementation : 'false'
+	 * @return
+	 */
+    public boolean isUnsignedTypeExpected() ;
+
+	/**
+	 * Returns TRUE if an SQL type is expected for this attribute <br>
+	 * e.g. for Java : java.sql.Date, java.sql.Time, etc <br>
+	 * If not supported by the model implementation : 'false'
+	 * @return
+	 */
+    public boolean isSqlTypeExpected() ;
+
 }

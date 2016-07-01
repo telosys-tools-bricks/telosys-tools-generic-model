@@ -17,6 +17,8 @@ package org.telosys.tools.generic.model.types;
 
 import java.util.HashMap;
 
+import org.telosys.tools.commons.ConsoleLogger;
+import org.telosys.tools.commons.TelosysToolsLogger;
 import org.telosys.tools.generic.model.Attribute;
 
 /**
@@ -27,6 +29,14 @@ import org.telosys.tools.generic.model.Attribute;
  *
  */
 public abstract class TypeConverter {
+	
+	private final static boolean log = false ;
+	private final static TelosysToolsLogger logger = new ConsoleLogger();
+	private void log(String msg) {
+		if ( log ) {
+			logger.log(this, msg);
+		}
+	}
 
 	private final HashMap<String, LanguageType> primitiveTypes         = new HashMap<String, LanguageType>();
 	private final HashMap<String, LanguageType> primitiveUnsignedTypes = new HashMap<String, LanguageType>();
@@ -127,27 +137,36 @@ public abstract class TypeConverter {
 	 */
 	public final LanguageType getType(AttributeTypeInfo attributeTypeInfo) {
 		
+		log("type info : " + attributeTypeInfo );
+		
+		log("STEP 1" );
 		//--- 1) Process explicit requirements first (if any)
 		// A primitive type is explicitly required ( @PrimitiveType or @UnsignedType )
 		if ( attributeTypeInfo.isPrimitiveTypeExpected() || attributeTypeInfo.isUnsignedTypeExpected() ) {
 			LanguageType lt = getPrimitiveType(attributeTypeInfo.getNeutralType(), attributeTypeInfo.isUnsignedTypeExpected() ) ;
 			if ( lt != null ) {
 				// FOUND
+				log("1) primitive type found" );
 				return lt ;
 			}
 		}
+		log("1) primitive type not found" );
 		
 		// An object type is explicitly required ( @ObjectType or @SqlType )
 		if ( attributeTypeInfo.isObjectTypeExpected() || attributeTypeInfo.isSqlTypeExpected() ) {
 			LanguageType lt = getObjectType(attributeTypeInfo.getNeutralType(), attributeTypeInfo.isSqlTypeExpected() ) ;
 			if ( lt != null ) {
 				// FOUND
+				log("1) object type found" );
 				return lt ;
 			}
 		}
+		log("1) object type not found" );
 
+		log("STEP 2 " );
 		//--- 2) Process standard type conversion
 		if ( attributeTypeInfo.isNotNull() ) {
+			log("2) Not Null : TRUE" );
 			// Try to found a primitive type first
 			LanguageType lt = getPrimitiveType(attributeTypeInfo.getNeutralType(), false ) ;
 			if ( lt != null ) {
@@ -158,6 +177,7 @@ public abstract class TypeConverter {
 			return getObjectType(attributeTypeInfo.getNeutralType(), false ) ;
 		}
 		else {
+			log("2) Not Null : FALSE" );
 			// Try to found an object type first
 			LanguageType lt = getObjectType(attributeTypeInfo.getNeutralType(), false ) ;
 			if ( lt != null ) {
@@ -180,22 +200,21 @@ public abstract class TypeConverter {
 		
 		int typeInfo = 0 ;		
 		if ( attribute.isNotNull() ) {
-			typeInfo += typeInfo + AttributeTypeInfo.NOT_NULL ;
+			typeInfo += AttributeTypeInfo.NOT_NULL ;
 		}
 		
-		// TODO
-//		if ( attribute.isPrimitiveTypeExpected() ) {
-//			typeInfo += typeInfo + AttributeTypeInfo.PRIMITIVE_TYPE ;
-//		}
-//		if ( attribute.isObjectTypeExpected() ) {
-//			typeInfo += typeInfo + AttributeTypeInfo.OBJECT_TYPE ;
-//		}
-//		if ( attribute.isUnsignedTypeExpected() ) {
-//			typeInfo += typeInfo + AttributeTypeInfo.UNSIGNED_TYPE ;
-//		}
-//		if ( attribute.isSqlTypeExpected() ) {
-//			typeInfo += typeInfo + AttributeTypeInfo.SQL_TYPE ;
-//		}
+		if ( attribute.isPrimitiveTypeExpected() ) {
+			typeInfo += AttributeTypeInfo.PRIMITIVE_TYPE ;
+		}
+		if ( attribute.isObjectTypeExpected() ) {
+			typeInfo += AttributeTypeInfo.OBJECT_TYPE ;
+		}
+		if ( attribute.isUnsignedTypeExpected() ) {
+			typeInfo += AttributeTypeInfo.UNSIGNED_TYPE ;
+		}
+		if ( attribute.isSqlTypeExpected() ) {
+			typeInfo += AttributeTypeInfo.SQL_TYPE ;
+		}
 		
 		AttributeTypeInfo attributeTypeInfo = new AttributeTypeInfo(neutralType, typeInfo);
 		return getType(attributeTypeInfo);
