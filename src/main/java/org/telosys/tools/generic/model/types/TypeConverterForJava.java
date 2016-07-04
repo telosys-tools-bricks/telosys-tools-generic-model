@@ -70,10 +70,10 @@ public class TypeConverterForJava extends TypeConverter {
 
 	private LanguageType buildJavaType(Class<?> clazz) {
 		if ( clazz.isPrimitive() ) {
-			return new LanguageType(clazz.getSimpleName(), clazz.getSimpleName() );
+			return new LanguageType(clazz.getSimpleName(), clazz.getSimpleName(), true );
 		}
 		else {
-			return new LanguageType(clazz.getSimpleName(), clazz.getCanonicalName() );
+			return new LanguageType(clazz.getSimpleName(), clazz.getCanonicalName(), false );
 		}
 	}		
 }

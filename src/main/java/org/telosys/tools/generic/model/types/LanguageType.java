@@ -32,27 +32,52 @@ public class LanguageType {
 
 	private final String fullType ;
 
+	private final boolean isPrimitiveType ;
+
 	/**
 	 * Constructor
 	 * @param simpleType
 	 * @param fullType
+	 * @param isPrimitiveType
 	 */
-	public LanguageType(String simpleType, String fullType) {
+	public LanguageType(String simpleType, String fullType, boolean isPrimitiveType) {
 		super();
 		this.simpleType = simpleType;
 		this.fullType = fullType;
+		this.isPrimitiveType = isPrimitiveType;
 	}
 
+	/**
+	 * Returns the 'simple type' name <br>
+	 * e.g. 'Long' for a Java 'java.lang.Long' type <br>
+	 * or 'long' for a Java primitive type (same name for simple and full name ) <br>
+	 * @return
+	 */
 	public String getSimpleType() {
 		return simpleType;
 	}
 
+	/**
+	 * Returns the 'full type' name <br>
+	 * e.g. 'java.lang.Long' in Java <br>
+	 * or 'long' for a Java primitive type (same name for simple and full name ) <br>
+	 * @return
+	 */
 	public String getFullType() {
 		return fullType;
 	}
 
+	/**
+	 * Returns true if the type is a primitive type (  e.g. 'long' in Java )
+	 * @return
+	 */
+	public boolean isPrimitiveType() {
+		return isPrimitiveType;
+	}
+
 	@Override
 	public String toString() {
-		return "LanguageType : '" + simpleType + "', '"	+ fullType + "'";
+		String s = isPrimitiveType() ? "PRIMITIVE-TYPE" : "OBJECT-TYPE" ;
+		return "LanguageType : '" + simpleType + "', '"	+ fullType + "' " + s ;
 	}
 }

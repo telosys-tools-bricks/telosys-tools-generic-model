@@ -2,6 +2,9 @@ package org.telosys.tools.generic.model.types;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+
 import static org.telosys.tools.generic.model.types.AttributeTypeInfo.NONE;
 import static org.telosys.tools.generic.model.types.AttributeTypeInfo.NOT_NULL;
 import static org.telosys.tools.generic.model.types.AttributeTypeInfo.OBJECT_TYPE;
@@ -30,6 +33,12 @@ public class TypeConverterForJavaTest  {
 		assertNotNull(lt);
 		assertEquals(clazz.getSimpleName(), lt.getSimpleType() );
 		assertEquals(clazz.getCanonicalName(), lt.getFullType() );
+		if ( clazz.isPrimitive() ) {
+			assertTrue ( lt.isPrimitiveType() ) ;
+		}
+		else {
+			assertFalse ( lt.isPrimitiveType() ) ;
+		}
 	}
 	
 	@Test
