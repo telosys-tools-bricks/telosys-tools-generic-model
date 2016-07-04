@@ -15,6 +15,8 @@
  */
 package org.telosys.tools.generic.model.types;
 
+import org.telosys.tools.generic.model.Attribute;
+
 /**
  * Synthetic type information 
  * 
@@ -56,58 +58,39 @@ public class AttributeTypeInfo {
 		this.sqlTypeExpected       = ( typeInfo & SQL_TYPE ) != 0 ;
 	}
 
-	
-//	/**
-//	 * Constructor
-//	 * @param neutralType
-//	 * @param notNull
-//	 * @param primitiveTypeExpected
-//	 * @param objectTypeExpected
-//	 * @param unsignedTypeExpected
-//	 * @param sqlTypeExpected
-//	 */
-//	public AttributeTypeInfo(String neutralType, boolean notNull,
-//			boolean primitiveTypeExpected, boolean objectTypeExpected,
-//			boolean unsignedTypeExpected, boolean sqlTypeExpected) {
-//		super();
-//		this.neutralType = neutralType;
-//		this.notNull = notNull;
-//		this.primitiveTypeExpected = primitiveTypeExpected;
-//		this.objectTypeExpected    = objectTypeExpected;
-//		this.unsignedTypeExpected  = unsignedTypeExpected;
-//		this.sqlTypeExpected       = sqlTypeExpected;
-//	}
-
+	public AttributeTypeInfo(Attribute attribute) {
+		super();
+		this.neutralType           = attribute.getNeutralType();
+		this.notNull               = attribute.isNotNull();
+		this.primitiveTypeExpected = attribute.isPrimitiveTypeExpected();
+		this.objectTypeExpected    = attribute.isObjectTypeExpected();
+		this.unsignedTypeExpected  = attribute.isUnsignedTypeExpected();
+		this.sqlTypeExpected       = attribute.isSqlTypeExpected();
+	}
 
 	public String getNeutralType() {
 		return neutralType;
 	}
 
-
 	public boolean isNotNull() {
 		return notNull;
 	}
-
 
 	public boolean isPrimitiveTypeExpected() {
 		return primitiveTypeExpected;
 	}
 
-
 	public boolean isObjectTypeExpected() {
 		return objectTypeExpected;
 	}
-
 
 	public boolean isUnsignedTypeExpected() {
 		return unsignedTypeExpected;
 	}
 
-
 	public boolean isSqlTypeExpected() {
 		return sqlTypeExpected;
 	}
-
 
 	@Override
 	public String toString() {

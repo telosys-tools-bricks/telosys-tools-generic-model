@@ -196,27 +196,29 @@ public abstract class TypeConverter {
 	 */
 	public final LanguageType getType(Attribute attribute) {
 		
-		String neutralType = attribute.getNeutralType();
+//		String neutralType = attribute.getNeutralType();
+//		
+//		int typeInfo = 0 ;		
+//		if ( attribute.isNotNull() ) {
+//			typeInfo += AttributeTypeInfo.NOT_NULL ;
+//		}
+//		
+//		if ( attribute.isPrimitiveTypeExpected() ) {
+//			typeInfo += AttributeTypeInfo.PRIMITIVE_TYPE ;
+//		}
+//		if ( attribute.isObjectTypeExpected() ) {
+//			typeInfo += AttributeTypeInfo.OBJECT_TYPE ;
+//		}
+//		if ( attribute.isUnsignedTypeExpected() ) {
+//			typeInfo += AttributeTypeInfo.UNSIGNED_TYPE ;
+//		}
+//		if ( attribute.isSqlTypeExpected() ) {
+//			typeInfo += AttributeTypeInfo.SQL_TYPE ;
+//		}
+//		
+//		AttributeTypeInfo attributeTypeInfo = new AttributeTypeInfo(neutralType, typeInfo);
 		
-		int typeInfo = 0 ;		
-		if ( attribute.isNotNull() ) {
-			typeInfo += AttributeTypeInfo.NOT_NULL ;
-		}
-		
-		if ( attribute.isPrimitiveTypeExpected() ) {
-			typeInfo += AttributeTypeInfo.PRIMITIVE_TYPE ;
-		}
-		if ( attribute.isObjectTypeExpected() ) {
-			typeInfo += AttributeTypeInfo.OBJECT_TYPE ;
-		}
-		if ( attribute.isUnsignedTypeExpected() ) {
-			typeInfo += AttributeTypeInfo.UNSIGNED_TYPE ;
-		}
-		if ( attribute.isSqlTypeExpected() ) {
-			typeInfo += AttributeTypeInfo.SQL_TYPE ;
-		}
-		
-		AttributeTypeInfo attributeTypeInfo = new AttributeTypeInfo(neutralType, typeInfo);
+		AttributeTypeInfo attributeTypeInfo = new AttributeTypeInfo(attribute);
 		return getType(attributeTypeInfo);
 	}
 }
