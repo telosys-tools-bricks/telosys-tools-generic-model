@@ -70,10 +70,48 @@ public class TypeConverterForJava extends TypeConverter {
 
 	private LanguageType buildJavaType(Class<?> clazz) {
 		if ( clazz.isPrimitive() ) {
-			return new LanguageType(clazz.getSimpleName(), clazz.getSimpleName(), true );
+			// Primitive type
+			return new LanguageType(clazz.getSimpleName(), clazz.getSimpleName(), true, getWrapperType(clazz.getSimpleName()) );
 		}
 		else {
-			return new LanguageType(clazz.getSimpleName(), clazz.getCanonicalName(), false );
+			// Object type => the wrapper type is the same 
+			return new LanguageType(clazz.getSimpleName(), clazz.getCanonicalName(), false, clazz.getSimpleName() );
 		}
-	}		
+	}
+	
+	/**
+	 * Returns the Java wrapper type for the given primitive type
+	 * @param primitiveType
+	 * @return
+	 */
+	private String getWrapperType(String primitiveType) {
+		
+		if ( boolean.class.getSimpleName().equals(primitiveType) ) {
+			return Boolean.class.getSimpleName() ;
+		}
+		else if ( char.class.getSimpleName().equals(primitiveType) ) {
+			return Character.class.getSimpleName() ;
+		}
+		else if ( byte.class.getSimpleName().equals(primitiveType) ) {
+			return Byte.class.getSimpleName() ;
+		}
+		else if ( short.class.getSimpleName().equals(primitiveType) ) {
+			return Short.class.getSimpleName() ;
+		}
+		else if ( int.class.getSimpleName().equals(primitiveType) ) {
+			return Integer.class.getSimpleName() ;
+		}
+		else if ( long.class.getSimpleName().equals(primitiveType) ) {
+			return Long.class.getSimpleName() ;
+		}
+		else if ( float.class.getSimpleName().equals(primitiveType) ) {
+			return Float.class.getSimpleName() ;
+		}
+		else if ( double.class.getSimpleName().equals(primitiveType) ) {
+			return Double.class.getSimpleName() ;
+		}
+		else {
+			return primitiveType ; // Never happens
+		}
+	}
 }

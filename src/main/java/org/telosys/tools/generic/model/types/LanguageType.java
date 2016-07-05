@@ -32,6 +32,8 @@ public class LanguageType {
 
 	private final String fullType ;
 
+	private final String wrapperType ;
+
 	private final boolean isPrimitiveType ;
 
 	/**
@@ -39,12 +41,14 @@ public class LanguageType {
 	 * @param simpleType
 	 * @param fullType
 	 * @param isPrimitiveType
+	 * @param wrapperType
 	 */
-	public LanguageType(String simpleType, String fullType, boolean isPrimitiveType) {
+	public LanguageType(String simpleType, String fullType, boolean isPrimitiveType, String wrapperType) {
 		super();
 		this.simpleType = simpleType;
 		this.fullType = fullType;
 		this.isPrimitiveType = isPrimitiveType;
+		this.wrapperType = wrapperType ;
 	}
 
 	/**
@@ -74,7 +78,17 @@ public class LanguageType {
 	public boolean isPrimitiveType() {
 		return isPrimitiveType;
 	}
-
+	
+	/**
+	 * Returns the wrapper type for current type <br>
+	 * e.g. in Java : 'Long' for a 'long' type  <br>
+	 * or 'Long' for a 'Long' type
+	 * @return
+	 */
+	public String getWrapperType() {
+		return wrapperType ;
+	}
+	
 	@Override
 	public String toString() {
 		String s = isPrimitiveType() ? "PRIMITIVE-TYPE" : "OBJECT-TYPE" ;

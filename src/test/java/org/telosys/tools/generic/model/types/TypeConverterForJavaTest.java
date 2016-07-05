@@ -252,4 +252,60 @@ public class TypeConverterForJavaTest  {
 		check( getType(tc, NeutralType.BINARY, PRIMITIVE_TYPE + SQL_TYPE ), byte[].class); // not compatible (primitive type has priority)	
 	}
 
+	@Test
+	public void testPrimitiveTypes() {
+		System.out.println("--- ");
+		TypeConverter tc = new TypeConverterForJava() ;
+		LanguageType lt ;
+		
+		lt = getType(tc, NeutralType.BOOLEAN, PRIMITIVE_TYPE ) ;
+		assertEquals("boolean", lt.getSimpleType());
+		assertEquals("boolean", lt.getFullType());
+		assertEquals("Boolean", lt.getWrapperType());
+		assertTrue(lt.isPrimitiveType());
+		
+		lt = getType(tc, NeutralType.SHORT, PRIMITIVE_TYPE ) ;
+		assertEquals("short", lt.getSimpleType());
+		assertEquals("short", lt.getFullType());
+		assertEquals("Short", lt.getWrapperType());
+		assertTrue(lt.isPrimitiveType());
+
+		lt = getType(tc, NeutralType.INTEGER, PRIMITIVE_TYPE ) ;
+		assertEquals("int", lt.getSimpleType());
+		assertEquals("int", lt.getFullType());
+		assertEquals("Integer", lt.getWrapperType());
+		assertTrue(lt.isPrimitiveType());
+
+		lt = getType(tc, NeutralType.LONG, PRIMITIVE_TYPE ) ;
+		assertEquals("long", lt.getSimpleType());
+		assertEquals("long", lt.getFullType());
+		assertEquals("Long", lt.getWrapperType());
+		assertTrue(lt.isPrimitiveType());
+	}
+	
+	@Test
+	public void testObjectTypes() {
+		System.out.println("--- ");
+		TypeConverter tc = new TypeConverterForJava() ;
+		LanguageType lt ;
+		
+		lt = getType(tc, NeutralType.BOOLEAN, OBJECT_TYPE ) ;
+		assertEquals("Boolean", lt.getSimpleType());
+		assertEquals("java.lang.Boolean", lt.getFullType());
+		assertEquals("Boolean", lt.getWrapperType());
+		assertFalse(lt.isPrimitiveType());
+
+		lt = getType(tc, NeutralType.SHORT, OBJECT_TYPE ) ;
+		assertEquals("Short", lt.getSimpleType());
+		assertEquals("java.lang.Short", lt.getFullType());
+		assertEquals("Short", lt.getWrapperType());
+		assertFalse(lt.isPrimitiveType());
+
+		lt = getType(tc, NeutralType.INTEGER, OBJECT_TYPE ) ;
+		assertEquals("Integer", lt.getSimpleType());
+		assertEquals("java.lang.Integer", lt.getFullType());
+		assertEquals("Integer", lt.getWrapperType());
+		assertFalse(lt.isPrimitiveType());
+
+	}
 }
