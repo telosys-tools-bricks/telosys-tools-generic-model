@@ -66,8 +66,14 @@ public class TypeReverserTest {
 	public void test3() {
 		System.out.println("---");
 		check ( "java.lang.String", DateType.UNDEFINED, NeutralType.STRING ) ;
+		check ( "java.lang.String", null,               NeutralType.STRING ) ;
+		
 		check ( "java.lang.Boolean", DateType.UNDEFINED, NeutralType.BOOLEAN ) ;
+		check ( "java.lang.Boolean", null,               NeutralType.BOOLEAN ) ;
+		
 		check ( "java.lang.Byte", DateType.UNDEFINED, NeutralType.BYTE ) ;
+		check ( "java.lang.Byte", null,               NeutralType.BYTE ) ;
+		
 		check ( "java.lang.Short", DateType.UNDEFINED, NeutralType.SHORT ) ;
 		check ( "java.lang.Integer", DateType.UNDEFINED, NeutralType.INTEGER ) ;
 		check ( "java.lang.Long", DateType.UNDEFINED, NeutralType.LONG ) ;
@@ -76,6 +82,7 @@ public class TypeReverserTest {
 		check ( "java.math.BigDecimal", DateType.UNDEFINED, NeutralType.DECIMAL ) ;
 		
 		check ( "java.util.Date", DateType.UNDEFINED, NeutralType.DATE ) ;
+		check ( "java.util.Date", null,               NeutralType.DATE ) ;
 		check ( "java.util.Date", DateType.DATE_ONLY, NeutralType.DATE ) ;
 		check ( "java.util.Date", DateType.TIME_ONLY, NeutralType.TIME ) ;
 		check ( "java.util.Date", DateType.DATE_AND_TIME, NeutralType.TIMESTAMP ) ;
@@ -85,6 +92,7 @@ public class TypeReverserTest {
 		check ( "java.sql.Date", DateType.UNDEFINED, NeutralType.DATE ) ;
 		check ( "java.sql.Time", DateType.UNDEFINED, NeutralType.TIME ) ;
 		check ( "java.sql.Timestamp", DateType.UNDEFINED, NeutralType.TIMESTAMP ) ;
+		
 //		check ( "java.sql.Clob", DateType.UNDEFINED, NeutralType.LONGTEXT ) ;
 		check ( "java.sql.Clob", DateType.UNDEFINED, NeutralType.STRING ) ;
 		check ( "java.sql.Blob", DateType.UNDEFINED, NeutralType.BINARY ) ;
@@ -139,6 +147,7 @@ public class TypeReverserTest {
 		checkTypeInfo("java.lang.Integer", objectType  ) ;
 		// checkTypeInfo("java.lang.String", new AttributeTypeInfo("", AttributeTypeInfo.PRIMITIVE_TYPE )  ) ;
 		checkTypeInfo("java.math.BigDecimal", objectType  ) ;
+		checkTypeInfo("java.util.Date", objectType  ) ;
 
 		checkTypeInfo("java.sql.Date", sqlType  ) ;
 		checkTypeInfo("java.sql.Time", sqlType  ) ;

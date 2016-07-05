@@ -68,6 +68,7 @@ public class TypeReverser {
 		types.put(java.lang.Double.class.getCanonicalName(),     NeutralType.DOUBLE ) ;
 		types.put(java.math.BigDecimal.class.getCanonicalName(), NeutralType.DECIMAL ) ;
 		
+//		types.put(java.util.Date.class.getCanonicalName(),       NeutralType.DATE ) ;
 //		types.put(java.nio.ByteBuffer.class.getCanonicalName(),  NeutralType.BINARY ) ;
 
 		//--- Java object - SQL Types
@@ -103,6 +104,7 @@ public class TypeReverser {
 		typesInfo.put(java.lang.Long.class.getCanonicalName(),       objectType ) ;
 		typesInfo.put(java.lang.Float.class.getCanonicalName(),      objectType ) ;
 		typesInfo.put(java.lang.Double.class.getCanonicalName(),     objectType ) ;
+		typesInfo.put(java.util.Date.class.getCanonicalName(),       objectType ) ;
 		typesInfo.put(java.math.BigDecimal.class.getCanonicalName(), objectType ) ;
 
 		//--- Java object - SQL Types

@@ -116,11 +116,12 @@ public interface Attribute {
 //	public Entity getEntity();
 // Removed #LGU  2015-03-05
 
-	/**
-	 * Returns the full type ( java.math.BigDecimal, java.util.Date, .. )
-	 * @return
-	 */
-	public String getFullType();
+	// Removed in v 3.0.0
+//	/**
+//	 * Returns the full type ( java.math.BigDecimal, java.util.Date, .. )
+//	 * @return
+//	 */
+//	public String getFullType();
 
 	/**
 	 * Returns the generator for a 'generated value'<br>
@@ -250,11 +251,12 @@ public interface Attribute {
 	 */
 	public String getSequenceGeneratorSequenceName() ;
 
-	/**
-	 * Returns the simple type ( BigDecimal, Date, int, Integer, .. )
-	 * @return
-	 */
-	public String getSimpleType() ;
+	// Removed in v 3.0.0
+//	/**
+//	 * Returns the simple type ( BigDecimal, Date, int, Integer, .. )
+//	 * @return
+//	 */
+//	public String getSimpleType() ;
 
 	/**
 	 * Returns the name of the 'table generator' <br>
