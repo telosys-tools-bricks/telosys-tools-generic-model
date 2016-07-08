@@ -92,6 +92,6 @@ public class LanguageType {
 	@Override
 	public String toString() {
 		String s = isPrimitiveType() ? "PRIMITIVE-TYPE" : "OBJECT-TYPE" ;
-		return "LanguageType : '" + simpleType + "', '"	+ fullType + "' " + s ;
+		return "LanguageType : '" + simpleType + "', '"	+ fullType + "' " + s + ", wrapper : " + wrapperType ;
 	}
 }
