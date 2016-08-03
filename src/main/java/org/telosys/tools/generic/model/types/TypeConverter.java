@@ -44,40 +44,68 @@ public abstract class TypeConverter {
 	private final HashMap<String, LanguageType> objectTypes         = new HashMap<String, LanguageType>();
 	private final HashMap<String, LanguageType> objectSqlTypes      = new HashMap<String, LanguageType>();
 		
+//	/**
+//	 * Declares a regular primitive type
+//	 * @param neutralType
+//	 * @param languageType
+//	 */
+//	protected void declarePrimitiveType(String neutralType, LanguageType languageType) {
+//		primitiveTypes.put(neutralType, languageType);
+//	}
 	/**
 	 * Declares a regular primitive type
-	 * @param neutralType
 	 * @param languageType
 	 */
-	protected void declarePrimitiveType(String neutralType, LanguageType languageType) {
-		primitiveTypes.put(neutralType, languageType);
+	protected void declarePrimitiveType(LanguageType languageType) {
+		primitiveTypes.put(languageType.getNeutralType(), languageType);
 	}
 	
+//	/**
+//	 * Declares an unsigned primitive type
+//	 * @param neutralType
+//	 * @param languageType
+//	 */
+//	protected void declarePrimitiveUnsignedType(String neutralType, LanguageType languageType) {
+//		primitiveUnsignedTypes.put(neutralType, languageType);
+//	}
 	/**
 	 * Declares an unsigned primitive type
-	 * @param neutralType
 	 * @param languageType
 	 */
-	protected void declarePrimitiveUnsignedType(String neutralType, LanguageType languageType) {
-		primitiveUnsignedTypes.put(neutralType, languageType);
+	protected void declarePrimitiveUnsignedType(LanguageType languageType) {
+		primitiveUnsignedTypes.put(languageType.getNeutralType(), languageType);
 	}
 	
+//	/**
+//	 * Declares a regular object type
+//	 * @param neutralType
+//	 * @param languageType
+//	 */
+//	protected void declareObjectType(String neutralType, LanguageType languageType) {
+//		objectTypes.put(neutralType, languageType);
+//	}
 	/**
 	 * Declares a regular object type
-	 * @param neutralType
 	 * @param languageType
 	 */
-	protected void declareObjectType(String neutralType, LanguageType languageType) {
-		objectTypes.put(neutralType, languageType);
+	protected void declareObjectType(LanguageType languageType) {
+		objectTypes.put(languageType.getNeutralType(), languageType);
 	}
 	
+//	/**
+//	 * Declares a SQL object type
+//	 * @param neutralType
+//	 * @param languageType
+//	 */
+//	protected void declareObjectSqlType(String neutralType, LanguageType languageType) {
+//		objectSqlTypes.put(neutralType, languageType);
+//	}
 	/**
 	 * Declares a SQL object type
-	 * @param neutralType
 	 * @param languageType
 	 */
-	protected void declareObjectSqlType(String neutralType, LanguageType languageType) {
-		objectSqlTypes.put(neutralType, languageType);
+	protected void declareObjectSqlType(LanguageType languageType) {
+		objectSqlTypes.put(languageType.getNeutralType(), languageType);
 	}
 	
 	/**

@@ -77,20 +77,53 @@ public class LiteralValuesProviderForJava implements LiteralValuesProvider {
 			return val.toString() ;
 		}
 		// DATE & TIME
-		else if ( java.util.Date.class.getCanonicalName().equals(javaFullType) || java.sql.Date.class.getCanonicalName().equals(javaFullType) ) {
-			String dateISO = (2000+step) + "-06-22" ; // "2001-06-22" 
-			return "java.sql.Date.valueOf(\"" + dateISO + "\")" ; 
+		else if ( java.util.Date.class.getCanonicalName().equals(javaFullType) ) {
+			String neutralType = languageType.getNeutralType();
+			// A standard "java.util.Date" can be used to store Date/Time/Timestamp
+			if ( NeutralType.DATE.equals(neutralType) ) {
+				return generateDateValue(step);
+			}
+			else if ( NeutralType.TIME.equals(neutralType) ) {
+				return generateTimeValue(step);
+			}
+			else if ( NeutralType.TIMESTAMP.equals(neutralType) ) {
+				return generateTimestampValue(step);
+			}
+			else {
+				// by default generate a DATE
+				return generateDateValue(step);
+			}
+		}
+		else if ( java.sql.Date.class.getCanonicalName().equals(javaFullType) ) {
+//			String dateISO = (2000+step) + "-06-22" ; // "2001-06-22" 
+//			return "java.sql.Date.valueOf(\"" + dateISO + "\")" ; 
+			return generateDateValue(step);
 		}
 		else if ( java.sql.Time.class.getCanonicalName().equals(javaFullType) ) {
-			String timeISO =  String.format("%02d", (step%24) ) + ":46:52" ; // "15:46:52"
-			return "java.sql.Time.valueOf(\"" + timeISO + "\")" ; // "15:46:52"
+//			String timeISO =  String.format("%02d", (step%24) ) + ":46:52" ; // "15:46:52"
+//			return "java.sql.Time.valueOf(\"" + timeISO + "\")" ; // "15:46:52"
+			return generateTimeValue(step);
 		}
 		else if ( java.sql.Timestamp.class.getCanonicalName().equals(javaFullType) ) {
-			String timestampISO = (2000+step) + "-05-21" + " " + String.format("%02d", (step%24) ) + ":46:52" ; // "2001-05-21 15:46:52" 
-			return "java.sql.Timestamp.valueOf(\"" + timestampISO + "\")" ; // e.g. "2001-05-21 15:46:52"
+//			String timestampISO = (2000+step) + "-05-21" + " " + String.format("%02d", (step%24) ) + ":46:52" ; // "2001-05-21 15:46:52" 
+//			return "java.sql.Timestamp.valueOf(\"" + timestampISO + "\")" ; // e.g. "2001-05-21 15:46:52"
+			return generateTimestampValue(step);
 		}
 		
 		return "null" ; 
+	}
+	
+	private String generateDateValue(int step) {
+		String dateISO = (2000+step) + "-06-22" ; // "2001-06-22" 
+		return "java.sql.Date.valueOf(\"" + dateISO + "\")" ; 
+	}
+	private String generateTimeValue(int step) {
+		String timeISO =  String.format("%02d", (step%24) ) + ":46:52" ; // "15:46:52"
+		return "java.sql.Time.valueOf(\"" + timeISO + "\")" ; // "15:46:52"
+	}
+	private String generateTimestampValue(int step) {
+		String timestampISO = (2000+step) + "-05-21" + " " + String.format("%02d", (step%24) ) + ":46:52" ; // "2001-05-21 15:46:52" 
+		return "java.sql.Timestamp.valueOf(\"" + timestampISO + "\")" ; // e.g. "2001-05-21 15:46:52"
 	}
 
 	/* 

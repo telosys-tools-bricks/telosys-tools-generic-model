@@ -27,55 +27,55 @@ public class TypeConverterForJava extends TypeConverter {
 		super();
 		
 		//--- Object types 
-		declareObjectType(NeutralType.STRING,    buildJavaType(java.lang.String.class) );
-		declareObjectType(NeutralType.BOOLEAN,   buildJavaType(java.lang.Boolean.class) );
-		declareObjectType(NeutralType.BYTE,      buildJavaType(java.lang.Byte.class) );
-		declareObjectType(NeutralType.SHORT,     buildJavaType(java.lang.Short.class) );
-		declareObjectType(NeutralType.INTEGER,   buildJavaType(java.lang.Integer.class) );
-		declareObjectType(NeutralType.LONG,      buildJavaType(java.lang.Long.class) );
-		declareObjectType(NeutralType.FLOAT,     buildJavaType(java.lang.Float.class) );
-		declareObjectType(NeutralType.DOUBLE,    buildJavaType(java.lang.Double.class) );
-		declareObjectType(NeutralType.DECIMAL,   buildJavaType(java.math.BigDecimal.class) );
-		declareObjectType(NeutralType.DATE,      buildJavaType(java.util.Date.class) );
-		declareObjectType(NeutralType.TIME,      buildJavaType(java.util.Date.class) );
-		declareObjectType(NeutralType.TIMESTAMP, buildJavaType(java.util.Date.class) );
+		declareObjectType( buildJavaType(NeutralType.STRING,    java.lang.String.class) );
+		declareObjectType( buildJavaType(NeutralType.BOOLEAN,   java.lang.Boolean.class) );
+		declareObjectType( buildJavaType(NeutralType.BYTE,      java.lang.Byte.class) );
+		declareObjectType( buildJavaType(NeutralType.SHORT,     java.lang.Short.class) );
+		declareObjectType( buildJavaType(NeutralType.INTEGER,   java.lang.Integer.class) );
+		declareObjectType( buildJavaType(NeutralType.LONG,      java.lang.Long.class) );
+		declareObjectType( buildJavaType(NeutralType.FLOAT,     java.lang.Float.class) );
+		declareObjectType( buildJavaType(NeutralType.DOUBLE,    java.lang.Double.class) );
+		declareObjectType( buildJavaType(NeutralType.DECIMAL,   java.math.BigDecimal.class) );
+		declareObjectType( buildJavaType(NeutralType.DATE,      java.util.Date.class) );
+		declareObjectType( buildJavaType(NeutralType.TIME,      java.util.Date.class) );
+		declareObjectType( buildJavaType(NeutralType.TIMESTAMP, java.util.Date.class) );
 //		declareObjectType(NeutralType.LONGTEXT,  buildJavaType(java.lang.String.class) );
 //		declareObjectType(NeutralType.BINARY,    buildJavaType(java.nio.ByteBuffer.class) );
 
 		//--- Object SQL types 
-		declareObjectSqlType(NeutralType.DATE,      buildJavaType(java.sql.Date.class) );
-		declareObjectSqlType(NeutralType.TIME,      buildJavaType(java.sql.Time.class) );
-		declareObjectSqlType(NeutralType.TIMESTAMP, buildJavaType(java.sql.Timestamp.class) );
+		declareObjectSqlType( buildJavaType(NeutralType.DATE,      java.sql.Date.class) );
+		declareObjectSqlType( buildJavaType(NeutralType.TIME,      java.sql.Time.class) );
+		declareObjectSqlType( buildJavaType(NeutralType.TIMESTAMP, java.sql.Timestamp.class) );
 //		declareObjectSqlType(NeutralType.LONGTEXT,  buildJavaType(java.sql.Clob.class) );
-		declareObjectSqlType(NeutralType.BINARY,    buildJavaType(java.sql.Blob.class) );
+		declareObjectSqlType( buildJavaType(NeutralType.BINARY,    java.sql.Blob.class) );
 		
 		//--- Primitive types 
 		// STRING => No primitive type
-		declarePrimitiveType(NeutralType.BOOLEAN,  buildJavaType(boolean.class) );
-		declarePrimitiveType(NeutralType.BYTE,     buildJavaType(byte.class) );
-		declarePrimitiveType(NeutralType.SHORT,    buildJavaType(short.class) );
-		declarePrimitiveType(NeutralType.INTEGER,  buildJavaType(int.class) );
-		declarePrimitiveType(NeutralType.LONG,     buildJavaType(long.class) );
-		declarePrimitiveType(NeutralType.FLOAT,    buildJavaType(float.class) );
-		declarePrimitiveType(NeutralType.DOUBLE,   buildJavaType(double.class) );
+		declarePrimitiveType( buildJavaType(NeutralType.BOOLEAN, boolean.class) );
+		declarePrimitiveType( buildJavaType(NeutralType.BYTE,    byte.class) );
+		declarePrimitiveType( buildJavaType(NeutralType.SHORT,   short.class) );
+		declarePrimitiveType( buildJavaType(NeutralType.INTEGER, int.class) );
+		declarePrimitiveType( buildJavaType(NeutralType.LONG,    long.class) );
+		declarePrimitiveType( buildJavaType(NeutralType.FLOAT,   float.class) );
+		declarePrimitiveType( buildJavaType(NeutralType.DOUBLE,  double.class) );
 		// DECIMAL => No primitive type
 		// DATE => No primitive type
 		// TIME => No primitive type
 		// TIMESTAMP => No primitive type
 		// LONGTEXT => No primitive type
-		declarePrimitiveType(NeutralType.BINARY,   buildJavaType(byte[].class) );
+		declarePrimitiveType( buildJavaType(NeutralType.BINARY,  byte[].class) );
 		
 		//--- Unsigned primitive types : No unsigned primitive types in Java
 	}
 
-	private LanguageType buildJavaType(Class<?> clazz) {
+	private LanguageType buildJavaType(String neutralType, Class<?> clazz) {
 		if ( clazz.isPrimitive() ) {
 			// Primitive type
-			return new LanguageType(clazz.getSimpleName(), clazz.getSimpleName(), true, getWrapperType(clazz.getSimpleName()) );
+			return new LanguageType( neutralType, clazz.getSimpleName(), clazz.getSimpleName(), true, getWrapperType(clazz.getSimpleName()) );
 		}
 		else {
 			// Object type => the wrapper type is the same 
-			return new LanguageType(clazz.getSimpleName(), clazz.getCanonicalName(), false, clazz.getSimpleName() );
+			return new LanguageType( neutralType, clazz.getSimpleName(), clazz.getCanonicalName(), false, clazz.getSimpleName() );
 		}
 	}
 	

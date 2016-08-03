@@ -28,6 +28,8 @@ package org.telosys.tools.generic.model.types;
  */
 public class LanguageType {
 
+	private final String neutralType ;
+
 	private final String simpleType ;
 
 	private final String fullType ;
@@ -38,19 +40,29 @@ public class LanguageType {
 
 	/**
 	 * Constructor
-	 * @param simpleType
-	 * @param fullType
+	 * @param neutralType the original neutral type before conversion to language type
+	 * @param simpleType the language simple type
+	 * @param fullType the language full type
 	 * @param isPrimitiveType
 	 * @param wrapperType
 	 */
-	public LanguageType(String simpleType, String fullType, boolean isPrimitiveType, String wrapperType) {
+	protected LanguageType(String neutralType, String simpleType, String fullType, boolean isPrimitiveType, String wrapperType) {
 		super();
+		this.neutralType = neutralType;
 		this.simpleType = simpleType;
 		this.fullType = fullType;
 		this.isPrimitiveType = isPrimitiveType;
 		this.wrapperType = wrapperType ;
 	}
 
+	/**
+	 * Returns the original neutral type (before conversion to specific language type)
+	 * @return
+	 */
+	public String getNeutralType() {
+		return neutralType;
+	}
+	
 	/**
 	 * Returns the 'simple type' name <br>
 	 * e.g. 'Long' for a Java 'java.lang.Long' type <br>

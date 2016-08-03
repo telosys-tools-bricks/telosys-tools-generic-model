@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import org.junit.Assert;
@@ -102,8 +103,8 @@ public class LiteralValuesProviderForJavaTest {
 		assertEquals("null", literalValuesProvider.getLiteralNull() ) ;
 	}
 	
-	private LanguageType buildLanguageType(Class<?> clazz ) {
-		LanguageType languageType = new LanguageType(clazz.getSimpleName(), clazz.getCanonicalName(), clazz.isPrimitive(), clazz.getSimpleName());
+	private LanguageType buildLanguageType(String neutralType, Class<?> clazz ) {
+		LanguageType languageType = new LanguageType(neutralType, clazz.getSimpleName(), clazz.getCanonicalName(), clazz.isPrimitive(), clazz.getSimpleName());
 		System.out.println("LanguageType : " + languageType );
 		return languageType ;
 	}
@@ -111,7 +112,7 @@ public class LiteralValuesProviderForJavaTest {
 	//-------------------------------------------------------------------------------------------
 
 	private void checkEqualsStatement(String value, Class<?> clazz, String expected ) {
-		LanguageType languageType = buildLanguageType(clazz);
+		LanguageType languageType = buildLanguageType("", clazz); // Neutral type is not used
 		LiteralValuesProvider  literalValuesProvider = new LiteralValuesProviderForJava();
 		String equalsStatement = literalValuesProvider.getEqualsStatement(value, languageType) ;
 		System.out.println("Equals statement : '" + equalsStatement + "'" );
@@ -153,7 +154,10 @@ public class LiteralValuesProviderForJavaTest {
 	//-------------------------------------------------------------------------------------------
 	
 	private void checkLiteralValue(Class<?> clazz, int maxLength, int step, String expected ) {
-		LanguageType languageType = buildLanguageType(clazz);
+		checkLiteralValue("", clazz, maxLength, step, expected );
+	}
+	private void checkLiteralValue(String neutralType, Class<?> clazz, int maxLength, int step, String expected ) {
+		LanguageType languageType = buildLanguageType(neutralType, clazz);
 		LiteralValuesProvider  literalValuesProvider = new LiteralValuesProviderForJava();
 		String value = literalValuesProvider.generateLiteralValue(languageType, maxLength, step);
 		System.out.println("Literal value : '" + value + "'" );
@@ -258,7 +262,7 @@ public class LiteralValuesProviderForJavaTest {
 	}
 
 	@Test
-	public void testDateValues() {
+	public void testUtilDateValues() {
 		
 		java.util.Date d = java.sql.Date.valueOf("2000-06-22");
 		System.out.println(" d = " + d);
@@ -268,7 +272,41 @@ public class LiteralValuesProviderForJavaTest {
 		checkLiteralValue(java.util.Date.class, 0,  999, "java.sql.Date.valueOf(\"2999-06-22\")");
 		checkLiteralValue(java.util.Date.class, 0, 1000, "java.sql.Date.valueOf(\"3000-06-22\")");
 
-		java.util.Date d2 = java.sql.Date.valueOf("2001-06-22");
+		checkLiteralValue(NeutralType.DATE, java.util.Date.class, 0,    0, "java.sql.Date.valueOf(\"2000-06-22\")");
+		checkLiteralValue(NeutralType.DATE, java.util.Date.class, 0,    1, "java.sql.Date.valueOf(\"2001-06-22\")");
+		checkLiteralValue(NeutralType.DATE, java.util.Date.class, 0,    2, "java.sql.Date.valueOf(\"2002-06-22\")");
+		checkLiteralValue(NeutralType.DATE, java.util.Date.class, 0,  999, "java.sql.Date.valueOf(\"2999-06-22\")");
+		checkLiteralValue(NeutralType.DATE, java.util.Date.class, 0, 1000, "java.sql.Date.valueOf(\"3000-06-22\")");
+
+		java.util.Date t1 = java.sql.Time.valueOf("00:46:52");
+		System.out.println(" t1 = " + t1);
+		SimpleDateFormat fmt = new SimpleDateFormat("dd MMM yyyy HH:mm:ss"); // 01 janv. 1970 00:46:52
+		System.out.println(" t1 = " + fmt.format(t1));
+
+		java.sql.Time t2 = java.sql.Time.valueOf("00:46:52") ;
+		System.out.println(" t2 = " + t2);
+		checkLiteralValue(NeutralType.TIME, java.util.Date.class, 0,    0, "java.sql.Time.valueOf(\"00:46:52\")");
+		checkLiteralValue(NeutralType.TIME, java.util.Date.class, 0,    1, "java.sql.Time.valueOf(\"01:46:52\")");
+		checkLiteralValue(NeutralType.TIME, java.util.Date.class, 0,    2, "java.sql.Time.valueOf(\"02:46:52\")");
+		checkLiteralValue(NeutralType.TIME, java.util.Date.class, 0,   23, "java.sql.Time.valueOf(\"23:46:52\")");
+		checkLiteralValue(NeutralType.TIME, java.util.Date.class, 0,   24, "java.sql.Time.valueOf(\"00:46:52\")");
+		checkLiteralValue(NeutralType.TIME, java.util.Date.class, 0,   25, "java.sql.Time.valueOf(\"01:46:52\")");
+		checkLiteralValue(NeutralType.TIME, java.util.Date.class, 0,   47, "java.sql.Time.valueOf(\"23:46:52\")");
+		checkLiteralValue(NeutralType.TIME, java.util.Date.class, 0,   48, "java.sql.Time.valueOf(\"00:46:52\")");
+
+		java.util.Date ts = java.sql.Timestamp.valueOf("2000-05-21 00:46:52");
+		System.out.println(" ts = " + ts);
+		checkLiteralValue(NeutralType.TIMESTAMP, java.util.Date.class, 0,    0, "java.sql.Timestamp.valueOf(\"2000-05-21 00:46:52\")");
+		checkLiteralValue(NeutralType.TIMESTAMP, java.util.Date.class, 0,    1, "java.sql.Timestamp.valueOf(\"2001-05-21 01:46:52\")");
+		checkLiteralValue(NeutralType.TIMESTAMP, java.util.Date.class, 0,    2, "java.sql.Timestamp.valueOf(\"2002-05-21 02:46:52\")");
+		checkLiteralValue(NeutralType.TIMESTAMP, java.util.Date.class, 0,   23, "java.sql.Timestamp.valueOf(\"2023-05-21 23:46:52\")");
+		checkLiteralValue(NeutralType.TIMESTAMP, java.util.Date.class, 0,   24, "java.sql.Timestamp.valueOf(\"2024-05-21 00:46:52\")");
+	}
+
+	@Test
+	public void testSqlDateValues() {
+		
+		java.sql.Date d2 = java.sql.Date.valueOf("2001-06-22");
 		System.out.println(" d2 = " + d2);
 		checkLiteralValue(java.sql.Date.class, 0,    0, "java.sql.Date.valueOf(\"2000-06-22\")");
 		checkLiteralValue(java.sql.Date.class, 0,    1, "java.sql.Date.valueOf(\"2001-06-22\")");
@@ -276,8 +314,13 @@ public class LiteralValuesProviderForJavaTest {
 		checkLiteralValue(java.sql.Date.class, 0,  999, "java.sql.Date.valueOf(\"2999-06-22\")");
 		checkLiteralValue(java.sql.Date.class, 0, 1000, "java.sql.Date.valueOf(\"3000-06-22\")");
 
-		java.sql.Time t = java.sql.Time.valueOf("00:46:52") ;
-		System.out.println(" t = " + t);
+		java.sql.Time t1 = java.sql.Time.valueOf("00:46:52");
+		System.out.println(" t1 = " + t1);
+		SimpleDateFormat fmt = new SimpleDateFormat("dd MMM yyyy HH:mm:ss"); // 01 janv. 1970 00:46:52
+		System.out.println(" t1 = " + fmt.format(t1));
+
+		java.sql.Time t2 = java.sql.Time.valueOf("00:46:52") ;
+		System.out.println(" t2 = " + t2);
 		checkLiteralValue(java.sql.Time.class, 0,    0, "java.sql.Time.valueOf(\"00:46:52\")");
 		checkLiteralValue(java.sql.Time.class, 0,    1, "java.sql.Time.valueOf(\"01:46:52\")");
 		checkLiteralValue(java.sql.Time.class, 0,    2, "java.sql.Time.valueOf(\"02:46:52\")");

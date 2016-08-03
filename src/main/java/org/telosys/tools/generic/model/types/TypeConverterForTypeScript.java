@@ -34,22 +34,22 @@ public class TypeConverterForTypeScript extends TypeConverter {
 //		declareObjectSqlType(NeutralType.DATE,  xxxx );
 		
 		//--- Primitive types :
-		declarePrimitiveType(NeutralType.STRING,    buildPrimitiveType("string",  "string"  ) );
+		declarePrimitiveType( buildPrimitiveType(NeutralType.STRING,  "string",  "string"  ) );
 		
-		declarePrimitiveType(NeutralType.BOOLEAN,   buildPrimitiveType("boolean", "boolean" ) );
+		declarePrimitiveType( buildPrimitiveType(NeutralType.BOOLEAN, "boolean", "boolean" ) );
 		
-		declarePrimitiveType(NeutralType.BYTE,      buildPrimitiveType("number",  "number"  ) );
-		declarePrimitiveType(NeutralType.SHORT,     buildPrimitiveType("number",  "number"  ) );
-		declarePrimitiveType(NeutralType.INTEGER,   buildPrimitiveType("number",  "number"  ) );
-		declarePrimitiveType(NeutralType.LONG,      buildPrimitiveType("number",  "number"  ) );
-		declarePrimitiveType(NeutralType.FLOAT,     buildPrimitiveType("number",  "number"  ) );
-		declarePrimitiveType(NeutralType.DOUBLE,    buildPrimitiveType("number",  "number"  ) );
-		declarePrimitiveType(NeutralType.DECIMAL,   buildPrimitiveType("number",  "number"  ) );
+		declarePrimitiveType( buildPrimitiveType(NeutralType.BYTE,    "number",  "number"  ) );
+		declarePrimitiveType( buildPrimitiveType(NeutralType.SHORT,   "number",  "number"  ) );
+		declarePrimitiveType( buildPrimitiveType(NeutralType.INTEGER, "number",  "number"  ) );
+		declarePrimitiveType( buildPrimitiveType(NeutralType.LONG,    "number",  "number"  ) );
+		declarePrimitiveType( buildPrimitiveType(NeutralType.FLOAT,   "number",  "number"  ) );
+		declarePrimitiveType( buildPrimitiveType(NeutralType.DOUBLE,  "number",  "number"  ) );
+		declarePrimitiveType( buildPrimitiveType(NeutralType.DECIMAL, "number",  "number"  ) );
 		
-		declarePrimitiveType(NeutralType.DATE,      buildPrimitiveType("any",     "any"     ) );
-		declarePrimitiveType(NeutralType.TIME,      buildPrimitiveType("any",     "any"     ) );
-		declarePrimitiveType(NeutralType.TIMESTAMP, buildPrimitiveType("any",     "any"     ) );
-		declarePrimitiveType(NeutralType.BINARY,    buildPrimitiveType("any",     "any"     ) );
+		declarePrimitiveType( buildPrimitiveType(NeutralType.DATE,      "any",     "any"   ) );
+		declarePrimitiveType( buildPrimitiveType(NeutralType.TIME,      "any",     "any"   ) );
+		declarePrimitiveType( buildPrimitiveType(NeutralType.TIMESTAMP, "any",     "any"   ) );
+		declarePrimitiveType( buildPrimitiveType(NeutralType.BINARY,    "any",     "any"   ) );
 		
 		//--- Unsigned primitive types : 
 		// No unsigned types
@@ -57,8 +57,8 @@ public class TypeConverterForTypeScript extends TypeConverter {
 		
 	}
 
-	private LanguageType buildPrimitiveType(String primitiveType, String wrapperType) {
-		return new LanguageType(primitiveType,  primitiveType, true, wrapperType );
+	private LanguageType buildPrimitiveType(String neutralType, String primitiveType, String wrapperType) {
+		return new LanguageType(neutralType, primitiveType,  primitiveType, true, wrapperType );
 	}
 
 //	private LanguageType buildObjectType(String simpleType, String fullType) {
