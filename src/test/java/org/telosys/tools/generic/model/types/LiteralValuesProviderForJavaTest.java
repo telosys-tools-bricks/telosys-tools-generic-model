@@ -172,6 +172,10 @@ public class LiteralValuesProviderForJavaTest {
 		checkLiteralValue(boolean.class, 0, 3, "true");
 		checkLiteralValue(boolean.class, 0, 4, "false");
 		checkLiteralValue(boolean.class, 0, 5, "true");
+
+		checkLiteralValue(Boolean.class, 0, 1, "Boolean.valueOf(true)"  );
+		checkLiteralValue(Boolean.class, 0, 2, "Boolean.valueOf(false)" );
+		checkLiteralValue(Boolean.class, 0, 3, "Boolean.valueOf(true)"  );
 	}
 	
 	@Test
@@ -225,40 +229,40 @@ public class LiteralValuesProviderForJavaTest {
 		
 		// wrapper types
 		
-		checkLiteralValue(Byte.class, 0,   0, "(byte)0");
-		checkLiteralValue(Byte.class, 0,   1, "(byte)1");
-		checkLiteralValue(Byte.class, 0,   2, "(byte)2");
-		checkLiteralValue(Byte.class, 0, 127, "(byte)127"); // MAX VALUE
-		checkLiteralValue(Byte.class, 0, 128, "(byte)1"); // restart with % 127 --> 1
-		checkLiteralValue(Byte.class, 0, 253, "(byte)126"); 
-		checkLiteralValue(Byte.class, 0, 254, "(byte)127"); // MAX VALUE BIS 
-		checkLiteralValue(Byte.class, 0, 255, "(byte)1"); // restart with % 127 --> 1
+		checkLiteralValue(Byte.class, 0,   0, "Byte.valueOf((byte)0)");
+		checkLiteralValue(Byte.class, 0,   1, "Byte.valueOf((byte)1)");
+		checkLiteralValue(Byte.class, 0,   2, "Byte.valueOf((byte)2)");
+		checkLiteralValue(Byte.class, 0, 127, "Byte.valueOf((byte)127)"); // MAX VALUE
+		checkLiteralValue(Byte.class, 0, 128, "Byte.valueOf((byte)1)"); // restart with % 127 --> 1
+		checkLiteralValue(Byte.class, 0, 253, "Byte.valueOf((byte)126)"); 
+		checkLiteralValue(Byte.class, 0, 254, "Byte.valueOf((byte)127)"); // MAX VALUE BIS 
+		checkLiteralValue(Byte.class, 0, 255, "Byte.valueOf((byte)1)"); // restart with % 127 --> 1
 
-		checkLiteralValue(Short.class, 0, 0, "(short)0");
-		checkLiteralValue(Short.class, 0, 1, "(short)1");
-		checkLiteralValue(Short.class, 0, 2, "(short)2");
+		checkLiteralValue(Short.class, 0, 0, "Short.valueOf((short)0)" );
+		checkLiteralValue(Short.class, 0, 1, "Short.valueOf((short)1)" );
+		checkLiteralValue(Short.class, 0, 2, "Short.valueOf((short)2)" );
 
-		checkLiteralValue(Integer.class, 0, 0, "0");
-		checkLiteralValue(Integer.class, 0, 1, "100");
-		checkLiteralValue(Integer.class, 0, 2, "200");
-		checkLiteralValue(Integer.class, 0, 2000, "200000");
-		checkLiteralValue(Integer.class, 0, 2000000, "200000000");
+		checkLiteralValue(Integer.class, 0, 0, "Integer.valueOf(0)");
+		checkLiteralValue(Integer.class, 0, 1, "Integer.valueOf(100)");
+		checkLiteralValue(Integer.class, 0, 2, "Integer.valueOf(200)");
+		checkLiteralValue(Integer.class, 0, 2000, "Integer.valueOf(200000)");
+		checkLiteralValue(Integer.class, 0, 2000000, "Integer.valueOf(200000000)");
 
-		checkLiteralValue(Long.class, 0, 0, "0L");
-		checkLiteralValue(Long.class, 0, 1, "1000L");
-		checkLiteralValue(Long.class, 0, 2, "2000L");
+		checkLiteralValue(Long.class, 0, 0, "Long.valueOf(0L)"     );
+		checkLiteralValue(Long.class, 0, 1, "Long.valueOf(1000L)"  );
+		checkLiteralValue(Long.class, 0, 2, "Long.valueOf(2000L)"  );
 
-		checkLiteralValue(Float.class, 0, 0, "0.5F");
-		checkLiteralValue(Float.class, 0, 1, "1000.5F");
-		checkLiteralValue(Float.class, 0, 2, "2000.5F");
+		checkLiteralValue(Float.class, 0, 0, "Float.valueOf(0.5F)"    );
+		checkLiteralValue(Float.class, 0, 1, "Float.valueOf(1000.5F)" );
+		checkLiteralValue(Float.class, 0, 2, "Float.valueOf(2000.5F)" );
 
-		checkLiteralValue(Double.class, 0, 0, "0.66D");
-		checkLiteralValue(Double.class, 0, 1, "1000.66D");
-		checkLiteralValue(Double.class, 0, 2, "2000.66D");
+		checkLiteralValue(Double.class, 0, 0, "Double.valueOf(0.66D)"    );
+		checkLiteralValue(Double.class, 0, 1, "Double.valueOf(1000.66D)" );
+		checkLiteralValue(Double.class, 0, 2, "Double.valueOf(2000.66D)" );
 		
-		checkLiteralValue(BigDecimal.class, 0, 0, "(new BigDecimal(0))");
-		checkLiteralValue(BigDecimal.class, 0, 1, "(new BigDecimal(10000))");
-		checkLiteralValue(BigDecimal.class, 0, 2, "(new BigDecimal(20000))");
+		checkLiteralValue(BigDecimal.class, 0, 0, "java.math.BigDecimal.valueOf(0)"     );
+		checkLiteralValue(BigDecimal.class, 0, 1, "java.math.BigDecimal.valueOf(10000)" );
+		checkLiteralValue(BigDecimal.class, 0, 2, "java.math.BigDecimal.valueOf(20000)" );
 	}
 
 	@Test
@@ -270,13 +274,16 @@ public class LiteralValuesProviderForJavaTest {
 		checkLiteralValue(java.util.Date.class, 0,    1, "java.sql.Date.valueOf(\"2001-06-22\")");
 		checkLiteralValue(java.util.Date.class, 0,    2, "java.sql.Date.valueOf(\"2002-06-22\")");
 		checkLiteralValue(java.util.Date.class, 0,  999, "java.sql.Date.valueOf(\"2999-06-22\")");
-		checkLiteralValue(java.util.Date.class, 0, 1000, "java.sql.Date.valueOf(\"3000-06-22\")");
+		checkLiteralValue(java.util.Date.class, 0, 1000, "java.sql.Date.valueOf(\"2000-06-22\")");
+		checkLiteralValue(java.util.Date.class, 0, 1256, "java.sql.Date.valueOf(\"2256-06-22\")");
+
+		checkLiteralValue(java.util.Date.class, 0, 10000589, "java.sql.Date.valueOf(\"2589-06-22\")");
 
 		checkLiteralValue(NeutralType.DATE, java.util.Date.class, 0,    0, "java.sql.Date.valueOf(\"2000-06-22\")");
 		checkLiteralValue(NeutralType.DATE, java.util.Date.class, 0,    1, "java.sql.Date.valueOf(\"2001-06-22\")");
 		checkLiteralValue(NeutralType.DATE, java.util.Date.class, 0,    2, "java.sql.Date.valueOf(\"2002-06-22\")");
 		checkLiteralValue(NeutralType.DATE, java.util.Date.class, 0,  999, "java.sql.Date.valueOf(\"2999-06-22\")");
-		checkLiteralValue(NeutralType.DATE, java.util.Date.class, 0, 1000, "java.sql.Date.valueOf(\"3000-06-22\")");
+		checkLiteralValue(NeutralType.DATE, java.util.Date.class, 0, 1000, "java.sql.Date.valueOf(\"2000-06-22\")");
 
 		java.util.Date t1 = java.sql.Time.valueOf("00:46:52");
 		System.out.println(" t1 = " + t1);
@@ -312,7 +319,7 @@ public class LiteralValuesProviderForJavaTest {
 		checkLiteralValue(java.sql.Date.class, 0,    1, "java.sql.Date.valueOf(\"2001-06-22\")");
 		checkLiteralValue(java.sql.Date.class, 0,    2, "java.sql.Date.valueOf(\"2002-06-22\")");
 		checkLiteralValue(java.sql.Date.class, 0,  999, "java.sql.Date.valueOf(\"2999-06-22\")");
-		checkLiteralValue(java.sql.Date.class, 0, 1000, "java.sql.Date.valueOf(\"3000-06-22\")");
+		checkLiteralValue(java.sql.Date.class, 0, 1000, "java.sql.Date.valueOf(\"2000-06-22\")");
 
 		java.sql.Time t1 = java.sql.Time.valueOf("00:46:52");
 		System.out.println(" t1 = " + t1);

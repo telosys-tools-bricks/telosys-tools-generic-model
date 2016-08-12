@@ -45,37 +45,84 @@ public class LiteralValuesProviderForJava implements LiteralValuesProvider {
 	public String generateLiteralValue(LanguageType languageType, int maxLength, int step) {
 		
 		String javaFullType = languageType.getFullType() ;
-		// STRING
+		//--- STRING
 		if ( java.lang.String.class.getCanonicalName().equals(javaFullType) ) {
 			return "\"" + buildStringValue(maxLength, step) + "\"" ;
 		}
-		// NUMBERS
-		else if ( byte.class.getCanonicalName().equals(javaFullType) || java.lang.Byte.class.getCanonicalName().equals(javaFullType) ) {
+		
+		//--- BYTE
+		else if ( byte.class.getCanonicalName().equals(javaFullType) ) {
 			return "(byte)" + checkThreshold(step, Byte.MAX_VALUE) ;
 		}
-		else if ( short.class.getCanonicalName().equals(javaFullType) || java.lang.Short.class.getCanonicalName().equals(javaFullType) ) {
+		else if ( java.lang.Byte.class.getCanonicalName().equals(javaFullType) ) {
+			//Byte.valueOf(12); // Invalid
+			//Byte.valueOf((byte)12); // OK
+			return "Byte.valueOf((byte)" + checkThreshold(step, Byte.MAX_VALUE) + ")" ;
+		}
+		
+		//--- SHORT
+		else if ( short.class.getCanonicalName().equals(javaFullType) ) {
 			return "(short)" + checkThreshold(step, Short.MAX_VALUE) ;
 		}
-		else if ( int.class.getCanonicalName().equals(javaFullType) || java.lang.Integer.class.getCanonicalName().equals(javaFullType) ) {
+		else if ( java.lang.Short.class.getCanonicalName().equals(javaFullType) ) {
+			//Short.valueOf(12); // Invalid
+			//Short.valueOf((short)12); // OK
+			return "Short.valueOf((short)" + checkThreshold(step, Short.MAX_VALUE) + ")" ;
+		}
+		
+		//--- INT		
+		else if ( int.class.getCanonicalName().equals(javaFullType) ) {
 			return "" + (step*100);
 		}
-		else if ( long.class.getCanonicalName().equals(javaFullType) || java.lang.Long.class.getCanonicalName().equals(javaFullType) ) {
+		else if ( java.lang.Integer.class.getCanonicalName().equals(javaFullType) ) {
+			Integer.valueOf(12);
+			return "Integer.valueOf(" + (step*100) + ")";
+		}
+		
+		//--- LONG
+		else if ( long.class.getCanonicalName().equals(javaFullType) ) {
 			return (step*1000) + "L" ;
 		}
-		else if ( float.class.getCanonicalName().equals(javaFullType) || java.lang.Float.class.getCanonicalName().equals(javaFullType) ) {
+		else if ( java.lang.Long.class.getCanonicalName().equals(javaFullType) ) {
+			// Long.valueOf(12L);
+			return "Long.valueOf(" + (step*1000) + "L)" ;
+		}
+		
+		//--- FLOAT
+		else if ( float.class.getCanonicalName().equals(javaFullType) ) {
 			return (step*1000) + ".5F" ;
 		}
-		else if ( double.class.getCanonicalName().equals(javaFullType) || java.lang.Double.class.getCanonicalName().equals(javaFullType) ) {
+		else if ( java.lang.Float.class.getCanonicalName().equals(javaFullType) ) {
+			// Float.valueOf(12.5F);
+			return "Float.valueOf(" + (step*1000) + ".5F)" ;
+		}
+		
+		//--- DOUBLE
+		else if ( double.class.getCanonicalName().equals(javaFullType) ) {
 			return (step*1000) + ".66D" ;
 		}
-		else if ( java.math.BigDecimal.class.getCanonicalName().equals(javaFullType) ) {
-			return "(new BigDecimal(" + (step*10000) + "))" ;
+		else if ( java.lang.Double.class.getCanonicalName().equals(javaFullType) ) {
+			//Double.valueOf(12.66D);
+			return "Double.valueOf(" + (step*1000) + ".66D)" ;
 		}
-		// BOOLEAN
-		else if ( boolean.class.getCanonicalName().equals(javaFullType) || java.lang.Boolean.class.getCanonicalName().equals(javaFullType) ) {
+		
+		//--- BIG DECIMAL
+		else if ( java.math.BigDecimal.class.getCanonicalName().equals(javaFullType) ) {
+			// java.math.BigDecimal.valueOf(15000);
+			return "java.math.BigDecimal.valueOf(" + (step * 10000) + ")" ;
+		}
+		
+		//--- BOOLEAN
+		else if ( boolean.class.getCanonicalName().equals(javaFullType) ) {
 			Boolean val = step % 2 != 0 ? Boolean.TRUE : Boolean.FALSE ;
 			return val.toString() ;
 		}
+		else if ( java.lang.Boolean.class.getCanonicalName().equals(javaFullType) ) {
+			// Boolean.valueOf(true);
+			Boolean val = step % 2 != 0 ? Boolean.TRUE : Boolean.FALSE ;
+			return "Boolean.valueOf(" + val.toString() + ")";
+		}
+		
 		// DATE & TIME
 		else if ( java.util.Date.class.getCanonicalName().equals(javaFullType) ) {
 			String neutralType = languageType.getNeutralType();
@@ -113,8 +160,12 @@ public class LiteralValuesProviderForJava implements LiteralValuesProvider {
 		return "null" ; 
 	}
 	
+	private String generateYearValue(int step) {
+		int year = 2000 + ( step % 1000 ) ;  // between 2000 and 2999 
+		return "" + year ;
+	}
 	private String generateDateValue(int step) {
-		String dateISO = (2000+step) + "-06-22" ; // "2001-06-22" 
+		String dateISO = generateYearValue(step) + "-06-22" ; // "2001-06-22" 
 		return "java.sql.Date.valueOf(\"" + dateISO + "\")" ; 
 	}
 	private String generateTimeValue(int step) {
@@ -122,7 +173,7 @@ public class LiteralValuesProviderForJava implements LiteralValuesProvider {
 		return "java.sql.Time.valueOf(\"" + timeISO + "\")" ; // "15:46:52"
 	}
 	private String generateTimestampValue(int step) {
-		String timestampISO = (2000+step) + "-05-21" + " " + String.format("%02d", (step%24) ) + ":46:52" ; // "2001-05-21 15:46:52" 
+		String timestampISO = generateYearValue(step) + "-05-21" + " " + String.format("%02d", (step%24) ) + ":46:52" ; // "2001-05-21 15:46:52" 
 		return "java.sql.Timestamp.valueOf(\"" + timestampISO + "\")" ; // e.g. "2001-05-21 15:46:52"
 	}
 
