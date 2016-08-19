@@ -427,13 +427,6 @@ public interface Attribute {
 	public boolean isSelected() ;
 
 	/**
-	 * Returns TRUE if the attribute is used in (at least) one Foreign Key <br>
-	 * If not supported by the model implementation : 'false' 
-	 * @return
-	 */
-	public boolean isUsedInForeignKey() ;
-
-	/**
 	 * Returns TRUE if a primitive type is expected for this attribute <br>
 	 * e.g. for Java : short, boolean, float, etc <br>
 	 * If not supported by the model implementation : 'false'
@@ -449,7 +442,7 @@ public interface Attribute {
 	 */
     public boolean isObjectTypeExpected() ;
 
-	/**
+    /**
 	 * Returns TRUE if an unsigned type is expected for this attribute <br>
 	 * e.g. for C# : ushort, uint, ulong, etc <br>
 	 * If not supported by the model implementation : 'false'
@@ -464,5 +457,39 @@ public interface Attribute {
 	 * @return
 	 */
     public boolean isSqlTypeExpected() ;
+
+//--- Removed in v 3.0.0, replaced by "isFK()"
+//	/**
+//	 * Returns TRUE if the attribute is used in (at least) one Foreign Key <br>
+//	 * If not supported by the model implementation : 'false' 
+//	 * @return
+//	 */
+//	public boolean isUsedInForeignKey() ;
+
+
+    /**
+	 * Returns TRUE if the attribute is involved in a Foreign Key ( simple or composite FK ).<br>
+	 * ( TRUE if the attribute is itself the single part of a Foreign Key <br>
+	 * or if it is a part of a Foreign Key composed of many attributes )<br>
+     * @return
+     * @since v 3.0.0
+     */
+    public boolean isFK() ;
+    
+    /**
+	 * Returns TRUE if the attribute is itself a "Simple Foreign Key" <br>
+	 * ( the FK is based only on this single attribute ) <br>
+     * @return
+     * @since v 3.0.0
+     */
+    public boolean isFKSimple() ;
+    
+    /**
+	 * Returns TRUE if the attribute is a part of a "Composite Foreign Key" <br>
+	 * ( the FK is based on many attributes including this attribute ) <br>
+     * @return
+     * @since v 3.0.0
+     */
+    public boolean isFKComposite() ;
 
 }
