@@ -492,4 +492,18 @@ public interface Attribute {
      */
     public boolean isFKComposite() ;
 
+//    /**
+//	 * Returns the Entity referenced by the attribute if any<br>
+//	 * Returns an Entity instance only if the attribute is a "Single FK" or a part of a "Composite FK" <br>
+//	 * 
+//     * @return the Entity referenced, or null if none
+//     */
+//    public Entity getReferencedEntity() ;
+//    
+    /**
+	 * Returns the name of the Entity referenced by the attribute if any<br>
+	 * Returns null if none <br>
+     * @return
+     */
+    public String getReferencedEntityClassName() ;
 }
