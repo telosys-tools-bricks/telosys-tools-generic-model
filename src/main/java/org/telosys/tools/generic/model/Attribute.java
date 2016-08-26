@@ -506,4 +506,19 @@ public interface Attribute {
      * @return
      */
     public String getReferencedEntityClassName() ;
+    
+	/**
+	 * Returns true if the attribute is used as FK (or "pseudo FK") in one or more links of its entity
+	 * @return
+	 * @since v 3.0.0
+	 */
+	public boolean isUsedInLinks();
+	
+	/**
+	 * Returns true if the attribute is used as FK (or "pseudo FK") in one or more selected links of its entity
+	 * @return
+	 * @since v 3.0.0
+	 */
+	public boolean isUsedInSelectedLinks(); 
+
 }
