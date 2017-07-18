@@ -84,38 +84,52 @@ public class TypeConverterForTypeScript extends TypeConverter {
 		return new LanguageType( neutralType, objectType, objectType, false, objectType );
 	}
 
+//	@Override
+//	public LanguageType getType(AttributeTypeInfo attributeTypeInfo) {
+//		log("type info : " + attributeTypeInfo );
+//		
+//		// @UnsignedType, @SqlType, @NotNull are not supported in TypeScript
+//
+//		//--- 1) Process explicit requirements first (if any)
+//		if ( attributeTypeInfo.isPrimitiveTypeExpected() ) {
+//			// A primitive type is explicitly required ( @PrimitiveType )
+//			LanguageType lt = getPrimitiveType(attributeTypeInfo.getNeutralType() ) ;
+//			if ( lt != null ) {
+//				// FOUND
+//				log("1) primitive type found" );
+//				return lt ;
+//			}
+//		}
+//		else if ( attributeTypeInfo.isObjectTypeExpected() ) {
+//			// An object type is explicitly required ( @ObjectType )
+//			LanguageType lt = getObjectType(attributeTypeInfo.getNeutralType() ) ;
+//			if ( lt != null ) {
+//				// FOUND
+//				log("1) object type found" );
+//				return lt ;
+//			}
+//		}
+//
+//		// By default return the primitive type or object type if no primitive type
+//		LanguageType lt = getPrimitiveType(attributeTypeInfo.getNeutralType() ) ;
+//		if ( lt == null ) {
+//			lt = getObjectType(attributeTypeInfo.getNeutralType() ) ;
+//		}
+//		return lt ;
+//	}
 	@Override
 	public LanguageType getType(AttributeTypeInfo attributeTypeInfo) {
 		log("type info : " + attributeTypeInfo );
 		
-		// @UnsignedType, @SqlType, @NotNull are not supported in TypeScript
-
-		//--- 1) Process explicit requirements first (if any)
-		if ( attributeTypeInfo.isPrimitiveTypeExpected() ) {
-			// A primitive type is explicitly required ( @PrimitiveType )
-			LanguageType lt = getPrimitiveType(attributeTypeInfo.getNeutralType() ) ;
-			if ( lt != null ) {
-				// FOUND
-				log("1) primitive type found" );
-				return lt ;
-			}
+		// Return an Object "Date" type only for DATE, TIME or TIMESTAMP
+		// for all other types return the primitive type
+		if ( NeutralType.DATE.equals(attributeTypeInfo.getNeutralType()) ||
+			 NeutralType.TIME.equals(attributeTypeInfo.getNeutralType()) ||
+			 NeutralType.TIMESTAMP.equals(attributeTypeInfo.getNeutralType()) ) {
+			return getObjectType(attributeTypeInfo.getNeutralType() ) ;
 		}
-		else if ( attributeTypeInfo.isObjectTypeExpected() ) {
-			// An object type is explicitly required ( @ObjectType )
-			LanguageType lt = getObjectType(attributeTypeInfo.getNeutralType() ) ;
-			if ( lt != null ) {
-				// FOUND
-				log("1) object type found" );
-				return lt ;
-			}
+		else {
+			return getPrimitiveType(attributeTypeInfo.getNeutralType() ) ;
 		}
-
-		// By default return the primitive type or object type if no primitive type
-		LanguageType lt = getPrimitiveType(attributeTypeInfo.getNeutralType() ) ;
-		if ( lt == null ) {
-			lt = getObjectType(attributeTypeInfo.getNeutralType() ) ;
-		}
-		return lt ;
 	}
-
 }

@@ -34,27 +34,27 @@ public class TypeConverterForTypeScriptTest  {
 	private void checkStringPrimitiveType(TypeConverter tc, int typeInfo ) {
 		checkPrimitiveType( getType(tc, NeutralType.STRING, typeInfo ), "string", "String");
 	}
-	private void checkStringObjectType(TypeConverter tc, int typeInfo ) {
-		checkObjectType( getType(tc, NeutralType.STRING, typeInfo ), "String", "String");
-	}
+//	private void checkStringObjectType(TypeConverter tc, int typeInfo ) {
+//		checkObjectType( getType(tc, NeutralType.STRING, typeInfo ), "String", "String");
+//	}
 	private void checkBooleanPrimitiveType(TypeConverter tc, int typeInfo ) {
 		checkPrimitiveType( getType(tc, NeutralType.BOOLEAN, typeInfo ), "boolean", "Boolean");
 	}
-	private void checkBooleanObjectType(TypeConverter tc, int typeInfo ) {
-		checkObjectType( getType(tc, NeutralType.BOOLEAN, typeInfo ), "Boolean", "Boolean");
-	}
+//	private void checkBooleanObjectType(TypeConverter tc, int typeInfo ) {
+//		checkObjectType( getType(tc, NeutralType.BOOLEAN, typeInfo ), "Boolean", "Boolean");
+//	}
 	private void checkShortPrimitiveType(TypeConverter tc, int typeInfo ) {
 		checkPrimitiveType( getType(tc, NeutralType.SHORT, typeInfo ), "number", "Number");
 	}
-	private void checkShortObjectType(TypeConverter tc, int typeInfo ) {
-		checkObjectType( getType(tc, NeutralType.SHORT, typeInfo ), "Number", "Number");
-	}
+//	private void checkShortObjectType(TypeConverter tc, int typeInfo ) {
+//		checkObjectType( getType(tc, NeutralType.SHORT, typeInfo ), "Number", "Number");
+//	}
 	private void checkDecimalPrimitiveType(TypeConverter tc, int typeInfo ) {
 		checkPrimitiveType( getType(tc, NeutralType.DECIMAL, typeInfo ), "number", "Number");
 	}
-	private void checkDecimalObjectType(TypeConverter tc, int typeInfo ) {
-		checkObjectType( getType(tc, NeutralType.DECIMAL, typeInfo ), "Number", "Number");
-	}
+//	private void checkDecimalObjectType(TypeConverter tc, int typeInfo ) {
+//		checkObjectType( getType(tc, NeutralType.DECIMAL, typeInfo ), "Number", "Number");
+//	}
 	private void checkDateObjectType(TypeConverter tc, int typeInfo ) {
 		checkObjectType( getType(tc, NeutralType.DATE, typeInfo ), "Date", "Date");
 	}
@@ -97,12 +97,12 @@ public class TypeConverterForTypeScriptTest  {
 		checkStringPrimitiveType(tc, PRIMITIVE_TYPE + OBJECT_TYPE );
 		
 		// Object type expected
-		checkStringObjectType( tc, OBJECT_TYPE );
-		checkStringObjectType( tc, OBJECT_TYPE + SQL_TYPE );
-		checkStringObjectType( tc, OBJECT_TYPE + NOT_NULL );
-		checkStringObjectType( tc, OBJECT_TYPE + NOT_NULL + SQL_TYPE );
-		checkStringObjectType( tc, OBJECT_TYPE + UNSIGNED_TYPE );
-		checkStringObjectType( tc, OBJECT_TYPE + UNSIGNED_TYPE + SQL_TYPE );
+		checkStringPrimitiveType( tc, OBJECT_TYPE );
+		checkStringPrimitiveType( tc, OBJECT_TYPE + SQL_TYPE );
+		checkStringPrimitiveType( tc, OBJECT_TYPE + NOT_NULL );
+		checkStringPrimitiveType( tc, OBJECT_TYPE + NOT_NULL + SQL_TYPE );
+		checkStringPrimitiveType( tc, OBJECT_TYPE + UNSIGNED_TYPE );
+		checkStringPrimitiveType( tc, OBJECT_TYPE + UNSIGNED_TYPE + SQL_TYPE );
 	}
 
 	@Test
@@ -121,12 +121,12 @@ public class TypeConverterForTypeScriptTest  {
 		checkBooleanPrimitiveType(tc, PRIMITIVE_TYPE + OBJECT_TYPE );
 				
 		// Object type expected
-		checkBooleanObjectType( tc, OBJECT_TYPE );
-		checkBooleanObjectType( tc, OBJECT_TYPE + SQL_TYPE );
-		checkBooleanObjectType( tc, OBJECT_TYPE + NOT_NULL );
-		checkBooleanObjectType( tc, OBJECT_TYPE + NOT_NULL + SQL_TYPE );
-		checkBooleanObjectType( tc, OBJECT_TYPE + UNSIGNED_TYPE );
-		checkBooleanObjectType( tc, OBJECT_TYPE + UNSIGNED_TYPE + SQL_TYPE );
+		checkBooleanPrimitiveType( tc, OBJECT_TYPE );
+		checkBooleanPrimitiveType( tc, OBJECT_TYPE + SQL_TYPE );
+		checkBooleanPrimitiveType( tc, OBJECT_TYPE + NOT_NULL );
+		checkBooleanPrimitiveType( tc, OBJECT_TYPE + NOT_NULL + SQL_TYPE );
+		checkBooleanPrimitiveType( tc, OBJECT_TYPE + UNSIGNED_TYPE );
+		checkBooleanPrimitiveType( tc, OBJECT_TYPE + UNSIGNED_TYPE + SQL_TYPE );
 	}
 
 	@Test
@@ -145,12 +145,12 @@ public class TypeConverterForTypeScriptTest  {
 		checkShortPrimitiveType(tc, PRIMITIVE_TYPE + OBJECT_TYPE );
 				
 		// Object type expected
-		checkShortObjectType( tc, OBJECT_TYPE );
-		checkShortObjectType( tc, OBJECT_TYPE + SQL_TYPE );
-		checkShortObjectType( tc, OBJECT_TYPE + NOT_NULL );
-		checkShortObjectType( tc, OBJECT_TYPE + NOT_NULL + SQL_TYPE );
-		checkShortObjectType( tc, OBJECT_TYPE + UNSIGNED_TYPE );
-		checkShortObjectType( tc, OBJECT_TYPE + UNSIGNED_TYPE + SQL_TYPE );
+		checkShortPrimitiveType( tc, OBJECT_TYPE );
+		checkShortPrimitiveType( tc, OBJECT_TYPE + SQL_TYPE );
+		checkShortPrimitiveType( tc, OBJECT_TYPE + NOT_NULL );
+		checkShortPrimitiveType( tc, OBJECT_TYPE + NOT_NULL + SQL_TYPE );
+		checkShortPrimitiveType( tc, OBJECT_TYPE + UNSIGNED_TYPE );
+		checkShortPrimitiveType( tc, OBJECT_TYPE + UNSIGNED_TYPE + SQL_TYPE );
 	}
 
 	@Test
@@ -169,12 +169,12 @@ public class TypeConverterForTypeScriptTest  {
 		checkDecimalPrimitiveType(tc, PRIMITIVE_TYPE + OBJECT_TYPE );
 				
 		// Object type expected
-		checkDecimalObjectType( tc, OBJECT_TYPE );
-		checkDecimalObjectType( tc, OBJECT_TYPE + SQL_TYPE );
-		checkDecimalObjectType( tc, OBJECT_TYPE + NOT_NULL );
-		checkDecimalObjectType( tc, OBJECT_TYPE + NOT_NULL + SQL_TYPE );
-		checkDecimalObjectType( tc, OBJECT_TYPE + UNSIGNED_TYPE );
-		checkDecimalObjectType( tc, OBJECT_TYPE + UNSIGNED_TYPE + SQL_TYPE );
+		checkDecimalPrimitiveType( tc, OBJECT_TYPE );
+		checkDecimalPrimitiveType( tc, OBJECT_TYPE + SQL_TYPE );
+		checkDecimalPrimitiveType( tc, OBJECT_TYPE + NOT_NULL );
+		checkDecimalPrimitiveType( tc, OBJECT_TYPE + NOT_NULL + SQL_TYPE );
+		checkDecimalPrimitiveType( tc, OBJECT_TYPE + UNSIGNED_TYPE );
+		checkDecimalPrimitiveType( tc, OBJECT_TYPE + UNSIGNED_TYPE + SQL_TYPE );
 	}
 
 	@Test
@@ -281,22 +281,22 @@ public class TypeConverterForTypeScriptTest  {
 		TypeConverter tc = new TypeConverterForTypeScript() ;
 		LanguageType lt ;
 		
-		lt = getType(tc, NeutralType.BOOLEAN, OBJECT_TYPE ) ;
-		assertEquals("Boolean", lt.getSimpleType());
-		assertEquals("Boolean", lt.getFullType());
-		assertEquals("Boolean", lt.getWrapperType());
+		lt = getType(tc, NeutralType.DATE, OBJECT_TYPE ) ;
+		assertEquals("Date", lt.getSimpleType());
+		assertEquals("Date", lt.getFullType());
+		assertEquals("Date", lt.getWrapperType());
 		assertFalse(lt.isPrimitiveType());
 
-		lt = getType(tc, NeutralType.SHORT, OBJECT_TYPE ) ;
-		assertEquals("Number", lt.getSimpleType());
-		assertEquals("Number", lt.getFullType());
-		assertEquals("Number", lt.getWrapperType());
+		lt = getType(tc, NeutralType.TIME, OBJECT_TYPE ) ;
+		assertEquals("Date", lt.getSimpleType());
+		assertEquals("Date", lt.getFullType());
+		assertEquals("Date", lt.getWrapperType());
 		assertFalse(lt.isPrimitiveType());
 
-		lt = getType(tc, NeutralType.INTEGER, OBJECT_TYPE ) ;
-		assertEquals("Number", lt.getSimpleType());
-		assertEquals("Number", lt.getFullType());
-		assertEquals("Number", lt.getWrapperType());
+		lt = getType(tc, NeutralType.TIMESTAMP, OBJECT_TYPE ) ;
+		assertEquals("Date", lt.getSimpleType());
+		assertEquals("Date", lt.getFullType());
+		assertEquals("Date", lt.getWrapperType());
 		assertFalse(lt.isPrimitiveType());
 	}
 }
