@@ -114,4 +114,60 @@ public class TypeConverterForJava extends TypeConverter {
 			return primitiveType ; // Never happens
 		}
 	}
+	
+	@Override
+	public LanguageType getType(AttributeTypeInfo attributeTypeInfo) {
+		
+		log("type info : " + attributeTypeInfo );
+		
+		log("STEP 1" );
+		//--- 1) Process explicit requirements first (if any)
+		// A primitive type is explicitly required ( @PrimitiveType or @UnsignedType )
+		if ( attributeTypeInfo.isPrimitiveTypeExpected() || attributeTypeInfo.isUnsignedTypeExpected() ) {
+			LanguageType lt = getPrimitiveType(attributeTypeInfo.getNeutralType(), attributeTypeInfo.isUnsignedTypeExpected() ) ;
+			if ( lt != null ) {
+				// FOUND
+				log("1) primitive type found" );
+				return lt ;
+			}
+		}
+		log("1) primitive type not found" );
+		
+		// An object type is explicitly required ( @ObjectType or @SqlType )
+		if ( attributeTypeInfo.isObjectTypeExpected() || attributeTypeInfo.isSqlTypeExpected() ) {
+			LanguageType lt = getObjectType(attributeTypeInfo.getNeutralType(), attributeTypeInfo.isSqlTypeExpected() ) ;
+			if ( lt != null ) {
+				// FOUND
+				log("1) object type found" );
+				return lt ;
+			}
+		}
+		log("1) object type not found" );
+
+		log("STEP 2 " );
+		//--- 2) Process standard type conversion
+		if ( attributeTypeInfo.isNotNull() ) {
+			log("2) Not Null : TRUE" );
+			// Try to found a primitive type first
+			LanguageType lt = getPrimitiveType(attributeTypeInfo.getNeutralType(), false ) ;
+			if ( lt != null ) {
+				// FOUND
+				return lt ;
+			}
+			// Still not found : try to found an object type
+			return getObjectType(attributeTypeInfo.getNeutralType(), false ) ;
+		}
+		else {
+			log("2) Not Null : FALSE" );
+			// Try to found an object type first
+			LanguageType lt = getObjectType(attributeTypeInfo.getNeutralType(), false ) ;
+			if ( lt != null ) {
+				// FOUND
+				return lt ;
+			}
+			// Still not found : try to found a primitive type
+			return getPrimitiveType(attributeTypeInfo.getNeutralType(), false ) ;
+		}
+	}
+	
 }
