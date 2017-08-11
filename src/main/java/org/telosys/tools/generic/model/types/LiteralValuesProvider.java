@@ -15,13 +15,67 @@
  */
 package org.telosys.tools.generic.model.types;
 
-public interface LiteralValuesProvider {
+/**
+ * Abstract literal values provider
+ * 
+ * @author Laurent GUERIN
+ *
+ */
+public abstract class LiteralValuesProvider {
 	
+	/**
+	 * Ensures the value is always less than or equal at the given threshold 
+	 * @param value
+	 * @param max
+	 * @return
+	 */
+	protected int checkThreshold(int value, int max) {
+		if ( value <= max ) {
+			// OK ( 0 to MAX )
+			return value ;
+		}
+		else {
+			int modulo = value % max ;
+			if ( modulo == 0 ) {
+				return max ;
+			}
+			else {
+				return modulo ;
+			}
+		}
+	}
+	
+	/**
+	 * Builds a string with the given length 
+	 * @param maxLength
+	 * @param step the step used for randomization
+	 * @return
+	 */
+	protected String buildStringValue(int maxLength, int step) {
+		int maxLimit = 100 ;
+		// 'A'-'Z' : 65-90 
+		// 'a'-'z' : 97-122 
+		char c = 'A' ; 
+		if ( step > 0 ) {
+			int delta = (step-1) % 26;
+			c = (char)('A' + delta );
+		}
+		StringBuilder sb = new StringBuilder();
+		for ( int i = 0 ; i < maxLength && i < maxLimit ; i++) {
+			sb.append(c);
+		}
+		return sb.toString();
+	}
+
+	//------------------------------------------------------------------------------------
+	// ABSTRACT METHODS
+	//------------------------------------------------------------------------------------
+
 	/**
 	 * Returns the literal 'null' for the current language
 	 * @return
 	 */
-	public String getLiteralNull() ;
+	public abstract String getLiteralNull() ;
 
 	/**
 	 * Generates a literal value for the given language type <br>
@@ -30,7 +84,7 @@ public interface LiteralValuesProvider {
 	 * @param step
 	 * @return
 	 */
-	public String generateLiteralValue(LanguageType languageType, int maxLength, int step) ;
+	public abstract String generateLiteralValue(LanguageType languageType, int maxLength, int step) ;
 
 	/**
 	 * Returns the ad hoc equals statement for a given literal value according with the language type<br>
@@ -42,6 +96,6 @@ public interface LiteralValuesProvider {
 	 * @param languageType
 	 * @return
 	 */
-	public String getEqualsStatement(String value, LanguageType languageType) ;
+	public abstract String getEqualsStatement(String value, LanguageType languageType) ;
 
 }

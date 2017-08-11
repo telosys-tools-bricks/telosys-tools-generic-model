@@ -15,7 +15,13 @@
  */
 package org.telosys.tools.generic.model.types;
 
-public class LiteralValuesProviderForJava implements LiteralValuesProvider {
+/**
+ * Literal values provider for "JAVA" language
+ * 
+ * @author Laurent GUERIN
+ *
+ */
+public class LiteralValuesProviderForJava extends LiteralValuesProvider {
 	
 	private final static String NULL_LITERAL = "null" ; // null in Java
 	
@@ -24,22 +30,22 @@ public class LiteralValuesProviderForJava implements LiteralValuesProvider {
 		return NULL_LITERAL;
 	}
 	
-	private int checkThreshold(int step, int max) {
-		if ( step <= max ) {
-			// OK ( 0 to MAX )
-			return step ;
-		}
-		else {
-			int modulo = step % max ;
-			if ( modulo == 0 ) {
-				return max ;
-			}
-			else {
-				return modulo ;
-			}
-		}
-		
-	}
+//	private int checkThreshold(int step, int max) {
+//		if ( step <= max ) {
+//			// OK ( 0 to MAX )
+//			return step ;
+//		}
+//		else {
+//			int modulo = step % max ;
+//			if ( modulo == 0 ) {
+//				return max ;
+//			}
+//			else {
+//				return modulo ;
+//			}
+//		}
+//		
+//	}
 	
 	@Override
 	public String generateLiteralValue(LanguageType languageType, int maxLength, int step) {
@@ -202,54 +208,22 @@ public class LiteralValuesProviderForJava implements LiteralValuesProvider {
 			return sb.toString();
 
 		}
-//		if ( attribute.isNumberType() ) {
-//			//if ( attribute.isBigDecimalType() ) { 
-//			if ( attribute.isDecimalType() ) { // v 3.0.0
-//				sb.append( buildObjectEqualsValue(value) ) ;
-//			}
-//			else {
-//				// int, long, double, float, ...
-//				sb.append( buildStandardEqualsValue(value) );
-//			}
-//		}
-//		else if ( attribute.isBooleanType() ) {
-//			sb.append( buildStandardEqualsValue(value) );
-//		}
-//		else {
-//			sb.append( buildObjectEqualsValue(value) ) ;
-//		}
-//		return sb.toString();
 	}
 
-	private String buildStringValue(int maxLength, int step) {
-		int maxLimit = 100 ;
-		// 'A'-'Z' : 65-90 
-		// 'a'-'z' : 97-122 
-		char c = 'A' ; 
-		if ( step > 0 ) {
-			int delta = (step-1) % 26;
-			c = (char)('A' + delta );
-		}
-		StringBuilder sb = new StringBuilder();
-		for ( int i = 0 ; i < maxLength && i < maxLimit ; i++) {
-			sb.append(c);
-		}
-		return sb.toString();
-	}
+//	private String buildStringValue(int maxLength, int step) {
+//		int maxLimit = 100 ;
+//		// 'A'-'Z' : 65-90 
+//		// 'a'-'z' : 97-122 
+//		char c = 'A' ; 
+//		if ( step > 0 ) {
+//			int delta = (step-1) % 26;
+//			c = (char)('A' + delta );
+//		}
+//		StringBuilder sb = new StringBuilder();
+//		for ( int i = 0 ; i < maxLength && i < maxLimit ; i++) {
+//			sb.append(c);
+//		}
+//		return sb.toString();
+//	}
 
-//	private String buildObjectEqualsValue(String value) {
-//		StringBuilder sb = new StringBuilder();
-//		sb.append( ".equals(" );
-//		sb.append( value );
-//		sb.append( ")" );
-//		return sb.toString();
-//	}
-//	
-//	private String buildStandardEqualsValue(String value) {
-//		StringBuilder sb = new StringBuilder();
-//		sb.append( " == " );
-//		sb.append( value );
-//		sb.append( " " );
-//		return sb.toString();
-//	}
 }
