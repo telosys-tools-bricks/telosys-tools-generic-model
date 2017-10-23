@@ -84,9 +84,9 @@ public class TypeConverterForCSharpTest  {
 	@Test
 	public void testShort() {
 		System.out.println("--- ");
-		TypeConverter tc = getTypeConverter() ;
-		
-		LanguageType lt ; 
+//		TypeConverter tc = getTypeConverter() ;
+//		
+//		LanguageType lt ; 
 		
 		//-----------------------------------
 //		
@@ -110,7 +110,7 @@ public class TypeConverterForCSharpTest  {
 	@Test
 	public void testDecimal() {
 		System.out.println("--- ");
-		TypeConverter tc = getTypeConverter() ;
+//		TypeConverter tc = getTypeConverter() ;
 		
 //		// Supposed to always return BigDecimal (in any cases) 
 //		check( getType(tc, NeutralType.DECIMAL, NONE ), BigDecimal.class);
