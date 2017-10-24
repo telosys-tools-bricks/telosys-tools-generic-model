@@ -17,8 +17,8 @@ package org.telosys.tools.generic.model.types;
 
 import java.util.HashMap;
 
-import org.telosys.tools.commons.ConsoleLogger;
 import org.telosys.tools.commons.TelosysToolsLogger;
+import org.telosys.tools.commons.logger.ConsoleLogger;
 import org.telosys.tools.generic.model.Attribute;
 
 /**
