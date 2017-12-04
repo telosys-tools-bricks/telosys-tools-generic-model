@@ -17,7 +17,6 @@ package org.telosys.tools.generic.model.types;
 
 import java.util.HashMap;
 
-import org.telosys.tools.commons.TelosysToolsLogger;
 import org.telosys.tools.commons.logger.ConsoleLogger;
 import org.telosys.tools.generic.model.Attribute;
 
@@ -30,19 +29,19 @@ import org.telosys.tools.generic.model.Attribute;
  */
 public abstract class TypeConverter {
 	
-	private final static boolean log = false ;
-	private final static TelosysToolsLogger logger = new ConsoleLogger();
+	private static final boolean LOG = false ;
+	private static final ConsoleLogger logger = new ConsoleLogger();
 	protected void log(String msg) {
-		if ( log ) {
+		if ( LOG ) {
 			logger.log(this, msg);
 		}
 	}
 
-	private final HashMap<String, LanguageType> primitiveTypes         = new HashMap<String, LanguageType>();
-	private final HashMap<String, LanguageType> primitiveUnsignedTypes = new HashMap<String, LanguageType>();
+	private final HashMap<String, LanguageType> primitiveTypes         = new HashMap<>();
+	private final HashMap<String, LanguageType> primitiveUnsignedTypes = new HashMap<>();
 	
-	private final HashMap<String, LanguageType> objectTypes         = new HashMap<String, LanguageType>();
-	private final HashMap<String, LanguageType> objectSqlTypes      = new HashMap<String, LanguageType>();
+	private final HashMap<String, LanguageType> objectTypes         = new HashMap<>();
+	private final HashMap<String, LanguageType> objectSqlTypes      = new HashMap<>();
 		
 	/**
 	 * Declares a regular primitive type
