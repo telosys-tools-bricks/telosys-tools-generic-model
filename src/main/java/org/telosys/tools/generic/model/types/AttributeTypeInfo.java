@@ -25,12 +25,12 @@ import org.telosys.tools.generic.model.Attribute;
  */
 public class AttributeTypeInfo {
 
-	public final static int     NONE           =  0 ;
-	public final static int     NOT_NULL       =  1 ;
-	public final static int     PRIMITIVE_TYPE =  2 ;
-	public final static int     OBJECT_TYPE    =  4 ;
-	public final static int     UNSIGNED_TYPE  =  8 ;
-	public final static int     SQL_TYPE       = 16 ;
+	public static final int     NONE           =  0 ;
+	public static final int     NOT_NULL       =  1 ;
+	public static final int     PRIMITIVE_TYPE =  2 ;
+	public static final int     OBJECT_TYPE    =  4 ;
+	public static final int     UNSIGNED_TYPE  =  8 ;
+	public static final int     SQL_TYPE       = 16 ;
 	
 	private final String  neutralType ;
 
@@ -94,7 +94,7 @@ public class AttributeTypeInfo {
 
 	@Override
 	public String toString() {
-		StringBuffer sb  = new StringBuffer();
+		StringBuilder sb  = new StringBuilder();
 		sb.append("'" + neutralType + "' " );
 		if ( notNull || primitiveTypeExpected || objectTypeExpected || unsignedTypeExpected || sqlTypeExpected ) {
 			sb.append("( " );
