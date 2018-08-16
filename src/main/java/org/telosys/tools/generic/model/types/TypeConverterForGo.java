@@ -48,9 +48,9 @@ public class TypeConverterForGo extends TypeConverter {
 		declarePrimitiveUnsignedType( buildPrimitiveType(NeutralType.LONG,    "uint64",  "uint64" ) );
 
 		//--- Object types : for GO "object types" are used for "structures" define in a "package" ( when "import" is required )
-		declareObjectType( buildObjectType(NeutralType.DATE,      "Date",     "time.Date"  ) );
-		declareObjectType( buildObjectType(NeutralType.TIME,      "Time",     "time.Time"  ) );
-		declareObjectType( buildObjectType(NeutralType.TIMESTAMP, "DateTime", "time.DateTime" ) );
+		declareObjectType( buildObjectType(NeutralType.DATE,      "time.Time",  "time.Time" ) );
+		declareObjectType( buildObjectType(NeutralType.TIME,      "time.Time",  "time.Time" ) );
+		declareObjectType( buildObjectType(NeutralType.TIMESTAMP, "time.Time",  "time.Time" ) );
 	}
 
 	private LanguageType buildPrimitiveType(String neutralType, String primitiveType, String wrapperType) {

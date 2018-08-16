@@ -215,117 +215,49 @@ public class TypeConverterForGoTest  {
 	@Test
 	public void testDate() {
 		System.out.println("--- ");
-		// Go example :
-		//   import "time" 
-		//   x := time.Date(2009, 11, 17, 20, 34, 58, 651387237, time.UTC)
-		checkObjectType( getType( NeutralType.DATE, NONE ),                           "Date", "time.Date" );
-		checkObjectType( getType( NeutralType.DATE, NOT_NULL ),                       "Date", "time.Date" );
-		checkObjectType( getType( NeutralType.DATE, PRIMITIVE_TYPE ),                 "Date", "time.Date" );
-		checkObjectType( getType( NeutralType.DATE, OBJECT_TYPE),                     "Date", "time.Date" );
-		checkObjectType( getType( NeutralType.DATE, SQL_TYPE),                        "Date", "time.Date" );
-		checkObjectType( getType( NeutralType.DATE, OBJECT_TYPE + SQL_TYPE),          "Date", "time.Date" );
-		checkObjectType( getType( NeutralType.DATE, NOT_NULL + OBJECT_TYPE),          "Date", "time.Date" );
-		checkObjectType( getType( NeutralType.DATE, NOT_NULL + SQL_TYPE),             "Date", "time.Date" );
-		checkObjectType( getType( NeutralType.DATE, UNSIGNED_TYPE ),                  "Date", "time.Date" );
-		checkObjectType( getType( NeutralType.DATE, PRIMITIVE_TYPE + UNSIGNED_TYPE ), "Date", "time.Date" );
-		checkObjectType( getType( NeutralType.DATE, OBJECT_TYPE + UNSIGNED_TYPE ),    "Date", "time.Date" );
+		checkObjectType( getType( NeutralType.DATE, NONE ),                           "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.DATE, NOT_NULL ),                       "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.DATE, PRIMITIVE_TYPE ),                 "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.DATE, OBJECT_TYPE),                     "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.DATE, SQL_TYPE),                        "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.DATE, OBJECT_TYPE + SQL_TYPE),          "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.DATE, NOT_NULL + OBJECT_TYPE),          "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.DATE, NOT_NULL + SQL_TYPE),             "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.DATE, UNSIGNED_TYPE ),                  "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.DATE, PRIMITIVE_TYPE + UNSIGNED_TYPE ), "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.DATE, OBJECT_TYPE + UNSIGNED_TYPE ),    "time.Time", "time.Time" );
 	}
 
 	@Test
 	public void testTime() {
 		System.out.println("--- ");
-		// Go example :
-		//   import "time" 
-		//   x := time.Date(2009, 11, 17, 20, 34, 58, 651387237, time.UTC)
-		checkObjectType( getType( NeutralType.TIME, NONE ),                           "Time", "time.Time" );
-		checkObjectType( getType( NeutralType.TIME, NOT_NULL ),                       "Time", "time.Time" );
-		checkObjectType( getType( NeutralType.TIME, PRIMITIVE_TYPE ),                 "Time", "time.Time" );
-		checkObjectType( getType( NeutralType.TIME, OBJECT_TYPE),                     "Time", "time.Time" );
-		checkObjectType( getType( NeutralType.TIME, SQL_TYPE),                        "Time", "time.Time" );
-		checkObjectType( getType( NeutralType.TIME, OBJECT_TYPE + SQL_TYPE),          "Time", "time.Time" );
-		checkObjectType( getType( NeutralType.TIME, NOT_NULL + OBJECT_TYPE),          "Time", "time.Time" );
-		checkObjectType( getType( NeutralType.TIME, NOT_NULL + SQL_TYPE),             "Time", "time.Time" );
-		checkObjectType( getType( NeutralType.TIME, UNSIGNED_TYPE ),                  "Time", "time.Time" );
-		checkObjectType( getType( NeutralType.TIME, PRIMITIVE_TYPE + UNSIGNED_TYPE ), "Time", "time.Time" );
-		checkObjectType( getType( NeutralType.TIME, OBJECT_TYPE + UNSIGNED_TYPE ),    "Time", "time.Time" );
+		checkObjectType( getType( NeutralType.TIME, NONE ),                           "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.TIME, NOT_NULL ),                       "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.TIME, PRIMITIVE_TYPE ),                 "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.TIME, OBJECT_TYPE),                     "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.TIME, SQL_TYPE),                        "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.TIME, OBJECT_TYPE + SQL_TYPE),          "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.TIME, NOT_NULL + OBJECT_TYPE),          "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.TIME, NOT_NULL + SQL_TYPE),             "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.TIME, UNSIGNED_TYPE ),                  "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.TIME, PRIMITIVE_TYPE + UNSIGNED_TYPE ), "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.TIME, OBJECT_TYPE + UNSIGNED_TYPE ),    "time.Time", "time.Time" );
 	}
 
 	@Test
 	public void testTimestamp() {
 		System.out.println("--- ");
-//		TypeConverter tc = new TypeConverterForTypeScript() ;
-//		
-//		// Supposed to always return BigDecimal (in any cases) 
-//		check( getType(tc, NeutralType.TIMESTAMP, NONE ), java.util.Date.class);
-//		check( getType(tc, NeutralType.TIMESTAMP, NOT_NULL ), java.util.Date.class);
-//		
-//		check( getType(tc, NeutralType.TIMESTAMP, PRIMITIVE_TYPE ), java.util.Date.class);
-//		check( getType(tc, NeutralType.TIMESTAMP, UNSIGNED_TYPE ), java.util.Date.class);
-//		check( getType(tc, NeutralType.TIMESTAMP, PRIMITIVE_TYPE + UNSIGNED_TYPE ), java.util.Date.class);
-//		
-//		check( getType(tc, NeutralType.TIMESTAMP, OBJECT_TYPE ), java.util.Date.class);
-//		check( getType(tc, NeutralType.TIMESTAMP, NOT_NULL + OBJECT_TYPE ), java.util.Date.class);
-//
-//		check( getType(tc, NeutralType.TIMESTAMP, SQL_TYPE ), java.sql.Timestamp.class);	 // SQL Time	
-//		check( getType(tc, NeutralType.TIMESTAMP, NOT_NULL + SQL_TYPE ), java.sql.Timestamp.class); // SQL Time	
-//		check( getType(tc, NeutralType.TIMESTAMP, OBJECT_TYPE + SQL_TYPE ), java.sql.Timestamp.class); // SQL Time	
-//		check( getType(tc, NeutralType.TIMESTAMP, PRIMITIVE_TYPE + SQL_TYPE ), java.sql.Timestamp.class); // not compatible (no Prim type => SQL Time)	
+		checkObjectType( getType( NeutralType.TIMESTAMP, NONE ),                           "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.TIMESTAMP, NOT_NULL ),                       "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.TIMESTAMP, PRIMITIVE_TYPE ),                 "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.TIMESTAMP, OBJECT_TYPE),                     "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.TIMESTAMP, SQL_TYPE),                        "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.TIMESTAMP, OBJECT_TYPE + SQL_TYPE),          "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.TIMESTAMP, NOT_NULL + OBJECT_TYPE),          "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.TIMESTAMP, NOT_NULL + SQL_TYPE),             "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.TIMESTAMP, UNSIGNED_TYPE ),                  "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.TIMESTAMP, PRIMITIVE_TYPE + UNSIGNED_TYPE ), "time.Time", "time.Time" );
+		checkObjectType( getType( NeutralType.TIMESTAMP, OBJECT_TYPE + UNSIGNED_TYPE ),    "time.Time", "time.Time" );
 	}
 
-	@Test
-	public void testPrimitiveTypes() {
-		System.out.println("--- ");
-//		TypeConverter tc = new TypeConverterForTypeScript() ;
-//		LanguageType lt ;
-//		
-//		lt = getType(tc, NeutralType.BOOLEAN, PRIMITIVE_TYPE ) ;
-//		assertEquals("boolean", lt.getSimpleType());
-//		assertEquals("boolean", lt.getFullType());
-//		assertEquals("Boolean", lt.getWrapperType());
-//		assertTrue(lt.isPrimitiveType());
-//		
-//		lt = getType(tc, NeutralType.SHORT, PRIMITIVE_TYPE ) ;
-//		assertEquals("short", lt.getSimpleType());
-//		assertEquals("short", lt.getFullType());
-//		assertEquals("Short", lt.getWrapperType());
-//		assertTrue(lt.isPrimitiveType());
-//
-//		lt = getType(tc, NeutralType.INTEGER, PRIMITIVE_TYPE ) ;
-//		assertEquals("int", lt.getSimpleType());
-//		assertEquals("int", lt.getFullType());
-//		assertEquals("Integer", lt.getWrapperType());
-//		assertTrue(lt.isPrimitiveType());
-//
-//		lt = getType(tc, NeutralType.LONG, PRIMITIVE_TYPE ) ;
-//		assertEquals("long", lt.getSimpleType());
-//		assertEquals("long", lt.getFullType());
-//		assertEquals("Long", lt.getWrapperType());
-//		assertTrue(lt.isPrimitiveType());
-	}
-	
-	@Test
-	public void testObjectTypes() {
-		System.out.println("--- ");
-//		TypeConverter tc = new TypeConverterForTypeScript() ;
-//		LanguageType lt ;
-//		
-//		lt = getType(tc, NeutralType.BOOLEAN, OBJECT_TYPE ) ;
-//		assertEquals("Boolean", lt.getSimpleType());
-//		assertEquals("java.lang.Boolean", lt.getFullType());
-//		assertEquals("Boolean", lt.getWrapperType());
-//		assertFalse(lt.isPrimitiveType());
-//
-//		lt = getType(tc, NeutralType.SHORT, OBJECT_TYPE ) ;
-//		assertEquals("Short", lt.getSimpleType());
-//		assertEquals("java.lang.Short", lt.getFullType());
-//		assertEquals("Short", lt.getWrapperType());
-//		assertFalse(lt.isPrimitiveType());
-//
-//		lt = getType(tc, NeutralType.INTEGER, OBJECT_TYPE ) ;
-//		assertEquals("Integer", lt.getSimpleType());
-//		assertEquals("java.lang.Integer", lt.getFullType());
-//		assertEquals("Integer", lt.getWrapperType());
-//		assertFalse(lt.isPrimitiveType());
-//
-	}
 }
