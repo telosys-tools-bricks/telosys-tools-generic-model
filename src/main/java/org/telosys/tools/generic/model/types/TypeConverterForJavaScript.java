@@ -15,6 +15,9 @@
  */
 package org.telosys.tools.generic.model.types;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Type converter for "JavaScript" language
  * 
@@ -24,7 +27,8 @@ package org.telosys.tools.generic.model.types;
 public class TypeConverterForJavaScript extends TypeConverter {
 
 	public TypeConverterForJavaScript() {
-		super();
+		super("JavaScript");
+		
 		// No type for JavaScript !
 
 //		//--- Object types 
@@ -83,6 +87,13 @@ public class TypeConverterForJavaScript extends TypeConverter {
 //		// simple type = full type = wrapper type
 //		return new LanguageType( neutralType, objectType, objectType, false, objectType );
 //	}
+
+	@Override
+	public List<String> getComments() {
+		List<String> l = new LinkedList<>();
+		l.add("");
+		return l ;
+	}
 
 	@Override
 	public LanguageType getType(AttributeTypeInfo attributeTypeInfo) {

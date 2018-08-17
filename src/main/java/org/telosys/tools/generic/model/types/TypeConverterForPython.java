@@ -15,6 +15,9 @@
  */
 package org.telosys.tools.generic.model.types;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Type converter for "Python" language
  * 
@@ -24,8 +27,15 @@ package org.telosys.tools.generic.model.types;
 public class TypeConverterForPython extends TypeConverter {
 
 	public TypeConverterForPython() {
-		super();
+		super("Python");
 		// No type for Python !
+	}
+
+	@Override
+	public List<String> getComments() {
+		List<String> l = new LinkedList<>();
+		l.add("");
+		return l ;
 	}
 
 	@Override

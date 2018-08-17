@@ -15,6 +15,9 @@
  */
 package org.telosys.tools.generic.model.types;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Type converter for "Go" language
  * 
@@ -24,7 +27,7 @@ package org.telosys.tools.generic.model.types;
 public class TypeConverterForGo extends TypeConverter {
 
 	public TypeConverterForGo() {
-		super();
+		super("Go");
 		
 		//--- Primitive types :
 		declarePrimitiveType( buildPrimitiveType(NeutralType.STRING,   "string",  "string"  ) );
@@ -61,61 +64,17 @@ public class TypeConverterForGo extends TypeConverter {
 		return new LanguageType(neutralType, simpleType,  fullType, false, simpleType );
 	}
 	
-	
-//	@Override
-//	public LanguageType getType(AttributeTypeInfo attributeTypeInfo) {
-//		
-//		log("type info : " + attributeTypeInfo );
-//		
-//		log("STEP 1" );
-//		//--- 1) Process explicit requirements first (if any)
-//		// A primitive type is explicitly required ( @PrimitiveType or @UnsignedType )
-//		if ( attributeTypeInfo.isPrimitiveTypeExpected() || attributeTypeInfo.isUnsignedTypeExpected() ) {
-//			LanguageType lt = getPrimitiveType(attributeTypeInfo.getNeutralType(), attributeTypeInfo.isUnsignedTypeExpected() ) ;
-//			if ( lt != null ) {
-//				// FOUND
-//				log("1) primitive type found" );
-//				return lt ;
-//			}
-//		}
-//		log("1) primitive type not found" );
-//		
-//		// An object type is explicitly required ( @ObjectType or @SqlType )
-//		if ( attributeTypeInfo.isObjectTypeExpected() || attributeTypeInfo.isSqlTypeExpected() ) {
-//			LanguageType lt = getObjectType(attributeTypeInfo.getNeutralType(), attributeTypeInfo.isSqlTypeExpected() ) ;
-//			if ( lt != null ) {
-//				// FOUND
-//				log("1) object type found" );
-//				return lt ;
-//			}
-//		}
-//		log("1) object type not found" );
-//
-//		log("STEP 2 " );
-//		//--- 2) Process standard type conversion
-//		if ( attributeTypeInfo.isNotNull() ) {
-//			log("2) Not Null : TRUE" );
-//			// Try to found a primitive type first
-//			LanguageType lt = getPrimitiveType(attributeTypeInfo.getNeutralType(), false ) ;
-//			if ( lt != null ) {
-//				// FOUND
-//				return lt ;
-//			}
-//			// Still not found : try to found an object type
-//			return getObjectType(attributeTypeInfo.getNeutralType(), false ) ;
-//		}
-//		else {
-//			log("2) Not Null : FALSE" );
-////			// Try to found an object type first
-////			LanguageType lt = getObjectType(attributeTypeInfo.getNeutralType(), false ) ;
-////			if ( lt != null ) {
-////				// FOUND
-////				return lt ;
-////			}
-//			// Still not found : try to found a primitive type
-//			return getPrimitiveType(attributeTypeInfo.getNeutralType(), false ) ;
-//		}
-//	}
+	@Override
+	public List<String> getComments() {
+		List<String> l = new LinkedList<>();
+		l.add("'@UnsignedType'  has effect only for byte, short, int, long ");
+		l.add("");
+		l.add("'@NotNull'  has not effect ");
+		l.add("'@PrimitiveType'  has not effect ");
+		l.add("'@ObjectType'  has not effect  ");
+		l.add("'@SqlType'  has not effect ");
+		return l ;
+	}
 
 	@Override
 	public LanguageType getType(AttributeTypeInfo attributeTypeInfo) {
@@ -124,12 +83,16 @@ public class TypeConverterForGo extends TypeConverter {
 		// Search a "primitive type" first 
 		LanguageType lt = getPrimitiveType(neutralType, attributeTypeInfo.isUnsignedTypeExpected() ) ;
 		if ( lt != null ) {
-			// FOUND
-			log("1) primitive type found" );
 			return lt ;
 		}
-		// if "primitive type" not found search an "object type" 
-		return getObjectType( neutralType ) ;
+		// if "primitive type" not found search an "object type" : date, time, timestamp
+		lt = getObjectType( neutralType ) ;
+		if ( lt != null ) {
+			return lt;
+		}
+		// Still not found !!!
+		throwTypeNotFoundException(attributeTypeInfo);
+		return null ;  // just to avoid compilation error
 	}
 	
 }

@@ -15,6 +15,9 @@
  */
 package org.telosys.tools.generic.model.types;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Type converter for "JAVA" language
  * 
@@ -24,7 +27,7 @@ package org.telosys.tools.generic.model.types;
 public class TypeConverterForJava extends TypeConverter {
 
 	public TypeConverterForJava() {
-		super();
+		super("Java");
 		
 		//--- Object types 
 		declareObjectType( buildJavaType(NeutralType.STRING,    java.lang.String.class) );
@@ -115,6 +118,13 @@ public class TypeConverterForJava extends TypeConverter {
 		}
 	}
 	
+	@Override
+	public List<String> getComments() {
+		List<String> l = new LinkedList<>();
+		l.add("");
+		return l ;
+	}
+
 	@Override
 	public LanguageType getType(AttributeTypeInfo attributeTypeInfo) {
 		

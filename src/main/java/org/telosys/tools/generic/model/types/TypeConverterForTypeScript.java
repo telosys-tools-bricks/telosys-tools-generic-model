@@ -15,6 +15,9 @@
  */
 package org.telosys.tools.generic.model.types;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Type converter for "TypeScript" language
  * 
@@ -24,7 +27,7 @@ package org.telosys.tools.generic.model.types;
 public class TypeConverterForTypeScript extends TypeConverter {
 
 	public TypeConverterForTypeScript() {
-		super();
+		super("TypeScript");
 		// cf : https://www.typescriptlang.org/docs/handbook/basic-types.html
 
 		//--- Object types 
@@ -117,6 +120,14 @@ public class TypeConverterForTypeScript extends TypeConverter {
 //		}
 //		return lt ;
 //	}
+	
+	@Override
+	public List<String> getComments() {
+		List<String> l = new LinkedList<>();
+		l.add("");
+		return l ;
+	}
+
 	@Override
 	public LanguageType getType(AttributeTypeInfo attributeTypeInfo) {
 		log("type info : " + attributeTypeInfo );

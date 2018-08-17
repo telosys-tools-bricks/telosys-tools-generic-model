@@ -16,6 +16,7 @@
 package org.telosys.tools.generic.model.types;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.telosys.tools.commons.logger.ConsoleLogger;
 import org.telosys.tools.generic.model.Attribute;
@@ -37,12 +38,35 @@ public abstract class TypeConverter {
 		}
 	}
 
+	private final String languageName ;
+	
 	private final HashMap<String, LanguageType> primitiveTypes         = new HashMap<>();
 	private final HashMap<String, LanguageType> primitiveUnsignedTypes = new HashMap<>();
 	
 	private final HashMap<String, LanguageType> objectTypes         = new HashMap<>();
 	private final HashMap<String, LanguageType> objectSqlTypes      = new HashMap<>();
-		
+
+	
+	public TypeConverter(String languageName) {
+		super();
+		this.languageName = languageName;
+	}
+
+	/**
+	 * Returns the language associated with this type converter
+	 * @return
+	 */
+	public String getLanguageName() {
+		return languageName;
+	}
+	
+	/**
+	 * Returns a list of comment lines
+	 * @return
+	 */
+	public abstract List<String> getComments() ;
+	
+
 	/**
 	 * Declares a regular primitive type
 	 * @param languageType
@@ -169,5 +193,9 @@ public abstract class TypeConverter {
 	public final LanguageType getType(Attribute attribute) {		
 		AttributeTypeInfo attributeTypeInfo = new AttributeTypeInfo(attribute);
 		return getType(attributeTypeInfo);
+	}
+	
+	protected void throwTypeNotFoundException(AttributeTypeInfo attributeTypeInfo) {
+		throw new RuntimeException("No type found for '" + attributeTypeInfo.getNeutralType() + "'");
 	}
 }

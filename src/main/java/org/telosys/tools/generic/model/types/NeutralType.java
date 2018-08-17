@@ -15,6 +15,9 @@
  */
 package org.telosys.tools.generic.model.types;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * All neutral types used in the generic model <br>
  * 
@@ -28,11 +31,10 @@ public final class NeutralType {
     // Neutral type list of predefined names
     public static final String STRING    = "string";
     
-    public static final String BYTE      = "byte"; // Added
-    public static final String SHORT     = "short"; // Added
-//    public static final String INTEGER   = "integer"; 
-    public static final String INTEGER   = "int"; // Changed
-    public static final String LONG      = "long"; // Added
+    public static final String BYTE      = "byte"; 
+    public static final String SHORT     = "short"; 
+    public static final String INTEGER   = "int"; 
+    public static final String LONG      = "long"; 
     
     public static final String DECIMAL   = "decimal";
     public static final String FLOAT     = "float";
@@ -46,5 +48,34 @@ public final class NeutralType {
     
     public static final String BINARY   = "binary";   // BLOB
     // public static final String LONGTEXT = "longtext"; // CLOB
+    
+    /**
+     * Returns all the neutral types
+     * @return
+     */
+    public static final List<String> getAllNeutralTypes() {
+    	List<String> list = new LinkedList<>();
+    	
+    	list.add(STRING);
+    	
+    	list.add(BYTE);
+    	list.add(SHORT);
+    	list.add(INTEGER);
+    	list.add(LONG);
+    	
+    	list.add(DECIMAL);
+    	list.add(FLOAT);
+    	list.add(DOUBLE);
+    	
+    	list.add(BOOLEAN);
+    	
+    	list.add(DATE);
+    	list.add(TIME);
+    	list.add(TIMESTAMP);
+    	
+    	list.add(BINARY);
+    	
+    	return list ;
+    }
 
 }
