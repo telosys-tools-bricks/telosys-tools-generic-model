@@ -69,10 +69,10 @@ public class TypeConverterForGo extends TypeConverter {
 		List<String> l = new LinkedList<>();
 		l.add("'@UnsignedType'  has effect only for byte, short, int, long ");
 		l.add("");
-		l.add("'@NotNull'  has not effect ");
-		l.add("'@PrimitiveType'  has not effect ");
-		l.add("'@ObjectType'  has not effect  ");
-		l.add("'@SqlType'  has not effect ");
+		l.add("'@NotNull'  has no effect ");
+		l.add("'@PrimitiveType'  has no effect ");
+		l.add("'@ObjectType'  has no effect  ");
+		l.add("'@SqlType'  has no effect ");
 		return l ;
 	}
 

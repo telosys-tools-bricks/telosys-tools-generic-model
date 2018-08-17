@@ -90,9 +90,9 @@ public class TypeConverterForCSharp extends TypeConverter {
 		l.add("'@UnsignedType'  has effect only for byte, short, int, long ");
 		l.add("'@ObjectType'  switches to .Net types ( System.Int64, System.Boolean, etc) ");
 		l.add("");
-		l.add("'@NotNull'  has not effect ");
-		l.add("'@PrimitiveType'  has not effect ");
-		l.add("'@SqlType'  has not effect ");
+		l.add("'@NotNull'  has no effect ");
+		l.add("'@PrimitiveType'  has no effect ");
+		l.add("'@SqlType'  has no effect ");
 		return l ;
 	}
 
