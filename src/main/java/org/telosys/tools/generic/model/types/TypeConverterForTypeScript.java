@@ -21,6 +21,8 @@ import java.util.List;
 /**
  * Type converter for "TypeScript" language
  * 
+ * See : https://www.typescriptlang.org/docs/handbook/basic-types.html 
+ * 
  * @author Laurent Guerin
  *
  */
@@ -67,10 +69,7 @@ public class TypeConverterForTypeScript extends TypeConverter {
 		// TIME => No primitive type
 		// TIMESTAMP => No primitive type
 		// BINARY => No primitive type
-		//declarePrimitiveType( buildPrimitiveType(NeutralType.DATE,      "any",     "any"   ) );
-		//declarePrimitiveType( buildPrimitiveType(NeutralType.TIME,      "any",     "any"   ) );
-		//declarePrimitiveType( buildPrimitiveType(NeutralType.TIMESTAMP, "any",     "any"   ) );
-		//declarePrimitiveType( buildPrimitiveType(NeutralType.BINARY,    "any",     "any"   ) );
+		declarePrimitiveType( buildPrimitiveType(NeutralType.BINARY,  "any",  "Number"  ) ); // ?????
 		
 		//--- Unsigned primitive types : 
 		// No unsigned types
@@ -132,15 +131,23 @@ public class TypeConverterForTypeScript extends TypeConverter {
 	public LanguageType getType(AttributeTypeInfo attributeTypeInfo) {
 		log("type info : " + attributeTypeInfo );
 		
+		LanguageType lt ;
 		// Return an Object "Date" type only for DATE, TIME or TIMESTAMP
 		// for all other types return the primitive type
 		if ( NeutralType.DATE.equals(attributeTypeInfo.getNeutralType()) ||
 			 NeutralType.TIME.equals(attributeTypeInfo.getNeutralType()) ||
 			 NeutralType.TIMESTAMP.equals(attributeTypeInfo.getNeutralType()) ) {
-			return getObjectType(attributeTypeInfo.getNeutralType() ) ;
+			lt = getObjectType(attributeTypeInfo.getNeutralType() ) ;
 		}
 		else {
-			return getPrimitiveType(attributeTypeInfo.getNeutralType() ) ;
+			lt = getPrimitiveType(attributeTypeInfo.getNeutralType() ) ;
 		}
+		if ( lt != null ) {
+			return lt ;
+		}
+		// Still not found !!!
+		throwTypeNotFoundException(attributeTypeInfo);
+		return null ;  // just to avoid compilation error
+
 	}
 }

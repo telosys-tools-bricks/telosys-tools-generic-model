@@ -141,8 +141,7 @@ public class TypeConverterForJava extends TypeConverter {
 //			LanguageType lt = getPrimitiveType(attributeTypeInfo.getNeutralType(), attributeTypeInfo.isUnsignedTypeExpected() ) ;
 		if ( attributeTypeInfo.isPrimitiveTypeExpected()  ) { // "UnsignedType" no effect in Java => ignore
 			LanguageType lt = getPrimitiveType(attributeTypeInfo.getNeutralType(), false ) ; 
-			if ( lt != null ) {
-				// FOUND
+			if ( lt != null ) { // FOUND
 				log("1) primitive type found" );
 				return lt ;
 			}
@@ -152,8 +151,7 @@ public class TypeConverterForJava extends TypeConverter {
 		// An object type is explicitly required ( @ObjectType or @SqlType )
 		if ( attributeTypeInfo.isObjectTypeExpected() || attributeTypeInfo.isSqlTypeExpected() ) {
 			LanguageType lt = getObjectType(attributeTypeInfo.getNeutralType(), attributeTypeInfo.isSqlTypeExpected() ) ;
-			if ( lt != null ) {
-				// FOUND
+			if ( lt != null ) { // FOUND
 				log("1) object type found" );
 				return lt ;
 			}
@@ -166,8 +164,7 @@ public class TypeConverterForJava extends TypeConverter {
 			log("2) Not Null : TRUE" );
 			// Try to found a primitive type first
 			LanguageType lt = getPrimitiveType(attributeTypeInfo.getNeutralType(), false ) ;
-			if ( lt != null ) {
-				// FOUND
+			if ( lt != null ) { // FOUND
 				return lt ;
 			}
 			// Still not found : try to found an object type
@@ -177,13 +174,18 @@ public class TypeConverterForJava extends TypeConverter {
 			log("2) Not Null : FALSE" );
 			// Try to found an object type first
 			LanguageType lt = getObjectType(attributeTypeInfo.getNeutralType(), false ) ;
-			if ( lt != null ) {
-				// FOUND
+			if ( lt != null ) { // FOUND
 				return lt ;
 			}
 			// Still not found : try to found a primitive type
-			return getPrimitiveType(attributeTypeInfo.getNeutralType(), false ) ;
+			lt = getPrimitiveType(attributeTypeInfo.getNeutralType(), false ) ;
+			if ( lt != null ) { // FOUND
+				return lt ;
+			}
 		}
+		// Still not found !!!
+		throwTypeNotFoundException(attributeTypeInfo);
+		return null ;  // just to avoid compilation error
 	}
 	
 }

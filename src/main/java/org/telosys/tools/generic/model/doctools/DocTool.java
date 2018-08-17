@@ -23,6 +23,7 @@ import org.telosys.tools.generic.model.types.TypeConverter;
 import org.telosys.tools.generic.model.types.TypeConverterForCSharp;
 import org.telosys.tools.generic.model.types.TypeConverterForGo;
 import org.telosys.tools.generic.model.types.TypeConverterForJava;
+import org.telosys.tools.generic.model.types.TypeConverterForTypeScript;
 
 public class DocTool {
 
@@ -30,6 +31,7 @@ public class DocTool {
 		printDoc("html/lang-types-java.html", new TypeConverterForJava() ) ;
 		printDoc("html/lang-types-go.html", new TypeConverterForGo() ) ;
 		printDoc("html/lang-types-csharp.html", new TypeConverterForCSharp() ) ;
+		printDoc("html/lang-types-typescript.html", new TypeConverterForTypeScript()) ;
 	}
 	
 	public static void printDoc(String fileName, TypeConverter typeConverter ) {
