@@ -63,17 +63,31 @@ public class TypeConverterForJavaTest  {
 		System.out.println("--- ");
 		TypeConverter tc = new TypeConverterForJava() ;
 		
+		// Default type :
 		check( getType(tc, NeutralType.BOOLEAN, NONE ), Boolean.class);
-		check( getType(tc, NeutralType.BOOLEAN, NOT_NULL ), boolean.class);
-		
+		// Unsigned type : no effect
+		check( getType(tc, NeutralType.BOOLEAN, UNSIGNED_TYPE ), Boolean.class);
+
+		// Primitive type 
 		check( getType(tc, NeutralType.BOOLEAN, PRIMITIVE_TYPE ), boolean.class);
-		check( getType(tc, NeutralType.BOOLEAN, UNSIGNED_TYPE ), boolean.class);
-		check( getType(tc, NeutralType.BOOLEAN, PRIMITIVE_TYPE + UNSIGNED_TYPE ), boolean.class);
+		check( getType(tc, NeutralType.BOOLEAN, NOT_NULL ), boolean.class);
+		check( getType(tc, NeutralType.BOOLEAN, PRIMITIVE_TYPE + NOT_NULL ), boolean.class);
+		// not compatible (primitive type has priority)
+		check( getType(tc, NeutralType.BOOLEAN, PRIMITIVE_TYPE + SQL_TYPE  ), boolean.class);
+		check( getType(tc, NeutralType.BOOLEAN, PRIMITIVE_TYPE + OBJECT_TYPE  ), boolean.class);
+		// Unsigned type : no effect
+		check( getType(tc, NeutralType.BOOLEAN, PRIMITIVE_TYPE + UNSIGNED_TYPE  ), boolean.class);
+
 		
+		// Object type ( wrapper ) 
 		check( getType(tc, NeutralType.BOOLEAN, OBJECT_TYPE ), Boolean.class);
 		check( getType(tc, NeutralType.BOOLEAN, SQL_TYPE ), Boolean.class);		
-		check( getType(tc, NeutralType.BOOLEAN, NOT_NULL + OBJECT_TYPE ), Boolean.class);
-		check( getType(tc, NeutralType.BOOLEAN, NOT_NULL + SQL_TYPE ), Boolean.class);
+		check( getType(tc, NeutralType.BOOLEAN, OBJECT_TYPE + NOT_NULL ), Boolean.class);
+		check( getType(tc, NeutralType.BOOLEAN, OBJECT_TYPE + SQL_TYPE ), Boolean.class);
+		check( getType(tc, NeutralType.BOOLEAN, SQL_TYPE + NOT_NULL ), Boolean.class);
+		// Unsigned type : no effect
+		check( getType(tc, NeutralType.BOOLEAN, OBJECT_TYPE + UNSIGNED_TYPE ), Boolean.class);
+		check( getType(tc, NeutralType.BOOLEAN, SQL_TYPE + UNSIGNED_TYPE ), Boolean.class);
 	}
 
 	@Test
@@ -81,43 +95,30 @@ public class TypeConverterForJavaTest  {
 		System.out.println("--- ");
 		TypeConverter tc = new TypeConverterForJava() ;
 		
-		LanguageType lt ; 
-		
-		//-----------------------------------
-		lt = getType(tc, NeutralType.SHORT, NONE );
-		check(lt, Short.class);		
-		lt = getType(tc, NeutralType.SHORT, NOT_NULL );
-		check(lt, short.class);		
-		
-		lt = getType(tc, NeutralType.SHORT, PRIMITIVE_TYPE );
-		check(lt, short.class);		
-		lt = getType(tc, NeutralType.SHORT, NOT_NULL + PRIMITIVE_TYPE );
-		check(lt, short.class);		
-		lt = getType(tc, NeutralType.SHORT, UNSIGNED_TYPE );
-		
-		check(lt, short.class);		
-		lt = getType(tc, NeutralType.SHORT, OBJECT_TYPE );
-		check(lt, Short.class);		
-		lt = getType(tc, NeutralType.SHORT, SQL_TYPE );
-		check(lt, Short.class);		
-		lt = getType(tc, NeutralType.SHORT, OBJECT_TYPE + SQL_TYPE);
-		check(lt, Short.class);		
-		
-		lt = getType(tc, NeutralType.SHORT, PRIMITIVE_TYPE + OBJECT_TYPE); // not compatible (primitive type has priority)
-		check(lt, short.class);		
-		lt = getType(tc, NeutralType.SHORT, PRIMITIVE_TYPE + SQL_TYPE); // not compatible (primitive type has priority)
-		check(lt, short.class);		
-		lt = getType(tc, NeutralType.SHORT, UNSIGNED_TYPE + OBJECT_TYPE ); // not compatible (primitive type has priority)
-		check(lt, short.class);		
-		lt = getType(tc, NeutralType.SHORT, UNSIGNED_TYPE + SQL_TYPE ); // not compatible (primitive type has priority)
-		check(lt, short.class);		
+		// Default type :
+		check( getType(tc, NeutralType.SHORT, NONE ), Short.class);
+		// Unsigned type : no effect
+		check( getType(tc, NeutralType.SHORT, UNSIGNED_TYPE ), Short.class);
 
-		
+		// Primitive type 
+		check( getType(tc, NeutralType.SHORT, PRIMITIVE_TYPE   ), short.class);
+		check( getType(tc, NeutralType.SHORT, NOT_NULL   ), short.class);
+		check( getType(tc, NeutralType.SHORT, PRIMITIVE_TYPE + NOT_NULL  ), short.class);
+		// not compatible (primitive type has priority)
+		check( getType(tc, NeutralType.SHORT, PRIMITIVE_TYPE + SQL_TYPE  ), short.class);
+		check( getType(tc, NeutralType.SHORT, PRIMITIVE_TYPE + OBJECT_TYPE  ), short.class);
+		// Unsigned type : no effect
+		check( getType(tc, NeutralType.SHORT, PRIMITIVE_TYPE + UNSIGNED_TYPE  ), short.class);
+
+		// Object type ( wrapper ) 
 		check( getType(tc, NeutralType.SHORT, OBJECT_TYPE ), Short.class);
 		check( getType(tc, NeutralType.SHORT, OBJECT_TYPE + NOT_NULL), Short.class);
 		check( getType(tc, NeutralType.SHORT, SQL_TYPE), Short.class);
 		check( getType(tc, NeutralType.SHORT, SQL_TYPE + NOT_NULL), Short.class);
 		check( getType(tc, NeutralType.SHORT, SQL_TYPE + OBJECT_TYPE), Short.class);
+		// Unsigned type : no effect
+		check( getType(tc, NeutralType.SHORT, OBJECT_TYPE + UNSIGNED_TYPE ), Short.class);
+		check( getType(tc, NeutralType.SHORT, SQL_TYPE + UNSIGNED_TYPE ), Short.class);
 	}
 
 	@Test

@@ -121,7 +121,11 @@ public class TypeConverterForJava extends TypeConverter {
 	@Override
 	public List<String> getComments() {
 		List<String> l = new LinkedList<>();
-		l.add("");
+		l.add("'@UnsignedType' : <br>&nbsp;  has no effect (all numeric types are signed in Java)");
+		l.add("'@NotNull' : <br>&nbsp;  switches to primitive type if possible (in order to avoid 'null' value) ");
+		l.add("'@PrimitiveType' : <br>&nbsp;  switches to primitive type if possible (short, int, boolean, etc) ");
+		l.add("'@ObjectType' : <br>&nbsp;  switches primitive types to standard wrapper types (Short, Integer, Long, Float, etc)  ");
+		l.add("'@SqlType' : <br>&nbsp;  switches to 'java.sql.*' types (Time, Blob, etc) if possible (or standard wrapper types if no SQL type)   ");
 		return l ;
 	}
 
@@ -133,8 +137,10 @@ public class TypeConverterForJava extends TypeConverter {
 		log("STEP 1" );
 		//--- 1) Process explicit requirements first (if any)
 		// A primitive type is explicitly required ( @PrimitiveType or @UnsignedType )
-		if ( attributeTypeInfo.isPrimitiveTypeExpected() || attributeTypeInfo.isUnsignedTypeExpected() ) {
-			LanguageType lt = getPrimitiveType(attributeTypeInfo.getNeutralType(), attributeTypeInfo.isUnsignedTypeExpected() ) ;
+//		if ( attributeTypeInfo.isPrimitiveTypeExpected() || attributeTypeInfo.isUnsignedTypeExpected() ) {
+//			LanguageType lt = getPrimitiveType(attributeTypeInfo.getNeutralType(), attributeTypeInfo.isUnsignedTypeExpected() ) ;
+		if ( attributeTypeInfo.isPrimitiveTypeExpected()  ) { // "UnsignedType" no effect in Java => ignore
+			LanguageType lt = getPrimitiveType(attributeTypeInfo.getNeutralType(), false ) ; 
 			if ( lt != null ) {
 				// FOUND
 				log("1) primitive type found" );
