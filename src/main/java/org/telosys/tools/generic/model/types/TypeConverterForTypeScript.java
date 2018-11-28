@@ -123,7 +123,7 @@ public class TypeConverterForTypeScript extends TypeConverter {
 	@Override
 	public List<String> getComments() {
 		List<String> l = new LinkedList<>();
-		l.add("");
+		l.add("All annotations have no effect for TypeScript");
 		return l ;
 	}
 

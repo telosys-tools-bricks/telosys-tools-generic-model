@@ -19,29 +19,41 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import org.telosys.tools.generic.model.types.LiteralValuesProvider;
+import org.telosys.tools.generic.model.types.LiteralValuesProviderForCSharp;
+import org.telosys.tools.generic.model.types.LiteralValuesProviderForGo;
+import org.telosys.tools.generic.model.types.LiteralValuesProviderForJava;
+import org.telosys.tools.generic.model.types.LiteralValuesProviderForJavaScript;
+import org.telosys.tools.generic.model.types.LiteralValuesProviderForPython;
+import org.telosys.tools.generic.model.types.LiteralValuesProviderForTypeScript;
 import org.telosys.tools.generic.model.types.TypeConverter;
 import org.telosys.tools.generic.model.types.TypeConverterForCSharp;
 import org.telosys.tools.generic.model.types.TypeConverterForGo;
 import org.telosys.tools.generic.model.types.TypeConverterForJava;
+import org.telosys.tools.generic.model.types.TypeConverterForJavaScript;
+import org.telosys.tools.generic.model.types.TypeConverterForPython;
 import org.telosys.tools.generic.model.types.TypeConverterForTypeScript;
 
 public class DocTool {
 
 	public static void main(String[] args) {
-		printDoc("html/lang-types-java.html", new TypeConverterForJava() ) ;
-		printDoc("html/lang-types-go.html", new TypeConverterForGo() ) ;
-		printDoc("html/lang-types-csharp.html", new TypeConverterForCSharp() ) ;
-		printDoc("html/lang-types-typescript.html", new TypeConverterForTypeScript()) ;
+		printDoc("html/lang-types-java.html", new TypeConverterForJava(), new LiteralValuesProviderForJava() ) ;
+		printDoc("html/lang-types-go.html", new TypeConverterForGo(), new LiteralValuesProviderForGo()  ) ;
+		printDoc("html/lang-types-csharp.html", new TypeConverterForCSharp(), new LiteralValuesProviderForCSharp()  ) ;
+		printDoc("html/lang-types-typescript.html", new TypeConverterForTypeScript(), new LiteralValuesProviderForTypeScript() ) ;
+		
+		printDoc("html/lang-types-python.html", new TypeConverterForPython(), new LiteralValuesProviderForPython()) ;
+		printDoc("html/lang-types-javascript.html", new TypeConverterForJavaScript(), new LiteralValuesProviderForJavaScript()) ;
 	}
 	
-	public static void printDoc(String fileName, TypeConverter typeConverter ) {
+	public static void printDoc(String fileName, TypeConverter typeConverter, LiteralValuesProvider literalValuesProvider ) {
 		
 		System.out.println("Print doc : " + fileName );
 		
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
 			
-			TypeConvertersDoc tcd = new TypeConvertersDoc( typeConverter, writer);		
+			TypeConvertersDoc tcd = new TypeConvertersDoc( typeConverter, literalValuesProvider, writer);		
 			tcd.printDoc();
 			
 			writer.close();

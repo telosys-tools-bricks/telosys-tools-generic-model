@@ -18,30 +18,35 @@ package org.telosys.tools.generic.model.doctools;
 import java.io.BufferedWriter;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.telosys.tools.generic.model.types.AttributeTypeInfo;
 import org.telosys.tools.generic.model.types.LanguageType;
+import org.telosys.tools.generic.model.types.LiteralValuesProvider;
 import org.telosys.tools.generic.model.types.NeutralType;
 import org.telosys.tools.generic.model.types.TypeConverter;
 
 public class TypeConvertersDoc extends DocPrinter {
 
-	private final TypeConverter  typeConverter ;
+	private final TypeConverter          typeConverter ;
+	private final LiteralValuesProvider  literalValuesProvider ;
 	
-	public TypeConvertersDoc(TypeConverter typeConverter, BufferedWriter writer ) {
+	public TypeConvertersDoc(TypeConverter typeConverter, LiteralValuesProvider literalValuesProvider, BufferedWriter writer ) {
 		super(writer);
 		this.typeConverter = typeConverter ;
+		this.literalValuesProvider = literalValuesProvider ;
 	}
 	
 	public void printDoc() {
 		String title = "Type conversion for " + typeConverter.getLanguageName() ;
 		printHtmlHeader(title);
-		printTable();
-		printRemarks();
+		printTypesTable();
+		printTypesRemarks();
+		printLiteralValuesTable();
 		printHtmlFooter();
 	}
 	
-	private void printTable() {
+	private void printTypesTable() {
 		print("<table style=\"\"> ");
 		println();
 		println("<colgroup>");
@@ -67,7 +72,7 @@ public class TypeConvertersDoc extends DocPrinter {
 		println("<tbody>");
 		for ( String neutralType : NeutralType.getAllNeutralTypes() ) {
 			List<String> types = getSimpleTypes(neutralType); 
-			printRow(neutralType, types);
+			printTypeRow(neutralType, types);
 		}		
 		println("</tbody>");
 		println("</table>");
@@ -86,12 +91,19 @@ public class TypeConvertersDoc extends DocPrinter {
 		return list;
 	}
 	
+	private LanguageType getLanguageType(String neutralType) {
+		return typeConverter.getType(new AttributeTypeInfo(neutralType, AttributeTypeInfo.NONE));
+	}	
+	private LanguageType getLanguageType(String neutralType, int info) {
+		return typeConverter.getType(new AttributeTypeInfo(neutralType, info));
+	}	
+	
 	private String getSimpleType(String neutralType, int info) {
-		LanguageType lt = typeConverter.getType(new AttributeTypeInfo(neutralType, info));
+		LanguageType lt = getLanguageType(neutralType, info);
 		return lt.getSimpleType();
 	}	
 	
-	private void printRow(String neutralType, List<String> types) {
+	private void printTypeRow(String neutralType, List<String> types) {
 				
 		print(" <tr>" );
 		print(" <td>" + neutralType + "</td>");
@@ -101,7 +113,7 @@ public class TypeConvertersDoc extends DocPrinter {
 		print(" </tr>\n" );
 	}
 
-	private void printRemarks() {
+	private void printTypesRemarks() {
 		List<String >remarks = typeConverter.getComments() ;
 		if ( remarks == null || remarks.isEmpty() ) {
 			return ;
@@ -112,6 +124,78 @@ public class TypeConvertersDoc extends DocPrinter {
 			print( s + "<br>" );	
 		}
 		print("</p>" );	
+	}
+
+	//---------------------------------------------------------------------------------
+	/**
+	 * Returns all types possibilities for the current language (grouped by neutral type) <br>
+	 * e.g. "String", "int", "Integer" etc
+	 * @return
+	 */
+	private List<LanguageType> getAllLanguageTypes() {
+		List<LanguageType> list = new LinkedList<>();
+		for ( String neutralType : NeutralType.getAllNeutralTypes() ) {
+			getLanguageTypesForNeutralType(list, neutralType);
+		}		
+		return list;
+	}
+	private void getLanguageTypesForNeutralType(List<LanguageType> list, String neutralType) {
+		// Add at least the default type
+		addIfNotInList( list, getLanguageType(neutralType, AttributeTypeInfo.NONE ) ) ; // "default type"
+		// Add other types 
+		addIfNotInList( list, getLanguageType(neutralType, AttributeTypeInfo.UNSIGNED_TYPE ) ) ;
+		addIfNotInList( list, getLanguageType(neutralType, AttributeTypeInfo.NOT_NULL ) ) ;
+		addIfNotInList( list, getLanguageType(neutralType, AttributeTypeInfo.PRIMITIVE_TYPE ) ) ;
+		addIfNotInList( list, getLanguageType(neutralType, AttributeTypeInfo.OBJECT_TYPE ) ) ;
+		addIfNotInList( list, getLanguageType(neutralType, AttributeTypeInfo.SQL_TYPE ) ) ;
+	}
+	private void addIfNotInList(List<LanguageType> list, LanguageType languageType) {
+		if ( ! list.contains(languageType) ) {
+			list.add(languageType);
+		}
+	}
+	
+	private void printLiteralValuesTable() {
+		println();
+		println("<h2>Literal values </h2>" );	
+		println("<table style=\"\"> ");
+		println("<colgroup>");
+		print(" <col style=\"background-color: GhostWhite ; \">" );
+		print(" <col>" );
+		print(" <col>" );
+		print(" <col>" );
+		println();
+		println("</colgroup>");
+
+		println("<thead>");
+		print(" <tr>");
+		print(" <th> Model type </th>" ); 
+		print(" <th> Language type </th> " );
+		print(" <th> Language full type </th> " );
+		print(" <th> Language literal value </th>" ); 
+		println("</tr>");
+	    println("</thead>");
+
+		println("<tbody>");
+		for ( LanguageType languageType : getAllLanguageTypes() ) {
+			String literalValue = literalValuesProvider.generateLiteralValue(languageType, 3, 1);
+			printLiteralValueRow(languageType, literalValue);
+		}		
+		println("</tbody>");
+		println("</table>");
+	}
+
+	private void printLiteralValueRow(LanguageType languageType, String literalValue) {
+		
+//		literalValuesProvider.getLiteralNull();
+//		literalValuesProvider.getEqualsStatement(value, languageType)
+		print(" <tr>" );
+		print(" <td>" + languageType.getNeutralType() + "</td>");
+		print(" <td>" + languageType.getSimpleType() + "</td>");
+		print(" <td>" + languageType.getFullType() + "</td>");
+		print(" <td>" + literalValue + "</td>");
+		print(" </tr>" );
+		println();
 	}
 	
 }

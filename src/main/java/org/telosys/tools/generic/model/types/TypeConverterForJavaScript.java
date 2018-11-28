@@ -28,93 +28,25 @@ public class TypeConverterForJavaScript extends TypeConverter {
 
 	public TypeConverterForJavaScript() {
 		super("JavaScript");
-		
 		// No type for JavaScript !
-
-//		//--- Object types 
-//		declareObjectType( buildObjectType(NeutralType.STRING,    "String" ) );
-//		
-//		declareObjectType( buildObjectType(NeutralType.BOOLEAN,   "Boolean" ) );
-//		
-//		declareObjectType( buildObjectType(NeutralType.BYTE,      "Number" ) );
-//		declareObjectType( buildObjectType(NeutralType.SHORT,     "Number" ) );
-//		declareObjectType( buildObjectType(NeutralType.INTEGER,   "Number" ) );
-//		declareObjectType( buildObjectType(NeutralType.LONG,      "Number" ) );
-//		declareObjectType( buildObjectType(NeutralType.FLOAT,     "Number" ) );
-//		declareObjectType( buildObjectType(NeutralType.DOUBLE,    "Number" ) );
-//		declareObjectType( buildObjectType(NeutralType.DECIMAL,   "Number" ) );
-//		
-//		declareObjectType( buildObjectType(NeutralType.DATE,      "Date" ) );
-//		declareObjectType( buildObjectType(NeutralType.TIME,      "Date" ) );
-//		declareObjectType( buildObjectType(NeutralType.TIMESTAMP, "Date" ) );
-//
-//		//--- Object SQL types :
-//		// No specific SQL types 
-//		
-//		//--- Primitive types :
-//		declarePrimitiveType( buildPrimitiveType(NeutralType.STRING,  "string",  "String"  ) );
-//		
-//		declarePrimitiveType( buildPrimitiveType(NeutralType.BOOLEAN, "boolean", "Boolean" ) );
-//		
-//		declarePrimitiveType( buildPrimitiveType(NeutralType.BYTE,    "number",  "Number"  ) );
-//		declarePrimitiveType( buildPrimitiveType(NeutralType.SHORT,   "number",  "Number"  ) );
-//		declarePrimitiveType( buildPrimitiveType(NeutralType.INTEGER, "number",  "Number"  ) );
-//		declarePrimitiveType( buildPrimitiveType(NeutralType.LONG,    "number",  "Number"  ) );
-//		declarePrimitiveType( buildPrimitiveType(NeutralType.FLOAT,   "number",  "Number"  ) );
-//		declarePrimitiveType( buildPrimitiveType(NeutralType.DOUBLE,  "number",  "Number"  ) );
-//		declarePrimitiveType( buildPrimitiveType(NeutralType.DECIMAL, "number",  "Number"  ) );
-//		
-//		// DATE => No primitive type
-//		// TIME => No primitive type
-//		// TIMESTAMP => No primitive type
-//		// BINARY => No primitive type
-//		//declarePrimitiveType( buildPrimitiveType(NeutralType.DATE,      "any",     "any"   ) );
-//		//declarePrimitiveType( buildPrimitiveType(NeutralType.TIME,      "any",     "any"   ) );
-//		//declarePrimitiveType( buildPrimitiveType(NeutralType.TIMESTAMP, "any",     "any"   ) );
-//		//declarePrimitiveType( buildPrimitiveType(NeutralType.BINARY,    "any",     "any"   ) );
-//		
-//		//--- Unsigned primitive types : 
-//		// No unsigned types
-//		//declarePrimitiveUnsignedType(NeutralType.SHORT,   buildPrimitiveType("ushort", "System.UInt16" ) );
-		
 	}
-
-//	private LanguageType buildPrimitiveType(String neutralType, String primitiveType, String wrapperType) {
-//		return new LanguageType(neutralType, primitiveType,  primitiveType, true, wrapperType );
-//	}
-
-//	private LanguageType buildObjectType(String neutralType, String objectType) {
-//		// simple type = full type = wrapper type
-//		return new LanguageType( neutralType, objectType, objectType, false, objectType );
-//	}
 
 	@Override
 	public List<String> getComments() {
 		List<String> l = new LinkedList<>();
-		l.add("");
+		l.add("JavaScript is a dynamically-typed language, there are no types in the source code.");
+		l.add("Hence the type conversion always return a void string.");
 		return l ;
 	}
 
 	@Override
 	public LanguageType getType(AttributeTypeInfo attributeTypeInfo) {
 		log("type info : " + attributeTypeInfo );
-		
-//		// Return an Object "Date" type only for DATE, TIME or TIMESTAMP
-//		// for all other types return the primitive type
-//		if ( NeutralType.DATE.equals(attributeTypeInfo.getNeutralType()) ||
-//			 NeutralType.TIME.equals(attributeTypeInfo.getNeutralType()) ||
-//			 NeutralType.TIMESTAMP.equals(attributeTypeInfo.getNeutralType()) ) {
-//			return getObjectType(attributeTypeInfo.getNeutralType() ) ;
-//		}
-//		else {
-//			return getPrimitiveType(attributeTypeInfo.getNeutralType() ) ;
-//		}
-		
 		// Return always the same "void" type
 		return new LanguageType(attributeTypeInfo.getNeutralType(),
-				"", // String simpleType, 
-				"", // String fullType, 
-				true, // boolean isPrimitiveType, 
-				"") ; // String wrapperType
+				"", // the simpleType, 
+				"", // the fullType, 
+				true, // isPrimitiveType flag, 
+				"") ; // the wrapperType
 	}
 }

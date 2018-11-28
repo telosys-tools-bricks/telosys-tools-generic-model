@@ -34,7 +34,8 @@ public class TypeConverterForPython extends TypeConverter {
 	@Override
 	public List<String> getComments() {
 		List<String> l = new LinkedList<>();
-		l.add("");
+		l.add("Python is dynamically typed, there are no types in the source code.");
+		l.add("Hence the type conversion always return a void string.");
 		return l ;
 	}
 
