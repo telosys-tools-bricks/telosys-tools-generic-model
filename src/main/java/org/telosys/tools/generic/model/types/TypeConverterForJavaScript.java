@@ -29,6 +29,27 @@ public class TypeConverterForJavaScript extends TypeConverter {
 	public TypeConverterForJavaScript() {
 		super("JavaScript");
 		// No type for JavaScript !
+		//--- Pseudo types :
+		declarePrimitiveType( buildType(NeutralType.STRING ) );
+		declarePrimitiveType( buildType(NeutralType.BOOLEAN ) );
+		declarePrimitiveType( buildType(NeutralType.BYTE ) );
+		declarePrimitiveType( buildType(NeutralType.SHORT) );
+		declarePrimitiveType( buildType(NeutralType.INTEGER) );
+		declarePrimitiveType( buildType(NeutralType.LONG ) );
+		declarePrimitiveType( buildType(NeutralType.FLOAT ) );
+		declarePrimitiveType( buildType(NeutralType.DOUBLE ) );
+		declarePrimitiveType( buildType(NeutralType.DECIMAL ) );
+		declarePrimitiveType( buildType(NeutralType.DATE ) );
+		declarePrimitiveType( buildType(NeutralType.TIME ) );
+		declarePrimitiveType( buildType(NeutralType.TIMESTAMP ) );
+		declarePrimitiveType( buildType(NeutralType.BINARY ) ); 				
+	}
+	private LanguageType buildType(String neutralType) {
+		return new LanguageType(neutralType, 
+				"",   // String simpleType, 
+				"",   // String fullType, 
+				true, // boolean isPrimitiveType, 
+				"" ); // String wrapperType
 	}
 
 	@Override
@@ -42,11 +63,12 @@ public class TypeConverterForJavaScript extends TypeConverter {
 	@Override
 	public LanguageType getType(AttributeTypeInfo attributeTypeInfo) {
 		log("type info : " + attributeTypeInfo );
-		// Return always the same "void" type
-		return new LanguageType(attributeTypeInfo.getNeutralType(),
-				"", // the simpleType, 
-				"", // the fullType, 
-				true, // isPrimitiveType flag, 
-				"") ; // the wrapperType
+//		// Return always the same "void" type
+//		return new LanguageType(attributeTypeInfo.getNeutralType(),
+//				"", // the simpleType, 
+//				"", // the fullType, 
+//				true, // isPrimitiveType flag, 
+//				"") ; // the wrapperType
+		return getPrimitiveType( attributeTypeInfo.getNeutralType() );
 	}
 }

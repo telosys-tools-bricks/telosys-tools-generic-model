@@ -29,7 +29,7 @@ public class TypeConverterForPython extends TypeConverter {
 	public TypeConverterForPython() {
 		super("Python");
 		// No type for Python => all types are "" (void string")
-		//--- Primitive types :
+		//--- Pseudo types :
 		declarePrimitiveType( buildType(NeutralType.STRING ) );
 		declarePrimitiveType( buildType(NeutralType.BOOLEAN ) );
 		declarePrimitiveType( buildType(NeutralType.BYTE ) );
@@ -42,8 +42,7 @@ public class TypeConverterForPython extends TypeConverter {
 		declarePrimitiveType( buildType(NeutralType.DATE ) );
 		declarePrimitiveType( buildType(NeutralType.TIME ) );
 		declarePrimitiveType( buildType(NeutralType.TIMESTAMP ) );
-		declarePrimitiveType( buildType(NeutralType.BINARY ) ); 
-		
+		declarePrimitiveType( buildType(NeutralType.BINARY ) ); 		
 	}
 	private LanguageType buildType(String neutralType) {
 		return new LanguageType(neutralType, 
