@@ -23,13 +23,25 @@ package org.telosys.tools.generic.model.types;
  */
 public class LiteralValuesProviderForJava extends LiteralValuesProvider {
 	
-	private final static String NULL_LITERAL = "null" ; // null in Java
+	private static final String NULL_LITERAL  = "null" ; // null in Java
+	private static final String TRUE_LITERAL  = "true" ; 
+	private static final String FALSE_LITERAL = "false" ; 
 	
 	@Override
 	public String getLiteralNull() {
 		return NULL_LITERAL;
 	}
 	
+	@Override
+	public String getLiteralTrue() {
+		return TRUE_LITERAL;
+	}
+
+	@Override
+	public String getLiteralFalse() {
+		return FALSE_LITERAL;
+	}
+			
 //	private int checkThreshold(int step, int max) {
 //		if ( step <= max ) {
 //			// OK ( 0 to MAX )
@@ -120,13 +132,18 @@ public class LiteralValuesProviderForJava extends LiteralValuesProvider {
 		
 		//--- BOOLEAN
 		else if ( boolean.class.getCanonicalName().equals(javaFullType) ) {
-			Boolean val = step % 2 != 0 ? Boolean.TRUE : Boolean.FALSE ;
-			return val.toString() ;
+			// Primitive boolean type
+//			Boolean val = step % 2 != 0 ? Boolean.TRUE : Boolean.FALSE ;
+//			return val.toString() ;
+			return step % 2 != 0 ? TRUE_LITERAL : FALSE_LITERAL ;
+
 		}
 		else if ( java.lang.Boolean.class.getCanonicalName().equals(javaFullType) ) {
-			// Boolean.valueOf(true);
-			Boolean val = step % 2 != 0 ? Boolean.TRUE : Boolean.FALSE ;
-			return "Boolean.valueOf(" + val.toString() + ")";
+//			// Boolean.valueOf(true);
+//			Boolean val = step % 2 != 0 ? Boolean.TRUE : Boolean.FALSE ;
+//			return "Boolean.valueOf(" + val.toString() + ")";
+			// Object boolean wrapper type
+			return "Boolean.valueOf(" + (step % 2 != 0 ? TRUE_LITERAL : FALSE_LITERAL) + ")";
 		}
 		
 		// DATE & TIME

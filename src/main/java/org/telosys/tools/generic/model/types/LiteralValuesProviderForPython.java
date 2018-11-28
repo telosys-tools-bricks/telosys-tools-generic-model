@@ -36,15 +36,25 @@ package org.telosys.tools.generic.model.types;
  */
 public class LiteralValuesProviderForPython extends LiteralValuesProvider {
 	
-	private final static String NULL_LITERAL  = "None" ; // In Python, the 'null' object is the singleton 'None'.
-	private final static String TRUE_LITERAL  = "True" ; 
-	private final static String FALSE_LITERAL = "False" ; 
+	private static final String NULL_LITERAL  = "None" ; // In Python, the 'null' object is the singleton 'None'.
+	private static final String TRUE_LITERAL  = "True" ; 
+	private static final String FALSE_LITERAL = "False" ; 
 	
 	@Override
 	public String getLiteralNull() {
 		return NULL_LITERAL;
 	}
 	
+	@Override
+	public String getLiteralTrue() {
+		return TRUE_LITERAL;
+	}
+
+	@Override
+	public String getLiteralFalse() {
+		return FALSE_LITERAL;
+	}
+		
 	@Override
 	public String generateLiteralValue(LanguageType languageType, int maxLength, int step) {
 		

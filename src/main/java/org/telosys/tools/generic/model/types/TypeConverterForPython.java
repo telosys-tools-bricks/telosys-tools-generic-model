@@ -28,7 +28,29 @@ public class TypeConverterForPython extends TypeConverter {
 
 	public TypeConverterForPython() {
 		super("Python");
-		// No type for Python !
+		// No type for Python => all types are "" (void string")
+		//--- Primitive types :
+		declarePrimitiveType( buildType(NeutralType.STRING ) );
+		declarePrimitiveType( buildType(NeutralType.BOOLEAN ) );
+		declarePrimitiveType( buildType(NeutralType.BYTE ) );
+		declarePrimitiveType( buildType(NeutralType.SHORT) );
+		declarePrimitiveType( buildType(NeutralType.INTEGER) );
+		declarePrimitiveType( buildType(NeutralType.LONG ) );
+		declarePrimitiveType( buildType(NeutralType.FLOAT ) );
+		declarePrimitiveType( buildType(NeutralType.DOUBLE ) );
+		declarePrimitiveType( buildType(NeutralType.DECIMAL ) );
+		declarePrimitiveType( buildType(NeutralType.DATE ) );
+		declarePrimitiveType( buildType(NeutralType.TIME ) );
+		declarePrimitiveType( buildType(NeutralType.TIMESTAMP ) );
+		declarePrimitiveType( buildType(NeutralType.BINARY ) ); 
+		
+	}
+	private LanguageType buildType(String neutralType) {
+		return new LanguageType(neutralType, 
+				"",   // String simpleType, 
+				"",   // String fullType, 
+				true, // boolean isPrimitiveType, 
+				"" ); // String wrapperType
 	}
 
 	@Override
@@ -43,10 +65,11 @@ public class TypeConverterForPython extends TypeConverter {
 	public LanguageType getType(AttributeTypeInfo attributeTypeInfo) {
 		log("type info : " + attributeTypeInfo );		
 		// Return always the same "void" type
-		return new LanguageType(attributeTypeInfo.getNeutralType(),
-				"", // String simpleType, 
-				"", // String fullType, 
-				true, // boolean isPrimitiveType, 
-				"") ; // String wrapperType
+//		return new LanguageType(attributeTypeInfo.getNeutralType(),
+//				"", // String simpleType, 
+//				"", // String fullType, 
+//				true, // boolean isPrimitiveType, 
+//				"") ; // String wrapperType
+		return getPrimitiveType( attributeTypeInfo.getNeutralType() );
 	}
 }

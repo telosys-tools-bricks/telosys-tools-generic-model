@@ -56,7 +56,7 @@ public abstract class DocPrinter {
 		println("</head>");
 		println();
 		println("<body>");
-		println(" <h2>" + title + "</h2>");
+		println("<h1>" + title + "</h1>");
 	}
 	
 	private void printHtmlStyle() {

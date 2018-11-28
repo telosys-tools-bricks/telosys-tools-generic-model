@@ -78,6 +78,18 @@ public abstract class LiteralValuesProvider {
 	public abstract String getLiteralNull() ;
 
 	/**
+	 * Returns the literal 'TRUE' for the current language
+	 * @return
+	 */
+	public abstract String getLiteralTrue() ;
+
+	/**
+	 * Returns the literal 'FALSE' for the current language
+	 * @return
+	 */
+	public abstract String getLiteralFalse() ;
+
+	/**
 	 * Generates a literal value for the given language type <br>
 	 * @param languageType
 	 * @param maxLength

@@ -33,6 +33,16 @@ public class LiteralValuesProviderForGo extends LiteralValuesProvider {
 	}
 	
 	@Override
+	public String getLiteralTrue() {
+		return TRUE_LITERAL;
+	}
+
+	@Override
+	public String getLiteralFalse() {
+		return FALSE_LITERAL;
+	}
+	
+	@Override
 	public String generateLiteralValue(LanguageType languageType, int maxLength, int step) {
 		// see : https://golang.org/test/literal.go
 		String neutralType = languageType.getNeutralType(); 

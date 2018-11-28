@@ -18,7 +18,6 @@ package org.telosys.tools.generic.model.doctools;
 import java.io.BufferedWriter;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import org.telosys.tools.generic.model.types.AttributeTypeInfo;
 import org.telosys.tools.generic.model.types.LanguageType;
@@ -38,15 +37,22 @@ public class TypeConvertersDoc extends DocPrinter {
 	}
 	
 	public void printDoc() {
-		String title = "Type conversion for " + typeConverter.getLanguageName() ;
+//		String title = "Type conversion for " + typeConverter.getLanguageName() ;
+		String title = "Code generation peculiarities for \"" + typeConverter.getLanguageName() + "\" language"; 
 		printHtmlHeader(title);
-		printTypesTable();
+		print("<hr/>");		
+		printTypeConversion();
 		printTypesRemarks();
+		print("<hr/>");
+		printLiteralTrueFalseNull();
+		print("<hr/>");
 		printLiteralValuesTable();
 		printHtmlFooter();
 	}
 	
-	private void printTypesTable() {
+	private void printTypeConversion() {
+		println();
+		println("<h2>Type conversion </h2>" );			
 		print("<table style=\"\"> ");
 		println();
 		println("<colgroup>");
@@ -91,9 +97,6 @@ public class TypeConvertersDoc extends DocPrinter {
 		return list;
 	}
 	
-	private LanguageType getLanguageType(String neutralType) {
-		return typeConverter.getType(new AttributeTypeInfo(neutralType, AttributeTypeInfo.NONE));
-	}	
 	private LanguageType getLanguageType(String neutralType, int info) {
 		return typeConverter.getType(new AttributeTypeInfo(neutralType, info));
 	}	
@@ -124,6 +127,7 @@ public class TypeConvertersDoc extends DocPrinter {
 			print( s + "<br>" );	
 		}
 		print("</p>" );	
+		println("<br>");		
 	}
 
 	//---------------------------------------------------------------------------------
@@ -155,6 +159,24 @@ public class TypeConvertersDoc extends DocPrinter {
 		}
 	}
 	
+	private void printLiteralTrueFalseNull() {
+		println();
+		println("<h2>Literals for TRUE, FALSE and NULL </h2>" );	
+		println("<table style=\"\"> ");
+		println("<colgroup>");
+		print(" <col style=\"background-color: GhostWhite ; \">" );
+		print(" <col>" );
+		println();
+		println("</colgroup>");
+		println("<tbody>");
+		print(" <tr> <td> TRUE  </td> <td>" + literalValuesProvider.getLiteralTrue() + "</td> </tr>");
+		print(" <tr> <td> FALSE </td> <td>" + literalValuesProvider.getLiteralFalse() + "</td> </tr>");
+		print(" <tr> <td> NULL  </td> <td>" + literalValuesProvider.getLiteralNull() + "</td> </tr>");
+		println("</tbody>");
+		println("</table>");
+		println("<br>");
+	}
+
 	private void printLiteralValuesTable() {
 		println();
 		println("<h2>Literal values </h2>" );	
@@ -172,7 +194,7 @@ public class TypeConvertersDoc extends DocPrinter {
 		print(" <th> Model type </th>" ); 
 		print(" <th> Language type </th> " );
 		print(" <th> Language full type </th> " );
-		print(" <th> Language literal value </th>" ); 
+		print(" <th> Language literal value example </th>" ); 
 		println("</tr>");
 	    println("</thead>");
 
@@ -183,6 +205,7 @@ public class TypeConvertersDoc extends DocPrinter {
 		}		
 		println("</tbody>");
 		println("</table>");
+		println("<br>");
 	}
 
 	private void printLiteralValueRow(LanguageType languageType, String literalValue) {

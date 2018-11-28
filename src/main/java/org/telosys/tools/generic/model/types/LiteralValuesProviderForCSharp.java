@@ -23,15 +23,25 @@ package org.telosys.tools.generic.model.types;
  */
 public class LiteralValuesProviderForCSharp extends LiteralValuesProvider {
 	
-	private final static String NULL_LITERAL  = "null" ; 
-	private final static String TRUE_LITERAL  = "true" ; 
-	private final static String FALSE_LITERAL = "false" ; 
+	private static final String NULL_LITERAL  = "null" ; 
+	private static final String TRUE_LITERAL  = "true" ; 
+	private static final String FALSE_LITERAL = "false" ; 
 
 	@Override
 	public String getLiteralNull() {
 		return NULL_LITERAL;
 	}
 	
+	@Override
+	public String getLiteralTrue() {
+		return TRUE_LITERAL;
+	}
+
+	@Override
+	public String getLiteralFalse() {
+		return FALSE_LITERAL;
+	}
+
 	@Override
 	public String generateLiteralValue(LanguageType languageType, int maxLength, int step) {
 		
