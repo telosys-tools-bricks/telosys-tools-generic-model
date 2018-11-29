@@ -66,7 +66,10 @@ public abstract class DocPrinter {
 		println("  th, td { padding: 15px; text-align: left; }" );
 		println("  th { font-family: Courier New; font-weight: bold; background-color: #4CAF50; color: white; }" );
 		println("  td { font-family: Courier New; font-weight: bold; }" );
-		println("  p { font-family: Courier New; font-weight: bold; }" );
+		//println("  p { font-family: Courier New; font-weight: bold; }" );
+		println("  p.code { font-family: Courier New; font-weight: bold; }" );
+		println("  span.code { font-family: Courier New; font-weight: bold; }" );
+		println("  ul.code { font-family: Courier New; font-weight: bold; }" );
 		println(" </style>" );
 	}
 

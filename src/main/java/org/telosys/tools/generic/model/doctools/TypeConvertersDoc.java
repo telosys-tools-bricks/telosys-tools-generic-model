@@ -41,6 +41,8 @@ public class TypeConvertersDoc extends DocPrinter {
 		String title = "Code generation peculiarities for \"" + typeConverter.getLanguageName() + "\" language"; 
 		printHtmlHeader(title);
 		print("<hr/>");		
+		printIntro();
+		print("<hr/>");		
 		printTypeConversion();
 		printTypesRemarks();
 		print("<hr/>");
@@ -50,9 +52,42 @@ public class TypeConvertersDoc extends DocPrinter {
 		printHtmlFooter();
 	}
 	
+	private void printIntro() {
+		println("<br>");
+		//print("<p style=\"font-family: "Times New Roman", Times, serif;\">" );	
+		print("<p>" );	
+		if ( "Java".equalsIgnoreCase(typeConverter.getLanguageName())) {
+			print("Java is the default target language <br>" );	
+			print("therefore it is <b>not necessary</b> to call  <b>'$env.setLanguage()'</b> in the templates files." );	
+		} 
+		else {
+			print("To define <b>" + typeConverter.getLanguageName() + "</b> as the target language call &nbsp;" );	
+			print("<span class=\"code\">$env.setLanguage('" + typeConverter.getLanguageName() + "')</span>&nbsp; in the templates files." );	
+		}
+		println("<br>");
+		println("<br>");
+		print("The information below shows the behavior of the generator when '" + typeConverter.getLanguageName() 
+				+ "' is the current target language.");
+		println("<br>");
+		println("<br>");
+		print("</p>" );	
+		println("<br>");		
+	}
+	
 	private void printTypeConversion() {
 		println();
 		println("<h2>Type conversion </h2>" );			
+		println();
+		print("The language type conversion has an impact on :" );	
+		print("<ul class=\"code\" >" );	
+		print("<li> $attribute.type </li>" );
+		print("<li> $attribute.fullType </li>" );
+		print("<li> $attribute.simpleType </li>" );
+		print("<li> $attribute.wrapperType </li>" );
+		print("<li> $attribute.isPrimitiveType() </li>" );
+		print("</ul>" );	
+		println();
+		
 		print("<table style=\"\"> ");
 		println();
 		println("<colgroup>");
@@ -122,7 +157,7 @@ public class TypeConvertersDoc extends DocPrinter {
 			return ;
 		}
 		print("<h2>Remarks</h2>" );	
-		print("<p>" );	
+		print("<p class=\"code\" >" );	
 		for ( String s : typeConverter.getComments() ) {
 			print( s + "<br>" );	
 		}

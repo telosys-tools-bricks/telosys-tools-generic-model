@@ -16,7 +16,8 @@
 package org.telosys.tools.generic.model.types;
 
 /**
- * Literal values provider for "TYPESCRIPT" language
+ * Literal values provider for "TYPESCRIPT" language <br>
+ * See https://www.typescriptlang.org/docs/handbook/basic-types.html <br>
  * 
  * @author Laurent GUERIN
  *
