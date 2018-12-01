@@ -44,7 +44,7 @@ public interface Attribute {
 
 	/**
 	 * Returns the database comment for the attribute<br> 
-	 * If not supported by the model implementation : 'null'
+	 * Void string if not defined
 	 * @return
 	 */
 	public String getDatabaseComment() ;

@@ -45,10 +45,17 @@ public interface Entity
 	
 	/**
 	 * Returns the database catalog of the table mapped with this entity<br> 
-	 * If not supported by the model implementation : 'null'
+	 * Void string if not defined
 	 * @return
 	 */
 	public String getDatabaseCatalog() ; 
+	
+	/**
+	 * Returns the database comment for the table mapped with this entity<br> 
+	 * If not supported by the model implementation : 'null'
+	 * @return
+	 */
+	public String getDatabaseComment() ;
 	
 	/**
 	 * Returns all the database foreign keys defined for this entity<br> 
@@ -84,14 +91,6 @@ public interface Entity
 	 * @return
 	 */
 	public String getFullName();
-
-//	/**
-//	 * Returns the entity unique id. <br>
-//	 * A string identifying uniquely the entity in the model <br>
-//	 * ( ie : the class name or the table name depending on the model type)
-//	 * @return
-//	 */
-//	public String getId();
 
 	/**
 	 * Returns a list of all the links defined for the current entity<br>
