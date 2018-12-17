@@ -24,6 +24,7 @@ import org.telosys.tools.generic.model.types.LiteralValuesProviderForCSharp;
 import org.telosys.tools.generic.model.types.LiteralValuesProviderForGo;
 import org.telosys.tools.generic.model.types.LiteralValuesProviderForJava;
 import org.telosys.tools.generic.model.types.LiteralValuesProviderForJavaScript;
+import org.telosys.tools.generic.model.types.LiteralValuesProviderForPHP;
 import org.telosys.tools.generic.model.types.LiteralValuesProviderForPython;
 import org.telosys.tools.generic.model.types.LiteralValuesProviderForTypeScript;
 import org.telosys.tools.generic.model.types.TypeConverter;
@@ -31,6 +32,7 @@ import org.telosys.tools.generic.model.types.TypeConverterForCSharp;
 import org.telosys.tools.generic.model.types.TypeConverterForGo;
 import org.telosys.tools.generic.model.types.TypeConverterForJava;
 import org.telosys.tools.generic.model.types.TypeConverterForJavaScript;
+import org.telosys.tools.generic.model.types.TypeConverterForPHP;
 import org.telosys.tools.generic.model.types.TypeConverterForPython;
 import org.telosys.tools.generic.model.types.TypeConverterForTypeScript;
 
@@ -42,8 +44,9 @@ public class DocTool {
 		printDoc("html/lang-types-csharp.html", new TypeConverterForCSharp(), new LiteralValuesProviderForCSharp()  ) ;
 		printDoc("html/lang-types-typescript.html", new TypeConverterForTypeScript(), new LiteralValuesProviderForTypeScript() ) ;
 		
-		printDoc("html/lang-types-python.html", new TypeConverterForPython(), new LiteralValuesProviderForPython()) ;
+		printDoc("html/lang-types-python.html",     new TypeConverterForPython(),     new LiteralValuesProviderForPython()) ;
 		printDoc("html/lang-types-javascript.html", new TypeConverterForJavaScript(), new LiteralValuesProviderForJavaScript()) ;
+		printDoc("html/lang-types-php.html",        new TypeConverterForPHP(),        new LiteralValuesProviderForPHP()) ;
 	}
 	
 	public static void printDoc(String fileName, TypeConverter typeConverter, LiteralValuesProvider literalValuesProvider ) {
