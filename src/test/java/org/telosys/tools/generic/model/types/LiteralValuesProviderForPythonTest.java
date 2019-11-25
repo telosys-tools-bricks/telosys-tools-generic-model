@@ -6,14 +6,14 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class LiteralValuesProviderForGoTest {
+public class LiteralValuesProviderForPythonTest {
 	
 	//----------------------------------------------------------------------------------
 	private TypeConverter getTypeConverter() {
-		return new TypeConverterForGo() ;
+		return new TypeConverterForPython() ;
 	}
 	private LiteralValuesProvider getLiteralValuesProvider() {
-		return new LiteralValuesProviderForGo() ;
+		return new LiteralValuesProviderForPython() ;
 	}
 	private LanguageType getLanguageType(AttributeTypeInfo typeInfo ) {
 		System.out.println( typeInfo + " --> " + typeInfo );
@@ -29,15 +29,15 @@ public class LiteralValuesProviderForGoTest {
 
 	@Test
 	public void testLiteralNull() {
-		assertEquals("nil", getLiteralValuesProvider().getLiteralNull() );
+		assertEquals("None", getLiteralValuesProvider().getLiteralNull() );
 	}
 
 	@Test
 	public void testLiteralValuesForBOOLEAN() {
 		LanguageType lt = getLanguageType(NeutralType.BOOLEAN, NONE );
-		assertEquals("true",  getLiteralValuesProvider().generateLiteralValue(lt, 0, 1).getCurrentLanguageValue() );
-		assertEquals("false", getLiteralValuesProvider().generateLiteralValue(lt, 0, 2).getCurrentLanguageValue() );
-		assertEquals("true",  getLiteralValuesProvider().generateLiteralValue(lt, 0, 3).getCurrentLanguageValue() );
+		assertEquals("True",  getLiteralValuesProvider().generateLiteralValue(lt, 0, 1).getCurrentLanguageValue() );
+		assertEquals("False", getLiteralValuesProvider().generateLiteralValue(lt, 0, 2).getCurrentLanguageValue() );
+		assertEquals("True",  getLiteralValuesProvider().generateLiteralValue(lt, 0, 3).getCurrentLanguageValue() );
 	}
 
 	@Test

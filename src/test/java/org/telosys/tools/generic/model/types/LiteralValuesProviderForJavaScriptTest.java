@@ -6,14 +6,14 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class LiteralValuesProviderForGoTest {
+public class LiteralValuesProviderForJavaScriptTest {
 	
 	//----------------------------------------------------------------------------------
 	private TypeConverter getTypeConverter() {
-		return new TypeConverterForGo() ;
+		return new TypeConverterForJavaScript() ;
 	}
 	private LiteralValuesProvider getLiteralValuesProvider() {
-		return new LiteralValuesProviderForGo() ;
+		return new LiteralValuesProviderForJavaScript() ;
 	}
 	private LanguageType getLanguageType(AttributeTypeInfo typeInfo ) {
 		System.out.println( typeInfo + " --> " + typeInfo );
@@ -29,7 +29,7 @@ public class LiteralValuesProviderForGoTest {
 
 	@Test
 	public void testLiteralNull() {
-		assertEquals("nil", getLiteralValuesProvider().getLiteralNull() );
+		assertEquals("null", getLiteralValuesProvider().getLiteralNull() );
 	}
 
 	@Test

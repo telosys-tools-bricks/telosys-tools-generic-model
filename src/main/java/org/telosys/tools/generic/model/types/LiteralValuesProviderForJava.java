@@ -15,6 +15,8 @@
  */
 package org.telosys.tools.generic.model.types;
 
+import java.math.BigDecimal;
+
 /**
  * Literal values provider for "JAVA" language
  * 
@@ -60,90 +62,111 @@ public class LiteralValuesProviderForJava extends LiteralValuesProvider {
 //	}
 	
 	@Override
-	public String generateLiteralValue(LanguageType languageType, int maxLength, int step) {
+	public LiteralValue generateLiteralValue(LanguageType languageType, int maxLength, int step) {
 		
 		String javaFullType = languageType.getFullType() ;
 		//--- STRING
 		if ( java.lang.String.class.getCanonicalName().equals(javaFullType) ) {
-			return "\"" + buildStringValue(maxLength, step) + "\"" ;
+//			return "\"" + buildStringValue(maxLength, step) + "\"" ;
+			String value = buildStringValue(maxLength, step);
+			return new LiteralValue("\"" + value + "\"", value) ;			
 		}
 		
 		//--- BYTE
 		else if ( byte.class.getCanonicalName().equals(javaFullType) ) {
-			return "(byte)" + checkThreshold(step, Byte.MAX_VALUE) ;
+//			return "(byte)" + checkThreshold(step, Byte.MAX_VALUE) ;
+			Long value = Long.valueOf(checkThreshold(step, Byte.MAX_VALUE)) ;  
+			return new LiteralValue("(byte)" + value.toString(), value) ; // eg : (byte)123
 		}
 		else if ( java.lang.Byte.class.getCanonicalName().equals(javaFullType) ) {
-			//Byte.valueOf(12); // Invalid
-			//Byte.valueOf((byte)12); // OK
-			return "Byte.valueOf((byte)" + checkThreshold(step, Byte.MAX_VALUE) + ")" ;
+//			return "Byte.valueOf((byte)" + checkThreshold(step, Byte.MAX_VALUE) + ")" ;
+			Long value = Long.valueOf(checkThreshold(step, Byte.MAX_VALUE)) ;  
+			return new LiteralValue("Byte.valueOf((byte)" + value.toString() + ")", value) ; // eg : Byte.valueOf((byte)123)
 		}
 		
 		//--- SHORT
 		else if ( short.class.getCanonicalName().equals(javaFullType) ) {
-			return "(short)" + checkThreshold(step, Short.MAX_VALUE) ;
+//			return "(short)" + checkThreshold(step, Short.MAX_VALUE) ;
+			Long value = Long.valueOf(checkThreshold(step, Short.MAX_VALUE)) ;  
+			return new LiteralValue("(short)" + value.toString(), value) ;
 		}
 		else if ( java.lang.Short.class.getCanonicalName().equals(javaFullType) ) {
-			//Short.valueOf(12); // Invalid
-			//Short.valueOf((short)12); // OK
-			return "Short.valueOf((short)" + checkThreshold(step, Short.MAX_VALUE) + ")" ;
+//			return "Short.valueOf((short)" + checkThreshold(step, Short.MAX_VALUE) + ")" ;
+			Long value = Long.valueOf(checkThreshold(step, Short.MAX_VALUE)) ;  
+			return new LiteralValue("Short.valueOf((short)" + value.toString() + ")", value) ; // eg : Short.valueOf((short)123)
 		}
 		
 		//--- INT		
 		else if ( int.class.getCanonicalName().equals(javaFullType) ) {
-			return "" + (step*100);
+//			return "" + (step*100);
+			Long value = Long.valueOf(step*100L) ;  
+			return new LiteralValue(value.toString(), value) ;
+			
 		}
 		else if ( java.lang.Integer.class.getCanonicalName().equals(javaFullType) ) {
-			Integer.valueOf(12);
-			return "Integer.valueOf(" + (step*100) + ")";
+//			return "Integer.valueOf(" + (step*100) + ")";
+			Long value = Long.valueOf(step*100L) ;  
+			return new LiteralValue("Integer.valueOf(" + value.toString() + ")", value) ; // eg : Integer.valueOf(123)
 		}
 		
 		//--- LONG
 		else if ( long.class.getCanonicalName().equals(javaFullType) ) {
-			return (step*1000) + "L" ;
+//			return (step*1000) + "L" ;
+			Long value = Long.valueOf(step*1000L) ;  
+			return new LiteralValue(value.toString() + "L", value) ; // eg : 123L
 		}
 		else if ( java.lang.Long.class.getCanonicalName().equals(javaFullType) ) {
-			// Long.valueOf(12L);
-			return "Long.valueOf(" + (step*1000) + "L)" ;
+//			return "Long.valueOf(" + (step*1000) + "L)" ;
+			Long value = Long.valueOf(step*1000L) ;  
+			return new LiteralValue("Long.valueOf(" + value.toString() + "L)", value) ; // eg :  Long.valueOf(123L)
 		}
 		
 		//--- FLOAT
 		else if ( float.class.getCanonicalName().equals(javaFullType) ) {
-			return (step*1000) + ".5F" ;
+//			return (step*1000) + ".5F" ;
+			BigDecimal value = BigDecimal.valueOf((step * 1000) + 0.5);
+			return new LiteralValue(value.toString()+"F", value) ; //  eg :  123.5F
 		}
 		else if ( java.lang.Float.class.getCanonicalName().equals(javaFullType) ) {
-			// Float.valueOf(12.5F);
-			return "Float.valueOf(" + (step*1000) + ".5F)" ;
+//			return "Float.valueOf(" + (step*1000) + ".5F)" ;
+			BigDecimal value = BigDecimal.valueOf((step * 1000) + 0.5);
+			return new LiteralValue("Float.valueOf(" + value.toString() + "F)", value) ; //  eg :  Float.valueOf(123.5F)
 		}
 		
 		//--- DOUBLE
 		else if ( double.class.getCanonicalName().equals(javaFullType) ) {
-			return (step*1000) + ".66D" ;
+//			return (step*1000) + ".66D" ;
+			BigDecimal value = BigDecimal.valueOf((step * 1000) + 0.66);
+			return new LiteralValue(value.toString()+"D", value) ; // eg :  123.66D
 		}
 		else if ( java.lang.Double.class.getCanonicalName().equals(javaFullType) ) {
 			//Double.valueOf(12.66D);
-			return "Double.valueOf(" + (step*1000) + ".66D)" ;
+//			return "Double.valueOf(" + (step*1000) + ".66D)" ;
+			BigDecimal value = BigDecimal.valueOf((step * 1000) + 0.66);
+			return new LiteralValue("Double.valueOf("+value.toString()+"D)", value) ; // eg : Double.valueOf(123.66D)
 		}
 		
 		//--- BIG DECIMAL
 		else if ( java.math.BigDecimal.class.getCanonicalName().equals(javaFullType) ) {
-			// java.math.BigDecimal.valueOf(15000);
-			return "java.math.BigDecimal.valueOf(" + (step * 10000) + ")" ;
+//			return "java.math.BigDecimal.valueOf(" + (step * 10000) + ")" ;
+			BigDecimal value = BigDecimal.valueOf((step * 10000) + 0.77);
+			return new LiteralValue("java.math.BigDecimal.valueOf(" + value.toString() + ")", value) ; // eg : java.math.BigDecimal.valueOf(15000.77)
 		}
 		
 		//--- BOOLEAN
 		else if ( boolean.class.getCanonicalName().equals(javaFullType) ) {
 			// Primitive boolean type
-//			Boolean val = step % 2 != 0 ? Boolean.TRUE : Boolean.FALSE ;
-//			return val.toString() ;
-			return step % 2 != 0 ? TRUE_LITERAL : FALSE_LITERAL ;
-
+//			return step % 2 != 0 ? TRUE_LITERAL : FALSE_LITERAL ;
+			boolean value = step % 2 != 0 ;
+			return new LiteralValue(value ? TRUE_LITERAL : FALSE_LITERAL, Boolean.valueOf(value)) ;
 		}
 		else if ( java.lang.Boolean.class.getCanonicalName().equals(javaFullType) ) {
 //			// Boolean.valueOf(true);
-//			Boolean val = step % 2 != 0 ? Boolean.TRUE : Boolean.FALSE ;
-//			return "Boolean.valueOf(" + val.toString() + ")";
 			// Object boolean wrapper type
-			return "Boolean.valueOf(" + (step % 2 != 0 ? TRUE_LITERAL : FALSE_LITERAL) + ")";
+//			return "Boolean.valueOf(" + (step % 2 != 0 ? TRUE_LITERAL : FALSE_LITERAL) + ")";
+			boolean value = step % 2 != 0 ;
+			String s = value ? TRUE_LITERAL : FALSE_LITERAL ;
+			return new LiteralValue("Boolean.valueOf("+s+")", Boolean.valueOf(value)) ; // eg : Boolean.valueOf(true)
 		}
 		
 		// DATE & TIME
@@ -165,13 +188,9 @@ public class LiteralValuesProviderForJava extends LiteralValuesProvider {
 			}
 		}
 		else if ( java.sql.Date.class.getCanonicalName().equals(javaFullType) ) {
-//			String dateISO = (2000+step) + "-06-22" ; // "2001-06-22" 
-//			return "java.sql.Date.valueOf(\"" + dateISO + "\")" ; 
 			return generateDateValue(step);
 		}
 		else if ( java.sql.Time.class.getCanonicalName().equals(javaFullType) ) {
-//			String timeISO =  String.format("%02d", (step%24) ) + ":46:52" ; // "15:46:52"
-//			return "java.sql.Time.valueOf(\"" + timeISO + "\")" ; // "15:46:52"
 			return generateTimeValue(step);
 		}
 		else if ( java.sql.Timestamp.class.getCanonicalName().equals(javaFullType) ) {
@@ -180,24 +199,29 @@ public class LiteralValuesProviderForJava extends LiteralValuesProvider {
 			return generateTimestampValue(step);
 		}
 		
-		return "null" ; 
+//		return "null" ; 
+		return new LiteralValue(NULL_LITERAL, null);
 	}
 	
 	private String generateYearValue(int step) {
 		int year = 2000 + ( step % 1000 ) ;  // between 2000 and 2999 
 		return "" + year ;
 	}
-	private String generateDateValue(int step) {
+	private LiteralValue generateDateValue(int step) {
 		String dateISO = generateYearValue(step) + "-06-22" ; // "2001-06-22" 
-		return "java.sql.Date.valueOf(\"" + dateISO + "\")" ; 
+		java.sql.Date value = java.sql.Date.valueOf(dateISO);
+		return new LiteralValue("java.sql.Date.valueOf(\"" + dateISO + "\")", value) ; 
 	}
-	private String generateTimeValue(int step) {
+	private LiteralValue generateTimeValue(int step) {
 		String timeISO =  String.format("%02d", (step%24) ) + ":46:52" ; // "15:46:52"
-		return "java.sql.Time.valueOf(\"" + timeISO + "\")" ; // "15:46:52"
+		java.sql.Time value = java.sql.Time.valueOf(timeISO);
+		return new LiteralValue("java.sql.Time.valueOf(\"" + timeISO + "\")", value) ; 
 	}
-	private String generateTimestampValue(int step) {
+	private LiteralValue generateTimestampValue(int step) {
 		String timestampISO = generateYearValue(step) + "-05-21" + " " + String.format("%02d", (step%24) ) + ":46:52" ; // "2001-05-21 15:46:52" 
-		return "java.sql.Timestamp.valueOf(\"" + timestampISO + "\")" ; // e.g. "2001-05-21 15:46:52"
+//		return "java.sql.Timestamp.valueOf(\"" + timestampISO + "\")" ; // e.g. "2001-05-21 15:46:52"
+		java.sql.Timestamp value = java.sql.Timestamp.valueOf(timestampISO);
+		return new LiteralValue("java.sql.Timestamp.valueOf(\"" + timestampISO + "\")", value) ; 
 	}
 
 	/* 

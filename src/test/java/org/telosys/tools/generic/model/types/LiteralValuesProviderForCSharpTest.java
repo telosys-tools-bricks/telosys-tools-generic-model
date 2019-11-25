@@ -6,14 +6,14 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class LiteralValuesProviderForGoTest {
+public class LiteralValuesProviderForCSharpTest {
 	
 	//----------------------------------------------------------------------------------
 	private TypeConverter getTypeConverter() {
-		return new TypeConverterForGo() ;
+		return new TypeConverterForCSharp() ;
 	}
 	private LiteralValuesProvider getLiteralValuesProvider() {
-		return new LiteralValuesProviderForGo() ;
+		return new LiteralValuesProviderForCSharp() ;
 	}
 	private LanguageType getLanguageType(AttributeTypeInfo typeInfo ) {
 		System.out.println( typeInfo + " --> " + typeInfo );
@@ -29,7 +29,7 @@ public class LiteralValuesProviderForGoTest {
 
 	@Test
 	public void testLiteralNull() {
-		assertEquals("nil", getLiteralValuesProvider().getLiteralNull() );
+		assertEquals("null", getLiteralValuesProvider().getLiteralNull() );
 	}
 
 	@Test
@@ -72,29 +72,29 @@ public class LiteralValuesProviderForGoTest {
 	@Test
 	public void testLiteralValuesForLONG() {
 		LanguageType lt = getLanguageType(NeutralType.LONG, NONE );
-		assertEquals("1000", getLiteralValuesProvider().generateLiteralValue(lt, 0, 1).getCurrentLanguageValue() );
-		assertEquals("2000", getLiteralValuesProvider().generateLiteralValue(lt, 0, 2).getCurrentLanguageValue() );
+		assertEquals("1000L", getLiteralValuesProvider().generateLiteralValue(lt, 0, 1).getCurrentLanguageValue() );
+		assertEquals("2000L", getLiteralValuesProvider().generateLiteralValue(lt, 0, 2).getCurrentLanguageValue() );
 	}
 
 	@Test
 	public void testLiteralValuesForFLOAT() {
 		LanguageType lt = getLanguageType(NeutralType.FLOAT, NONE );
-		assertEquals("1000.5", getLiteralValuesProvider().generateLiteralValue(lt, 0, 1).getCurrentLanguageValue() );
-		assertEquals("2000.5", getLiteralValuesProvider().generateLiteralValue(lt, 0, 2).getCurrentLanguageValue() );
+		assertEquals("1000.5F", getLiteralValuesProvider().generateLiteralValue(lt, 0, 1).getCurrentLanguageValue() );
+		assertEquals("2000.5F", getLiteralValuesProvider().generateLiteralValue(lt, 0, 2).getCurrentLanguageValue() );
 	}
 
 	@Test
 	public void testLiteralValuesForDOUBLE() {
 		LanguageType lt = getLanguageType(NeutralType.DOUBLE, NONE );
-		assertEquals("1000.66", getLiteralValuesProvider().generateLiteralValue(lt, 0, 1).getCurrentLanguageValue() );
-		assertEquals("2000.66", getLiteralValuesProvider().generateLiteralValue(lt, 0, 2).getCurrentLanguageValue() );
+		assertEquals("1000.66D", getLiteralValuesProvider().generateLiteralValue(lt, 0, 1).getCurrentLanguageValue() );
+		assertEquals("2000.66D", getLiteralValuesProvider().generateLiteralValue(lt, 0, 2).getCurrentLanguageValue() );
 	}
 
 	@Test
 	public void testLiteralValuesForDECIMAL() {
 		LanguageType lt = getLanguageType(NeutralType.DECIMAL, NONE );
-		assertEquals("10000.77", getLiteralValuesProvider().generateLiteralValue(lt, 0, 1).getCurrentLanguageValue() );
-		assertEquals("20000.77", getLiteralValuesProvider().generateLiteralValue(lt, 0, 2).getCurrentLanguageValue() );
+		assertEquals("10000.77M", getLiteralValuesProvider().generateLiteralValue(lt, 0, 1).getCurrentLanguageValue() );
+		assertEquals("20000.77M", getLiteralValuesProvider().generateLiteralValue(lt, 0, 2).getCurrentLanguageValue() );
 	}
 
 	@Test

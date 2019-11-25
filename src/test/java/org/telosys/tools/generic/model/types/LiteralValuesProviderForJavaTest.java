@@ -159,9 +159,9 @@ public class LiteralValuesProviderForJavaTest {
 	private void checkLiteralValue(String neutralType, Class<?> clazz, int maxLength, int step, String expected ) {
 		LanguageType languageType = buildLanguageType(neutralType, clazz);
 		LiteralValuesProvider  literalValuesProvider = new LiteralValuesProviderForJava();
-		String value = literalValuesProvider.generateLiteralValue(languageType, maxLength, step);
+		LiteralValue value = literalValuesProvider.generateLiteralValue(languageType, maxLength, step);
 		System.out.println("Literal value : '" + value + "'" );
-		assertEquals(expected, value ) ;
+		assertEquals(expected, value.getCurrentLanguageValue() ) ;
 	}
 
 	@Test
@@ -260,9 +260,9 @@ public class LiteralValuesProviderForJavaTest {
 		checkLiteralValue(Double.class, 0, 1, "Double.valueOf(1000.66D)" );
 		checkLiteralValue(Double.class, 0, 2, "Double.valueOf(2000.66D)" );
 		
-		checkLiteralValue(BigDecimal.class, 0, 0, "java.math.BigDecimal.valueOf(0)"     );
-		checkLiteralValue(BigDecimal.class, 0, 1, "java.math.BigDecimal.valueOf(10000)" );
-		checkLiteralValue(BigDecimal.class, 0, 2, "java.math.BigDecimal.valueOf(20000)" );
+		checkLiteralValue(BigDecimal.class, 0, 0, "java.math.BigDecimal.valueOf(0.77)"     );
+		checkLiteralValue(BigDecimal.class, 0, 1, "java.math.BigDecimal.valueOf(10000.77)" );
+		checkLiteralValue(BigDecimal.class, 0, 2, "java.math.BigDecimal.valueOf(20000.77)" );
 	}
 
 	@Test

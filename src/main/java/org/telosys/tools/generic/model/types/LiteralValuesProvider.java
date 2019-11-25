@@ -15,6 +15,8 @@
  */
 package org.telosys.tools.generic.model.types;
 
+import java.math.BigDecimal;
+
 /**
  * Abstract literal values provider
  * 
@@ -67,6 +69,59 @@ public abstract class LiteralValuesProvider {
 		return sb.toString();
 	}
 
+	protected Long buildIntegerValue(String neutralType, int step) {
+		//--- BYTE
+		if ( NeutralType.BYTE.equals(neutralType) ) {
+			return Long.valueOf(checkThreshold(step, Byte.MAX_VALUE)) ;  
+		}
+		
+		//--- SHORT
+		else if ( NeutralType.SHORT.equals(neutralType) ) {
+			return Long.valueOf(checkThreshold(step, Short.MAX_VALUE)) ;  
+		}
+		
+		//--- INT		
+		else if ( NeutralType.INTEGER.equals(neutralType)  ) {
+			return Long.valueOf(step*100L) ;  
+		}
+		
+		//--- LONG
+		else if ( NeutralType.LONG.equals(neutralType)  ) {
+			return Long.valueOf(step*1000L) ;  
+		}
+
+		//--- INVALID TYPE
+		else {
+			throw new IllegalArgumentException("Invalid neutral type " + neutralType);
+		}
+	}
+	
+	protected BigDecimal buildDecimalValue(String neutralType, int step) {
+		//--- FLOAT
+		if ( NeutralType.FLOAT.equals(neutralType)  ) {
+			return BigDecimal.valueOf((step * 1000) + 0.5);
+		}
+		
+		//--- DOUBLE
+		else if ( NeutralType.DOUBLE.equals(neutralType) ) {
+			return BigDecimal.valueOf((step * 1000) + 0.66);
+		}
+		
+		//--- BIG DECIMAL
+		else if ( NeutralType.DECIMAL.equals(neutralType) ) {
+			return BigDecimal.valueOf((step * 10000) + 0.77);
+		}
+		
+		//--- INVALID TYPE
+		else {
+			throw new IllegalArgumentException("Invalid neutral type " + neutralType);
+		}
+	}
+	
+	protected boolean buildBooleanValue(int step) {
+		return step % 2 != 0 ;
+	}
+	
 	//------------------------------------------------------------------------------------
 	// ABSTRACT METHODS
 	//------------------------------------------------------------------------------------
@@ -96,7 +151,8 @@ public abstract class LiteralValuesProvider {
 	 * @param step
 	 * @return
 	 */
-	public abstract String generateLiteralValue(LanguageType languageType, int maxLength, int step) ;
+//	public abstract String generateLiteralValue(LanguageType languageType, int maxLength, int step) ;
+	public abstract LiteralValue generateLiteralValue(LanguageType languageType, int maxLength, int step) ;
 
 	/**
 	 * Returns the ad hoc equals statement for a given literal value according with the language type<br>

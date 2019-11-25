@@ -15,6 +15,8 @@
  */
 package org.telosys.tools.generic.model.types;
 
+import java.math.BigDecimal;
+
 /**
  * Literal values provider for "C#" language
  * 
@@ -43,36 +45,37 @@ public class LiteralValuesProviderForGo extends LiteralValuesProvider {
 	}
 	
 	@Override
-	public String generateLiteralValue(LanguageType languageType, int maxLength, int step) {
+	public LiteralValue generateLiteralValue(LanguageType languageType, int maxLength, int step) {
 		// see : https://golang.org/test/literal.go
 		String neutralType = languageType.getNeutralType(); 
-		
+
+		//--- STRING
 		if ( NeutralType.STRING.equals(neutralType) ) {
-			return "\"" + buildStringValue(maxLength, step) + "\"" ;
+			String value = buildStringValue(maxLength, step);
+			return new LiteralValue("\"" + value + "\"", value) ;			
 		}
-		else if ( NeutralType.BYTE.equals(neutralType) ) {
-			return "" + checkThreshold(step, Byte.MAX_VALUE) ;  
+		
+		//--- NUMBER / INTEGER
+		else if (  NeutralType.BYTE.equals(neutralType) 
+				|| NeutralType.SHORT.equals(neutralType)
+				|| NeutralType.INTEGER.equals(neutralType) 
+				|| NeutralType.LONG.equals(neutralType) ) {
+			Long value = buildIntegerValue(neutralType, step);  
+			return new LiteralValue(value.toString(), value) ; // eg : 123
 		}
-		else if ( NeutralType.SHORT.equals(neutralType) ) {
-			return "" + checkThreshold(step, Short.MAX_VALUE) ;
+		
+		//--- NUMBER (NOT INTEGER)
+		else if (  NeutralType.FLOAT.equals(neutralType) 
+				|| NeutralType.DOUBLE.equals(neutralType) 
+				|| NeutralType.DECIMAL.equals(neutralType) ) {
+			BigDecimal value = buildDecimalValue(neutralType, step);
+			return new LiteralValue(value.toString(), value) ; // eg :  123.77
 		}
-		else if ( NeutralType.INTEGER.equals(neutralType)  ) {
-			return "" + (step*100);
-		}
-		else if ( NeutralType.LONG.equals(neutralType)  ) {
-			return "" + (step*1000) ; // eg :  "v := 123"
-		}
-		else if ( NeutralType.FLOAT.equals(neutralType)  ) {
-			return (step*1000) + ".5" ;  // eg :  "v := 333.333" / "var v float32 = 12.36" 
-		}
-		else if ( NeutralType.DOUBLE.equals(neutralType) ) {
-			return (step*1000) + ".66" ; // eg :  "v := 333.333" / "var v float64 = 12.36" 
-		}
-		else if ( NeutralType.DECIMAL.equals(neutralType) ) {
-			return (step*10000) + ".77" ;
-		}
+
+		//--- BOOLEAN
 		else if ( NeutralType.BOOLEAN.equals(neutralType)  ) {
-			return step % 2 != 0 ? TRUE_LITERAL : FALSE_LITERAL ;
+			boolean value = buildBooleanValue(step);
+			return new LiteralValue(value ? TRUE_LITERAL : FALSE_LITERAL, Boolean.valueOf(value)) ;
 		}
 
 //		//--- DATE, TIME and TIMESTAMP :  ????
@@ -90,7 +93,8 @@ public class LiteralValuesProviderForGo extends LiteralValuesProvider {
 //			return NULL_LITERAL ;
 //		}
 		
-		return NULL_LITERAL ; 
+//		return NULL_LITERAL ; 
+		return new LiteralValue(NULL_LITERAL, null);
 	}
 	
 	/* 
