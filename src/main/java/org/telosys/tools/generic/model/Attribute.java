@@ -65,11 +65,12 @@ public interface Attribute {
 	public String getDatabaseName();
 
 	/**
-	 * Returns the database size for the attribute if any (null if none)<br> 
+	 * Returns the database size for the attribute if any (null if none) <br> 
+	 * eg : "8" for VARCHAR(8) / "12" for CHAR(12) / "8,2" for "NUMBER(8,2)" / "5,2" for "DECIMAL(5,2)"
 	 * If not supported by the model implementation : 'null'
 	 * @return
 	 */
-	public Integer getDatabaseSize();
+	public String getDatabaseSize();
 
 	/**
 	 * Returns the database native type for the attribute<br>
