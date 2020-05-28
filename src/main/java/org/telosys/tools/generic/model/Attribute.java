@@ -24,6 +24,26 @@ import java.math.BigDecimal;
  * @author Laurent Guerin
  * @since 3.0.0
  */
+/**
+ * @author laguerin
+ *
+ */
+/**
+ * @author laguerin
+ *
+ */
+/**
+ * @author laguerin
+ *
+ */
+/**
+ * @author laguerin
+ *
+ */
+/**
+ * @author laguerin
+ *
+ */
 public interface Attribute {
 
 	/**
@@ -109,21 +129,6 @@ public interface Attribute {
 	 */
 	public String getDefaultValue();
 
-//	/**
-//	 * Returns the entity this attribute depends on <br>
-//	 * This information is MENDATORY, it must be provided by all models implementations
-//	 * @return
-//	 */
-//	public Entity getEntity();
-// Removed #LGU  2015-03-05
-
-	// Removed in v 3.0.0
-//	/**
-//	 * Returns the full type ( java.math.BigDecimal, java.util.Date, .. )
-//	 * @return
-//	 */
-//	public String getFullType();
-
 	/**
 	 * Returns the generator for a 'generated value'<br>
 	 * Typically for JPA : 'SequenceGenerator' or 'TableGenerator'<br> 
@@ -188,7 +193,6 @@ public interface Attribute {
 	 * If not supported by the model implementation : 'null'
 	 * @return
 	 */
-//	public Integer getMaxValue() ;
 	public BigDecimal getMaxValue() ;
 
 	/**
@@ -203,7 +207,6 @@ public interface Attribute {
 	 * If not supported by the model implementation : 'null'
 	 * @return
 	 */
-//	public Integer getMinValue() ;
 	public BigDecimal getMinValue() ;
 
 	/**
@@ -252,13 +255,6 @@ public interface Attribute {
 	 */
 	public String getSequenceGeneratorSequenceName() ;
 
-	// Removed in v 3.0.0
-//	/**
-//	 * Returns the simple type ( BigDecimal, Date, int, Integer, .. )
-//	 * @return
-//	 */
-//	public String getSimpleType() ;
-
 	/**
 	 * Returns the name of the 'table generator' <br>
 	 * Typically for JPA '@TableGenerator/name'  <br> 
@@ -300,23 +296,6 @@ public interface Attribute {
 	 */
 	public String getTableGeneratorValueColumnName() ;
 
-//	/**
-//	 * Returns the recommended type for the attribute <br>
-//	 * usually the simple type ( 'int', 'BigDecimal', 'Date' ) <br>
-//	 * sometimes the full type ( if the simple type is considered as ambiguous ) <br>
-//	 * Examples for Java : 'int', 'BigDecimal', 'Date', 'java.util.Date', 'java.sql.Date'
-//	 * @return
-//	 */
-//	public String getType(); // TODO useful ????
-//
-//	/**
-//	 * Returns the Java wrapper type corresponding to the attribute's primitive type <br>
-//	 * Examples : 'Float' for 'float', 'Integer' for 'int', 'Boolean' for 'boolean', ... <br>
-//	 * The attribute's type is returned as is if it's not a primitive type
-//	 * @return
-//	 */
-//	public String getWrapperType(); // TODO useful ????
-	
 	/**
 	 * Returns TRUE if the attribute has a 'Sequence Generator' <br>
 	 * If not supported by the model implementation : 'false'
@@ -459,15 +438,6 @@ public interface Attribute {
 	 */
     public boolean isSqlTypeExpected() ;
 
-//--- Removed in v 3.0.0, replaced by "isFK()"
-//	/**
-//	 * Returns TRUE if the attribute is used in (at least) one Foreign Key <br>
-//	 * If not supported by the model implementation : 'false' 
-//	 * @return
-//	 */
-//	public boolean isUsedInForeignKey() ;
-
-
     /**
 	 * Returns TRUE if the attribute is involved in a Foreign Key ( simple or composite FK ).<br>
 	 * ( TRUE if the attribute is itself the single part of a Foreign Key <br>
@@ -493,14 +463,6 @@ public interface Attribute {
      */
     public boolean isFKComposite() ;
 
-//    /**
-//	 * Returns the Entity referenced by the attribute if any<br>
-//	 * Returns an Entity instance only if the attribute is a "Single FK" or a part of a "Composite FK" <br>
-//	 * 
-//     * @return the Entity referenced, or null if none
-//     */
-//    public Entity getReferencedEntity() ;
-//    
     /**
 	 * Returns the name of the Entity referenced by the attribute if any<br>
 	 * Returns null if none <br>
@@ -522,4 +484,19 @@ public interface Attribute {
 	 */
 	public boolean isUsedInSelectedLinks(); 
 
+	/**
+	 * Returns true if there's a tag declared with the given name
+     * @param tagName
+	 * @return
+	 * @since v 3.3.0
+	 */
+	public boolean hasTag(String tagName); 
+
+	/**
+	 * Returns the value held by the tag
+     * @param tagName
+	 * @return
+	 * @since v 3.3.0
+	 */
+	public String getTagValue(String tagName); 
 }

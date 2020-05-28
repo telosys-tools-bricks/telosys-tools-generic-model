@@ -29,7 +29,7 @@ public class CascadeOptions implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	private final static String CASCADE_ALL = "ALL";
+	private static final String CASCADE_ALL = "ALL";
 
 	private final CascadeOption cascadeOptions[] = new CascadeOption[CascadeOption.values().length];
 	
@@ -82,7 +82,7 @@ public class CascadeOptions implements Serializable {
 	}
 	
 	public List<CascadeOption> getActiveOptions() {
-		LinkedList<CascadeOption> list = new LinkedList<CascadeOption>() ;
+		LinkedList<CascadeOption> list = new LinkedList<>() ;
 		for ( CascadeOption cascadeOption : cascadeOptions ) {
 			if ( cascadeOption != null ) {
 				list.add(cascadeOption);
@@ -100,7 +100,7 @@ public class CascadeOptions implements Serializable {
 		}
 		else {		
 			int count = 0 ;
-			StringBuffer sb = new StringBuffer();
+			StringBuilder sb = new StringBuilder();
 			for ( CascadeOption c : cascadeOptions ) {
 				if ( c != null ) {
 					if ( count > 0 ) {

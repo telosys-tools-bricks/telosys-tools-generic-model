@@ -117,33 +117,8 @@ public interface Link {
 	public String getInverseSideLinkId() ;
 	
 	//--------------------------------------------------------------------------
-//	/**
-//	 * Returns optional value : "TRUE"/"FALSE"/"UNDEFINED"
-//	 * @return
-//	 */
-//	public String getOptional() ;
-//
-//	public boolean isOptionalTrue() ;
-//
-//	public boolean isOptionalFalse() ;
-//
-//	public boolean isOptionalUndefined() ;
-
 	public Optional getOptional() ;
 	//--------------------------------------------------------------------------
-//	/**
-//	 * Returns the cardinality of the link : "OneToMany", "ManyToOne", "OneToOne", "ManyToMany" 
-//	 * @return
-//	 */
-//	public String getCardinality() ;
-//
-//	public boolean isTypeOneToOne() ;
-//
-//	public boolean isTypeOneToMany() ;
-//
-//	public boolean isTypeManyToOne() ;
-//
-//	public boolean isTypeManyToMany() ;
 
 	/**
 	 * Returns the cardinality of the link : "OneToMany" or "ManyToOne" or "OneToOne" or "ManyToMany" 
@@ -152,23 +127,6 @@ public interface Link {
 	public Cardinality getCardinality() ;
 	
 	//--------------------------------------------------------------------------
-//	/**
-//	 * Returns the 'cascade type' of the link : "ALL", "MERGE", "PERSIST", "REFRESH", "REMOVE" <br>
-//	 * The cascade type is cumulative, e.g. "MERGE PERSIST"
-//	 * @return
-//	 */
-//	public String getCascade() ;
-//
-//	public boolean isCascadeALL() ;
-//
-//	public boolean isCascadeMERGE() ;
-//
-//	public boolean isCascadePERSIST() ;
-//
-//	public boolean isCascadeREFRESH() ;
-//
-//	public boolean isCascadeREMOVE() ;
-
 	/**
 	 * Returns the cascade options of the link : "ALL", "MERGE", "PERSIST", "REFRESH", "REMOVE" <br>
 	 * Can be null if no 'cascade options'
@@ -177,18 +135,6 @@ public interface Link {
 	public CascadeOptions getCascadeOptions() ;
 	
 	//--------------------------------------------------------------------------
-//	/**
-//	 * Returns 'fetch property' of the link : "DEFAULT" or "EAGER" or "LAZY"
-//	 * @return
-//	 */
-//	public String getFetch() ;
-//
-//	public boolean isFetchDEFAULT() ;
-//	
-//	public boolean isFetchEAGER() ;
-//
-//	public boolean isFetchLAZY() ;
-	
 	/**
 	 * Returns the 'fetch type' of the link : "DEFAULT" or "EAGER" or "LAZY"
 	 * @return

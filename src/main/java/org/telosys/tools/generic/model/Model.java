@@ -105,32 +105,4 @@ public interface Model {
      */
     public List<Entity> getEntities() ;
 
-    /*------------------------------------------------------------------------------------------
-// TODO     ENUMERATIONS
-    ------------------------------------------------------------------------------------------*/
-
-//    /**
-//     * Returns an enumeration for the given name (or null if not found)
-//     *
-//     * @param enumerationName
-//     * @return
-//     */
-//    public final DomainEnumeration<?> getEnumeration(String enumerationName) ;
-//
-////    /**
-////     * Returns the number of enumerations currently defined in the model
-////     *
-////     * @return
-////     */
-////    public final int getNumberOfEnumerations() {
-////        return enumerations.size();
-////    }
-//
-//    /**
-//     * Returns all the enumeration names (in alphabetical order)
-//     *
-//     * @return
-//     */
-//    public List<String> getEnumerationNames() ;
-//
 }
