@@ -16,6 +16,7 @@
 package org.telosys.tools.generic.model;
 
 import java.math.BigDecimal;
+import java.util.Map;
 
 /**
  * This interface describe an abstract attribute that must be implemented 
@@ -328,14 +329,18 @@ public interface Attribute {
 	/**
 	 * Returns TRUE if the attribute must be a date 'AFTER a given value'
 	 * If not supported by the model implementation : 'false'
+	 * ( NOT USED )
 	 * @return
+	 * @deprecated 
 	 */
-	public boolean isDateAfter() ;
+	public boolean isDateAfter() ; // not used
     
 	/**
 	 * Returns TRUE if the attribute must be a date 'BEFORE a given value'
 	 * If not supported by the model implementation : 'false'
+	 * ( NOT USED )
 	 * @return
+	 * @deprecated 
 	 */
 	public boolean isDateBefore() ;
 	
@@ -485,18 +490,10 @@ public interface Attribute {
 	public boolean isUsedInSelectedLinks(); 
 
 	/**
-	 * Returns true if there's a tag declared with the given name
-     * @param tagName
+	 * Returns all the tags defined in the attribute
 	 * @return
 	 * @since v 3.3.0
 	 */
-	public boolean hasTag(String tagName); 
-
-	/**
-	 * Returns the value held by the tag
-     * @param tagName
-	 * @return
-	 * @since v 3.3.0
-	 */
-	public String getTagValue(String tagName); 
+	public Map<String, String> getTagsMap();
+	
 }
