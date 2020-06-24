@@ -62,16 +62,17 @@ public interface Link {
 	public String getFieldName() ;
 
 	//-------------------------------------------------------------------------------------
-	/**
-	 * Returns the type of the link <br>
-	 * If the type is a collection the full type is returned ( e.g. 'java.util.List', 'java.util.Set',...) <br>
-	 * If the type is an entity the simple type is returned ( 'Person', 'Customer', 'Book', ... ) <br>
-	 * For OneToMany/ManyToMany : the collection type ( 'java.util.List', ...) <br>
-	 * For ManyToOne/OneToOne   : the targeted entity short type ( 'Person', 'Customer', ... ) <br>
-	 * @return
-	 */
-	public String getFieldType() ;
-	
+// REMOVED in v 3.3.0
+//	/**
+//	 * Returns the type of the link <br>
+//	 * If the type is a collection the full type is returned ( e.g. 'java.util.List', 'java.util.Set',...) <br>
+//	 * If the type is an entity the simple type is returned ( 'Person', 'Customer', 'Book', ... ) <br>
+//	 * For OneToMany/ManyToMany : the collection type ( 'java.util.List', ...) <br>
+//	 * For ManyToOne/OneToOne   : the targeted entity short type ( 'Person', 'Customer', ... ) <br>
+//	 * @return
+//	 */
+//	public String getFieldType() ;
+//	
 	//-------------------------------------------------------------------------------------
 	/**
 	 * Returns TRUE if the link is the 'Owning Side' of the relationship between 2 entities
