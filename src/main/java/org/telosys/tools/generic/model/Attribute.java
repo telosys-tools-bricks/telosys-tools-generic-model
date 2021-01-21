@@ -16,6 +16,7 @@
 package org.telosys.tools.generic.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,26 +25,6 @@ import java.util.Map;
  * 
  * @author Laurent Guerin
  * @since 3.0.0
- */
-/**
- * @author laguerin
- *
- */
-/**
- * @author laguerin
- *
- */
-/**
- * @author laguerin
- *
- */
-/**
- * @author laguerin
- *
- */
-/**
- * @author laguerin
- *
  */
 public interface Attribute {
 
@@ -451,6 +432,21 @@ public interface Attribute {
      * @since v 3.0.0
      */
     public boolean isFK() ;
+    
+    /**
+     * Return TRUE if the attribute is involved in at least one FK definition <br>
+     * and is therefore able to provide at least one FKPart
+     * @return
+     * @since v 3.3.0
+     */
+    public boolean hasFKParts() ;
+    
+    /**
+     * Returns all parts of FK in which the attribute is involved
+     * @return
+     * @since v 3.3.0
+     */
+    public List<ForeignKeyPart> getFKParts() ;
     
     /**
 	 * Returns TRUE if the attribute is itself a "Simple Foreign Key" <br>

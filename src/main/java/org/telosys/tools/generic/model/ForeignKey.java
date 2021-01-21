@@ -17,6 +17,12 @@ package org.telosys.tools.generic.model;
 
 import java.util.List;
 
+/**
+ * Definition of a database foreign key
+ * 
+ * @author Laurent Guerin
+ *
+ */
 public interface ForeignKey {
 
 	//-------------------------------------------------------------------------------------
