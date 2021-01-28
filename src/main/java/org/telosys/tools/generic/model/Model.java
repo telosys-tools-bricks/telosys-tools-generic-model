@@ -27,43 +27,62 @@ import java.util.*;
 public interface Model {
 
     /**
-     * Returns the model's name <br>
-	 * This information is MENDATORY, it must be provided by all models implementations <br> 
+     * Returns the model name <br>
+	 * This information is MANDATORY, it must be provided by all models implementations <br> 
 	 * It cannot be null or void
 	 * 
      * @return
      */
     public String getName() ;
+    
+	/**
+     * Returns the model folder name if it exists for the type of model<br>
+     * For example 'xxx_model' for model 'xxx' or '' (void) for a 'db-model' <br>
+	 * This information is MANDATORY, it must be provided by all models implementations <br> 
+	 * It cannot be null, but can be void if not applicable
+	 * @return
+	 */
+	public String getFolderName() ;
 
     /**
-     * Returns the model's type  <br>
-	 * This information is MENDATORY, it must be provided by all models implementations <br>
+     * Returns the Telosys model type <br>
+	 * This information is MANDATORY, it must be provided by all models implementations <br>
+	 * It cannot be null or void
 	 * 
      * @return
      */
     public ModelType getType() ;
 
     /**
-     * Returns the model's version <br>
-	 * This information is MENDATORY, it must be provided by all models implementations <br>
+     * Returns the Telosys model version <br>
+	 * This information is MANDATORY, it must be provided by all models implementations <br>
 	 * It cannot be null or void
 	 * 
      * @return
      */
     public String getVersion() ;
 
+	//-------------------------------------------------------------------------------------
     /**
-     * Returns the model's description <br> 
-	 * If not supported by the model implementation : 'null'
+     * Returns the model title <br>
+	 * This information is OPTIONAL <br>
+	 * 
+     * @return
+     */
+    public String getTitle() ;
+
+    /**
+     * Returns the model description <br> 
+	 * This information is OPTIONAL <br>
      *
-     * @return the description or null if none
+     * @return 
      */
     public String getDescription() ;
 
 	//-------------------------------------------------------------------------------------
 	/**
 	 * Returns the ID of the database used to generate the model (if any)
-	 * If not supported by the model implementation : 'null'
+	 * This information is OPTIONAL <br>
 	 * 
 	 * @return
 	 */
@@ -73,7 +92,7 @@ public interface Model {
 	/**
 	 * Returns the product name of the database used to generate the model if any <br>
 	 * (the product name returned by the JDBC meta-data, e.g. 'Apache Derby')<br>
-	 * If not supported by the model implementation : 'null'
+	 * This information is OPTIONAL <br>
 	 * 
 	 * @return
 	 */
