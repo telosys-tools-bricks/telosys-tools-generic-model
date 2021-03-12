@@ -188,4 +188,26 @@ public class TypeConverterForJava extends TypeConverter {
 		return null ;  // just to avoid compilation error
 	}
 	
+	//--------------------------------------------------------------------------------------------
+	// Collection type ( since v 3.3.0 )
+	//--------------------------------------------------------------------------------------------	
+	// TODO : changeable type (via $env)
+	private static final String COLLECTION_SIMPLE_TYPE = "List" ;
+	private static final String COLLECTION_FULL_TYPE   = "java.util.List" ;
+	
+	@Override
+	public String getCollectionType(String elementType) {
+		return COLLECTION_SIMPLE_TYPE + "<" + elementType + ">" ; 
+	}
+	
+	@Override
+	public String getCollectionSimpleType() {
+		return COLLECTION_SIMPLE_TYPE ;
+	}
+
+	@Override
+	public String getCollectionFullType() {
+		return COLLECTION_FULL_TYPE ;
+	}
+
 }

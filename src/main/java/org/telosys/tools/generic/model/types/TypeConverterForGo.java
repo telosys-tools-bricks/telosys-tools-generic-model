@@ -95,4 +95,30 @@ public class TypeConverterForGo extends TypeConverter {
 		return null ;  // just to avoid compilation error
 	}
 	
+	//--------------------------------------------------------------------------------------------
+	// Collection type ( since v 3.3.0 )
+	//--------------------------------------------------------------------------------------------	
+	// TODO : changeable type (via $env)
+	// Collections for Go :
+	//  - Array : not applicable
+	//  - Slice : []Type
+	//  - Map   : not applicable
+	private static final String COLLECTION_SIMPLE_TYPE = "[]" ; // Slice
+	private static final String COLLECTION_FULL_TYPE   = "[]" ; // Slice
+	
+	@Override
+	public String getCollectionType(String elementType) {
+		return COLLECTION_SIMPLE_TYPE + elementType ; 
+	}
+	
+	@Override
+	public String getCollectionSimpleType() {
+		return COLLECTION_SIMPLE_TYPE ;
+	}
+
+	@Override
+	public String getCollectionFullType() {
+		return COLLECTION_FULL_TYPE ;
+	}
+	
 }

@@ -198,4 +198,30 @@ public abstract class TypeConverter {
 	protected void throwTypeNotFoundException(AttributeTypeInfo attributeTypeInfo) {
 		throw new RuntimeException("No type found for '" + attributeTypeInfo.getNeutralType() + "'");
 	}
+
+	//--------------------------------------------------------------------------------------------
+	// Collection type ( since v 3.3.0 )
+	//--------------------------------------------------------------------------------------------
+	/**
+	 * Returns the type for a collection of the given element <br>
+	 * For example : returns "List<Book>" for a "Book" element in Java
+	 * @param elementType
+	 * @return
+	 */
+	public abstract String getCollectionType(String elementType) ;
+
+	/**
+	 * Returns the 'simple type' used by default for a collection <br>
+	 * For example : returns "List" in Java
+	 * @return
+	 */
+	public abstract String getCollectionSimpleType() ;
+
+	/**
+	 * Returns the 'full type' used by default for a collection <br>
+	 * For example : returns "java.util.List" in Java
+	 * @return
+	 */
+	public abstract String getCollectionFullType() ;
+	
 }

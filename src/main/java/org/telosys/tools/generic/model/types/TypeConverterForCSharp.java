@@ -140,5 +140,31 @@ public class TypeConverterForCSharp extends TypeConverter {
 		throwTypeNotFoundException(attributeTypeInfo);
 		return null ;  // just to avoid compilation error
 	}
+	
+	//--------------------------------------------------------------------------------------------
+	// Collection type ( since v 3.3.0 )
+	//--------------------------------------------------------------------------------------------	
+	// TODO : changeable type (via $env)
+	// Collections for C# :
+	//  - List<T>
+	//  - Collection<T>
+	private static final String COLLECTION_SIMPLE_TYPE = "List" ; // or "Collection" ?
+	private static final String COLLECTION_FULL_TYPE   = "List" ; // or "Collection" ?
+	
+	@Override
+	public String getCollectionType(String elementType) {
+		return COLLECTION_SIMPLE_TYPE + "<" + elementType + ">" ; 
+	}
+	
+	@Override
+	public String getCollectionSimpleType() {
+		return COLLECTION_SIMPLE_TYPE ;
+	}
+
+	@Override
+	public String getCollectionFullType() {
+		return COLLECTION_FULL_TYPE ;
+	}
+
 
 }

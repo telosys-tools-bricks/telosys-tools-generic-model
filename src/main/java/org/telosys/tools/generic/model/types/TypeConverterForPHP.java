@@ -65,4 +65,29 @@ public class TypeConverterForPHP extends TypeConverter {
 		log("type info : " + attributeTypeInfo );		
 		return getPrimitiveType( attributeTypeInfo.getNeutralType() );
 	}
+	
+	//--------------------------------------------------------------------------------------------
+	// Collection type ( since v 3.3.0 )
+	//--------------------------------------------------------------------------------------------
+	// NOT APPLICABLE FOR 'PHP' :
+	// /**
+	//  * @ORM\OneToMany(targetEntity="Yoda\EventBundle\Entity\Event", mappedBy="owner")
+	//  */
+	// protected $events;
+	// 
+	@Override
+	public String getCollectionType(String elementType) {
+		return "" ; 
+	}
+	
+	@Override
+	public String getCollectionSimpleType() {
+		return "" ;
+	}
+
+	@Override
+	public String getCollectionFullType() {
+		return "" ;
+	}
+
 }

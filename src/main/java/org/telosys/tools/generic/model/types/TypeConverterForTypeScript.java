@@ -150,4 +150,36 @@ public class TypeConverterForTypeScript extends TypeConverter {
 		return null ;  // just to avoid compilation error
 
 	}
+	
+	//--------------------------------------------------------------------------------------------
+	// Collection type ( since v 3.3.0 )
+	//--------------------------------------------------------------------------------------------
+	// 'Array' : 
+	//    let   num:    number[]      = [1, 2, 3];
+	//    const numToo: Array<number> = [1, 2, 3];
+	//    Type[] is the shorthand syntax for an array of Type. 
+	//    Array<Type> is the generic syntax. 
+	//    They are completely equivalent.
+	// 'Set' : A set is an ordered list of values with no duplicates
+	//    const planet = new Set<string>();
+	//    planet.add("earth");
+	private static final String COLLECTION_SIMPLE_TYPE = "Array" ; // or "Set" ?
+	private static final String COLLECTION_FULL_TYPE   = "Array" ; // or "Set" ?
+	
+	@Override
+	public String getCollectionType(String elementType) {
+		return COLLECTION_SIMPLE_TYPE + "<" + elementType + ">" ; 
+	}
+	
+	@Override
+	public String getCollectionSimpleType() {
+		return COLLECTION_SIMPLE_TYPE ;
+	}
+
+	@Override
+	public String getCollectionFullType() {
+		return COLLECTION_FULL_TYPE ;
+	}
+	
+
 }
