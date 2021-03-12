@@ -148,23 +148,28 @@ public class TypeConverterForCSharp extends TypeConverter {
 	// Collections for C# :
 	//  - List<T>
 	//  - Collection<T>
-	private static final String COLLECTION_SIMPLE_TYPE = "List" ; // or "Collection" ?
-	private static final String COLLECTION_FULL_TYPE   = "List" ; // or "Collection" ?
+	private static final String STANDARD_COLLECTION_SIMPLE_TYPE = "List" ; // or "Collection" ?
+	private static final String STANDARD_COLLECTION_FULL_TYPE   = "List" ; // or "Collection" ?
 	
 	@Override
+	public void setSpecificCollectionType(String specificCollectionType) {
+		this.setSpecificCollectionFullType(specificCollectionType) ;
+		this.setSpecificCollectionSimpleType(specificCollectionType);
+	}
+
+	@Override
 	public String getCollectionType(String elementType) {
-		return COLLECTION_SIMPLE_TYPE + "<" + elementType + ">" ; 
+		return getCollectionSimpleType() + "<" + elementType + ">" ; 
 	}
 	
 	@Override
 	public String getCollectionSimpleType() {
-		return COLLECTION_SIMPLE_TYPE ;
+		return getCollectionSimpleType(STANDARD_COLLECTION_SIMPLE_TYPE);
 	}
 
 	@Override
 	public String getCollectionFullType() {
-		return COLLECTION_FULL_TYPE ;
+		return getCollectionFullType(STANDARD_COLLECTION_FULL_TYPE);
 	}
-
-
+	
 }

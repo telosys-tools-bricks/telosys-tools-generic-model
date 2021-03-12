@@ -46,10 +46,41 @@ public abstract class TypeConverter {
 	private final HashMap<String, LanguageType> objectTypes         = new HashMap<>();
 	private final HashMap<String, LanguageType> objectSqlTypes      = new HashMap<>();
 
+	private String specificCollectionFullType   = null ;
+	private String specificCollectionSimpleType = null ;
 	
+	/**
+	 * Constructor
+	 * @param languageName
+	 */
 	public TypeConverter(String languageName) {
 		super();
 		this.languageName = languageName;
+	}
+
+	//--- Standard/Specific COLLECTION SIMPLE TYPE
+	protected void setSpecificCollectionSimpleType(String type) {
+		specificCollectionSimpleType = type;
+	}
+	protected String getCollectionSimpleType(String standardType) {
+		if ( specificCollectionSimpleType != null ) {
+			return specificCollectionSimpleType ; 
+		}
+		else {
+			return standardType ; 
+		}
+	}
+	//--- Standard/Specific COLLECTION FULL TYPE
+	protected void setSpecificCollectionFullType(String type) {
+		specificCollectionFullType = type;
+	}
+	public String getCollectionFullType(String standardType) {
+		if ( specificCollectionFullType != null ) {
+			return specificCollectionFullType ; 
+		}
+		else {
+			return standardType ; 
+		}
 	}
 
 	/**
@@ -202,6 +233,13 @@ public abstract class TypeConverter {
 	//--------------------------------------------------------------------------------------------
 	// Collection type ( since v 3.3.0 )
 	//--------------------------------------------------------------------------------------------
+	
+	/**
+	 * Force a specific collection type (instead of standard type used by default)
+	 * @param specificCollectionType
+	 */
+	public abstract void setSpecificCollectionType(String specificCollectionType);
+
 	/**
 	 * Returns the type for a collection of the given element <br>
 	 * For example : returns "List<Book>" for a "Book" element in Java

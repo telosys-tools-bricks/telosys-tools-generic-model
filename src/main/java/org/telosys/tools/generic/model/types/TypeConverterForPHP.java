@@ -75,19 +75,26 @@ public class TypeConverterForPHP extends TypeConverter {
 	//  */
 	// protected $events;
 	// 
+	private static final String STANDARD_COLLECTION_SIMPLE_TYPE = "" ; 
+	private static final String STANDARD_COLLECTION_FULL_TYPE   = "" ; 
+	@Override
+	public void setSpecificCollectionType(String specificCollectionType) {
+		this.setSpecificCollectionFullType(specificCollectionType) ;
+		this.setSpecificCollectionSimpleType(specificCollectionType);
+	}
+
 	@Override
 	public String getCollectionType(String elementType) {
-		return "" ; 
+		return getCollectionSimpleType() ;
 	}
 	
 	@Override
 	public String getCollectionSimpleType() {
-		return "" ;
+		return getCollectionSimpleType(STANDARD_COLLECTION_SIMPLE_TYPE);
 	}
 
 	@Override
 	public String getCollectionFullType() {
-		return "" ;
+		return getCollectionFullType(STANDARD_COLLECTION_FULL_TYPE);
 	}
-
 }

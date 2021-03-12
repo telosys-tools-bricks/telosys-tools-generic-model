@@ -18,6 +18,8 @@ package org.telosys.tools.generic.model.types;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.telosys.tools.commons.JavaTypeUtil;
+
 /**
  * Type converter for "JAVA" language
  * 
@@ -191,23 +193,28 @@ public class TypeConverterForJava extends TypeConverter {
 	//--------------------------------------------------------------------------------------------
 	// Collection type ( since v 3.3.0 )
 	//--------------------------------------------------------------------------------------------	
-	// TODO : changeable type (via $env)
-	private static final String COLLECTION_SIMPLE_TYPE = "List" ;
-	private static final String COLLECTION_FULL_TYPE   = "java.util.List" ;
+	private static final String STANDARD_COLLECTION_SIMPLE_TYPE = "List" ;
+	private static final String STANDARD_COLLECTION_FULL_TYPE   = "java.util.List" ;
 	
 	@Override
+	public void setSpecificCollectionType(String specificCollectionType) {
+		this.setSpecificCollectionFullType(specificCollectionType) ;
+		this.setSpecificCollectionSimpleType(JavaTypeUtil.shortType(specificCollectionType));
+	}
+
+	@Override
 	public String getCollectionType(String elementType) {
-		return COLLECTION_SIMPLE_TYPE + "<" + elementType + ">" ; 
+		return getCollectionSimpleType() + "<" + elementType + ">" ; 
 	}
 	
 	@Override
 	public String getCollectionSimpleType() {
-		return COLLECTION_SIMPLE_TYPE ;
+		return getCollectionSimpleType(STANDARD_COLLECTION_SIMPLE_TYPE);
 	}
 
 	@Override
 	public String getCollectionFullType() {
-		return COLLECTION_FULL_TYPE ;
+		return getCollectionFullType(STANDARD_COLLECTION_FULL_TYPE);
 	}
 
 }
