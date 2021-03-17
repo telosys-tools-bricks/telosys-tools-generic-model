@@ -492,4 +492,18 @@ public interface Attribute {
 	 */
 	public Map<String, String> getTagsMap();
 	
+    /**
+     * Returns the 'insertable' flag values
+     * @return
+	 * @since v 3.3.0
+     */
+    public BooleanValue getInsertable() ; // v 3.3.0
+    
+    /**
+     * Returns the 'updatable' flag values
+     * @return
+	 * @since v 3.3.0
+     */
+    public BooleanValue getUpdatable() ; // v 3.3.0
+	
 }
