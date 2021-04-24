@@ -181,30 +181,30 @@ public abstract class TypeConverter {
 		return objectTypes.get(neutralType);
 	}
 
-	/**
-	 * Returns an object type for the given neutral type (or null if none)
-	 * @param neutralType
-	 * @param isSqlTypeExpected
-	 * @return
-	 */
-	protected LanguageType getObjectType(String neutralType, boolean isSqlTypeExpected ) {
-		if ( isSqlTypeExpected ) {
-			// Try to get a SQL object type
-			LanguageType lt = objectSqlTypes.get(neutralType);
-			if ( lt != null ) {
-				// SQL type FOUND
-				return lt ;
-			}
-			else {
-				// SQL type NOT FOUND => try to get a regular object type
-				return objectTypes.get(neutralType);
-			}
-		}
-		else {
-			// Try to get a regular object type
-			return objectTypes.get(neutralType);
-		}
-	}
+//	/**
+//	 * Returns an object type for the given neutral type (or null if none)
+//	 * @param neutralType
+//	 * @param isSqlTypeExpected
+//	 * @return
+//	 */
+//	protected LanguageType getObjectType(String neutralType, boolean isSqlTypeExpected ) {
+//		if ( isSqlTypeExpected ) {
+//			// Try to get a SQL object type
+//			LanguageType lt = objectSqlTypes.get(neutralType);
+//			if ( lt != null ) {
+//				// SQL type FOUND
+//				return lt ;
+//			}
+//			else {
+//				// SQL type NOT FOUND => try to get a regular object type
+//				return objectTypes.get(neutralType);
+//			}
+//		}
+//		else {
+//			// Try to get a regular object type
+//			return objectTypes.get(neutralType);
+//		}
+//	}
 	
 	//--------------------------------------------------------------------------------------------
 	// Get type for attribute or attribute info 

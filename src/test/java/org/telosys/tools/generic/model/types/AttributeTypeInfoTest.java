@@ -16,7 +16,7 @@ public class AttributeTypeInfoTest  {
 		assertFalse( attributeTypeInfo.isPrimitiveTypeExpected() );
 		assertFalse( attributeTypeInfo.isObjectTypeExpected() );
 		assertFalse( attributeTypeInfo.isUnsignedTypeExpected() );
-		assertFalse( attributeTypeInfo.isSqlTypeExpected() );
+//		assertFalse( attributeTypeInfo.isSqlTypeExpected() );
 	}
 	@Test
 	public void test2() {
@@ -26,7 +26,7 @@ public class AttributeTypeInfoTest  {
 		assertFalse( attributeTypeInfo.isPrimitiveTypeExpected() );
 		assertFalse( attributeTypeInfo.isObjectTypeExpected() );
 		assertFalse( attributeTypeInfo.isUnsignedTypeExpected() );
-		assertFalse( attributeTypeInfo.isSqlTypeExpected() );
+//		assertFalse( attributeTypeInfo.isSqlTypeExpected() );
 	}
 	@Test
 	public void test3() {
@@ -36,7 +36,7 @@ public class AttributeTypeInfoTest  {
 		assertTrue( attributeTypeInfo.isPrimitiveTypeExpected() );
 		assertFalse( attributeTypeInfo.isObjectTypeExpected() );
 		assertFalse( attributeTypeInfo.isUnsignedTypeExpected() );
-		assertFalse( attributeTypeInfo.isSqlTypeExpected() );
+//		assertFalse( attributeTypeInfo.isSqlTypeExpected() );
 	}
 	@Test
 	public void test4() {
@@ -46,7 +46,7 @@ public class AttributeTypeInfoTest  {
 		assertFalse( attributeTypeInfo.isPrimitiveTypeExpected() );
 		assertTrue( attributeTypeInfo.isObjectTypeExpected() );
 		assertFalse( attributeTypeInfo.isUnsignedTypeExpected() );
-		assertFalse( attributeTypeInfo.isSqlTypeExpected() );
+//		assertFalse( attributeTypeInfo.isSqlTypeExpected() );
 	}
 	@Test
 	public void test5() {
@@ -56,48 +56,49 @@ public class AttributeTypeInfoTest  {
 		assertFalse( attributeTypeInfo.isPrimitiveTypeExpected() );
 		assertFalse( attributeTypeInfo.isObjectTypeExpected() );
 		assertTrue( attributeTypeInfo.isUnsignedTypeExpected() );
-		assertFalse( attributeTypeInfo.isSqlTypeExpected() );
+//		assertFalse( attributeTypeInfo.isSqlTypeExpected() );
 	}
-	@Test
-	public void test6() {
-		AttributeTypeInfo attributeTypeInfo = new AttributeTypeInfo(NeutralType.STRING, SQL_TYPE);
-		System.out.println(attributeTypeInfo);
-		assertFalse( attributeTypeInfo.isNotNull() );
-		assertFalse( attributeTypeInfo.isPrimitiveTypeExpected() );
-		assertFalse( attributeTypeInfo.isObjectTypeExpected() );
-		assertFalse( attributeTypeInfo.isUnsignedTypeExpected() );
-		assertTrue( attributeTypeInfo.isSqlTypeExpected() );
-	}
-	@Test
-	public void test7() {
-		AttributeTypeInfo attributeTypeInfo = new AttributeTypeInfo(NeutralType.STRING, NOT_NULL + SQL_TYPE);
-		System.out.println(attributeTypeInfo);
-		assertTrue( attributeTypeInfo.isNotNull() );
-		assertFalse( attributeTypeInfo.isPrimitiveTypeExpected() );
-		assertFalse( attributeTypeInfo.isObjectTypeExpected() );
-		assertFalse( attributeTypeInfo.isUnsignedTypeExpected() );
-		assertTrue( attributeTypeInfo.isSqlTypeExpected() );
-	}
-	@Test
-	public void test8() {
-		AttributeTypeInfo attributeTypeInfo = new AttributeTypeInfo(NeutralType.STRING, NOT_NULL + OBJECT_TYPE + SQL_TYPE );
-		System.out.println(attributeTypeInfo);
-		assertTrue( attributeTypeInfo.isNotNull() );
-		assertFalse( attributeTypeInfo.isPrimitiveTypeExpected() );
-		assertTrue( attributeTypeInfo.isObjectTypeExpected() );
-		assertFalse( attributeTypeInfo.isUnsignedTypeExpected() );
-		assertTrue( attributeTypeInfo.isSqlTypeExpected() );
-	}
+//	@Test
+//	public void test6() {
+//		AttributeTypeInfo attributeTypeInfo = new AttributeTypeInfo(NeutralType.STRING, SQL_TYPE);
+//		System.out.println(attributeTypeInfo);
+//		assertFalse( attributeTypeInfo.isNotNull() );
+//		assertFalse( attributeTypeInfo.isPrimitiveTypeExpected() );
+//		assertFalse( attributeTypeInfo.isObjectTypeExpected() );
+//		assertFalse( attributeTypeInfo.isUnsignedTypeExpected() );
+////		assertTrue( attributeTypeInfo.isSqlTypeExpected() );
+//	}
+//	@Test
+//	public void test7() {
+//		AttributeTypeInfo attributeTypeInfo = new AttributeTypeInfo(NeutralType.STRING, NOT_NULL + SQL_TYPE);
+//		System.out.println(attributeTypeInfo);
+//		assertTrue( attributeTypeInfo.isNotNull() );
+//		assertFalse( attributeTypeInfo.isPrimitiveTypeExpected() );
+//		assertFalse( attributeTypeInfo.isObjectTypeExpected() );
+//		assertFalse( attributeTypeInfo.isUnsignedTypeExpected() );
+////		assertTrue( attributeTypeInfo.isSqlTypeExpected() );
+//	}
+//	@Test
+//	public void test8() {
+//		AttributeTypeInfo attributeTypeInfo = new AttributeTypeInfo(NeutralType.STRING, NOT_NULL + OBJECT_TYPE + SQL_TYPE );
+//		System.out.println(attributeTypeInfo);
+//		assertTrue( attributeTypeInfo.isNotNull() );
+//		assertFalse( attributeTypeInfo.isPrimitiveTypeExpected() );
+//		assertTrue( attributeTypeInfo.isObjectTypeExpected() );
+//		assertFalse( attributeTypeInfo.isUnsignedTypeExpected() );
+////		assertTrue( attributeTypeInfo.isSqlTypeExpected() );
+//	}
 	@Test
 	public void test9() {
 		AttributeTypeInfo attributeTypeInfo = new AttributeTypeInfo(NeutralType.STRING, 
-				NOT_NULL + PRIMITIVE_TYPE + OBJECT_TYPE + UNSIGNED_TYPE + SQL_TYPE);
+//				NOT_NULL + PRIMITIVE_TYPE + OBJECT_TYPE + UNSIGNED_TYPE + SQL_TYPE);
+				NOT_NULL + PRIMITIVE_TYPE + OBJECT_TYPE + UNSIGNED_TYPE );
 		System.out.println(attributeTypeInfo);
 		assertTrue( attributeTypeInfo.isNotNull() );
 		assertTrue( attributeTypeInfo.isPrimitiveTypeExpected() );
 		assertTrue( attributeTypeInfo.isObjectTypeExpected() );
 		assertTrue( attributeTypeInfo.isUnsignedTypeExpected() );
-		assertTrue( attributeTypeInfo.isSqlTypeExpected() );
+//		assertTrue( attributeTypeInfo.isSqlTypeExpected() );
 	}
 	@Test
 	public void test10() {
@@ -111,7 +112,7 @@ public class AttributeTypeInfoTest  {
 		assertTrue( attributeTypeInfo.isPrimitiveTypeExpected() );
 		assertFalse( attributeTypeInfo.isObjectTypeExpected() );
 		assertFalse( attributeTypeInfo.isUnsignedTypeExpected() );
-		assertFalse( attributeTypeInfo.isSqlTypeExpected() );
+//		assertFalse( attributeTypeInfo.isSqlTypeExpected() );
 	}
 	@Test
 	public void test11() {
@@ -127,7 +128,7 @@ public class AttributeTypeInfoTest  {
 		assertTrue( attributeTypeInfo.isPrimitiveTypeExpected() );
 		assertTrue( attributeTypeInfo.isObjectTypeExpected() );
 		assertTrue( attributeTypeInfo.isUnsignedTypeExpected() );
-		assertFalse( attributeTypeInfo.isSqlTypeExpected() );
+//		assertFalse( attributeTypeInfo.isSqlTypeExpected() );
 	}
 
 	@Test
@@ -142,6 +143,6 @@ public class AttributeTypeInfoTest  {
 		assertFalse( attributeTypeInfo.isPrimitiveTypeExpected() );
 		assertTrue( attributeTypeInfo.isObjectTypeExpected() );
 		assertFalse( attributeTypeInfo.isUnsignedTypeExpected() );
-		assertFalse( attributeTypeInfo.isSqlTypeExpected() );
+//		assertFalse( attributeTypeInfo.isSqlTypeExpected() );
 	}
 }

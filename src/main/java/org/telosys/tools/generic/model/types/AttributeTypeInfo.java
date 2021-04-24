@@ -30,7 +30,7 @@ public class AttributeTypeInfo {
 	public static final int     PRIMITIVE_TYPE =  2 ;
 	public static final int     OBJECT_TYPE    =  4 ;
 	public static final int     UNSIGNED_TYPE  =  8 ;
-	public static final int     SQL_TYPE       = 16 ;
+	//public static final int     SQL_TYPE       = 16 ;
 	
 	private final String  neutralType ;
 
@@ -40,7 +40,7 @@ public class AttributeTypeInfo {
 	private final boolean objectTypeExpected ;
 	
 	private final boolean unsignedTypeExpected ;
-	private final boolean sqlTypeExpected ;
+	//private final boolean sqlTypeExpected ; // Removed in v 3.3.0
 	
 	/**
 	 * Constructor
@@ -55,7 +55,7 @@ public class AttributeTypeInfo {
 		this.primitiveTypeExpected = ( typeInfo & PRIMITIVE_TYPE ) != 0 ;
 		this.objectTypeExpected    = ( typeInfo & OBJECT_TYPE ) != 0 ;
 		this.unsignedTypeExpected  = ( typeInfo & UNSIGNED_TYPE ) != 0 ;
-		this.sqlTypeExpected       = ( typeInfo & SQL_TYPE ) != 0 ;
+		//this.sqlTypeExpected       = ( typeInfo & SQL_TYPE ) != 0 ; // Removed in v 3.3.0
 	}
 
 	public AttributeTypeInfo(Attribute attribute) {
@@ -65,7 +65,7 @@ public class AttributeTypeInfo {
 		this.primitiveTypeExpected = attribute.isPrimitiveTypeExpected();
 		this.objectTypeExpected    = attribute.isObjectTypeExpected();
 		this.unsignedTypeExpected  = attribute.isUnsignedTypeExpected();
-		this.sqlTypeExpected       = attribute.isSqlTypeExpected();
+		//this.sqlTypeExpected       = attribute.isSqlTypeExpected(); // Removed in v 3.3.0
 	}
 
 	public String getNeutralType() {
@@ -88,15 +88,16 @@ public class AttributeTypeInfo {
 		return unsignedTypeExpected;
 	}
 
-	public boolean isSqlTypeExpected() {
-		return sqlTypeExpected;
-	}
+//	public boolean isSqlTypeExpected() { // Removed in v 3.3.0
+//		return sqlTypeExpected;
+//	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb  = new StringBuilder();
 		sb.append("'" + neutralType + "' " );
-		if ( notNull || primitiveTypeExpected || objectTypeExpected || unsignedTypeExpected || sqlTypeExpected ) {
+//		if ( notNull || primitiveTypeExpected || objectTypeExpected || unsignedTypeExpected || sqlTypeExpected ) {
+		if ( notNull || primitiveTypeExpected || objectTypeExpected || unsignedTypeExpected ) {
 			sb.append("( " );
 			if ( notNull ) {
 				sb.append("notNull " );
@@ -110,9 +111,9 @@ public class AttributeTypeInfo {
 			if ( objectTypeExpected ) {
 				sb.append("objectType " );
 			}
-			if ( sqlTypeExpected ) {
-				sb.append("sqlType " );
-			}
+//			if ( sqlTypeExpected ) { // Removed in v 3.3.0
+//				sb.append("sqlType " );
+//			}
 			sb.append(")" );
 		}
 		return sb.toString();

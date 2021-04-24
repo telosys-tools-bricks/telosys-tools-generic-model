@@ -127,7 +127,6 @@ public class TypeConverterForJava extends TypeConverter {
 		l.add("'@NotNull' : <br>&nbsp;  switches to primitive type if possible (in order to avoid 'null' value) ");
 		l.add("'@PrimitiveType' : <br>&nbsp;  switches to primitive type if possible (short, int, boolean, etc) ");
 		l.add("'@ObjectType' : <br>&nbsp;  switches primitive types to standard wrapper types (Short, Integer, Long, Float, etc)  ");
-		l.add("'@SqlType' : <br>&nbsp;  switches to 'java.sql.*' types (Time, Blob, etc) if possible (or standard wrapper types if no SQL type)   ");
 		return l ;
 	}
 
@@ -151,8 +150,10 @@ public class TypeConverterForJava extends TypeConverter {
 		log("1) primitive type not found" );
 		
 		// An object type is explicitly required ( @ObjectType or @SqlType )
-		if ( attributeTypeInfo.isObjectTypeExpected() || attributeTypeInfo.isSqlTypeExpected() ) {
-			LanguageType lt = getObjectType(attributeTypeInfo.getNeutralType(), attributeTypeInfo.isSqlTypeExpected() ) ;
+//		if ( attributeTypeInfo.isObjectTypeExpected() || attributeTypeInfo.isSqlTypeExpected() ) {
+//			LanguageType lt = getObjectType(attributeTypeInfo.getNeutralType(), attributeTypeInfo.isSqlTypeExpected() ) ;
+		if ( attributeTypeInfo.isObjectTypeExpected() ) {
+			LanguageType lt = getObjectType(attributeTypeInfo.getNeutralType() ) ;
 			if ( lt != null ) { // FOUND
 				log("1) object type found" );
 				return lt ;
@@ -170,12 +171,14 @@ public class TypeConverterForJava extends TypeConverter {
 				return lt ;
 			}
 			// Still not found : try to found an object type
-			return getObjectType(attributeTypeInfo.getNeutralType(), false ) ;
+//			return getObjectType(attributeTypeInfo.getNeutralType(), false ) ;
+			return getObjectType(attributeTypeInfo.getNeutralType() ) ;
 		}
 		else {
 			log("2) Not Null : FALSE" );
 			// Try to found an object type first
-			LanguageType lt = getObjectType(attributeTypeInfo.getNeutralType(), false ) ;
+//			LanguageType lt = getObjectType(attributeTypeInfo.getNeutralType(), false ) ;
+			LanguageType lt = getObjectType(attributeTypeInfo.getNeutralType() ) ;
 			if ( lt != null ) { // FOUND
 				return lt ;
 			}

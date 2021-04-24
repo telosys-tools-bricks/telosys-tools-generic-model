@@ -1,20 +1,19 @@
 package org.telosys.tools.generic.model.types;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-
 import static org.telosys.tools.generic.model.types.AttributeTypeInfo.NONE;
 import static org.telosys.tools.generic.model.types.AttributeTypeInfo.NOT_NULL;
 import static org.telosys.tools.generic.model.types.AttributeTypeInfo.OBJECT_TYPE;
 import static org.telosys.tools.generic.model.types.AttributeTypeInfo.PRIMITIVE_TYPE;
-import static org.telosys.tools.generic.model.types.AttributeTypeInfo.SQL_TYPE;
 import static org.telosys.tools.generic.model.types.AttributeTypeInfo.UNSIGNED_TYPE;
 
 import java.math.BigDecimal;
 
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class TypeConverterForJavaTest  {
 
@@ -54,8 +53,8 @@ public class TypeConverterForJavaTest  {
 		check( getType(tc, NeutralType.STRING, PRIMITIVE_TYPE + UNSIGNED_TYPE ), String.class);
 		
 		check( getType(tc, NeutralType.STRING, OBJECT_TYPE), String.class);
-		check( getType(tc, NeutralType.STRING, SQL_TYPE ), String.class);
-		check( getType(tc, NeutralType.STRING, OBJECT_TYPE + SQL_TYPE), String.class);
+//		check( getType(tc, NeutralType.STRING, SQL_TYPE ), String.class);
+//		check( getType(tc, NeutralType.STRING, OBJECT_TYPE + SQL_TYPE), String.class);
 	}
 
 	@Test
@@ -73,7 +72,7 @@ public class TypeConverterForJavaTest  {
 		check( getType(tc, NeutralType.BOOLEAN, NOT_NULL ), boolean.class);
 		check( getType(tc, NeutralType.BOOLEAN, PRIMITIVE_TYPE + NOT_NULL ), boolean.class);
 		// not compatible (primitive type has priority)
-		check( getType(tc, NeutralType.BOOLEAN, PRIMITIVE_TYPE + SQL_TYPE  ), boolean.class);
+//		check( getType(tc, NeutralType.BOOLEAN, PRIMITIVE_TYPE + SQL_TYPE  ), boolean.class);
 		check( getType(tc, NeutralType.BOOLEAN, PRIMITIVE_TYPE + OBJECT_TYPE  ), boolean.class);
 		// Unsigned type : no effect
 		check( getType(tc, NeutralType.BOOLEAN, PRIMITIVE_TYPE + UNSIGNED_TYPE  ), boolean.class);
@@ -81,13 +80,13 @@ public class TypeConverterForJavaTest  {
 		
 		// Object type ( wrapper ) 
 		check( getType(tc, NeutralType.BOOLEAN, OBJECT_TYPE ), Boolean.class);
-		check( getType(tc, NeutralType.BOOLEAN, SQL_TYPE ), Boolean.class);		
+//		check( getType(tc, NeutralType.BOOLEAN, SQL_TYPE ), Boolean.class);		
 		check( getType(tc, NeutralType.BOOLEAN, OBJECT_TYPE + NOT_NULL ), Boolean.class);
-		check( getType(tc, NeutralType.BOOLEAN, OBJECT_TYPE + SQL_TYPE ), Boolean.class);
-		check( getType(tc, NeutralType.BOOLEAN, SQL_TYPE + NOT_NULL ), Boolean.class);
+//		check( getType(tc, NeutralType.BOOLEAN, OBJECT_TYPE + SQL_TYPE ), Boolean.class);
+//		check( getType(tc, NeutralType.BOOLEAN, SQL_TYPE + NOT_NULL ), Boolean.class);
 		// Unsigned type : no effect
 		check( getType(tc, NeutralType.BOOLEAN, OBJECT_TYPE + UNSIGNED_TYPE ), Boolean.class);
-		check( getType(tc, NeutralType.BOOLEAN, SQL_TYPE + UNSIGNED_TYPE ), Boolean.class);
+//		check( getType(tc, NeutralType.BOOLEAN, SQL_TYPE + UNSIGNED_TYPE ), Boolean.class);
 	}
 
 	@Test
@@ -105,7 +104,7 @@ public class TypeConverterForJavaTest  {
 		check( getType(tc, NeutralType.SHORT, NOT_NULL   ), short.class);
 		check( getType(tc, NeutralType.SHORT, PRIMITIVE_TYPE + NOT_NULL  ), short.class);
 		// not compatible (primitive type has priority)
-		check( getType(tc, NeutralType.SHORT, PRIMITIVE_TYPE + SQL_TYPE  ), short.class);
+		//check( getType(tc, NeutralType.SHORT, PRIMITIVE_TYPE + SQL_TYPE  ), short.class);
 		check( getType(tc, NeutralType.SHORT, PRIMITIVE_TYPE + OBJECT_TYPE  ), short.class);
 		// Unsigned type : no effect
 		check( getType(tc, NeutralType.SHORT, PRIMITIVE_TYPE + UNSIGNED_TYPE  ), short.class);
@@ -113,12 +112,12 @@ public class TypeConverterForJavaTest  {
 		// Object type ( wrapper ) 
 		check( getType(tc, NeutralType.SHORT, OBJECT_TYPE ), Short.class);
 		check( getType(tc, NeutralType.SHORT, OBJECT_TYPE + NOT_NULL), Short.class);
-		check( getType(tc, NeutralType.SHORT, SQL_TYPE), Short.class);
-		check( getType(tc, NeutralType.SHORT, SQL_TYPE + NOT_NULL), Short.class);
-		check( getType(tc, NeutralType.SHORT, SQL_TYPE + OBJECT_TYPE), Short.class);
+//		check( getType(tc, NeutralType.SHORT, SQL_TYPE), Short.class);
+//		check( getType(tc, NeutralType.SHORT, SQL_TYPE + NOT_NULL), Short.class);
+//		check( getType(tc, NeutralType.SHORT, SQL_TYPE + OBJECT_TYPE), Short.class);
 		// Unsigned type : no effect
 		check( getType(tc, NeutralType.SHORT, OBJECT_TYPE + UNSIGNED_TYPE ), Short.class);
-		check( getType(tc, NeutralType.SHORT, SQL_TYPE + UNSIGNED_TYPE ), Short.class);
+//		check( getType(tc, NeutralType.SHORT, SQL_TYPE + UNSIGNED_TYPE ), Short.class);
 	}
 
 	@Test
@@ -135,9 +134,9 @@ public class TypeConverterForJavaTest  {
 		check( getType(tc, NeutralType.DECIMAL, PRIMITIVE_TYPE + UNSIGNED_TYPE ), BigDecimal.class);
 		
 		check( getType(tc, NeutralType.DECIMAL, OBJECT_TYPE ), BigDecimal.class);
-		check( getType(tc, NeutralType.DECIMAL, SQL_TYPE ), BigDecimal.class);		
+//		check( getType(tc, NeutralType.DECIMAL, SQL_TYPE ), BigDecimal.class);		
 		check( getType(tc, NeutralType.DECIMAL, NOT_NULL + OBJECT_TYPE ), BigDecimal.class);
-		check( getType(tc, NeutralType.DECIMAL, NOT_NULL + SQL_TYPE ), BigDecimal.class);
+//		check( getType(tc, NeutralType.DECIMAL, NOT_NULL + SQL_TYPE ), BigDecimal.class);
 	}
 
 	@Test
@@ -156,10 +155,10 @@ public class TypeConverterForJavaTest  {
 		check( getType(tc, NeutralType.DATE, OBJECT_TYPE ), java.util.Date.class);
 		check( getType(tc, NeutralType.DATE, NOT_NULL + OBJECT_TYPE ), java.util.Date.class);
 
-		check( getType(tc, NeutralType.DATE, SQL_TYPE ), java.sql.Date.class);	 // SQL Date	
-		check( getType(tc, NeutralType.DATE, NOT_NULL + SQL_TYPE ), java.sql.Date.class); // SQL Date	
-		check( getType(tc, NeutralType.DATE, OBJECT_TYPE + SQL_TYPE ), java.sql.Date.class); // SQL Date	
-		check( getType(tc, NeutralType.DATE, PRIMITIVE_TYPE + SQL_TYPE ), java.sql.Date.class); // not compatible (no Prim type => SQL Date)	
+//		check( getType(tc, NeutralType.DATE, SQL_TYPE ), java.sql.Date.class);	 // SQL Date	
+//		check( getType(tc, NeutralType.DATE, NOT_NULL + SQL_TYPE ), java.sql.Date.class); // SQL Date	
+//		check( getType(tc, NeutralType.DATE, OBJECT_TYPE + SQL_TYPE ), java.sql.Date.class); // SQL Date	
+//		check( getType(tc, NeutralType.DATE, PRIMITIVE_TYPE + SQL_TYPE ), java.sql.Date.class); // not compatible (no Prim type => SQL Date)	
 	}
 
 	@Test
@@ -178,10 +177,10 @@ public class TypeConverterForJavaTest  {
 		check( getType(tc, NeutralType.TIME, OBJECT_TYPE ), java.util.Date.class);
 		check( getType(tc, NeutralType.TIME, NOT_NULL + OBJECT_TYPE ), java.util.Date.class);
 
-		check( getType(tc, NeutralType.TIME, SQL_TYPE ), java.sql.Time.class);	 // SQL Time	
-		check( getType(tc, NeutralType.TIME, NOT_NULL + SQL_TYPE ), java.sql.Time.class); // SQL Time	
-		check( getType(tc, NeutralType.TIME, OBJECT_TYPE + SQL_TYPE ), java.sql.Time.class); // SQL Time	
-		check( getType(tc, NeutralType.TIME, PRIMITIVE_TYPE + SQL_TYPE ), java.sql.Time.class); // not compatible (no Prim type => SQL Time)	
+//		check( getType(tc, NeutralType.TIME, SQL_TYPE ), java.sql.Time.class);	 // SQL Time	
+//		check( getType(tc, NeutralType.TIME, NOT_NULL + SQL_TYPE ), java.sql.Time.class); // SQL Time	
+//		check( getType(tc, NeutralType.TIME, OBJECT_TYPE + SQL_TYPE ), java.sql.Time.class); // SQL Time	
+//		check( getType(tc, NeutralType.TIME, PRIMITIVE_TYPE + SQL_TYPE ), java.sql.Time.class); // not compatible (no Prim type => SQL Time)	
 	}
 
 	@Test
@@ -200,10 +199,10 @@ public class TypeConverterForJavaTest  {
 		check( getType(tc, NeutralType.TIMESTAMP, OBJECT_TYPE ), java.util.Date.class);
 		check( getType(tc, NeutralType.TIMESTAMP, NOT_NULL + OBJECT_TYPE ), java.util.Date.class);
 
-		check( getType(tc, NeutralType.TIMESTAMP, SQL_TYPE ), java.sql.Timestamp.class);	 // SQL Time	
-		check( getType(tc, NeutralType.TIMESTAMP, NOT_NULL + SQL_TYPE ), java.sql.Timestamp.class); // SQL Time	
-		check( getType(tc, NeutralType.TIMESTAMP, OBJECT_TYPE + SQL_TYPE ), java.sql.Timestamp.class); // SQL Time	
-		check( getType(tc, NeutralType.TIMESTAMP, PRIMITIVE_TYPE + SQL_TYPE ), java.sql.Timestamp.class); // not compatible (no Prim type => SQL Time)	
+//		check( getType(tc, NeutralType.TIMESTAMP, SQL_TYPE ), java.sql.Timestamp.class);	 // SQL Time	
+//		check( getType(tc, NeutralType.TIMESTAMP, NOT_NULL + SQL_TYPE ), java.sql.Timestamp.class); // SQL Time	
+//		check( getType(tc, NeutralType.TIMESTAMP, OBJECT_TYPE + SQL_TYPE ), java.sql.Timestamp.class); // SQL Time	
+//		check( getType(tc, NeutralType.TIMESTAMP, PRIMITIVE_TYPE + SQL_TYPE ), java.sql.Timestamp.class); // not compatible (no Prim type => SQL Time)	
 	}
 
 //	@Test
@@ -246,11 +245,11 @@ public class TypeConverterForJavaTest  {
 		check( getType(tc, NeutralType.BINARY, OBJECT_TYPE ),  byte[].class);
 		check( getType(tc, NeutralType.BINARY, NOT_NULL + OBJECT_TYPE ),  byte[].class);
 
-		check( getType(tc, NeutralType.BINARY, SQL_TYPE ), java.sql.Blob.class);	 // SQL BLOB	
-		check( getType(tc, NeutralType.BINARY, NOT_NULL + SQL_TYPE ), java.sql.Blob.class); // SQL BLOB	
-		check( getType(tc, NeutralType.BINARY, OBJECT_TYPE + SQL_TYPE ), java.sql.Blob.class); // SQL BLOB	
-		
-		check( getType(tc, NeutralType.BINARY, PRIMITIVE_TYPE + SQL_TYPE ), byte[].class); // not compatible (primitive type has priority)	
+//		check( getType(tc, NeutralType.BINARY, SQL_TYPE ), java.sql.Blob.class);	 // SQL BLOB	
+//		check( getType(tc, NeutralType.BINARY, NOT_NULL + SQL_TYPE ), java.sql.Blob.class); // SQL BLOB	
+//		check( getType(tc, NeutralType.BINARY, OBJECT_TYPE + SQL_TYPE ), java.sql.Blob.class); // SQL BLOB	
+//		
+//		check( getType(tc, NeutralType.BINARY, PRIMITIVE_TYPE + SQL_TYPE ), byte[].class); // not compatible (primitive type has priority)	
 	}
 
 	@Test

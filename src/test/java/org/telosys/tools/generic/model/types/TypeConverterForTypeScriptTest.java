@@ -1,18 +1,17 @@
 package org.telosys.tools.generic.model.types;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-
 import static org.telosys.tools.generic.model.types.AttributeTypeInfo.NONE;
 import static org.telosys.tools.generic.model.types.AttributeTypeInfo.NOT_NULL;
 import static org.telosys.tools.generic.model.types.AttributeTypeInfo.OBJECT_TYPE;
 import static org.telosys.tools.generic.model.types.AttributeTypeInfo.PRIMITIVE_TYPE;
-import static org.telosys.tools.generic.model.types.AttributeTypeInfo.SQL_TYPE;
 import static org.telosys.tools.generic.model.types.AttributeTypeInfo.UNSIGNED_TYPE;
 
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class TypeConverterForTypeScriptTest  {
 
@@ -92,17 +91,17 @@ public class TypeConverterForTypeScriptTest  {
 		checkStringPrimitiveType(tc, PRIMITIVE_TYPE);
 		checkStringPrimitiveType(tc, UNSIGNED_TYPE);
 		checkStringPrimitiveType(tc, PRIMITIVE_TYPE + UNSIGNED_TYPE);
-		checkStringPrimitiveType(tc, SQL_TYPE);
-		checkStringPrimitiveType(tc, NOT_NULL + SQL_TYPE);
+//		checkStringPrimitiveType(tc, SQL_TYPE);
+//		checkStringPrimitiveType(tc, NOT_NULL + SQL_TYPE);
 		checkStringPrimitiveType(tc, PRIMITIVE_TYPE + OBJECT_TYPE );
 		
 		// Object type expected
 		checkStringPrimitiveType( tc, OBJECT_TYPE );
-		checkStringPrimitiveType( tc, OBJECT_TYPE + SQL_TYPE );
+//		checkStringPrimitiveType( tc, OBJECT_TYPE + SQL_TYPE );
 		checkStringPrimitiveType( tc, OBJECT_TYPE + NOT_NULL );
-		checkStringPrimitiveType( tc, OBJECT_TYPE + NOT_NULL + SQL_TYPE );
+//		checkStringPrimitiveType( tc, OBJECT_TYPE + NOT_NULL + SQL_TYPE );
 		checkStringPrimitiveType( tc, OBJECT_TYPE + UNSIGNED_TYPE );
-		checkStringPrimitiveType( tc, OBJECT_TYPE + UNSIGNED_TYPE + SQL_TYPE );
+//		checkStringPrimitiveType( tc, OBJECT_TYPE + UNSIGNED_TYPE + SQL_TYPE );
 	}
 
 	@Test
@@ -116,17 +115,17 @@ public class TypeConverterForTypeScriptTest  {
 		checkBooleanPrimitiveType(tc, PRIMITIVE_TYPE);
 		checkBooleanPrimitiveType(tc, UNSIGNED_TYPE);
 		checkBooleanPrimitiveType(tc, PRIMITIVE_TYPE + UNSIGNED_TYPE);
-		checkBooleanPrimitiveType(tc, SQL_TYPE);
-		checkBooleanPrimitiveType(tc, NOT_NULL + SQL_TYPE);
+//		checkBooleanPrimitiveType(tc, SQL_TYPE);
+//		checkBooleanPrimitiveType(tc, NOT_NULL + SQL_TYPE);
 		checkBooleanPrimitiveType(tc, PRIMITIVE_TYPE + OBJECT_TYPE );
 				
 		// Object type expected
 		checkBooleanPrimitiveType( tc, OBJECT_TYPE );
-		checkBooleanPrimitiveType( tc, OBJECT_TYPE + SQL_TYPE );
+//		checkBooleanPrimitiveType( tc, OBJECT_TYPE + SQL_TYPE );
 		checkBooleanPrimitiveType( tc, OBJECT_TYPE + NOT_NULL );
-		checkBooleanPrimitiveType( tc, OBJECT_TYPE + NOT_NULL + SQL_TYPE );
+//		checkBooleanPrimitiveType( tc, OBJECT_TYPE + NOT_NULL + SQL_TYPE );
 		checkBooleanPrimitiveType( tc, OBJECT_TYPE + UNSIGNED_TYPE );
-		checkBooleanPrimitiveType( tc, OBJECT_TYPE + UNSIGNED_TYPE + SQL_TYPE );
+//		checkBooleanPrimitiveType( tc, OBJECT_TYPE + UNSIGNED_TYPE + SQL_TYPE );
 	}
 
 	@Test
@@ -140,17 +139,17 @@ public class TypeConverterForTypeScriptTest  {
 		checkShortPrimitiveType(tc, PRIMITIVE_TYPE);
 		checkShortPrimitiveType(tc, UNSIGNED_TYPE);
 		checkShortPrimitiveType(tc, PRIMITIVE_TYPE + UNSIGNED_TYPE);
-		checkShortPrimitiveType(tc, SQL_TYPE);
-		checkShortPrimitiveType(tc, NOT_NULL + SQL_TYPE);
+//		checkShortPrimitiveType(tc, SQL_TYPE);
+//		checkShortPrimitiveType(tc, NOT_NULL + SQL_TYPE);
 		checkShortPrimitiveType(tc, PRIMITIVE_TYPE + OBJECT_TYPE );
 				
 		// Object type expected
 		checkShortPrimitiveType( tc, OBJECT_TYPE );
-		checkShortPrimitiveType( tc, OBJECT_TYPE + SQL_TYPE );
+//		checkShortPrimitiveType( tc, OBJECT_TYPE + SQL_TYPE );
 		checkShortPrimitiveType( tc, OBJECT_TYPE + NOT_NULL );
-		checkShortPrimitiveType( tc, OBJECT_TYPE + NOT_NULL + SQL_TYPE );
+//		checkShortPrimitiveType( tc, OBJECT_TYPE + NOT_NULL + SQL_TYPE );
 		checkShortPrimitiveType( tc, OBJECT_TYPE + UNSIGNED_TYPE );
-		checkShortPrimitiveType( tc, OBJECT_TYPE + UNSIGNED_TYPE + SQL_TYPE );
+//		checkShortPrimitiveType( tc, OBJECT_TYPE + UNSIGNED_TYPE + SQL_TYPE );
 	}
 
 	@Test
@@ -164,17 +163,17 @@ public class TypeConverterForTypeScriptTest  {
 		checkDecimalPrimitiveType(tc, PRIMITIVE_TYPE);
 		checkDecimalPrimitiveType(tc, UNSIGNED_TYPE);
 		checkDecimalPrimitiveType(tc, PRIMITIVE_TYPE + UNSIGNED_TYPE);
-		checkDecimalPrimitiveType(tc, SQL_TYPE);
-		checkDecimalPrimitiveType(tc, NOT_NULL + SQL_TYPE);
+//		checkDecimalPrimitiveType(tc, SQL_TYPE);
+//		checkDecimalPrimitiveType(tc, NOT_NULL + SQL_TYPE);
 		checkDecimalPrimitiveType(tc, PRIMITIVE_TYPE + OBJECT_TYPE );
 				
 		// Object type expected
 		checkDecimalPrimitiveType( tc, OBJECT_TYPE );
-		checkDecimalPrimitiveType( tc, OBJECT_TYPE + SQL_TYPE );
+//		checkDecimalPrimitiveType( tc, OBJECT_TYPE + SQL_TYPE );
 		checkDecimalPrimitiveType( tc, OBJECT_TYPE + NOT_NULL );
-		checkDecimalPrimitiveType( tc, OBJECT_TYPE + NOT_NULL + SQL_TYPE );
+//		checkDecimalPrimitiveType( tc, OBJECT_TYPE + NOT_NULL + SQL_TYPE );
 		checkDecimalPrimitiveType( tc, OBJECT_TYPE + UNSIGNED_TYPE );
-		checkDecimalPrimitiveType( tc, OBJECT_TYPE + UNSIGNED_TYPE + SQL_TYPE );
+//		checkDecimalPrimitiveType( tc, OBJECT_TYPE + UNSIGNED_TYPE + SQL_TYPE );
 	}
 
 	@Test
@@ -188,16 +187,16 @@ public class TypeConverterForTypeScriptTest  {
 		checkDateObjectType(tc, PRIMITIVE_TYPE);
 		checkDateObjectType(tc, UNSIGNED_TYPE);
 		checkDateObjectType(tc, PRIMITIVE_TYPE + UNSIGNED_TYPE);
-		checkDateObjectType(tc, SQL_TYPE);
-		checkDateObjectType(tc, NOT_NULL + SQL_TYPE);
+//		checkDateObjectType(tc, SQL_TYPE);
+//		checkDateObjectType(tc, NOT_NULL + SQL_TYPE);
 		checkDateObjectType(tc, PRIMITIVE_TYPE + OBJECT_TYPE );
 
 		checkDateObjectType( tc, OBJECT_TYPE );
-		checkDateObjectType( tc, OBJECT_TYPE + SQL_TYPE );
+//		checkDateObjectType( tc, OBJECT_TYPE + SQL_TYPE );
 		checkDateObjectType( tc, OBJECT_TYPE + NOT_NULL );
-		checkDateObjectType( tc, OBJECT_TYPE + NOT_NULL + SQL_TYPE );
+//		checkDateObjectType( tc, OBJECT_TYPE + NOT_NULL + SQL_TYPE );
 		checkDateObjectType( tc, OBJECT_TYPE + UNSIGNED_TYPE );
-		checkDateObjectType( tc, OBJECT_TYPE + UNSIGNED_TYPE + SQL_TYPE );
+//		checkDateObjectType( tc, OBJECT_TYPE + UNSIGNED_TYPE + SQL_TYPE );
 	}
 
 	@Test
@@ -210,16 +209,16 @@ public class TypeConverterForTypeScriptTest  {
 		checkTimeObjectType(tc, PRIMITIVE_TYPE);
 		checkTimeObjectType(tc, UNSIGNED_TYPE);
 		checkTimeObjectType(tc, PRIMITIVE_TYPE + UNSIGNED_TYPE);
-		checkTimeObjectType(tc, SQL_TYPE);
-		checkTimeObjectType(tc, NOT_NULL + SQL_TYPE);
+//		checkTimeObjectType(tc, SQL_TYPE);
+//		checkTimeObjectType(tc, NOT_NULL + SQL_TYPE);
 		checkTimeObjectType(tc, PRIMITIVE_TYPE + OBJECT_TYPE );
 
 		checkTimeObjectType( tc, OBJECT_TYPE );
-		checkTimeObjectType( tc, OBJECT_TYPE + SQL_TYPE );
+//		checkTimeObjectType( tc, OBJECT_TYPE + SQL_TYPE );
 		checkTimeObjectType( tc, OBJECT_TYPE + NOT_NULL );
-		checkTimeObjectType( tc, OBJECT_TYPE + NOT_NULL + SQL_TYPE );
+//		checkTimeObjectType( tc, OBJECT_TYPE + NOT_NULL + SQL_TYPE );
 		checkTimeObjectType( tc, OBJECT_TYPE + UNSIGNED_TYPE );
-		checkTimeObjectType( tc, OBJECT_TYPE + UNSIGNED_TYPE + SQL_TYPE );
+//		checkTimeObjectType( tc, OBJECT_TYPE + UNSIGNED_TYPE + SQL_TYPE );
 	}
 
 	@Test
@@ -232,16 +231,16 @@ public class TypeConverterForTypeScriptTest  {
 		checkTimestampObjectType(tc, PRIMITIVE_TYPE);
 		checkTimestampObjectType(tc, UNSIGNED_TYPE);
 		checkTimestampObjectType(tc, PRIMITIVE_TYPE + UNSIGNED_TYPE);
-		checkTimestampObjectType(tc, SQL_TYPE);
-		checkTimestampObjectType(tc, NOT_NULL + SQL_TYPE);
+//		checkTimestampObjectType(tc, SQL_TYPE);
+//		checkTimestampObjectType(tc, NOT_NULL + SQL_TYPE);
 		checkTimestampObjectType(tc, PRIMITIVE_TYPE + OBJECT_TYPE );
 
 		checkTimestampObjectType( tc, OBJECT_TYPE );
-		checkTimestampObjectType( tc, OBJECT_TYPE + SQL_TYPE );
+//		checkTimestampObjectType( tc, OBJECT_TYPE + SQL_TYPE );
 		checkTimestampObjectType( tc, OBJECT_TYPE + NOT_NULL );
-		checkTimestampObjectType( tc, OBJECT_TYPE + NOT_NULL + SQL_TYPE );
+//		checkTimestampObjectType( tc, OBJECT_TYPE + NOT_NULL + SQL_TYPE );
 		checkTimestampObjectType( tc, OBJECT_TYPE + UNSIGNED_TYPE );
-		checkTimestampObjectType( tc, OBJECT_TYPE + UNSIGNED_TYPE + SQL_TYPE );
+//		checkTimestampObjectType( tc, OBJECT_TYPE + UNSIGNED_TYPE + SQL_TYPE );
 	}
 
 	@Test

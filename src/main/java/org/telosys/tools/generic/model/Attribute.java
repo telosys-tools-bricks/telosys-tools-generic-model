@@ -416,13 +416,13 @@ public interface Attribute {
 	 */
     public boolean isUnsignedTypeExpected() ;
 
-	/**
-	 * Returns TRUE if an SQL type is expected for this attribute <br>
-	 * e.g. for Java : java.sql.Date, java.sql.Time, etc <br>
-	 * If not supported by the model implementation : 'false'
-	 * @return
-	 */
-    public boolean isSqlTypeExpected() ;
+//	/**
+//	 * Returns TRUE if an SQL type is expected for this attribute <br>
+//	 * e.g. for Java : java.sql.Date, java.sql.Time, etc <br>
+//	 * If not supported by the model implementation : 'false'
+//	 * @return
+//	 */
+//    public boolean isSqlTypeExpected() ; // // Removed in v 3.3.0
 
     /**
 	 * Returns TRUE if the attribute is involved in a Foreign Key ( simple or composite FK ).<br>

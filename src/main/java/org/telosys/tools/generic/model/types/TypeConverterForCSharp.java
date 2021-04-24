@@ -92,7 +92,6 @@ public class TypeConverterForCSharp extends TypeConverter {
 		l.add("");
 		l.add("'@NotNull'  has no effect ");
 		l.add("'@PrimitiveType'  has no effect ");
-		l.add("'@SqlType'  has no effect ");
 		return l ;
 	}
 
@@ -105,7 +104,8 @@ public class TypeConverterForCSharp extends TypeConverter {
 		//--- 1) Process explicit requirements first (if any)
 		// An object type is explicitly required ( @ObjectType )
 		if ( attributeTypeInfo.isObjectTypeExpected() ) {
-			LanguageType lt = getObjectType(attributeTypeInfo.getNeutralType(), false ) ;
+//			LanguageType lt = getObjectType(attributeTypeInfo.getNeutralType(), false ) ;
+			LanguageType lt = getObjectType(attributeTypeInfo.getNeutralType() ) ;
 			if ( lt != null ) {
 				// FOUND
 				log("1) object type found" );
@@ -132,7 +132,8 @@ public class TypeConverterForCSharp extends TypeConverter {
 		if ( lt != null ) {
 			return lt;
 		}
-		lt = getObjectType(attributeTypeInfo.getNeutralType(), false ) ;
+//		lt = getObjectType(attributeTypeInfo.getNeutralType(), false ) ;
+		lt = getObjectType(attributeTypeInfo.getNeutralType() ) ;
 		if ( lt != null ) {
 			return lt;
 		}

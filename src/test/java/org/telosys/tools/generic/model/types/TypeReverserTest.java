@@ -33,7 +33,7 @@ public class TypeReverserTest {
 		assertEquals(expectedTypeInfo.isPrimitiveTypeExpected(), r.isPrimitiveTypeExpected());
 		assertEquals(expectedTypeInfo.isUnsignedTypeExpected(),  r.isUnsignedTypeExpected());
 		assertEquals(expectedTypeInfo.isObjectTypeExpected(),    r.isObjectTypeExpected());
-		assertEquals(expectedTypeInfo.isSqlTypeExpected(),       r.isSqlTypeExpected());
+		//assertEquals(expectedTypeInfo.isSqlTypeExpected(),       r.isSqlTypeExpected());
 	}
 	
 	@Test
@@ -129,7 +129,7 @@ public class TypeReverserTest {
 		
 		AttributeTypeInfo primitiveType = new AttributeTypeInfo( "", AttributeTypeInfo.PRIMITIVE_TYPE );
 		AttributeTypeInfo objectType = new AttributeTypeInfo( "", AttributeTypeInfo.OBJECT_TYPE );
-		AttributeTypeInfo sqlType    = new AttributeTypeInfo( "", AttributeTypeInfo.SQL_TYPE );
+//		AttributeTypeInfo sqlType    = new AttributeTypeInfo( "", AttributeTypeInfo.SQL_TYPE );
 		
 		checkTypeInfo("boolean", primitiveType  ) ;
 		checkTypeInfo("byte", primitiveType  ) ;
@@ -149,8 +149,8 @@ public class TypeReverserTest {
 		checkTypeInfo("java.math.BigDecimal", objectType  ) ;
 		checkTypeInfo("java.util.Date", objectType  ) ;
 
-		checkTypeInfo("java.sql.Date", sqlType  ) ;
-		checkTypeInfo("java.sql.Time", sqlType  ) ;
-		checkTypeInfo("java.sql.Timestamp", sqlType  ) ;
+//		checkTypeInfo("java.sql.Date", sqlType  ) ;
+//		checkTypeInfo("java.sql.Time", sqlType  ) ;
+//		checkTypeInfo("java.sql.Timestamp", sqlType  ) ;
 	}
 }

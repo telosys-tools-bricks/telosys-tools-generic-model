@@ -74,7 +74,6 @@ public class TypeConverterForGo extends TypeConverter {
 		l.add("'@NotNull'  has no effect ");
 		l.add("'@PrimitiveType'  has no effect ");
 		l.add("'@ObjectType'  has no effect  ");
-		l.add("'@SqlType'  has no effect ");
 		return l ;
 	}
 

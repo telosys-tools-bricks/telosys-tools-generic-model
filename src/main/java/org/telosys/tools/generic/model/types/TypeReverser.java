@@ -84,7 +84,7 @@ public class TypeReverser {
 		//----------------------------------------------------------------------------------------
 		AttributeTypeInfo primitiveType = new AttributeTypeInfo("", AttributeTypeInfo.PRIMITIVE_TYPE);
 		AttributeTypeInfo objectType    = new AttributeTypeInfo("", AttributeTypeInfo.OBJECT_TYPE);
-		AttributeTypeInfo sqlType       = new AttributeTypeInfo("", AttributeTypeInfo.SQL_TYPE);
+//		AttributeTypeInfo sqlType       = new AttributeTypeInfo("", AttributeTypeInfo.SQL_TYPE);
 		//--- Java primitive types
 		typesInfo.put(boolean.class.getSimpleName(), primitiveType ) ;
 		typesInfo.put(byte.class.getSimpleName(),    primitiveType) ;
@@ -107,12 +107,13 @@ public class TypeReverser {
 		typesInfo.put(java.util.Date.class.getCanonicalName(),       objectType ) ;
 		typesInfo.put(java.math.BigDecimal.class.getCanonicalName(), objectType ) ;
 
-		//--- Java object - SQL Types
-		typesInfo.put(java.sql.Date.class.getCanonicalName(),      sqlType ) ;
-		typesInfo.put(java.sql.Time.class.getCanonicalName(),      sqlType ) ;
-		typesInfo.put(java.sql.Timestamp.class.getCanonicalName(), sqlType ) ;
-		typesInfo.put(java.sql.Clob.class.getCanonicalName(),      sqlType ) ;
-		typesInfo.put(java.sql.Blob.class.getCanonicalName(),      sqlType ) ;
+// removed in v 3.3.0
+//		//--- Java object - SQL Types
+//		typesInfo.put(java.sql.Date.class.getCanonicalName(),      sqlType ) ;
+//		typesInfo.put(java.sql.Time.class.getCanonicalName(),      sqlType ) ;
+//		typesInfo.put(java.sql.Timestamp.class.getCanonicalName(), sqlType ) ;
+//		typesInfo.put(java.sql.Clob.class.getCanonicalName(),      sqlType ) ;
+//		typesInfo.put(java.sql.Blob.class.getCanonicalName(),      sqlType ) ;
 	}
 
 

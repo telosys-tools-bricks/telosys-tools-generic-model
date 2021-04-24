@@ -1,17 +1,17 @@
 package org.telosys.tools.generic.model.types;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.telosys.tools.generic.model.types.AttributeTypeInfo.NONE;
 import static org.telosys.tools.generic.model.types.AttributeTypeInfo.NOT_NULL;
 import static org.telosys.tools.generic.model.types.AttributeTypeInfo.OBJECT_TYPE;
 import static org.telosys.tools.generic.model.types.AttributeTypeInfo.PRIMITIVE_TYPE;
-import static org.telosys.tools.generic.model.types.AttributeTypeInfo.SQL_TYPE;
 import static org.telosys.tools.generic.model.types.AttributeTypeInfo.UNSIGNED_TYPE;
 
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class TypeConverterForCSharpTest  {
 
@@ -55,10 +55,10 @@ public class TypeConverterForCSharpTest  {
 		checkPrimitiveType( getType(NeutralType.STRING, PRIMITIVE_TYPE ),  "string", "System.String");
 		checkPrimitiveType( getType(NeutralType.STRING, UNSIGNED_TYPE ),   "string", "System.String");
 		checkPrimitiveType( getType(NeutralType.STRING, PRIMITIVE_TYPE + UNSIGNED_TYPE ), "string", "System.String");
-		checkPrimitiveType( getType(NeutralType.STRING, SQL_TYPE),         "string", "System.String" );
+//		checkPrimitiveType( getType(NeutralType.STRING, SQL_TYPE),         "string", "System.String" );
 		
 		checkObjectType( getType(NeutralType.STRING, OBJECT_TYPE),            "String", "System.String" );
-		checkObjectType( getType(NeutralType.STRING, OBJECT_TYPE + SQL_TYPE), "String", "System.String" );
+//		checkObjectType( getType(NeutralType.STRING, OBJECT_TYPE + SQL_TYPE), "String", "System.String" );
 	}
 
 	@Test
@@ -70,11 +70,11 @@ public class TypeConverterForCSharpTest  {
 		checkPrimitiveType( getType( NeutralType.BOOLEAN, PRIMITIVE_TYPE ),        "bool", "System.Boolean");
 		checkPrimitiveType( getType( NeutralType.BOOLEAN, UNSIGNED_TYPE ),         "bool", "System.Boolean");
 		checkPrimitiveType( getType( NeutralType.BOOLEAN, PRIMITIVE_TYPE + UNSIGNED_TYPE ), "bool", "System.Boolean");
-		checkPrimitiveType( getType( NeutralType.BOOLEAN, SQL_TYPE),               "bool", "System.Boolean" );
-		checkPrimitiveType( getType( NeutralType.BOOLEAN, NOT_NULL + SQL_TYPE),    "bool", "System.Boolean" );
+//		checkPrimitiveType( getType( NeutralType.BOOLEAN, SQL_TYPE),               "bool", "System.Boolean" );
+//		checkPrimitiveType( getType( NeutralType.BOOLEAN, NOT_NULL + SQL_TYPE),    "bool", "System.Boolean" );
 		
 		checkObjectType( getType( NeutralType.BOOLEAN, OBJECT_TYPE),            "Boolean", "System.Boolean" );
-		checkObjectType( getType( NeutralType.BOOLEAN, OBJECT_TYPE + SQL_TYPE), "Boolean", "System.Boolean" );
+//		checkObjectType( getType( NeutralType.BOOLEAN, OBJECT_TYPE + SQL_TYPE), "Boolean", "System.Boolean" );
 		checkObjectType( getType( NeutralType.BOOLEAN, NOT_NULL + OBJECT_TYPE), "Boolean", "System.Boolean" );
 
 	}
