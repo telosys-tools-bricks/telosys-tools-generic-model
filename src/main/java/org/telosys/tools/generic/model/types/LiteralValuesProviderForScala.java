@@ -106,7 +106,7 @@ public class LiteralValuesProviderForScala extends LiteralValuesProvider {
 		int year = generateYearValue(step);
 		int month = 6;
 		int dayOfMonth = 22;
-		String s = "java.time.LocalDate.of(\"" + year + "," + month + "," + dayOfMonth + "\")";
+		String s = "java.time.LocalDate.of(" + year + "," + month + "," + dayOfMonth + ")";
 		
 		return new LiteralValue(s, null) ; // null : no basic value for JSON, URL
 	}
@@ -114,7 +114,7 @@ public class LiteralValuesProviderForScala extends LiteralValuesProvider {
 		int hour = step % 24 ;
 		int minute = 46 ;
 		int second = 52 ;
-		String s = "java.time.LocalTime.of(\"" + hour + "," + minute + "," + second + "\")";
+		String s = "java.time.LocalTime.of(" + hour + "," + minute + "," + second + ")";
 		return new LiteralValue(s, null) ;  // null : no basic value for JSON, URL
 	}
 	private LiteralValue generateJavaLocalDateTimeValue(int step) {
@@ -124,8 +124,8 @@ public class LiteralValuesProviderForScala extends LiteralValuesProvider {
 		int hour = step % 24 ;
 		int minute = 46 ;
 		int second = 52 ;
-		String s = "java.time.LocalDateTime.of(\"" + year + "," + month + "," + dayOfMonth + ","
-				+ hour + "," + minute + "," + second + "\")";
+		String s = "java.time.LocalDateTime.of(" + year + "," + month + "," + dayOfMonth + ","
+				+ hour + "," + minute + "," + second + ")";
 		return new LiteralValue(s, null) ;  // null : no basic value for JSON, URL		
 	}
 
