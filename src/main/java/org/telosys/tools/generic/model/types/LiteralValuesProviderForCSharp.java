@@ -45,7 +45,6 @@ public class LiteralValuesProviderForCSharp extends LiteralValuesProvider {
 	}
 
 	@Override
-//	public String generateLiteralValue(LanguageType languageType, int maxLength, int step) {
 	public LiteralValue generateLiteralValue(LanguageType languageType, int maxLength, int step) {
 		
 		String neutralType = languageType.getNeutralType(); 
@@ -91,20 +90,7 @@ public class LiteralValuesProviderForCSharp extends LiteralValuesProvider {
 			return new LiteralValue(value ? TRUE_LITERAL : FALSE_LITERAL, Boolean.valueOf(value)) ;
 		}
 
-//		//--- DATE, TIME and TIMESTAMP :  ????
-//		else if ( NeutralType.DATE.equals(neutralType)  ) {
-//			return NULL_LITERAL ;
-//		}
-//		else if ( NeutralType.TIME.equals(neutralType)  ) {
-//			return NULL_LITERAL ;
-//		}
-//		else if ( NeutralType.TIMESTAMP.equals(neutralType)  ) {
-//			return NULL_LITERAL ;
-//		}		
-//		//--- BINARY
-//		else if ( NeutralType.BINARY.equals(neutralType)  ) {
-//			return NULL_LITERAL ;
-//		}
+		//--- Noting for DATE, TIME and TIMESTAMP, BINARY
 		
 		return new LiteralValue(NULL_LITERAL, null);
 	}

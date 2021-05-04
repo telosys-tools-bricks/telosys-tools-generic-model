@@ -44,7 +44,9 @@ public abstract class TypeConverter {
 	private final HashMap<String, LanguageType> primitiveUnsignedTypes = new HashMap<>();
 	
 	private final HashMap<String, LanguageType> objectTypes         = new HashMap<>();
-	private final HashMap<String, LanguageType> objectSqlTypes      = new HashMap<>();
+	
+	// removed in v 3.3.0
+	//private final HashMap<String, LanguageType> objectSqlTypes      = new HashMap<>();
 
 	private String specificCollectionFullType   = null ;
 	private String specificCollectionSimpleType = null ;
@@ -122,13 +124,14 @@ public abstract class TypeConverter {
 		objectTypes.put(languageType.getNeutralType(), languageType);
 	}
 	
-	/**
-	 * Declares a SQL object type
-	 * @param languageType
-	 */
-	protected void declareObjectSqlType(LanguageType languageType) {
-		objectSqlTypes.put(languageType.getNeutralType(), languageType);
-	}
+	// removed in v 3.3.0
+//	/**
+//	 * Declares a SQL object type
+//	 * @param languageType
+//	 */
+//	protected void declareObjectSqlType(LanguageType languageType) {
+//		objectSqlTypes.put(languageType.getNeutralType(), languageType);
+//	}
 	
 	//--------------------------------------------------------------------------------------------
 	// Get "PRIMITIVE TYPE" with or without "unsigned" option

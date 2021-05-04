@@ -60,7 +60,7 @@ public class LiteralValuesProviderForPython extends LiteralValuesProvider {
 	@Override
 	public LiteralValue generateLiteralValue(LanguageType languageType, int maxLength, int step) {
 		
-		// For "TypeScript", the "neutral type" is the only information available in "LanguageType"
+		// The "neutral type" is the only usable information
 		String neutralType = languageType.getNeutralType(); 
 		
 		//--- STRING
@@ -92,22 +92,8 @@ public class LiteralValuesProviderForPython extends LiteralValuesProvider {
 			return new LiteralValue(value ? TRUE_LITERAL : FALSE_LITERAL, Boolean.valueOf(value)) ;
 		}
 
-//		//--- DATE, TIME and TIMESTAMP :  there is no Date literal in TypeScript !
-//		else if ( NeutralType.DATE.equals(neutralType)  ) {
-//			return NULL_LITERAL ;
-//		}
-//		else if ( NeutralType.TIME.equals(neutralType)  ) {
-//			return NULL_LITERAL ;
-//		}
-//		else if ( NeutralType.TIMESTAMP.equals(neutralType)  ) {
-//			return NULL_LITERAL ;
-//		}		
-//		//--- BINARY
-//		else if ( NeutralType.BINARY.equals(neutralType)  ) {
-//			return NULL_LITERAL ;
-//		}
+		//--- Noting for DATE, TIME and TIMESTAMP, BINARY 
 		
-//		return NULL_LITERAL ; 
 		return new LiteralValue(NULL_LITERAL, null);
 	}
 	

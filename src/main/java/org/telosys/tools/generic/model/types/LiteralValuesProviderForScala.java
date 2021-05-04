@@ -18,25 +18,21 @@ package org.telosys.tools.generic.model.types;
 import java.math.BigDecimal;
 
 /**
- * Literal values provider for "PHP" language <br>
- * <br>
- * Info :<br>
- * <br>
- *  https://stackoverflow.com/questions/2013848/uppercase-booleans-vs-lowercase-in-php <br>
- *  https://www.php-fig.org/psr/psr-2/ <br>
- *  https://stackoverflow.com/questions/80646/how-do-the-php-equality-double-equals-and-identity-triple-equals-comp <br>
- *    
+ * Literal values provider for "SCALA" language
+ * 
  * @author Laurent GUERIN
  *
  */
-public class LiteralValuesProviderForPHP extends LiteralValuesProvider {
+public class LiteralValuesProviderForScala extends LiteralValuesProvider {
 	
-	// According with "PSR-2: Coding Style Guide" : 
-	//  "PHP keywords MUST be in lower case"
-	//  "The PHP constants true, false, and null MUST be in lower case."
-	private static final String NULL_LITERAL  = "null" ;   // "NULL"  or "null"
-	private static final String TRUE_LITERAL  = "true" ;   // "TRUE"  or "true"
-	private static final String FALSE_LITERAL = "false" ;  // "FALSE" or "false" 
+	private static final String NULL_LITERAL  = "null" ;   // acceptable to the compiler but discouraged
+	// "null" is not supposed to be used in Scala
+	// see https://docs.scala-lang.org/overviews/scala-book/no-null-values.html
+	// Scala’s solution is to use constructs like the Option/Some/None classes
+	// "None" y: Option[Int] = None
+	
+	private static final String TRUE_LITERAL  = "true" ;   // Example : b1: Boolean = true 
+	private static final String FALSE_LITERAL = "false" ;  // Example : b2: Boolean = false 
 	
 	@Override
 	public String getLiteralNull() {
@@ -52,20 +48,19 @@ public class LiteralValuesProviderForPHP extends LiteralValuesProvider {
 	public String getLiteralFalse() {
 		return FALSE_LITERAL;
 	}
-		
+			
 	@Override
 	public LiteralValue generateLiteralValue(LanguageType languageType, int maxLength, int step) {
 		
-		// The "neutral type" is the only information available in "LanguageType"
 		String neutralType = languageType.getNeutralType(); 
-		
+
 		//--- STRING
 		if ( NeutralType.STRING.equals(neutralType) ) {
 			String value = buildStringValue(maxLength, step);
 			return new LiteralValue("\"" + value + "\"", value) ;			
 		}
 		
-		//--- NUMBER ( INTEGER )
+		//--- NUMBER / INTEGER
 		else if (  NeutralType.BYTE.equals(neutralType) 
 				|| NeutralType.SHORT.equals(neutralType)
 				|| NeutralType.INTEGER.equals(neutralType) 
@@ -81,19 +76,59 @@ public class LiteralValuesProviderForPHP extends LiteralValuesProvider {
 			BigDecimal value = buildDecimalValue(neutralType, step);
 			return new LiteralValue(value.toString(), value) ; // eg :  123.77
 		}
-		
+
 		//--- BOOLEAN
 		else if ( NeutralType.BOOLEAN.equals(neutralType)  ) {
 			boolean value = buildBooleanValue(step);
 			return new LiteralValue(value ? TRUE_LITERAL : FALSE_LITERAL, Boolean.valueOf(value)) ;
 		}
 
-		//--- Noting for DATE, TIME and TIMESTAMP :  there is no Date literal in TypeScript !
-		//--- Noting for BINARY
+		//--- DATE, TIME and TIMESTAMP : 
+		else if ( NeutralType.DATE.equals(neutralType)  ) {
+			return generateJavaLocalDateLiteralValue(step) ;
+		}
+		else if ( NeutralType.TIME.equals(neutralType)  ) {
+			return generateJavaLocalTimeValue(step)  ;
+		}
+		else if ( NeutralType.TIMESTAMP.equals(neutralType)  ) {
+			return generateJavaLocalDateTimeValue(step) ;
+		}
+		
+		//--- No literal value for BINARY
 		
 		return new LiteralValue(NULL_LITERAL, null);
 	}
 	
+	private int generateYearValue(int step) {
+		return 2000 + ( step % 1000 ) ;  // between 2000 and 2999 
+	}
+	private LiteralValue generateJavaLocalDateLiteralValue(int step) {
+		int year = generateYearValue(step);
+		int month = 6;
+		int dayOfMonth = 22;
+		String s = "java.time.LocalDate.of(\"" + year + "," + month + "," + dayOfMonth + "\")";
+		
+		return new LiteralValue(s, null) ; // null : no basic value for JSON, URL
+	}
+	private LiteralValue generateJavaLocalTimeValue(int step) {
+		int hour = step % 24 ;
+		int minute = 46 ;
+		int second = 52 ;
+		String s = "java.time.LocalTime.of(\"" + hour + "," + minute + "," + second + "\")";
+		return new LiteralValue(s, null) ;  // null : no basic value for JSON, URL
+	}
+	private LiteralValue generateJavaLocalDateTimeValue(int step) {
+		int year = generateYearValue(step);
+		int month = 5;
+		int dayOfMonth = 21;
+		int hour = step % 24 ;
+		int minute = 46 ;
+		int second = 52 ;
+		String s = "java.time.LocalDateTime.of(\"" + year + "," + month + "," + dayOfMonth + ","
+				+ hour + "," + minute + "," + second + "\")";
+		return new LiteralValue(s, null) ;  // null : no basic value for JSON, URL		
+	}
+
 	/* 
 	 * Returns something like that : 
 	 *   ' == 100' 
@@ -102,12 +137,7 @@ public class LiteralValuesProviderForPHP extends LiteralValuesProvider {
 	@Override
 	public String getEqualsStatement(String value, LanguageType languageType) {
 
-		// "=="   compares values (casting if necessary )
-		// "==="  "Strict" (same type and sale value)
-		//
-		//  1 === "1": false // 1 is an integer, "1" is a string
-		//  1 == "1": true // "1" gets casted to an integer, which is 1
-		return " == " + value ; // Value comparison 
+		// Always "==" ( whatever the type ) 
+		return " == " + value ;
 	}
-
 }

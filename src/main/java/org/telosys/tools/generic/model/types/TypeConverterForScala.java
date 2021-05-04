@@ -18,42 +18,44 @@ package org.telosys.tools.generic.model.types;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.telosys.tools.commons.JavaTypeUtil;
+
 /**
- * Type converter for "Go" language
+ * Type converter for "Scala" language
  * 
  * @author Laurent Guerin
  *
  */
-public class TypeConverterForGo extends TypeConverter {
+public class TypeConverterForScala extends TypeConverter {
 
-	public TypeConverterForGo() {
-		super("Go");
+	public TypeConverterForScala() {
+		super("Scala");
 		
-		//--- Primitive types :
-		declarePrimitiveType( buildPrimitiveType(NeutralType.STRING,   "string",  "string"  ) );
-		declarePrimitiveType( buildPrimitiveType(NeutralType.BOOLEAN,  "bool",    "bool"    ) );
-		declarePrimitiveType( buildPrimitiveType(NeutralType.BYTE,     "byte",    "byte"    ) );
-		declarePrimitiveType( buildPrimitiveType(NeutralType.SHORT,    "int16",   "int16"   ) );
-		declarePrimitiveType( buildPrimitiveType(NeutralType.INTEGER,  "int32",   "int32"   ) );
-		declarePrimitiveType( buildPrimitiveType(NeutralType.LONG,     "int64",   "int64"   ) );
-		declarePrimitiveType( buildPrimitiveType(NeutralType.FLOAT,    "float32", "float32" ) );
-		declarePrimitiveType( buildPrimitiveType(NeutralType.DOUBLE,   "float64", "float64" ) );
-		declarePrimitiveType( buildPrimitiveType(NeutralType.DECIMAL,  "float64", "float64" ) );
-		// DATE => No primitive type
-		// TIME => No primitive type
-		// TIMESTAMP => No primitive type
-		declarePrimitiveType( buildPrimitiveType(NeutralType.BINARY, "[]byte", "[]byte" )  ); // No Wrapper type for binary / byte[] ?
+		//--- Primitive types : "AnyVal" Scala types are considered as "primitive types"
+		declarePrimitiveType( buildPrimitiveType(NeutralType.BOOLEAN,  "Boolean",     "Boolean" ) );
+		declarePrimitiveType( buildPrimitiveType(NeutralType.BYTE,     "Byte",        "Byte"    ) );
+		declarePrimitiveType( buildPrimitiveType(NeutralType.SHORT,    "Short",       "Short"   ) );
+		declarePrimitiveType( buildPrimitiveType(NeutralType.INTEGER,  "Int",         "Int"     ) );
+		declarePrimitiveType( buildPrimitiveType(NeutralType.LONG,     "Long",        "Long"    ) );
+		declarePrimitiveType( buildPrimitiveType(NeutralType.FLOAT,    "Float",       "Float"   ) );
+		declarePrimitiveType( buildPrimitiveType(NeutralType.DOUBLE,   "Double",      "Double"  ) );		
+		declarePrimitiveType( buildPrimitiveType(NeutralType.BINARY,   "Array[Byte]", "Array[Byte]" )  ); 
+		// No primitive type for STRING, DECIMAL, DATE, TIME, TIMESTAMP
 		
-		//--- Unsigned primitive types : 
-		declarePrimitiveUnsignedType( buildPrimitiveType(NeutralType.BYTE,    "uint8",   "uint8"  ) );
-		declarePrimitiveUnsignedType( buildPrimitiveType(NeutralType.SHORT,   "uint16",  "uint16" ) );
-		declarePrimitiveUnsignedType( buildPrimitiveType(NeutralType.INTEGER, "uint32",  "uint32" ) );
-		declarePrimitiveUnsignedType( buildPrimitiveType(NeutralType.LONG,    "uint64",  "uint64" ) );
+		//--- No unsigned primitive types : 
 
-		//--- Object types : for GO "object types" are used for "structures" define in a "package" ( when "import" is required )
-		declareObjectType( buildObjectType(NeutralType.DATE,      "time.Time",  "time.Time" ) );
-		declareObjectType( buildObjectType(NeutralType.TIME,      "time.Time",  "time.Time" ) );
-		declareObjectType( buildObjectType(NeutralType.TIMESTAMP, "time.Time",  "time.Time" ) );
+		//--- Object types : 
+		// "String" is an alias for "java.lang.String" (defined in "scala.Predef" )
+		// See https://stackoverflow.com/questions/6559938/scala-string-vs-java-lang-string-type-inference
+		// See https://www.scala-lang.org/api/current/scala/Predef$.html
+		declareObjectType( buildObjectType(NeutralType.STRING,    "String",     "java.lang.String"  ) );
+		
+		// "scala.math.BigDecimal" is only a wrapper around "java.math.BigDecimal"  
+		declareObjectType( buildObjectType(NeutralType.DECIMAL,   "BigDecimal", "scala.math.BigDecimal" ) );
+		
+		declareObjectType( buildObjectType(NeutralType.DATE,      "LocalDate",     "java.time.LocalDate" ) );
+		declareObjectType( buildObjectType(NeutralType.TIME,      "LocalTime",     "java.time.LocalTime" ) );
+		declareObjectType( buildObjectType(NeutralType.TIMESTAMP, "LocalDateTime", "java.time.LocalDateTime" ) );
 	}
 
 	private LanguageType buildPrimitiveType(String neutralType, String primitiveType, String wrapperType) {
@@ -67,8 +69,7 @@ public class TypeConverterForGo extends TypeConverter {
 	@Override
 	public List<String> getComments() {
 		List<String> l = new LinkedList<>();
-		l.add("'@UnsignedType'  has effect only for byte, short, int, long ");
-		l.add("");
+		l.add("'@UnsignedType'  has no effect");
 		l.add("'@NotNull'  has no effect ");
 		l.add("'@PrimitiveType'  has no effect ");
 		l.add("'@ObjectType'  has no effect  ");
@@ -97,23 +98,21 @@ public class TypeConverterForGo extends TypeConverter {
 	//--------------------------------------------------------------------------------------------
 	// Collection type ( since v 3.3.0 )
 	//--------------------------------------------------------------------------------------------	
-	// In the future : changeable type (via $env) ???
-	// Collections for Go :
-	//  - Array : not applicable
-	//  - Slice : []Type
-	//  - Map   : not applicable
-	private static final String STANDARD_COLLECTION_SIMPLE_TYPE = "[]" ; // Slice
-	private static final String STANDARD_COLLECTION_FULL_TYPE   = "[]" ; // Slice
+	// The "scala.List" class is a pointer to the "scala.collection.immutable.List" class
+	private static final String STANDARD_COLLECTION_SIMPLE_TYPE = "List" ;
+	private static final String STANDARD_COLLECTION_FULL_TYPE   = "scala.List" ;
 	
 	@Override
 	public void setSpecificCollectionType(String specificCollectionType) {
 		this.setSpecificCollectionFullType(specificCollectionType) ;
-		this.setSpecificCollectionSimpleType(specificCollectionType);
+		this.setSpecificCollectionSimpleType(JavaTypeUtil.shortType(specificCollectionType));
 	}
 
 	@Override
 	public String getCollectionType(String elementType) {
-		return getCollectionSimpleType() + elementType ;  // "[]type"
+		// Examples : 
+		// val nums: List[Int] = List(1, 2, 3, 4)
+		return getCollectionSimpleType() + "[" + elementType + "]" ; 
 	}
 	
 	@Override
@@ -125,5 +124,4 @@ public class TypeConverterForGo extends TypeConverter {
 	public String getCollectionFullType() {
 		return getCollectionFullType(STANDARD_COLLECTION_FULL_TYPE);
 	}
-
 }

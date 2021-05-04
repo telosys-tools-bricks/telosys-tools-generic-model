@@ -44,16 +44,8 @@ public class TypeConverterForJava extends TypeConverter {
 		declareObjectType( buildJavaType(NeutralType.DATE,      java.util.Date.class) );
 		declareObjectType( buildJavaType(NeutralType.TIME,      java.util.Date.class) );
 		declareObjectType( buildJavaType(NeutralType.TIMESTAMP, java.util.Date.class) );
-//		declareObjectType(NeutralType.LONGTEXT,  buildJavaType(java.lang.String.class) );
-//		declareObjectType(NeutralType.BINARY,    buildJavaType(java.nio.ByteBuffer.class) );
+		//Nothing for BINARY
 
-		//--- Object SQL types 
-		declareObjectSqlType( buildJavaType(NeutralType.DATE,      java.sql.Date.class) );
-		declareObjectSqlType( buildJavaType(NeutralType.TIME,      java.sql.Time.class) );
-		declareObjectSqlType( buildJavaType(NeutralType.TIMESTAMP, java.sql.Timestamp.class) );
-//		declareObjectSqlType(NeutralType.LONGTEXT,  buildJavaType(java.sql.Clob.class) );
-		declareObjectSqlType( buildJavaType(NeutralType.BINARY,    java.sql.Blob.class) );
-		
 		//--- Primitive types 
 		// STRING => No primitive type
 		declarePrimitiveType( buildJavaType(NeutralType.BOOLEAN, boolean.class) );
@@ -67,7 +59,6 @@ public class TypeConverterForJava extends TypeConverter {
 		// DATE => No primitive type
 		// TIME => No primitive type
 		// TIMESTAMP => No primitive type
-		// LONGTEXT => No primitive type
 		declarePrimitiveType( buildJavaType(NeutralType.BINARY,  byte[].class) );
 		
 		//--- Unsigned primitive types : No unsigned primitive types in Java
@@ -138,8 +129,6 @@ public class TypeConverterForJava extends TypeConverter {
 		log("STEP 1" );
 		//--- 1) Process explicit requirements first (if any)
 		// A primitive type is explicitly required ( @PrimitiveType or @UnsignedType )
-//		if ( attributeTypeInfo.isPrimitiveTypeExpected() || attributeTypeInfo.isUnsignedTypeExpected() ) {
-//			LanguageType lt = getPrimitiveType(attributeTypeInfo.getNeutralType(), attributeTypeInfo.isUnsignedTypeExpected() ) ;
 		if ( attributeTypeInfo.isPrimitiveTypeExpected()  ) { // "UnsignedType" no effect in Java => ignore
 			LanguageType lt = getPrimitiveType(attributeTypeInfo.getNeutralType(), false ) ; 
 			if ( lt != null ) { // FOUND
@@ -149,9 +138,7 @@ public class TypeConverterForJava extends TypeConverter {
 		}
 		log("1) primitive type not found" );
 		
-		// An object type is explicitly required ( @ObjectType or @SqlType )
-//		if ( attributeTypeInfo.isObjectTypeExpected() || attributeTypeInfo.isSqlTypeExpected() ) {
-//			LanguageType lt = getObjectType(attributeTypeInfo.getNeutralType(), attributeTypeInfo.isSqlTypeExpected() ) ;
+		// An object type is explicitly required ( @ObjectType )
 		if ( attributeTypeInfo.isObjectTypeExpected() ) {
 			LanguageType lt = getObjectType(attributeTypeInfo.getNeutralType() ) ;
 			if ( lt != null ) { // FOUND
@@ -171,13 +158,11 @@ public class TypeConverterForJava extends TypeConverter {
 				return lt ;
 			}
 			// Still not found : try to found an object type
-//			return getObjectType(attributeTypeInfo.getNeutralType(), false ) ;
 			return getObjectType(attributeTypeInfo.getNeutralType() ) ;
 		}
 		else {
 			log("2) Not Null : FALSE" );
 			// Try to found an object type first
-//			LanguageType lt = getObjectType(attributeTypeInfo.getNeutralType(), false ) ;
 			LanguageType lt = getObjectType(attributeTypeInfo.getNeutralType() ) ;
 			if ( lt != null ) { // FOUND
 				return lt ;
