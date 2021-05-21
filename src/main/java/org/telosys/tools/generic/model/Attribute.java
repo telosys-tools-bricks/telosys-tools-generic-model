@@ -506,4 +506,12 @@ public interface Attribute {
      */
     public BooleanValue getUpdatable() ; // v 3.3.0
 	
+	/**
+	 * Returns TRUE if the field is 'transient' (useful for JPA)<br>
+	 * If not supported by the model implementation : 'false' 
+	 * @return
+	 * @since v 3.3.0
+	 */
+	public boolean isTransient() ; // v 3.3.0
+	
 }

@@ -190,6 +190,14 @@ public interface Link {
 	 */
 	public boolean isEmbedded() ;
 	
+	/**
+	 * Returns TRUE if the link field is 'transient' (useful for JPA)<br>
+	 * If not supported by the model implementation : 'false' 
+	 * @return
+	 * @since v 3.3.0
+	 */
+	public boolean isTransient() ; // v 3.3.0
+	
     /**
      * Returns the 'insertable' flag values
      * @return
