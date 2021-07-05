@@ -107,13 +107,19 @@ public class TypeReverser {
 		typesInfo.put(java.util.Date.class.getCanonicalName(),       objectType ) ;
 		typesInfo.put(java.math.BigDecimal.class.getCanonicalName(), objectType ) ;
 
-// removed in v 3.3.0
+// SQL type removed in v 3.3.0
 //		//--- Java object - SQL Types
 //		typesInfo.put(java.sql.Date.class.getCanonicalName(),      sqlType ) ;
 //		typesInfo.put(java.sql.Time.class.getCanonicalName(),      sqlType ) ;
 //		typesInfo.put(java.sql.Timestamp.class.getCanonicalName(), sqlType ) ;
 //		typesInfo.put(java.sql.Clob.class.getCanonicalName(),      sqlType ) ;
 //		typesInfo.put(java.sql.Blob.class.getCanonicalName(),      sqlType ) ;
+
+		typesInfo.put(java.sql.Date.class.getCanonicalName(),      objectType ) ;
+		typesInfo.put(java.sql.Time.class.getCanonicalName(),      objectType ) ;
+		typesInfo.put(java.sql.Timestamp.class.getCanonicalName(), objectType ) ;
+		typesInfo.put(java.sql.Clob.class.getCanonicalName(),      objectType ) ;
+		typesInfo.put(java.sql.Blob.class.getCanonicalName(),      objectType ) ;
 	}
 
 

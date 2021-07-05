@@ -152,5 +152,11 @@ public class TypeReverserTest {
 //		checkTypeInfo("java.sql.Date", sqlType  ) ;
 //		checkTypeInfo("java.sql.Time", sqlType  ) ;
 //		checkTypeInfo("java.sql.Timestamp", sqlType  ) ;
+		checkTypeInfo("java.sql.Date", objectType  ) ;
+		checkTypeInfo("java.sql.Time", objectType  ) ;
+		checkTypeInfo("java.sql.Timestamp", objectType  ) ;
+		checkTypeInfo("java.sql.Blob", objectType  ) ;
+		checkTypeInfo("java.sql.Clob", objectType  ) ;
+		
 	}
 }
