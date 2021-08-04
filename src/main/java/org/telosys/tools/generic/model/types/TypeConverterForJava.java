@@ -28,6 +28,10 @@ import org.telosys.tools.commons.JavaTypeUtil;
  */
 public class TypeConverterForJava extends TypeConverter {
 
+	public static final String LOCAL_DATE_CLASS      = "java.time.LocalDate" ;
+	public static final String LOCAL_TIME_CLASS      = "java.time.LocalTime" ;
+	public static final String LOCAL_DATE_TIME_CLASS = "java.time.LocalDateTime" ;	
+	
 	public TypeConverterForJava() {
 		super("Java");
 		
@@ -41,9 +45,14 @@ public class TypeConverterForJava extends TypeConverter {
 		declareObjectType( buildJavaType(NeutralType.FLOAT,     java.lang.Float.class) );
 		declareObjectType( buildJavaType(NeutralType.DOUBLE,    java.lang.Double.class) );
 		declareObjectType( buildJavaType(NeutralType.DECIMAL,   java.math.BigDecimal.class) );
-		declareObjectType( buildJavaType(NeutralType.DATE,      java.util.Date.class) );
-		declareObjectType( buildJavaType(NeutralType.TIME,      java.util.Date.class) );
-		declareObjectType( buildJavaType(NeutralType.TIMESTAMP, java.util.Date.class) );
+		
+// New temporal types since ver 3.4.0
+//		declareObjectType( buildJavaType(NeutralType.DATE,      java.util.Date.class) );
+//		declareObjectType( buildJavaType(NeutralType.TIME,      java.util.Date.class) );
+//		declareObjectType( buildJavaType(NeutralType.TIMESTAMP, java.util.Date.class) );
+		declareObjectType( buildJavaType(NeutralType.DATE,      LOCAL_DATE_CLASS) );
+		declareObjectType( buildJavaType(NeutralType.TIME,      LOCAL_TIME_CLASS) );
+		declareObjectType( buildJavaType(NeutralType.TIMESTAMP, LOCAL_DATE_TIME_CLASS) );
 		//Nothing for BINARY
 
 		//--- Primitive types 
@@ -73,6 +82,10 @@ public class TypeConverterForJava extends TypeConverter {
 			// Object type => the wrapper type is the same 
 			return new LanguageType( neutralType, clazz.getSimpleName(), clazz.getCanonicalName(), false, clazz.getSimpleName() );
 		}
+	}
+	private LanguageType buildJavaType(String neutralType, String javaClassCanonicalName) {
+		String javaClassSimpleName = JavaTypeUtil.shortType(javaClassCanonicalName);
+		return new LanguageType( neutralType, javaClassSimpleName, javaClassCanonicalName, false, javaClassSimpleName );
 	}
 	
 	/**

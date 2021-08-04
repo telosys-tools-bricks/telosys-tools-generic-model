@@ -151,7 +151,6 @@ public abstract class LiteralValuesProvider {
 	 * @param step
 	 * @return
 	 */
-//	public abstract String generateLiteralValue(LanguageType languageType, int maxLength, int step) ;
 	public abstract LiteralValue generateLiteralValue(LanguageType languageType, int maxLength, int step) ;
 
 	/**

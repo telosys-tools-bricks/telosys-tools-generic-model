@@ -9,6 +9,7 @@ import static org.telosys.tools.generic.model.types.AttributeTypeInfo.UNSIGNED_T
 import java.math.BigDecimal;
 
 import org.junit.Test;
+import org.telosys.tools.commons.JavaTypeUtil;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -16,6 +17,10 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class TypeConverterForJavaTest  {
+	
+	private static final String LOCAL_DATE      = TypeConverterForJava.LOCAL_DATE_CLASS; 
+	private static final String LOCAL_TIME      = TypeConverterForJava.LOCAL_TIME_CLASS; 
+	private static final String LOCAL_DATE_TIME = TypeConverterForJava.LOCAL_DATE_TIME_CLASS; 
 
 	private LanguageType getType(TypeConverter tc, AttributeTypeInfo typeInfo ) {
 		LanguageType lt = tc.getType(typeInfo);
@@ -38,6 +43,24 @@ public class TypeConverterForJavaTest  {
 		else {
 			assertFalse ( lt.isPrimitiveType() ) ;
 		}
+	}
+	private void checkLocalDate( LanguageType lt ) {
+		assertNotNull(lt);
+		assertEquals(JavaTypeUtil.shortType(LOCAL_DATE), lt.getSimpleType() );
+		assertEquals(LOCAL_DATE, lt.getFullType() );
+		assertFalse ( lt.isPrimitiveType() ) ;
+	}
+	private void checkLocalTime( LanguageType lt ) {
+		assertNotNull(lt);
+		assertEquals(JavaTypeUtil.shortType(LOCAL_TIME), lt.getSimpleType() );
+		assertEquals(LOCAL_TIME, lt.getFullType() );
+		assertFalse ( lt.isPrimitiveType() ) ;
+	}
+	private void checkLocalDateTime( LanguageType lt ) {
+		assertNotNull(lt);
+		assertEquals(JavaTypeUtil.shortType(LOCAL_DATE_TIME), lt.getSimpleType() );
+		assertEquals(LOCAL_DATE_TIME, lt.getFullType() );
+		assertFalse ( lt.isPrimitiveType() ) ;
 	}
 	
 	@Test
@@ -144,21 +167,16 @@ public class TypeConverterForJavaTest  {
 		System.out.println("--- ");
 		TypeConverter tc = new TypeConverterForJava() ;
 		
-		// Supposed to always return BigDecimal (in any cases) 
-		check( getType(tc, NeutralType.DATE, NONE ), java.util.Date.class);
-		check( getType(tc, NeutralType.DATE, NOT_NULL ), java.util.Date.class);
+		// Supposed to always return LocalDate (in any cases) 
+		checkLocalDate( getType(tc, NeutralType.DATE, NONE ));
+		checkLocalDate( getType(tc, NeutralType.DATE, NOT_NULL ));
 		
-		check( getType(tc, NeutralType.DATE, PRIMITIVE_TYPE ), java.util.Date.class);
-		check( getType(tc, NeutralType.DATE, UNSIGNED_TYPE ), java.util.Date.class);
-		check( getType(tc, NeutralType.DATE, PRIMITIVE_TYPE + UNSIGNED_TYPE ), java.util.Date.class);
+		checkLocalDate( getType(tc, NeutralType.DATE, PRIMITIVE_TYPE ));
+		checkLocalDate( getType(tc, NeutralType.DATE, UNSIGNED_TYPE ));
+		checkLocalDate( getType(tc, NeutralType.DATE, PRIMITIVE_TYPE + UNSIGNED_TYPE ));
 		
-		check( getType(tc, NeutralType.DATE, OBJECT_TYPE ), java.util.Date.class);
-		check( getType(tc, NeutralType.DATE, NOT_NULL + OBJECT_TYPE ), java.util.Date.class);
-
-//		check( getType(tc, NeutralType.DATE, SQL_TYPE ), java.sql.Date.class);	 // SQL Date	
-//		check( getType(tc, NeutralType.DATE, NOT_NULL + SQL_TYPE ), java.sql.Date.class); // SQL Date	
-//		check( getType(tc, NeutralType.DATE, OBJECT_TYPE + SQL_TYPE ), java.sql.Date.class); // SQL Date	
-//		check( getType(tc, NeutralType.DATE, PRIMITIVE_TYPE + SQL_TYPE ), java.sql.Date.class); // not compatible (no Prim type => SQL Date)	
+		checkLocalDate( getType(tc, NeutralType.DATE, OBJECT_TYPE ));
+		checkLocalDate( getType(tc, NeutralType.DATE, NOT_NULL + OBJECT_TYPE ));
 	}
 
 	@Test
@@ -166,21 +184,16 @@ public class TypeConverterForJavaTest  {
 		System.out.println("--- ");
 		TypeConverter tc = new TypeConverterForJava() ;
 		
-		// Supposed to always return BigDecimal (in any cases) 
-		check( getType(tc, NeutralType.TIME, NONE ), java.util.Date.class);
-		check( getType(tc, NeutralType.TIME, NOT_NULL ), java.util.Date.class);
+		// Supposed to always return LocalTime (in any cases) 
+		checkLocalTime( getType(tc, NeutralType.TIME, NONE ));
+		checkLocalTime( getType(tc, NeutralType.TIME, NOT_NULL ));
 		
-		check( getType(tc, NeutralType.TIME, PRIMITIVE_TYPE ), java.util.Date.class);
-		check( getType(tc, NeutralType.TIME, UNSIGNED_TYPE ), java.util.Date.class);
-		check( getType(tc, NeutralType.TIME, PRIMITIVE_TYPE + UNSIGNED_TYPE ), java.util.Date.class);
+		checkLocalTime( getType(tc, NeutralType.TIME, PRIMITIVE_TYPE ));
+		checkLocalTime( getType(tc, NeutralType.TIME, UNSIGNED_TYPE ));
+		checkLocalTime( getType(tc, NeutralType.TIME, PRIMITIVE_TYPE + UNSIGNED_TYPE ));
 		
-		check( getType(tc, NeutralType.TIME, OBJECT_TYPE ), java.util.Date.class);
-		check( getType(tc, NeutralType.TIME, NOT_NULL + OBJECT_TYPE ), java.util.Date.class);
-
-//		check( getType(tc, NeutralType.TIME, SQL_TYPE ), java.sql.Time.class);	 // SQL Time	
-//		check( getType(tc, NeutralType.TIME, NOT_NULL + SQL_TYPE ), java.sql.Time.class); // SQL Time	
-//		check( getType(tc, NeutralType.TIME, OBJECT_TYPE + SQL_TYPE ), java.sql.Time.class); // SQL Time	
-//		check( getType(tc, NeutralType.TIME, PRIMITIVE_TYPE + SQL_TYPE ), java.sql.Time.class); // not compatible (no Prim type => SQL Time)	
+		checkLocalTime( getType(tc, NeutralType.TIME, OBJECT_TYPE ));
+		checkLocalTime( getType(tc, NeutralType.TIME, NOT_NULL + OBJECT_TYPE ));
 	}
 
 	@Test
@@ -188,21 +201,16 @@ public class TypeConverterForJavaTest  {
 		System.out.println("--- ");
 		TypeConverter tc = new TypeConverterForJava() ;
 		
-		// Supposed to always return BigDecimal (in any cases) 
-		check( getType(tc, NeutralType.TIMESTAMP, NONE ), java.util.Date.class);
-		check( getType(tc, NeutralType.TIMESTAMP, NOT_NULL ), java.util.Date.class);
+		// Supposed to always return LocalDateTime (in any cases) 
+		checkLocalDateTime( getType(tc, NeutralType.TIMESTAMP, NONE ));
+		checkLocalDateTime( getType(tc, NeutralType.TIMESTAMP, NOT_NULL ));
 		
-		check( getType(tc, NeutralType.TIMESTAMP, PRIMITIVE_TYPE ), java.util.Date.class);
-		check( getType(tc, NeutralType.TIMESTAMP, UNSIGNED_TYPE ), java.util.Date.class);
-		check( getType(tc, NeutralType.TIMESTAMP, PRIMITIVE_TYPE + UNSIGNED_TYPE ), java.util.Date.class);
+		checkLocalDateTime( getType(tc, NeutralType.TIMESTAMP, PRIMITIVE_TYPE ));
+		checkLocalDateTime( getType(tc, NeutralType.TIMESTAMP, UNSIGNED_TYPE ));
+		checkLocalDateTime( getType(tc, NeutralType.TIMESTAMP, PRIMITIVE_TYPE + UNSIGNED_TYPE ));
 		
-		check( getType(tc, NeutralType.TIMESTAMP, OBJECT_TYPE ), java.util.Date.class);
-		check( getType(tc, NeutralType.TIMESTAMP, NOT_NULL + OBJECT_TYPE ), java.util.Date.class);
-
-//		check( getType(tc, NeutralType.TIMESTAMP, SQL_TYPE ), java.sql.Timestamp.class);	 // SQL Time	
-//		check( getType(tc, NeutralType.TIMESTAMP, NOT_NULL + SQL_TYPE ), java.sql.Timestamp.class); // SQL Time	
-//		check( getType(tc, NeutralType.TIMESTAMP, OBJECT_TYPE + SQL_TYPE ), java.sql.Timestamp.class); // SQL Time	
-//		check( getType(tc, NeutralType.TIMESTAMP, PRIMITIVE_TYPE + SQL_TYPE ), java.sql.Timestamp.class); // not compatible (no Prim type => SQL Time)	
+		checkLocalDateTime( getType(tc, NeutralType.TIMESTAMP, OBJECT_TYPE ));
+		checkLocalDateTime( getType(tc, NeutralType.TIMESTAMP, NOT_NULL + OBJECT_TYPE ));
 	}
 
 //	@Test

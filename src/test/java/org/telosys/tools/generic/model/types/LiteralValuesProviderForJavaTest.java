@@ -9,6 +9,7 @@ import java.util.Calendar;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.telosys.tools.commons.JavaTypeUtil;
 
 public class LiteralValuesProviderForJavaTest {
 	
@@ -158,6 +159,13 @@ public class LiteralValuesProviderForJavaTest {
 	}
 	private void checkLiteralValue(String neutralType, Class<?> clazz, int maxLength, int step, String expected ) {
 		LanguageType languageType = buildLanguageType(neutralType, clazz);
+//		LiteralValuesProvider  literalValuesProvider = new LiteralValuesProviderForJava();
+//		LiteralValue value = literalValuesProvider.generateLiteralValue(languageType, maxLength, step);
+//		System.out.println("Literal value : '" + value + "'" );
+//		assertEquals(expected, value.getCurrentLanguageValue() ) ;
+		checkLiteralValue(languageType, maxLength, step, expected );
+	}
+	private void checkLiteralValue(LanguageType languageType, int maxLength, int step, String expected ) {
 		LiteralValuesProvider  literalValuesProvider = new LiteralValuesProviderForJava();
 		LiteralValue value = literalValuesProvider.generateLiteralValue(languageType, maxLength, step);
 		System.out.println("Literal value : '" + value + "'" );
@@ -346,6 +354,32 @@ public class LiteralValuesProviderForJavaTest {
 		checkLiteralValue(java.sql.Timestamp.class, 0,   24, "java.sql.Timestamp.valueOf(\"2024-05-21 00:46:52\")");
 	}
 
+	private LanguageType buildLanguageType(String neutralType, String javaClassCanonicalName) {
+		String javaClassSimpleName = JavaTypeUtil.shortType(javaClassCanonicalName);
+		return new LanguageType( neutralType, javaClassSimpleName, javaClassCanonicalName, false, javaClassSimpleName );
+	}
+
+	@Test
+	public void testLocalDateValues() {
+		LanguageType languageType = buildLanguageType("date", TypeConverterForJava.LOCAL_DATE_CLASS );
+		checkLiteralValue(languageType, 0, 0, "java.time.LocalDate.parse(\"2000-06-22\")" );
+		checkLiteralValue(languageType, 0, 1, "java.time.LocalDate.parse(\"2001-06-22\")" );
+	}
+
+	@Test
+	public void testLocalTimeValues() {
+		LanguageType languageType = buildLanguageType("time", TypeConverterForJava.LOCAL_TIME_CLASS );
+		checkLiteralValue(languageType, 0, 0, "java.time.LocalTime.parse(\"00:46:52\")" );
+		checkLiteralValue(languageType, 0, 1, "java.time.LocalTime.parse(\"01:46:52\")" );
+	}
+	
+	@Test
+	public void testLocalDateTimeValues() {
+		LanguageType languageType = buildLanguageType("timestamp", TypeConverterForJava.LOCAL_DATE_TIME_CLASS );
+		checkLiteralValue(languageType, 0, 0, "java.time.LocalDateTime.parse(\"2000-05-21T00:46:52\")" );
+		checkLiteralValue(languageType, 0, 1, "java.time.LocalDateTime.parse(\"2001-05-21T01:46:52\")" );
+	}
+	
 	@Test
 	public void testInvalidTypes() {
 		checkLiteralValue(java.math.BigInteger.class, 0,    0, "null");
