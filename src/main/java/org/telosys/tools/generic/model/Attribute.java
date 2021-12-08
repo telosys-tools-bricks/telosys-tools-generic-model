@@ -513,5 +513,20 @@ public interface Attribute {
 	 * @since v 3.3.0
 	 */
 	public boolean isTransient() ; // v 3.3.0
+
+	/**
+	 * Returns the attribute size if any (null if none) <br> 
+	 * eg : "8", "12", "8,2", "5,2" 
+	 * @return a string representing the size or null if not defined
+	 * @since v 3.4.0
+	 */
+	public String getSize() ; // v 3.4.0
 	
+	/**
+	 * Returns TRUE if the attribute is unique <br>
+	 * @return
+	 * @since v 3.4.0
+	 */
+	public boolean isUnique() ; // v 3.4.0
+
 }

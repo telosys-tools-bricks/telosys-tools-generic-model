@@ -16,6 +16,7 @@
 package org.telosys.tools.generic.model;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Laurent Guerin
@@ -211,5 +212,14 @@ public interface Link {
 	 * @since v 3.3.0
      */
     public BooleanValue getUpdatable() ; // v 3.3.0
+    
+    
+	/**
+	 * Returns all the tags defined in the link
+	 * @return
+	 * @since v 3.4.0
+	 */
+	public Map<String, String> getTagsMap(); // v 3.4.0
+	
 
 }
