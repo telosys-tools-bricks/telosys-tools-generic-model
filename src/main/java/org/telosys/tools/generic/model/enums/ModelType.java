@@ -13,45 +13,34 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.telosys.tools.generic.model;
+package org.telosys.tools.generic.model.enums;
 
 /**
- * Enumeration for the different types of date
+ * Enumeration of all the model types usable by the generator 
  * 
  * @author Laurent Guerin
  * @since 3.0.0
  *
  */
-public enum DateType {
+public enum ModelType {
 	
 	/**
-	 * Undefined or not managed by the model implementation
+	 * Model created from a SQL Database Schema (Telosys Tools Database Repository)
 	 */
-	UNDEFINED(0),
+	DATABASE_SCHEMA,
 	
 	/**
-	 * Date information only (no time)
+	 * Model created by using the "Telosys Tools DSL"
 	 */
-	DATE_ONLY(1),
+	DOMAIN_SPECIFIC_LANGUAGE,
 	
 	/**
-	 * Time information only (no date)
+	 * Model created by Java classes introspection 
 	 */
-	TIME_ONLY(2),
+	JAVA_CLASSES,
 	
 	/**
-	 * Date and time information
+	 * Other type (specific model provided by an other tool)
 	 */
-	DATE_AND_TIME(3);
-	
-	//---------------------------------------------------
-	private int value ;
-	
-	private DateType(int value) {
-		this.value = value ;
-	}
-	
-	public int getValue() {
-		return this.value ;
-	}
+	OTHER
 }

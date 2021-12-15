@@ -13,56 +13,45 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.telosys.tools.generic.model;
+package org.telosys.tools.generic.model.enums;
 
 /**
- * Enumeration for a boolean value
+ * Enumeration for the different types of date
  * 
  * @author Laurent Guerin
- * @since 3.3.0
+ * @since 3.0.0
  *
  */
-public enum BooleanValue {
+public enum DateType {
 	
 	/**
 	 * Undefined or not managed by the model implementation
 	 */
-	UNDEFINED(-1, "undefined"),
+	UNDEFINED(0),
 	
 	/**
-	 * 
+	 * Date information only (no time)
 	 */
-	FALSE(0, "false"),
+	DATE_ONLY(1),
 	
 	/**
-	 * 
+	 * Time information only (no date)
 	 */
-	TRUE(1, "true");
+	TIME_ONLY(2),
+	
+	/**
+	 * Date and time information
+	 */
+	DATE_AND_TIME(3);
 	
 	//---------------------------------------------------
-	private final int    value ;
-	private final String text  ;
+	private int value ;
 	
-	private BooleanValue(int value, String text) {
+	private DateType(int value) {
 		this.value = value ;
-		this.text  = text ;
 	}
 	
-	/**
-	 * Returns the value as an int <br>
-	 * @return
-	 */
 	public int getValue() {
 		return this.value ;
 	}
-	
-	/**
-	 * Returns the value as a text<br>
-	 * e.g. : 'undefined', 'true', 'false'
-	 * @return
-	 */
-	public String getText() {
-		return this.text;
-	}
-	
 }

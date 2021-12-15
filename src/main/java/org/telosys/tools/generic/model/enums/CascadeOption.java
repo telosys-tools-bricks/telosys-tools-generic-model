@@ -13,53 +13,53 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.telosys.tools.generic.model;
+package org.telosys.tools.generic.model.enums;
 
 /**
- * Enumeration for the different types of CARDINALITY : "OneToMany", "ManyToOne", "OneToOne", "ManyToMany" 
+ * Enumeration for the different types of CASCADE 
  * 
  * @author Laurent Guerin
  * @since 3.0.0
  *
  */
-public enum Cardinality {
-	
-	/**
-	 * Undefined or not managed by the model implementation
-	 */
-	UNDEFINED(0, ""),
+public enum CascadeOption {
 	
 	/**
 	 * 
 	 */
-	ONE_TO_MANY(1, "OneToMany"),
+	MERGE(0, "MERGE"),
 	
 	/**
 	 * 
 	 */
-	MANY_TO_ONE(2, "ManyToOne"),
+	PERSIST(1, "PERSIST"),
 	
 	/**
 	 * 
 	 */
-	ONE_TO_ONE(3, "OneToOne"),
+	REFRESH(2, "REFRESH"),
 	
 	/**
 	 * 
 	 */
-	MANY_TO_MANY(4, "ManyToMany");
+	REMOVE(3, "REMOVE"),
+		
+	/**
+	 * 
+	 */
+	ALL(4, "ALL");
 	
 	//---------------------------------------------------
 	private final int    value ;
 	private final String text  ;
 	
-	private Cardinality(int value, String text) {
+	private CascadeOption(int value, String text) {
 		this.value = value ;
 		this.text  = text ;
 	}
 	
 	/**
-	 * Returns the cardinality as an int value (0 to 4) <br>
+	 * Returns the fetch type as an int value (0 to 3) <br>
 	 * @return
 	 */
 	public int getValue() {
@@ -67,31 +67,11 @@ public enum Cardinality {
 	}
 	
 	/**
-	 * Returns the cardinality as a text<br>
-	 * e.g. : 'OneToMany', 'ManyToOne', 'OneToOne', 'ManyToMany'
+	 * Returns the fetch type as a text<br>
+	 * e.g. : 'MERGE', 'PERSIST', etc
 	 * @return
 	 */
 	public String getText() {
 		return this.text;
-	}
-	
-	/**
-	 * Returns true if the cardinality is "MANY_TO_ONE" or "ONE_TO_ONE"
-	 * @return
-	 */
-	public boolean isToOne() {
-		if ( this == MANY_TO_ONE ) return true ;
-		if ( this == ONE_TO_ONE ) return true ;
-		return false ;
-	}
-
-	/**
-	 * Returns true if the cardinality is "ONE_TO_MANY" or "MANY_TO_MANY"
-	 * @return
-	 */
-	public boolean isToMany() {
-		if ( this == ONE_TO_MANY ) return true ;
-		if ( this == MANY_TO_MANY ) return true ;
-		return false ;
 	}
 }

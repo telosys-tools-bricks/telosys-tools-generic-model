@@ -13,16 +13,16 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.telosys.tools.generic.model;
+package org.telosys.tools.generic.model.enums;
 
 /**
- * Enumeration for the different types of FETCH : "DEFAULT", "EAGER", "LAZY" 
+ * Enumeration for the different types of CARDINALITY : "OneToMany", "ManyToOne", "OneToOne", "ManyToMany" 
  * 
  * @author Laurent Guerin
  * @since 3.0.0
  *
  */
-public enum FetchType {
+public enum Cardinality {
 	
 	/**
 	 * Undefined or not managed by the model implementation
@@ -32,29 +32,34 @@ public enum FetchType {
 	/**
 	 * 
 	 */
-	DEFAULT(1, "DEFAULT"),
+	ONE_TO_MANY(1, "OneToMany"),
 	
 	/**
 	 * 
 	 */
-	EAGER(2, "EAGER"),
+	MANY_TO_ONE(2, "ManyToOne"),
 	
 	/**
 	 * 
 	 */
-	LAZY(3, "LAZY");
-		
+	ONE_TO_ONE(3, "OneToOne"),
+	
+	/**
+	 * 
+	 */
+	MANY_TO_MANY(4, "ManyToMany");
+	
 	//---------------------------------------------------
 	private final int    value ;
 	private final String text  ;
 	
-	private FetchType(int value, String text) {
+	private Cardinality(int value, String text) {
 		this.value = value ;
 		this.text  = text ;
 	}
 	
 	/**
-	 * Returns the fetch type as an int value (0 to 3) <br>
+	 * Returns the cardinality as an int value (0 to 4) <br>
 	 * @return
 	 */
 	public int getValue() {
@@ -62,11 +67,31 @@ public enum FetchType {
 	}
 	
 	/**
-	 * Returns the fetch type as a text<br>
-	 * e.g. : 'DEFAULT' or 'EAGER' or 'LAZY'
+	 * Returns the cardinality as a text<br>
+	 * e.g. : 'OneToMany', 'ManyToOne', 'OneToOne', 'ManyToMany'
 	 * @return
 	 */
 	public String getText() {
 		return this.text;
+	}
+	
+	/**
+	 * Returns true if the cardinality is "MANY_TO_ONE" or "ONE_TO_ONE"
+	 * @return
+	 */
+	public boolean isToOne() {
+		if ( this == MANY_TO_ONE ) return true ;
+		if ( this == ONE_TO_ONE ) return true ;
+		return false ;
+	}
+
+	/**
+	 * Returns true if the cardinality is "ONE_TO_MANY" or "MANY_TO_MANY"
+	 * @return
+	 */
+	public boolean isToMany() {
+		if ( this == ONE_TO_MANY ) return true ;
+		if ( this == MANY_TO_MANY ) return true ;
+		return false ;
 	}
 }

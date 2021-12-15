@@ -17,7 +17,7 @@ package org.telosys.tools.generic.model.types;
 
 import java.util.HashMap;
 
-import org.telosys.tools.generic.model.DateType;
+import org.telosys.tools.generic.model.enums.DateType;
 
 /**
  * Utility class usable to revert the type <br>

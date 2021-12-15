@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
-import org.telosys.tools.generic.model.DateType;
+import org.telosys.tools.generic.model.enums.DateType;
 
 public class TypeReverserTest {
 

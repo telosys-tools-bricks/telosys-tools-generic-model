@@ -3,6 +3,7 @@ package org.telosys.tools.generic.model;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import org.telosys.tools.generic.model.enums.Cardinality;
 
 public class CardinalityTest {
 

@@ -19,6 +19,8 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.telosys.tools.generic.model.enums.CascadeOption;
+
 /**
  * Object containing a set of selected 'cascade options'
  * 

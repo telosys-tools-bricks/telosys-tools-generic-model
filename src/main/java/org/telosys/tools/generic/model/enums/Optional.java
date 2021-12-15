@@ -13,53 +13,43 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.telosys.tools.generic.model;
+package org.telosys.tools.generic.model.enums;
 
 /**
- * Enumeration for the different types of CASCADE 
+ * Enumeration for the different types of OPTIONAL 
  * 
  * @author Laurent Guerin
  * @since 3.0.0
  *
  */
-public enum CascadeOption {
+public enum Optional {
+	
+	/**
+	 * Undefined or not managed by the model implementation
+	 */
+	UNDEFINED(0, "undefined"),
 	
 	/**
 	 * 
 	 */
-	MERGE(0, "MERGE"),
+	TRUE(1, "true"),
 	
 	/**
 	 * 
 	 */
-	PERSIST(1, "PERSIST"),
-	
-	/**
-	 * 
-	 */
-	REFRESH(2, "REFRESH"),
-	
-	/**
-	 * 
-	 */
-	REMOVE(3, "REMOVE"),
+	FALSE(2, "false");
 		
-	/**
-	 * 
-	 */
-	ALL(4, "ALL");
-	
 	//---------------------------------------------------
 	private final int    value ;
 	private final String text  ;
 	
-	private CascadeOption(int value, String text) {
+	private Optional(int value, String text) {
 		this.value = value ;
 		this.text  = text ;
 	}
 	
 	/**
-	 * Returns the fetch type as an int value (0 to 3) <br>
+	 * Returns the 'optional' type as an int value (0 to 2) <br>
 	 * @return
 	 */
 	public int getValue() {
@@ -67,8 +57,8 @@ public enum CascadeOption {
 	}
 	
 	/**
-	 * Returns the fetch type as a text<br>
-	 * e.g. : 'MERGE', 'PERSIST', etc
+	 * Returns the 'optional' type as a text<br>
+	 * e.g. : 'true' or 'false' or 'undefined'
 	 * @return
 	 */
 	public String getText() {

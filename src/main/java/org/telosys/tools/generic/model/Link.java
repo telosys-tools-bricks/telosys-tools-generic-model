@@ -18,6 +18,11 @@ package org.telosys.tools.generic.model;
 import java.util.List;
 import java.util.Map;
 
+import org.telosys.tools.generic.model.enums.BooleanValue;
+import org.telosys.tools.generic.model.enums.Cardinality;
+import org.telosys.tools.generic.model.enums.FetchType;
+import org.telosys.tools.generic.model.enums.Optional;
+
 /**
  * @author Laurent Guerin
  *

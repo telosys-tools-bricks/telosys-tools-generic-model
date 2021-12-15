@@ -13,43 +13,33 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.telosys.tools.generic.model;
+package org.telosys.tools.generic.model.enums;
 
 /**
- * Enumeration for the different types of OPTIONAL 
+ * Enumeration for Generated Value Strategy
  * 
  * @author Laurent Guerin
- * @since 3.0.0
+ * @since 3.4.0
  *
  */
-public enum Optional {
+public enum GeneratedValueStrategy {
+	UNDEFINED(0, ""),
+	AUTO(1, "AUTO"),
+	IDENTITY(2, "IDENTITY"),
+	SEQUENCE(3, "SEQUENCE"),
+	TABLE(4, "TABLE");
 	
-	/**
-	 * Undefined or not managed by the model implementation
-	 */
-	UNDEFINED(0, "undefined"),
-	
-	/**
-	 * 
-	 */
-	TRUE(1, "true"),
-	
-	/**
-	 * 
-	 */
-	FALSE(2, "false");
-		
 	//---------------------------------------------------
 	private final int    value ;
 	private final String text  ;
 	
-	private Optional(int value, String text) {
+	private GeneratedValueStrategy(int value, String text) {
 		this.value = value ;
 		this.text  = text ;
 	}
 	
 	/**
-	 * Returns the 'optional' type as an int value (0 to 2) <br>
+	 * Returns the strategy as an int value (0 to 4) <br>
 	 * @return
 	 */
 	public int getValue() {
@@ -57,11 +47,12 @@ public enum Optional {
 	}
 	
 	/**
-	 * Returns the 'optional' type as a text<br>
-	 * e.g. : 'true' or 'false' or 'undefined'
+	 * Returns the strategy as a text<br>
+	 * e.g. : 'AUTO' or 'IDENTITY' or 'SEQUENCE' or 'TABLE'
 	 * @return
 	 */
 	public String getText() {
 		return this.text;
 	}
+	
 }

@@ -19,6 +19,10 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
+import org.telosys.tools.generic.model.enums.BooleanValue;
+import org.telosys.tools.generic.model.enums.DateType;
+import org.telosys.tools.generic.model.enums.GeneratedValueStrategy;
+
 /**
  * This interface describe an abstract attribute that must be implemented 
  * by each attribute in a concrete model 
@@ -112,20 +116,25 @@ public interface Attribute {
 	public String getDefaultValue();
 
 	/**
-	 * Returns the generator for a 'generated value'<br>
-	 * Typically for JPA : 'SequenceGenerator' or 'TableGenerator'<br> 
-	 * If not supported by the model implementation : 'null'
+	 * Returns the strategy for a 'generated value' 
 	 * @return
 	 */
-	public String getGeneratedValueGenerator() ;
+	public GeneratedValueStrategy getGeneratedValueStrategy() ;
+	
+//	/**
+//	 * Returns the generator for a 'generated value'<br>
+//	 * Typically for JPA : 'SequenceGenerator' or 'TableGenerator'<br> 
+//	 * If not supported by the model implementation : 'null'
+//	 * @return
+//	 */
+//	public String getGeneratedValueGenerator() ;
 
 	/**
-	 * Returns the strategy for a 'generated value' (or null if none) <br>
-	 * e.g : 'auto', 'identity', 'sequence', 'table' <br> 
-	 * If not supported by the model implementation : 'null'
+	 * Returns the generator name (usable with SEQUENCE and TABLE strategy) <br>
+	 * or null if none
 	 * @return
 	 */
-	public String getGeneratedValueStrategy() ;
+	public String getGeneratedValueGeneratorName() ; // v 3.4.0
 
 	/**
 	 * Returns the initial value for the attribute (or null if none) <br> 
@@ -213,21 +222,26 @@ public interface Attribute {
 	 */
 	public String getPattern(); 
 
+//	/**
+//	 * Returns the 'sequence allocation size' to be used in the 'sequence generator' definition"<br>
+//	 * Typically for JPA '@SequenceGenerator/allocationSize'  <br> 
+//	 * If not supported by the model implementation : 'null'
+//	 * @return
+//	 */
+//	public Integer getSequenceGeneratorAllocationSize() ;
 	/**
-	 * Returns the 'sequence allocation size' to be used in the 'sequence generator' definition"<br>
-	 * Typically for JPA '@SequenceGenerator/allocationSize'  <br> 
-	 * If not supported by the model implementation : 'null'
+	 * Returns the allocation size usable for SEQUENCE and TABLE stategy
 	 * @return
 	 */
-	public Integer getSequenceGeneratorAllocationSize() ;
+	public Integer getGeneratedValueAllocationSize() ; // v 3.4.0
 
-	/**
-	 * Returns the name of the 'sequence generator' <br>
-	 * Typically for JPA '@SequenceGenerator/name'<br> 
-	 * If not supported by the model implementation : 'null'
-	 * @return
-	 */
-	public String getSequenceGeneratorName() ;
+//	/**
+//	 * Returns the name of the 'sequence generator' <br>
+//	 * Typically for JPA '@SequenceGenerator/name'<br> 
+//	 * If not supported by the model implementation : 'null'
+//	 * @return
+//	 */
+//	public String getSequenceGeneratorName() ;
 
 	/**
 	 * Returns the 'sequence name' to be used in the 'sequence generator' definition <br>
@@ -235,15 +249,16 @@ public interface Attribute {
 	 * If not supported by the model implementation : 'null'
 	 * @return
 	 */
-	public String getSequenceGeneratorSequenceName() ;
+//	public String getSequenceGeneratorSequenceName() ;
+	public String getGeneratedValueSequenceName() ; // v 3.4.0
 
-	/**
-	 * Returns the name of the 'table generator' <br>
-	 * Typically for JPA '@TableGenerator/name'  <br> 
-	 * If not supported by the model implementation : 'null'
-	 * @return
-	 */
-	public String getTableGeneratorName() ;
+//	/**
+//	 * Returns the name of the 'table generator' <br>
+//	 * Typically for JPA '@TableGenerator/name'  <br> 
+//	 * If not supported by the model implementation : 'null'
+//	 * @return
+//	 */
+//	public String getTableGeneratorName() ;
 
 	/**
 	 * Returns the name of the Primary Key column used in the 'table generator' <br> 
@@ -251,7 +266,8 @@ public interface Attribute {
 	 * If not supported by the model implementation : 'null'
 	 * @return
 	 */
-	public String getTableGeneratorPkColumnName() ;
+//	public String getTableGeneratorPkColumnName() ;
+	public String getGeneratedValueTablePkColumnName() ; // v 3.4.0
 
 	/**
 	 * Returns the primary key value in the generator table that distinguishes this set <br>
@@ -260,7 +276,8 @@ public interface Attribute {
 	 * If not supported by the model implementation : 'null'
 	 * @return
 	 */
-	public String getTableGeneratorPkColumnValue() ;
+//	public String getTableGeneratorPkColumnValue() ;
+	public String getGeneratedValueTablePkColumnValue() ; // v 3.4.0
 
 	/**
 	 * Returns the name of the table used in the 'table generator' <br>
@@ -268,7 +285,8 @@ public interface Attribute {
 	 * If not supported by the model implementation : 'null'
 	 * @return
 	 */
-	public String getTableGeneratorTable() ;
+//	public String getTableGeneratorTable() ;
+	public String getGeneratedValueTableName() ; // v 3.4.0
 
 	/**
 	 * Returns the name of the column that stores the last value generated by the 'table generator' <br>
@@ -276,21 +294,23 @@ public interface Attribute {
 	 * If not supported by the model implementation : 'null'
 	 * @return
 	 */
-	public String getTableGeneratorValueColumnName() ;
-
-	/**
-	 * Returns TRUE if the attribute has a 'Sequence Generator' <br>
-	 * If not supported by the model implementation : 'false'
-	 * @return
-	 */
-	public boolean hasSequenceGenerator();
+//	public String getTableGeneratorValueColumnName() ;
+	public String getGeneratedValueTableValueColumnName() ; // v 3.4.0
 	
-	/**
-	 * Returns TRUE if the attribute has a 'Table Generator' <br>
-	 * If not supported by the model implementation : 'false'
-	 * @return
-	 */
-	public boolean hasTableGenerator();
+
+//	/**
+//	 * Returns TRUE if the attribute has a 'Sequence Generator' <br>
+//	 * If not supported by the model implementation : 'false'
+//	 * @return
+//	 */
+//	public boolean hasSequenceGenerator();
+//	
+//	/**
+//	 * Returns TRUE if the attribute has a 'Table Generator' <br>
+//	 * If not supported by the model implementation : 'false'
+//	 * @return
+//	 */
+//	public boolean hasTableGenerator();
 	
 	/**
 	 * Returns TRUE if the attribute is 'auto-incremented' by the database engine <br>

@@ -17,6 +17,8 @@ package org.telosys.tools.generic.model;
 
 import java.util.*;
 
+import org.telosys.tools.generic.model.enums.ModelType;
+
 /**
  * This interface describe an abstract model that must be implemented 
  * by each concrete model 

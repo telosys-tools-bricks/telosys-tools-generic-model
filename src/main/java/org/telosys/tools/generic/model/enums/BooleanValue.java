@@ -13,34 +13,56 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.telosys.tools.generic.model;
+package org.telosys.tools.generic.model.enums;
 
 /**
- * Enumeration of all the model types usable by the generator 
+ * Enumeration for a boolean value
  * 
  * @author Laurent Guerin
- * @since 3.0.0
+ * @since 3.3.0
  *
  */
-public enum ModelType {
+public enum BooleanValue {
 	
 	/**
-	 * Model created from a SQL Database Schema (Telosys Tools Database Repository)
+	 * Undefined or not managed by the model implementation
 	 */
-	DATABASE_SCHEMA,
+	UNDEFINED(-1, "undefined"),
 	
 	/**
-	 * Model created by using the "Telosys Tools DSL"
+	 * 
 	 */
-	DOMAIN_SPECIFIC_LANGUAGE,
+	FALSE(0, "false"),
 	
 	/**
-	 * Model created by Java classes introspection 
+	 * 
 	 */
-	JAVA_CLASSES,
+	TRUE(1, "true");
+	
+	//---------------------------------------------------
+	private final int    value ;
+	private final String text  ;
+	
+	private BooleanValue(int value, String text) {
+		this.value = value ;
+		this.text  = text ;
+	}
 	
 	/**
-	 * Other type (specific model provided by an other tool)
+	 * Returns the value as an int <br>
+	 * @return
 	 */
-	OTHER
+	public int getValue() {
+		return this.value ;
+	}
+	
+	/**
+	 * Returns the value as a text<br>
+	 * e.g. : 'undefined', 'true', 'false'
+	 * @return
+	 */
+	public String getText() {
+		return this.text;
+	}
+	
 }

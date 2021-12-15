@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 
 import org.junit.Test;
+import org.telosys.tools.generic.model.enums.CascadeOption;
 
 public class CascadeOptionsTest {
 
