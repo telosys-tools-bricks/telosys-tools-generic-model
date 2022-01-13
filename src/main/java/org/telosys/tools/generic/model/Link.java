@@ -16,7 +16,6 @@
 package org.telosys.tools.generic.model;
 
 import java.util.List;
-import java.util.Map;
 
 import org.telosys.tools.generic.model.enums.BooleanValue;
 import org.telosys.tools.generic.model.enums.Cardinality;
@@ -224,7 +223,7 @@ public interface Link {
 	 * @return
 	 * @since v 3.4.0
 	 */
-	public Map<String, String> getTagsMap(); // v 3.4.0
+	public TagContainer getTagContainer(); // v 3.4.0
 	
 
 }

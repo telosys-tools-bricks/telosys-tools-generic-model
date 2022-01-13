@@ -17,7 +17,6 @@ package org.telosys.tools.generic.model;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 import org.telosys.tools.generic.model.enums.BooleanValue;
 import org.telosys.tools.generic.model.enums.DateType;
@@ -505,12 +504,18 @@ public interface Attribute {
 	 */
 	public boolean isUsedInSelectedLinks(); 
 
+//	/**
+//	 * Returns all the tags defined in the attribute
+//	 * @return
+//	 * @since v 3.3.0
+//	 */
+//	public Map<String, String> getTagsMap();
 	/**
-	 * Returns all the tags defined in the attribute
+	 * Returns all the tags defined in the link
 	 * @return
-	 * @since v 3.3.0
+	 * @since v 3.4.0
 	 */
-	public Map<String, String> getTagsMap();
+	public TagContainer getTagContainer(); // v 3.4.0
 	
     /**
      * Returns the 'insertable' flag values

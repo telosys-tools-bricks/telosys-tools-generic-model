@@ -130,4 +130,12 @@ public interface Entity
 	 */
 	public List<String> getWarnings() ;
 
+	/**
+	 * Returns all the tags defined at entity level
+	 * @return
+	 * @since v 3.4.0
+	 */
+	public TagContainer getTagContainer(); // v 3.4.0
+	
+
 }
