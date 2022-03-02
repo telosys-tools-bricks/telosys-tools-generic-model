@@ -21,7 +21,8 @@ import java.util.List;
  * Definition of a database foreign key
  * 
  * @author Laurent Guerin
- *
+ * @since 2.0.0  (changes in v 3.4.0)
+ * 
  */
 public interface ForeignKey {
 
@@ -32,67 +33,78 @@ public interface ForeignKey {
 	 */
 	public String getName() ;
 
-	//-------------------------------------------------------------------------------------
-	/**
-	 * Returns the name of the table holding the foreign key
-	 * @return
-	 */
-	public String getTableName() ;
+    public String getOriginEntityName() ;
+    
+    public String getReferencedEntityName() ;
 
-	//-------------------------------------------------------------------------------------
-	/**
-	 * Returns the name of the referenced table (the table referenced by the foreign key)
-	 * @return
-	 */
-	public String getReferencedTableName() ;
+    public List<ForeignKeyAttribute> getAttributes();
+    
+    public boolean isComposite();
 
-	//-------------------------------------------------------------------------------------
-	/**
-	 * Returns all the columns composing the foreign key <br>
-	 * (sorted in the original database order)
-	 * @return
-	 */
-	public List<ForeignKeyColumn> getColumns() ;
-
-	//-------------------------------------------------------------------------------------
-	// Delete rule, Update rule and Deferrability constraint
-	//-------------------------------------------------------------------------------------
-	
-	/**
-	 * Returns the 'DEFERRABILITY' status ( 'NOT DEFERRABLE', 'INITIALLY IMMEDIATE', 'INITIALLY DEFERRED'  )
-	 * @return
-	 */
-	public String getDeferrable() ;
-
-	/**
-	 * Returns the 'DEFERRABILITY' status code ( MetaData Code : 5,6,7 ) 
-	 * @return
-	 */
-	public int getDeferrableCode() ;
-
-	/**
-	 * Returns the 'ON DELETE' rule ( 'NO ACTION', 'RESTRICT', 'SET NULL', 'SET DEFAULT', 'CASCADE'  )
-	 * @return
-	 */
-	public String getDeleteRule() ;
-
-	/**
-	 * Returns the 'ON DELETE' rule code ( MetaData Code : 0,1,2,3,4 )
-	 * @return
-	 */
-	public int getDeleteRuleCode() ;
-
-	/**
-	 * Returns the 'ON UPDATE' rule ( 'NO ACTION', 'RESTRICT', 'SET NULL', 'SET DEFAULT', 'CASCADE' ) 
-	 * @return
-	 */
-	public String getUpdateRule() ;
-
-	/**
-	 * Returns the 'ON UPDATE' rule code ( MetaData Code : 0,1,2,3,4 )
-	 * @return
-	 */
-	public int getUpdateRuleCode() ;
-	
-
+    //-------------------------------------------------------------------------------------
+    // OLD
+    //-------------------------------------------------------------------------------------
+//   
+//	/**
+//	 * Returns the name of the table holding the foreign key
+//	 * @return
+//	 */
+//	public String getTableName() ;
+//
+//	//-------------------------------------------------------------------------------------
+//	/**
+//	 * Returns the name of the referenced table (the table referenced by the foreign key)
+//	 * @return
+//	 */
+//	public String getReferencedTableName() ;
+//
+//	//-------------------------------------------------------------------------------------
+//	/**
+//	 * Returns all the columns composing the foreign key <br>
+//	 * (sorted in the original database order)
+//	 * @return
+//	 */
+//	public List<ForeignKeyColumn> getColumns() ;
+//
+//	//-------------------------------------------------------------------------------------
+//	// Delete rule, Update rule and Deferrability constraint
+//	//-------------------------------------------------------------------------------------
+//	
+//	/**
+//	 * Returns the 'DEFERRABILITY' status ( 'NOT DEFERRABLE', 'INITIALLY IMMEDIATE', 'INITIALLY DEFERRED'  )
+//	 * @return
+//	 */
+//	public String getDeferrable() ;
+//
+//	/**
+//	 * Returns the 'DEFERRABILITY' status code ( MetaData Code : 5,6,7 ) 
+//	 * @return
+//	 */
+//	public int getDeferrableCode() ;
+//
+//	/**
+//	 * Returns the 'ON DELETE' rule ( 'NO ACTION', 'RESTRICT', 'SET NULL', 'SET DEFAULT', 'CASCADE'  )
+//	 * @return
+//	 */
+//	public String getDeleteRule() ;
+//
+//	/**
+//	 * Returns the 'ON DELETE' rule code ( MetaData Code : 0,1,2,3,4 )
+//	 * @return
+//	 */
+//	public int getDeleteRuleCode() ;
+//
+//	/**
+//	 * Returns the 'ON UPDATE' rule ( 'NO ACTION', 'RESTRICT', 'SET NULL', 'SET DEFAULT', 'CASCADE' ) 
+//	 * @return
+//	 */
+//	public String getUpdateRule() ;
+//
+//	/**
+//	 * Returns the 'ON UPDATE' rule code ( MetaData Code : 0,1,2,3,4 )
+//	 * @return
+//	 */
+//	public int getUpdateRuleCode() ;
+//	
+//
 }

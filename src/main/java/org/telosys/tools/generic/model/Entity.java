@@ -22,18 +22,10 @@ import java.util.List;
  * by each entity in a concrete model 
  * 
  * @author Laurent Guerin
- * @since 3.0.0
+ * @since 2.0.0  (changes in v 3.4.0)
  */
 public interface Entity 
 {
-	/**
-	 * Returns all the attributes defined for this entity <br>
-	 * This information is MANDATORY, it must be provided by all models implementations <br>
-	 * It cannot be null, if no attribute the implementation is supposed to return a void list
-	 * @return
-	 */
-	public List<Attribute> getAttributes() ;
-
 	/**
 	 * Returns the entity class name without the package ( ie : "MyClass" ) <br>
 	 * This information is MANDATORY, it must be provided by all models implementations <br>
@@ -43,6 +35,16 @@ public interface Entity
 	 */
 	public String getClassName() ;
 	
+	/**
+	 * Returns all the attributes defined for this entity <br>
+	 * This information is MANDATORY, it must be provided by all models implementations <br>
+	 * It cannot be null, if no attribute the implementation is supposed to return a void list
+	 * @return
+	 */
+	public List<Attribute> getAttributes() ;
+	
+	public Attribute getAttributeByName(String name); // v 3.4.0 (for standardization in all models)
+
 	/**
 	 * Returns the database catalog of the table mapped with this entity<br> 
 	 * Void string if not defined
@@ -58,11 +60,12 @@ public interface Entity
 	public String getDatabaseComment() ;
 	
 	/**
-	 * Returns all the database foreign keys defined for this entity<br> 
-	 * If not supported by the model implementation : 'null'
+	 * Returns all the foreign keys defined for this entity<br> 
 	 * @return
 	 */
-	public List<ForeignKey> getDatabaseForeignKeys() ;
+//	public List<ForeignKey> getDatabaseForeignKeys() ;
+	public List<ForeignKey> getForeignKeys() ; // v 3.4.0
+
 
 	/**
 	 * Returns the database schema of the table mapped with this entity<br> 
@@ -137,5 +140,13 @@ public interface Entity
 	 */
 	public TagContainer getTagContainer(); // v 3.4.0
 	
-
+	public String getSuperClass() ; // v 3.4.0
+	public boolean isAbstract() ; // v 3.4.0
+	public boolean isInMemoryRepository() ; // v 3.4.0
+	public boolean isReadOnly() ; // v 3.4.0
+	public boolean isAggregateRoot() ; // v 3.4.0
+	public String getDomain(); // v 3.4.0
+	public String getContext(); // v 3.4.0
+	public boolean isDatabaseView(); // v 3.4.0
+	public String getDatabaseTablespace(); // v 3.4.0
 }

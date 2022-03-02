@@ -16,43 +16,48 @@
 package org.telosys.tools.generic.model;
 
 /**
- * Definition of a foreign key part based on the current entity field
+ * Definition of a database column that is part of a foreign key
  * 
  * @author Laurent Guerin
- * @since 2.0.0  (changes in v 3.4.0)
+ * @since 3.4.0  (replaces ForeignKeyColumn)
  * 
  */
-public interface ForeignKeyPart {
+public interface ForeignKeyAttribute {
 	
 	/**
-	 * Returns the name of the Foreign Key the field is part of
+	 * Returns the ordinal (position of the attribute in FK)
 	 * @return
 	 */
-	public String getFkName() ;
+	public int getOrdinal() ; // v 3.4.0
+	
+	/**
+	 * The name of the attribute at the origin of the reference
+	 * @return
+	 */
+	public String getOriginAttributeName() ;  // v 3.4.0
 
 	/**
-	 * Returns the name of the referenced entity
+	 * The name of the referenced attribute
 	 * @return
 	 */
-	public String getReferencedEntity() ;
-	
-	/**
-	 * Returns the name of the referenced attribute
-	 * @return
-	 */
-	public String getReferencedAttribute() ;
-	
-// Removed in v 3.4.0
+	public String getReferencedAttributeName() ;  // v 3.4.0
+
 //	/**
-//	 * Returns the name of the referenced table
+//	 * Returns the name of the column
 //	 * @return
 //	 */
-//	public String getReferencedTable() ;
-//	
+//	public String getColumnName() ;
+//
+//	/**
+//	 * Returns the sequence of the column (the position in the foreign key : 1rst, 2nd, etc)
+//	 * @return
+//	 */
+//	public int getSequence() ;
+//
 //	/**
 //	 * Returns the name of the referenced column
 //	 * @return
 //	 */
-//	public String getReferencedColumn() ;
+//	public String getReferencedColumnName() ;
 	
 }

@@ -15,30 +15,48 @@
  */
 package org.telosys.tools.generic.model;
 
+
 /**
- * Definition of a database column that is part of a foreign key
- * 
  * @author Laurent Guerin
+ * @since 3.4.0  (replaces JoinColumn)
  *
  */
-public interface ForeignKeyColumn {
+public interface LinkAttribute {
 	
 	/**
-	 * Returns the name of the column
+	 * Returns the name of the attribute (origin side)
 	 * @return
 	 */
-	public String getColumnName() ;
+	public String getOriginAttributeName() ;
 
 	/**
-	 * Returns the sequence of the column (the position in the foreign key : 1rst, 2nd, etc)
+	 * Returns the referenced attribute name (target side)
 	 * @return
 	 */
-	public int getSequence() ;
+	public String getReferencedAttributeName() ;
 
 	/**
-	 * Returns the name of the referenced column
+	 * Returns TRUE if 'insertable'
 	 * @return
 	 */
-	public String getReferencedColumnName() ;
+	public boolean isInsertable() ;
 	
+	/**
+	 * Returns TRUE if 'nullable'
+	 * @return
+	 */
+	public boolean isNullable() ;
+
+	/**
+	 * Returns TRUE if 'unique'
+	 * @return
+	 */
+	public boolean isUnique() ;
+
+	/**
+	 * Returns TRUE if 'updatable'
+	 * @return
+	 */
+	public boolean isUpdatable() ;
+
 }

@@ -15,18 +15,30 @@
  */
 package org.telosys.tools.generic.model;
 
-import java.util.List;
-
-
-public interface JoinTable {
+/**
+ * Definition of a database column that is part of a foreign key
+ * 
+ * @author Laurent Guerin
+ * (removed in v 3.4.0)
+ */
+public interface ForeignKeyColumn {
 	
-	public String getName() ;
-
-	public String getSchema() ;
-
-	public String getCatalog() ;
-
-	public List<JoinColumn> getJoinColumns() ;
-	
-	public List<JoinColumn> getInverseJoinColumns() ;
+//	/**
+//	 * Returns the name of the column
+//	 * @return
+//	 */
+//	public String getColumnName() ;
+//
+//	/**
+//	 * Returns the sequence of the column (the position in the foreign key : 1rst, 2nd, etc)
+//	 * @return
+//	 */
+//	public int getSequence() ;
+//
+//	/**
+//	 * Returns the name of the referenced column
+//	 * @return
+//	 */
+//	public String getReferencedColumnName() ;
+//	
 }

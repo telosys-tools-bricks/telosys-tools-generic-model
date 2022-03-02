@@ -28,27 +28,30 @@ import org.telosys.tools.generic.model.enums.Optional;
  */
 public interface Link {
 
-	/**
-	 * Returns the unique id of the link in the repository (id used by the tool)
-	 * @return
-	 */
-	public String getId() ;
+//	/**
+//	 * Returns the unique id of the link in the repository (id used by the tool)
+//	 * @return
+//	 */
+//	public String getId() ; // removed in v 3.4.0
 
 	//-------------------------------------------------------------------------------------
 	/**
-	 * Returns the 'join columns' for the link 
-	 * NB : can be null if the link doesn't have 'join columns'
+	 * Returns the attributes used in the link 
+	 * NB : can be null if the link doesn't have 'join attributes'
 	 * @return
 	 */
-	public List<JoinColumn> getJoinColumns() ;
+//	public List<JoinColumn> getJoinColumns() ;
+//	public List<LinkAttribute> getJoinAttributes() ; // v 3.4.0
+	public List<LinkAttribute> getAttributes() ; // v 3.4.0
 	
 	//-------------------------------------------------------------------------------------
-	/**
-	 * Returns the name of the target table (table referenced by the link) 
-	 * Can be null (if no database schema)
-	 * @return
-	 */
-	public String getTargetTableName() ;
+//	/**
+//	 * Returns the name of the target table (table referenced by the link) 
+//	 * Can be null (if no database schema)
+//	 * @return
+//	 */
+//	public String getTargetTableName() ; 
+	// v 3.4.0
 	
 	//--------------------------------------------------------------------------
 	/**
@@ -56,8 +59,9 @@ public interface Link {
 	 * ie "Book", "Customer", ... 
 	 * @return
 	 */
-	public String getTargetEntityClassName() ;
-
+	//public String getTargetEntityClassName() ;
+	public String getReferencedEntityName(); // v 3.4.0
+	
 	//-------------------------------------------------------------------------------------
 	/**
 	 * Returns the field name for the link (attribute field name in the entity class)
@@ -101,13 +105,14 @@ public interface Link {
 	public boolean isSelected() ; 
 	
 	//--------------------------------------------------------------------------
-	/**
-	 * Returns the name of the table name <br>
-	 * Can be null (if no database schema)
-	 * @return
-	 */
-	public String getSourceTableName() ;
-
+//	/**
+//	 * Returns the name of the table name <br>
+//	 * Can be null (if no database schema)
+//	 * @return
+//	 */
+//	public String getSourceTableName() ;
+	// v 3.4.0
+	
 	//--------------------------------------------------------------------------
 	/**
 	 * Returns TRUE if the link is the 'Inverse Side' of the relationship between 2 entities
@@ -115,12 +120,12 @@ public interface Link {
 	 */
 	public boolean isInverseSide() ;
 
-	/**
-	 * Returns the link id of the inverse side <br>
-	 * Can be null if no inverse side 
-	 * @return
-	 */
-	public String getInverseSideLinkId() ;
+//	/**
+//	 * Returns the link id of the inverse side <br>
+//	 * Can be null if no inverse side 
+//	 * @return
+//	 */
+//	public String getInverseSideLinkId() ; // removed in v 3.4.0
 	
 	//--------------------------------------------------------------------------
 	public Optional getOptional() ;
@@ -163,29 +168,33 @@ public interface Link {
 	//--------------------------------------------------------------------------
 	// JOIN TABLE management
 	//--------------------------------------------------------------------------
-	public boolean isBasedOnJoinTable() ;
+//	public boolean isBasedOnJoinTable() ;
+	public boolean isBasedOnJoinEntity() ; // v 3.4.0
 
-	/**
-	 * Returns the 'join table' object for the link <br>
-	 * NB : can be null if the link doesn't have a 'join table'
-	 * @return
-	 */
-	public JoinTable getJoinTable() ;
-
+//	/**
+//	 * Returns the 'join table' object for the link <br>
+//	 * NB : can be null if the link doesn't have a 'join table'
+//	 * @return
+//	 */
+//	public JoinTable getJoinTable() ;
+	// v 3.4.0
+	
 	/**
 	 * Returns the name of the Join Table used to generate the link <br>
 	 * NB : can be null if the link doesn't have a 'join table'
 	 * @return
 	 */
-	public String getJoinTableName() ;
+//	public String getJoinTableName() ;
+	public String getJoinEntityName() ; // v 3.4.0
 
 	//--------------------------------------------------------------------------
-	/**
-	 * Returns a string that can be used to compare 2 fields, and to know if they are different or identical<br>
-	 * NB : all the significant fields must be in this string !
-	 * @return
-	 */
-	public String getComparableString() ; 
+// removed in v 3.4.0
+//	/**
+//	 * Returns a string that can be used to compare 2 fields, and to know if they are different or identical<br>
+//	 * NB : all the significant fields must be in this string !
+//	 * @return
+//	 */
+//	public String getComparableString() ; 
 	
 	//--------------------------------------------------------------------------
 	/**
