@@ -88,17 +88,23 @@ public interface Model {
 	 * 
 	 * @return
 	 */
-    public Integer getDatabaseId() ;
+    public String getDatabaseId() ;
 
-	//-------------------------------------------------------------------------------------
 	/**
-	 * Returns the product name of the database used to generate the model if any <br>
-	 * (the product name returned by the JDBC meta-data, e.g. 'Apache Derby')<br>
+	 * Returns the name of the database used to generate the model if any <br>
 	 * This information is OPTIONAL <br>
 	 * 
 	 * @return
 	 */
-    public String getDatabaseProductName() ;
+    public String getDatabaseName() ;
+    
+	/**
+	 * Returns the type of the database used to generate the model if any <br>
+	 * This information is OPTIONAL <br>
+	 * 
+	 * @return
+	 */
+    public String getDatabaseType() ;
     
     /**
      * Returns the instance of the entity having the given class name <br>
