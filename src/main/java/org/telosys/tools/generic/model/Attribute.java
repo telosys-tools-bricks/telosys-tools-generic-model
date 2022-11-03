@@ -141,20 +141,21 @@ public interface Attribute {
 	 */
 	public String getInputType();
 
-	/**
-	 * Returns the JDBC type of the attribute (the type code) if any (null if none)<br> 
-	 * If not supported by the model implementation : 'null'
-	 * @return
-	 */
-    public Integer getJdbcTypeCode();
-
-	/**
-	 * Returns the JDBC type name ('CHAR', 'VARCHAR', 'NUMERIC', ... )<br>
-	 * The 'java.sql.Types' constant name for the current JDBC type code<br> 
-	 * If not supported by the model implementation : 'null'
-	 * @return
-	 */
-	public String getJdbcTypeName();
+// removed in v 4.1 
+//	/**
+//	 * Returns the JDBC type of the attribute (the type code) if any (null if none)<br> 
+//	 * If not supported by the model implementation : 'null'
+//	 * @return
+//	 */
+//    public Integer getJdbcTypeCode();
+//
+//	/**
+//	 * Returns the JDBC type name ('CHAR', 'VARCHAR', 'NUMERIC', ... )<br>
+//	 * The 'java.sql.Types' constant name for the current JDBC type code<br> 
+//	 * If not supported by the model implementation : 'null'
+//	 * @return
+//	 */
+//	public String getJdbcTypeName();
 
     /**
      * Returns the label defined for the attribute <br> 
