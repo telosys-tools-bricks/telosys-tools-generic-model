@@ -63,7 +63,6 @@ public interface Entity
 	 * Returns all the foreign keys defined for this entity<br> 
 	 * @return
 	 */
-//	public List<ForeignKey> getDatabaseForeignKeys() ;
 	public List<ForeignKey> getForeignKeys() ; // v 3.4.0
 
 

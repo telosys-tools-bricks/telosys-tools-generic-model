@@ -28,41 +28,20 @@ import org.telosys.tools.generic.model.enums.Optional;
  */
 public interface Link {
 
-//	/**
-//	 * Returns the unique id of the link in the repository (id used by the tool)
-//	 * @return
-//	 */
-//	public String getId() ; // removed in v 3.4.0
-
-	//-------------------------------------------------------------------------------------
 	/**
 	 * Returns the attributes used in the link 
 	 * NB : can be null if the link doesn't have 'join attributes'
 	 * @return
 	 */
-//	public List<JoinColumn> getJoinColumns() ;
-//	public List<LinkAttribute> getJoinAttributes() ; // v 3.4.0
 	public List<LinkAttribute> getAttributes() ; // v 3.4.0
 	
-	//-------------------------------------------------------------------------------------
-//	/**
-//	 * Returns the name of the target table (table referenced by the link) 
-//	 * Can be null (if no database schema)
-//	 * @return
-//	 */
-//	public String getTargetTableName() ; 
-	// v 3.4.0
-	
-	//--------------------------------------------------------------------------
 	/**
 	 * Returns the short class name of the target entity <br>
 	 * ie "Book", "Customer", ... 
 	 * @return
 	 */
-	//public String getTargetEntityClassName() ;
 	public String getReferencedEntityName(); // v 3.4.0
 	
-	//-------------------------------------------------------------------------------------
 	/**
 	 * Returns the field name for the link (attribute field name in the entity class)
 	 * e.g. : "book", "customer", "books", "customers", ...
@@ -70,19 +49,6 @@ public interface Link {
 	 */
 	public String getFieldName() ;
 
-	//-------------------------------------------------------------------------------------
-// REMOVED in v 3.3.0
-//	/**
-//	 * Returns the type of the link <br>
-//	 * If the type is a collection the full type is returned ( e.g. 'java.util.List', 'java.util.Set',...) <br>
-//	 * If the type is an entity the simple type is returned ( 'Person', 'Customer', 'Book', ... ) <br>
-//	 * For OneToMany/ManyToMany : the collection type ( 'java.util.List', ...) <br>
-//	 * For ManyToOne/OneToOne   : the targeted entity short type ( 'Person', 'Customer', ... ) <br>
-//	 * @return
-//	 */
-//	public String getFieldType() ;
-//	
-	//-------------------------------------------------------------------------------------
 	/**
 	 * Returns TRUE if the link is the 'Owning Side' of the relationship between 2 entities
 	 * @return
@@ -97,39 +63,23 @@ public interface Link {
 	 */
 	public String getMappedBy() ;
 
-	//--------------------------------------------------------------------------
 	/**
 	 * Returns TRUE if the link is selected (check-box checked in the GUI)
 	 * @return
 	 */
 	public boolean isSelected() ; 
 	
-	//--------------------------------------------------------------------------
-//	/**
-//	 * Returns the name of the table name <br>
-//	 * Can be null (if no database schema)
-//	 * @return
-//	 */
-//	public String getSourceTableName() ;
-	// v 3.4.0
-	
-	//--------------------------------------------------------------------------
 	/**
 	 * Returns TRUE if the link is the 'Inverse Side' of the relationship between 2 entities
 	 * @return
 	 */
 	public boolean isInverseSide() ;
 
-//	/**
-//	 * Returns the link id of the inverse side <br>
-//	 * Can be null if no inverse side 
-//	 * @return
-//	 */
-//	public String getInverseSideLinkId() ; // removed in v 3.4.0
-	
-	//--------------------------------------------------------------------------
+	/**
+	 * Returns Optional value for this link 
+	 * @return
+	 */
 	public Optional getOptional() ;
-	//--------------------------------------------------------------------------
 
 	/**
 	 * Returns the cardinality of the link : "OneToMany" or "ManyToOne" or "OneToOne" or "ManyToMany" 
@@ -137,7 +87,6 @@ public interface Link {
 	 */
 	public Cardinality getCardinality() ;
 	
-	//--------------------------------------------------------------------------
 	/**
 	 * Returns the cascade options of the link : "ALL", "MERGE", "PERSIST", "REFRESH", "REMOVE" <br>
 	 * Can be null if no 'cascade options'
@@ -145,7 +94,6 @@ public interface Link {
 	 */
 	public CascadeOptions getCascadeOptions() ;
 	
-	//--------------------------------------------------------------------------
 	/**
 	 * Returns the 'fetch type' of the link : "DEFAULT" or "EAGER" or "LAZY"
 	 * @return
@@ -155,6 +103,10 @@ public interface Link {
 	//--------------------------------------------------------------------------
 	// FOREIGN KEY management
 	//--------------------------------------------------------------------------
+	/**
+	 * Returns true if the link is based on a 'foreign key'
+	 * @return
+	 */
 	public boolean isBasedOnForeignKey() ;
 	
 	/**
@@ -168,34 +120,19 @@ public interface Link {
 	//--------------------------------------------------------------------------
 	// JOIN TABLE management
 	//--------------------------------------------------------------------------
-//	public boolean isBasedOnJoinTable() ;
-	public boolean isBasedOnJoinEntity() ; // v 3.4.0
-
-//	/**
-//	 * Returns the 'join table' object for the link <br>
-//	 * NB : can be null if the link doesn't have a 'join table'
-//	 * @return
-//	 */
-//	public JoinTable getJoinTable() ;
-	// v 3.4.0
-	
 	/**
-	 * Returns the name of the Join Table used to generate the link <br>
-	 * NB : can be null if the link doesn't have a 'join table'
+	 * Returns true if the link is based on a 'join entity'
 	 * @return
 	 */
-//	public String getJoinTableName() ;
+	public boolean isBasedOnJoinEntity() ; // v 3.4.0
+
+	/**
+	 * Returns the name of the Join Table used to generate the link <br>
+	 * NB : can be null if the link doesn't have a 'join entity'
+	 * @return
+	 */
 	public String getJoinEntityName() ; // v 3.4.0
 
-	//--------------------------------------------------------------------------
-// removed in v 3.4.0
-//	/**
-//	 * Returns a string that can be used to compare 2 fields, and to know if they are different or identical<br>
-//	 * NB : all the significant fields must be in this string !
-//	 * @return
-//	 */
-//	public String getComparableString() ; 
-	
 	//--------------------------------------------------------------------------
 	/**
 	 * Returns TRUE if the entity referenced by the link is embedded (useful for NoSQL databases)<br>

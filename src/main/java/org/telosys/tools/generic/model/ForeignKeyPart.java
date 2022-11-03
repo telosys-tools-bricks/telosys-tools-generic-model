@@ -34,25 +34,12 @@ public interface ForeignKeyPart {
 	 * Returns the name of the referenced entity
 	 * @return
 	 */
-	public String getReferencedEntity() ;
+	public String getReferencedEntityName() ;
 	
 	/**
 	 * Returns the name of the referenced attribute
 	 * @return
 	 */
-	public String getReferencedAttribute() ;
-	
-// Removed in v 3.4.0
-//	/**
-//	 * Returns the name of the referenced table
-//	 * @return
-//	 */
-//	public String getReferencedTable() ;
-//	
-//	/**
-//	 * Returns the name of the referenced column
-//	 * @return
-//	 */
-//	public String getReferencedColumn() ;
+	public String getReferencedAttributeName() ;
 	
 }

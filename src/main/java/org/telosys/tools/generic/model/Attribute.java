@@ -120,14 +120,6 @@ public interface Attribute {
 	 */
 	public GeneratedValueStrategy getGeneratedValueStrategy() ;
 	
-//	/**
-//	 * Returns the generator for a 'generated value'<br>
-//	 * Typically for JPA : 'SequenceGenerator' or 'TableGenerator'<br> 
-//	 * If not supported by the model implementation : 'null'
-//	 * @return
-//	 */
-//	public String getGeneratedValueGenerator() ;
-
 	/**
 	 * Returns the generator name (usable with SEQUENCE and TABLE strategy) <br>
 	 * or null if none
@@ -221,26 +213,11 @@ public interface Attribute {
 	 */
 	public String getPattern(); 
 
-//	/**
-//	 * Returns the 'sequence allocation size' to be used in the 'sequence generator' definition"<br>
-//	 * Typically for JPA '@SequenceGenerator/allocationSize'  <br> 
-//	 * If not supported by the model implementation : 'null'
-//	 * @return
-//	 */
-//	public Integer getSequenceGeneratorAllocationSize() ;
 	/**
 	 * Returns the allocation size usable for SEQUENCE and TABLE stategy
 	 * @return
 	 */
 	public Integer getGeneratedValueAllocationSize() ; // v 3.4.0
-
-//	/**
-//	 * Returns the name of the 'sequence generator' <br>
-//	 * Typically for JPA '@SequenceGenerator/name'<br> 
-//	 * If not supported by the model implementation : 'null'
-//	 * @return
-//	 */
-//	public String getSequenceGeneratorName() ;
 
 	/**
 	 * Returns the 'sequence name' to be used in the 'sequence generator' definition <br>
@@ -248,16 +225,7 @@ public interface Attribute {
 	 * If not supported by the model implementation : 'null'
 	 * @return
 	 */
-//	public String getSequenceGeneratorSequenceName() ;
 	public String getGeneratedValueSequenceName() ; // v 3.4.0
-
-//	/**
-//	 * Returns the name of the 'table generator' <br>
-//	 * Typically for JPA '@TableGenerator/name'  <br> 
-//	 * If not supported by the model implementation : 'null'
-//	 * @return
-//	 */
-//	public String getTableGeneratorName() ;
 
 	/**
 	 * Returns the name of the Primary Key column used in the 'table generator' <br> 
@@ -265,7 +233,6 @@ public interface Attribute {
 	 * If not supported by the model implementation : 'null'
 	 * @return
 	 */
-//	public String getTableGeneratorPkColumnName() ;
 	public String getGeneratedValueTablePkColumnName() ; // v 3.4.0
 
 	/**
@@ -275,7 +242,6 @@ public interface Attribute {
 	 * If not supported by the model implementation : 'null'
 	 * @return
 	 */
-//	public String getTableGeneratorPkColumnValue() ;
 	public String getGeneratedValueTablePkColumnValue() ; // v 3.4.0
 
 	/**
@@ -284,7 +250,6 @@ public interface Attribute {
 	 * If not supported by the model implementation : 'null'
 	 * @return
 	 */
-//	public String getTableGeneratorTable() ;
 	public String getGeneratedValueTableName() ; // v 3.4.0
 
 	/**
@@ -293,23 +258,7 @@ public interface Attribute {
 	 * If not supported by the model implementation : 'null'
 	 * @return
 	 */
-//	public String getTableGeneratorValueColumnName() ;
 	public String getGeneratedValueTableValueColumnName() ; // v 3.4.0
-	
-
-//	/**
-//	 * Returns TRUE if the attribute has a 'Sequence Generator' <br>
-//	 * If not supported by the model implementation : 'false'
-//	 * @return
-//	 */
-//	public boolean hasSequenceGenerator();
-//	
-//	/**
-//	 * Returns TRUE if the attribute has a 'Table Generator' <br>
-//	 * If not supported by the model implementation : 'false'
-//	 * @return
-//	 */
-//	public boolean hasTableGenerator();
 	
 	/**
 	 * Returns TRUE if the attribute is 'auto-incremented' by the database engine <br>
@@ -326,23 +275,25 @@ public interface Attribute {
 	 */
     public boolean isDatabaseNotNull() ;
 	
-	/**
-	 * Returns TRUE if the attribute must be a date 'AFTER a given value'
-	 * If not supported by the model implementation : 'false'
-	 * ( NOT USED )
-	 * @return
-	 * @deprecated 
-	 */
-	public boolean isDateAfter() ; // not used
+//	/**
+//	 * Returns TRUE if the attribute must be a date 'AFTER a given value'
+//	 * If not supported by the model implementation : 'false'
+//	 * ( NOT USED )
+//	 * @return
+//	 * @deprecated 
+//	 */
+//    @Deprecated
+//	public boolean isDateAfter() ; // not used
     
-	/**
-	 * Returns TRUE if the attribute must be a date 'BEFORE a given value'
-	 * If not supported by the model implementation : 'false'
-	 * ( NOT USED )
-	 * @return
-	 * @deprecated 
-	 */
-	public boolean isDateBefore() ;
+//	/**
+//	 * Returns TRUE if the attribute must be a date 'BEFORE a given value'
+//	 * If not supported by the model implementation : 'false'
+//	 * ( NOT USED )
+//	 * @return
+//	 * @deprecated 
+//	 */
+//    @Deprecated
+//	public boolean isDateBefore() ;
 	
 	/**
 	 * Returns TRUE if the attribute must be a date 'in the future'
@@ -504,12 +455,6 @@ public interface Attribute {
 	 */
 	public boolean isUsedInSelectedLinks(); 
 
-//	/**
-//	 * Returns all the tags defined in the attribute
-//	 * @return
-//	 * @since v 3.3.0
-//	 */
-//	public Map<String, String> getTagsMap();
 	/**
 	 * Returns all the tags defined in the link
 	 * @return

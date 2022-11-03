@@ -16,7 +16,7 @@
 package org.telosys.tools.generic.model;
 
 /**
- * Definition of a database column that is part of a foreign key
+ * Definition of a foreign key attribute
  * 
  * @author Laurent Guerin
  * @since 3.4.0  (replaces ForeignKeyColumn)
@@ -28,36 +28,18 @@ public interface ForeignKeyAttribute {
 	 * Returns the ordinal (position of the attribute in FK)
 	 * @return
 	 */
-	public int getOrdinal() ; // v 3.4.0
+	public int getOrdinal() ; 
 	
 	/**
-	 * The name of the attribute at the origin of the reference
+	 * Returns the name of the attribute at the origin of the reference
 	 * @return
 	 */
-	public String getOriginAttributeName() ;  // v 3.4.0
+	public String getOriginAttributeName() ;  
 
 	/**
-	 * The name of the referenced attribute
+	 * Returns the name of the referenced attribute
 	 * @return
 	 */
-	public String getReferencedAttributeName() ;  // v 3.4.0
+	public String getReferencedAttributeName() ;  
 
-//	/**
-//	 * Returns the name of the column
-//	 * @return
-//	 */
-//	public String getColumnName() ;
-//
-//	/**
-//	 * Returns the sequence of the column (the position in the foreign key : 1rst, 2nd, etc)
-//	 * @return
-//	 */
-//	public int getSequence() ;
-//
-//	/**
-//	 * Returns the name of the referenced column
-//	 * @return
-//	 */
-//	public String getReferencedColumnName() ;
-	
 }
