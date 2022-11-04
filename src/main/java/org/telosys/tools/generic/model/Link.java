@@ -171,5 +171,10 @@ public interface Link {
 	 */
 	public TagContainer getTagContainer(); // v 3.4.0
 	
-
+	/**
+	 * Returns TRUE if the link is marked as 'OrphanRemoval' (useful for ORM like JPA or Doctrine)<br>
+	 * @return
+	 * @since v 4.1.0
+	 */
+	public boolean isOrphanRemoval() ; // v 4.1.0
 }
