@@ -16,6 +16,7 @@
 package org.telosys.tools.generic.model;
 
 import java.io.Serializable;
+import java.util.EnumSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -36,14 +37,14 @@ public class CascadeOptions implements Serializable {
 	/**
 	 * Array indexed by enum value (0 to N), option undefined if null
 	 */
-	private final CascadeOption[] cascadeOptionsArray = new CascadeOption[CascadeOption.values().length];
+	private final EnumSet<CascadeOption> options = EnumSet.noneOf(CascadeOption.class);
 	
 	/**
 	 * Add a cascade option : MERGE, PERSIST, ALL, etc
 	 * @param cascadeOption
 	 */
 	public void add(CascadeOption cascadeOption) {
-		cascadeOptionsArray[cascadeOption.getValue()] = cascadeOption ;
+		options.add(cascadeOption);
 	}
 
 	/**
@@ -51,7 +52,7 @@ public class CascadeOptions implements Serializable {
 	 * @return
 	 */
 	public boolean isCascadeAll() {
-		return cascadeOptionsArray[CascadeOption.ALL.getValue()] == CascadeOption.ALL ;
+		return options.contains(CascadeOption.ALL);
 	}
 	
 	/**
@@ -59,7 +60,7 @@ public class CascadeOptions implements Serializable {
 	 * @return
 	 */
 	public boolean isCascadeMerge() {
-		return cascadeOptionsArray[CascadeOption.MERGE.getValue()] == CascadeOption.MERGE ;
+		return options.contains(CascadeOption.MERGE);
 	}
 	
 	/**
@@ -67,7 +68,7 @@ public class CascadeOptions implements Serializable {
 	 * @return
 	 */
 	public boolean isCascadePersist() {
-		return cascadeOptionsArray[CascadeOption.PERSIST.getValue()] == CascadeOption.PERSIST ;
+		return options.contains(CascadeOption.PERSIST);
 	}
 	
 	/**
@@ -75,7 +76,7 @@ public class CascadeOptions implements Serializable {
 	 * @return
 	 */
 	public boolean isCascadeRefresh() {
-		return cascadeOptionsArray[CascadeOption.REFRESH.getValue()] == CascadeOption.REFRESH ;
+		return options.contains(CascadeOption.REFRESH);
 	}
 
 	/**
@@ -83,17 +84,23 @@ public class CascadeOptions implements Serializable {
 	 * @return
 	 */
 	public boolean isCascadeRemove() {
-		return cascadeOptionsArray[CascadeOption.REMOVE.getValue()] == CascadeOption.REMOVE ;
+		return options.contains(CascadeOption.REMOVE);
 	}
 	
 	public List<CascadeOption> getActiveOptions() {
 		LinkedList<CascadeOption> list = new LinkedList<>() ;
-		for ( CascadeOption cascadeOption : cascadeOptionsArray ) {
-			if ( cascadeOption != null ) {
-				list.add(cascadeOption);
-			}
+		for ( CascadeOption o : options ) {
+			list.add(o);
 		}
 		return list;
+	}
+	
+	public int size() {
+		return options.size();
+	}
+	
+	public boolean isEmpty() {
+		return options.isEmpty();
 	}
 	
 	/* (non-Javadoc)
@@ -106,7 +113,7 @@ public class CascadeOptions implements Serializable {
 		else {		
 			int count = 0 ;
 			StringBuilder sb = new StringBuilder();
-			for ( CascadeOption c : cascadeOptionsArray ) {
+			for ( CascadeOption c : options ) {
 				if ( c != null ) {
 					if ( count > 0 ) {
 						sb.append(" ");

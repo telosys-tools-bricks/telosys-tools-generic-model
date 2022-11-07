@@ -12,15 +12,12 @@ import org.telosys.tools.generic.model.enums.CascadeOption;
 public class CascadeOptionsTest {
 
 	@Test
-	public void test0() {
-		System.out.println("\nCascadeOptionsTest : test0 : ");
-		System.out.println("CascadeOption.values().length = " + CascadeOption.values().length);
+	public void testEnum() {
 		assertEquals(5, CascadeOption.values().length );
 	}
 	
 	@Test
 	public void testInitialState() {
-		System.out.println("\nCascadeOptionsTest : initial state ");
 		CascadeOptions cascadeOptions = new CascadeOptions();
 		//--- All cascade options are supposed to be "false"
 		assertFalse(cascadeOptions.isCascadeAll());
@@ -34,24 +31,29 @@ public class CascadeOptionsTest {
 	}
 	
 	@Test
-	public void test1() {
-		System.out.println("\nCascadeOptionsTest : test1 : ");
+	public void testAdd() {
 		CascadeOptions cascadeOptions = new CascadeOptions();
 		
 		assertFalse(cascadeOptions.isCascadeAll());
 		assertFalse(cascadeOptions.isCascadeMerge());
 		assertFalse(cascadeOptions.isCascadePersist());
+		assertEquals(0, cascadeOptions.size());
+		assertTrue(cascadeOptions.isEmpty());
 		
 		cascadeOptions.add(CascadeOption.MERGE);
 		assertTrue(cascadeOptions.isCascadeMerge());
 		assertFalse(cascadeOptions.isCascadePersist());
 		assertFalse(cascadeOptions.isCascadeRefresh());
+		assertEquals(1, cascadeOptions.size());
+		assertFalse(cascadeOptions.isEmpty());
 
 		cascadeOptions.add(CascadeOption.PERSIST);
 		assertTrue(cascadeOptions.isCascadeMerge());
 		assertTrue(cascadeOptions.isCascadePersist());
 		assertFalse(cascadeOptions.isCascadeRefresh());
 		assertFalse(cascadeOptions.isCascadeRemove());
+		assertEquals(2, cascadeOptions.size());
+		assertFalse(cascadeOptions.isEmpty());
 
 		cascadeOptions.add(CascadeOption.REFRESH);
 		assertTrue(cascadeOptions.isCascadeMerge());
@@ -64,23 +66,17 @@ public class CascadeOptionsTest {
 		
 		cascadeOptions.add(CascadeOption.ALL);
 		assertTrue(cascadeOptions.isCascadeAll());
-		
-		String s = cascadeOptions.toString();
-		System.out.println("toString() = " + s);
 	}
 
 	@Test
-	public void test2() {
-		System.out.println("\nCascadeOptionsTest : test2 : ");
+	public void testAllPlusOther() {
 		CascadeOptions cascadeOptions = new CascadeOptions();
 		
 		assertFalse(cascadeOptions.isCascadeAll());
 		assertFalse(cascadeOptions.isCascadeMerge());
 		assertFalse(cascadeOptions.isCascadePersist());
 
-		String s = cascadeOptions.toString();
-		System.out.println("toString() = " + s);
-		assertEquals("", s);
+		assertEquals("", cascadeOptions.toString() );
 		
 		cascadeOptions.add(CascadeOption.ALL);
 
@@ -88,56 +84,40 @@ public class CascadeOptionsTest {
 		assertFalse(cascadeOptions.isCascadeMerge());
 		assertFalse(cascadeOptions.isCascadePersist());
 
-		s = cascadeOptions.toString();
-		System.out.println("toString() = " + s);
-		assertEquals("ALL", s);
+		assertEquals("ALL", cascadeOptions.toString() );
 
 		cascadeOptions.add(CascadeOption.PERSIST);
-		s = cascadeOptions.toString();
-		System.out.println("toString() = " + s);
-		assertEquals("ALL", s);
+		assertEquals("ALL", cascadeOptions.toString() );
 	}
 	
 	@Test
-	public void test3() {
-		System.out.println("\nCascadeOptionsTest : test3 : ");
+	public void testToString() {
 		CascadeOptions cascadeOptions = new CascadeOptions();
-
 		String s = cascadeOptions.toString();
-		System.out.println("toString() = " + s);
-		assertTrue(s.indexOf("MERGE") < 0 );
-		assertTrue(s.indexOf("REMOVE") < 0 );
+		assertTrue(s.length() == 0);
+		assertFalse(s.contains("MERGE") );
+		assertFalse(s.contains("REMOVE") );
 		
 		cascadeOptions.add(CascadeOption.MERGE);
 		s = cascadeOptions.toString();
-		System.out.println("toString() = " + s);
-		assertTrue(s.indexOf("MERGE") >= 0 );
-		assertTrue(s.indexOf("REMOVE") < 0 );
+		assertTrue(s.contains("MERGE") );
+		assertFalse(s.contains("REMOVE") );
 	}
 
 	@Test
-	public void test4() {
-		System.out.println("\nCascadeOptionsTest : test4 : ");
+	public void testGetActiveOptions() {
 		CascadeOptions cascadeOptions = new CascadeOptions();
-
-		System.out.println("toString() = " + cascadeOptions.toString());		
 		assertEquals(0,	cascadeOptions.getActiveOptions().size() );
 		
 		cascadeOptions.add(CascadeOption.MERGE);
-		System.out.println("toString() = " + cascadeOptions.toString());		
 		assertEquals(1,	cascadeOptions.getActiveOptions().size() );
-
 		cascadeOptions.add(CascadeOption.MERGE);
-		System.out.println("toString() = " + cascadeOptions.toString());		
 		assertEquals(1,	cascadeOptions.getActiveOptions().size() );
 
 		cascadeOptions.add(CascadeOption.PERSIST);
-		System.out.println("toString() = " + cascadeOptions.toString());		
 		assertEquals(2,	cascadeOptions.getActiveOptions().size() );
 
 		cascadeOptions.add(CascadeOption.ALL);
-		System.out.println("toString() = " + cascadeOptions.toString());		
 		assertEquals(3,	cascadeOptions.getActiveOptions().size() );
-
 	}
 }
