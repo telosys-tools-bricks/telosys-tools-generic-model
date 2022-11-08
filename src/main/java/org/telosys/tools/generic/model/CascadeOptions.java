@@ -118,7 +118,7 @@ public class CascadeOptions implements Serializable {
 					if ( count > 0 ) {
 						sb.append(" ");
 					}
-					sb.append(c.getText());
+					sb.append(c.getLongText());
 					count++;
 				}
 			}

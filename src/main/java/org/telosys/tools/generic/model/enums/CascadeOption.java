@@ -27,39 +27,41 @@ public enum CascadeOption {
 	/**
 	 * 
 	 */
-	MERGE(0, "MERGE"),
+	MERGE(0, "MERGE", "M"),
 	
 	/**
 	 * 
 	 */
-	PERSIST(1, "PERSIST"),
+	PERSIST(1, "PERSIST", "P"),
 	
 	/**
 	 * 
 	 */
-	REFRESH(2, "REFRESH"),
+	REFRESH(2, "REFRESH", "REF"),
 	
 	/**
 	 * 
 	 */
-	REMOVE(3, "REMOVE"),
+	REMOVE(3, "REMOVE", "REM"),
 		
 	/**
 	 * 
 	 */
-	ALL(4, "ALL");
+	ALL(4, "ALL", "A");
 	
 	//---------------------------------------------------
 	private final int    value ;
-	private final String text  ;
+	private final String longText  ;
+	private final String shortText  ;
 	
-	private CascadeOption(int value, String text) {
+	private CascadeOption(int value, String longText, String shortText) {
 		this.value = value ;
-		this.text  = text ;
+		this.longText  = longText ;
+		this.shortText  = shortText ;
 	}
 	
 	/**
-	 * Returns the fetch type as an int value (0 to 3) <br>
+	 * Returns the int value identifying the cascade option <br>
 	 * @return
 	 */
 	public int getValue() {
@@ -67,11 +69,20 @@ public enum CascadeOption {
 	}
 	
 	/**
-	 * Returns the fetch type as a text<br>
+	 * Returns the text in long format<br>
 	 * e.g. : 'MERGE', 'PERSIST', etc
 	 * @return
 	 */
-	public String getText() {
-		return this.text;
+	public String getLongText() {
+		return this.longText;
+	}
+
+	/**
+	 * Returns the text in short format<br>
+	 * e.g. : 'M', 'P', 'REF', etc
+	 * @return
+	 */
+	public String getShortText() {
+		return this.shortText;
 	}
 }
