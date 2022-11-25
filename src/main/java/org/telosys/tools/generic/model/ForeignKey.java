@@ -40,5 +40,6 @@ public interface ForeignKey {
     public List<ForeignKeyAttribute> getAttributes();
     
     public boolean isComposite();
-
+    
+    public boolean isExplicit(); // since 4.1.0 
 }
