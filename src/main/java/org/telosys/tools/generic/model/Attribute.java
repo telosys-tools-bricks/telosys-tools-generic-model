@@ -356,12 +356,13 @@ public interface Attribute {
 	 */
     public boolean isNotNull() ;
 
-	/**
-	 * Returns TRUE if the attribute is selected (check-box checked in the GUI) <br>
-	 * If not supported by the model implementation : 'true' (attribute 'selected' by default)
-	 * @return
-	 */
-	public boolean isSelected() ;
+// removed in v 4.1.0
+//	/**
+//	 * Returns TRUE if the attribute is selected (check-box checked in the GUI) <br>
+//	 * If not supported by the model implementation : 'true' (attribute 'selected' by default)
+//	 * @return
+//	 */
+//	public boolean isSelected() ;
 
 	/**
 	 * Returns TRUE if a primitive type is expected for this attribute <br>
