@@ -148,4 +148,6 @@ public interface Entity
 	public String getContext(); // v 3.4.0
 	public boolean isDatabaseView(); // v 3.4.0
 	public String getDatabaseTablespace(); // v 3.4.0
+
+	public boolean isJoinEntity() ; // v 4.1.0
 }
