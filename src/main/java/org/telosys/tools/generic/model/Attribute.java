@@ -269,12 +269,13 @@ public interface Attribute {
 	 */
     public boolean isAutoIncremented();
 
-	/**
-	 * Returns TRUE if the attribute must be 'NOT NULL' when stored in the database
-	 * If not supported by the model implementation : 'false'
-	 * @return
-	 */
-    public boolean isDatabaseNotNull() ;
+//	/**
+//	 * Returns TRUE if the attribute must be 'NOT NULL' when stored in the database
+//	 * If not supported by the model implementation : 'false'
+//	 * @return
+//	 */
+// REMOVED in v 4.1
+//    public boolean isDatabaseNotNull() ;
 	
 //	/**
 //	 * Returns TRUE if the attribute must be a date 'AFTER a given value'
