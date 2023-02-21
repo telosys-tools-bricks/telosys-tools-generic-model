@@ -49,11 +49,12 @@ public interface Link {
 	 */
 	public String getFieldName() ;
 
-	/**
-	 * Returns TRUE if the link is the 'Owning Side' of the relationship between 2 entities
-	 * @return
-	 */
-	public boolean isOwningSide() ;
+// removed in v 4.1.0
+//	/**
+//	 * Returns TRUE if the link is the 'Owning Side' of the relationship between 2 entities
+//	 * @return
+//	 */
+//	public boolean isOwningSide() ;
 
 	/**
 	 * Returns the name of the link in the 'owning side' <br>
@@ -69,11 +70,12 @@ public interface Link {
 	 */
 	public boolean isSelected() ; 
 	
-	/**
-	 * Returns TRUE if the link is the 'Inverse Side' of the relationship between 2 entities
-	 * @return
-	 */
-	public boolean isInverseSide() ;
+// removed in v 4.1.0
+//	/**
+//	 * Returns TRUE if the link is the 'Inverse Side' of the relationship between 2 entities
+//	 * @return
+//	 */
+//	public boolean isInverseSide() ;
 
 	/**
 	 * Returns Optional value for this link 
