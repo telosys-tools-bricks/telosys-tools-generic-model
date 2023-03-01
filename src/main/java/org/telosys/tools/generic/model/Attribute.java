@@ -268,13 +268,14 @@ public interface Attribute {
 //	 */
 //	public String getGeneratedValueTableValueColumnName() ; // v 3.4.0
 	
-	/**
-	 * Returns TRUE if the attribute is 'auto-incremented' by the database engine <br>
-	 * when a new entity is inserted in the database <br>
-	 * If not supported by the model implementation : 'false'
-	 * @return
-	 */
-    public boolean isAutoIncremented();
+// removed in v 4.1.0
+//	/**
+//	 * Returns TRUE if the attribute is 'auto-incremented' by the database engine <br>
+//	 * when a new entity is inserted in the database <br>
+//	 * If not supported by the model implementation : 'false'
+//	 * @return
+//	 */
+//    public boolean isAutoIncremented();
 
 //	/**
 //	 * Returns TRUE if the attribute must be 'NOT NULL' when stored in the database
