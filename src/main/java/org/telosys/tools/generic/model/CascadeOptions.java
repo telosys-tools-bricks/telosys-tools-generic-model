@@ -37,10 +37,18 @@ public class CascadeOptions implements Serializable {
 	/**
 	 * Array indexed by enum value (0 to N), option undefined if null
 	 */
-	private final EnumSet<CascadeOption> options = EnumSet.noneOf(CascadeOption.class);
+	private final EnumSet<CascadeOption> options ;
 	
 	/**
-	 * Add a cascade option : MERGE, PERSIST, ALL, etc
+	 * Constructor : creates an empty set of CascadeOption
+	 */
+	public CascadeOptions() {
+		super();
+		this.options = EnumSet.noneOf(CascadeOption.class);
+	}
+
+	/**
+	 * Add a cascade option (MERGE, PERSIST, ALL, etc) in the set if not already exists
 	 * @param cascadeOption
 	 */
 	public void add(CascadeOption cascadeOption) {
