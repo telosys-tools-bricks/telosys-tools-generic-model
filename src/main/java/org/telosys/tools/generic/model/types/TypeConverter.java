@@ -45,9 +45,6 @@ public abstract class TypeConverter {
 	
 	private final HashMap<String, LanguageType> objectTypes         = new HashMap<>();
 	
-	// removed in v 3.3.0
-	//private final HashMap<String, LanguageType> objectSqlTypes      = new HashMap<>();
-
 	private String specificCollectionFullType   = null ;
 	private String specificCollectionSimpleType = null ;
 	
@@ -55,7 +52,7 @@ public abstract class TypeConverter {
 	 * Constructor
 	 * @param languageName
 	 */
-	public TypeConverter(String languageName) {
+	protected TypeConverter(String languageName) {
 		super();
 		this.languageName = languageName;
 	}
@@ -124,15 +121,6 @@ public abstract class TypeConverter {
 		objectTypes.put(languageType.getNeutralType(), languageType);
 	}
 	
-	// removed in v 3.3.0
-//	/**
-//	 * Declares a SQL object type
-//	 * @param languageType
-//	 */
-//	protected void declareObjectSqlType(LanguageType languageType) {
-//		objectSqlTypes.put(languageType.getNeutralType(), languageType);
-//	}
-	
 	//--------------------------------------------------------------------------------------------
 	// Get "PRIMITIVE TYPE" with or without "unsigned" option
 	//--------------------------------------------------------------------------------------------
@@ -184,31 +172,6 @@ public abstract class TypeConverter {
 		return objectTypes.get(neutralType);
 	}
 
-//	/**
-//	 * Returns an object type for the given neutral type (or null if none)
-//	 * @param neutralType
-//	 * @param isSqlTypeExpected
-//	 * @return
-//	 */
-//	protected LanguageType getObjectType(String neutralType, boolean isSqlTypeExpected ) {
-//		if ( isSqlTypeExpected ) {
-//			// Try to get a SQL object type
-//			LanguageType lt = objectSqlTypes.get(neutralType);
-//			if ( lt != null ) {
-//				// SQL type FOUND
-//				return lt ;
-//			}
-//			else {
-//				// SQL type NOT FOUND => try to get a regular object type
-//				return objectTypes.get(neutralType);
-//			}
-//		}
-//		else {
-//			// Try to get a regular object type
-//			return objectTypes.get(neutralType);
-//		}
-//	}
-	
 	//--------------------------------------------------------------------------------------------
 	// Get type for attribute or attribute info 
 	//--------------------------------------------------------------------------------------------

@@ -48,6 +48,9 @@ public class LanguageType {
 	 */
 	protected LanguageType(String neutralType, String simpleType, String fullType, boolean isPrimitiveType, String wrapperType) {
 		super();
+		if ( neutralType == null || simpleType == null || fullType == null || wrapperType == null ) {
+			throw new IllegalArgumentException("LanguageType constructor : null argument");
+		}
 		this.neutralType = neutralType;
 		this.simpleType = simpleType;
 		this.fullType = fullType;
@@ -55,6 +58,10 @@ public class LanguageType {
 		this.wrapperType = wrapperType ;
 	}
 
+	public boolean isEmpty() {
+		return simpleType.isEmpty() && fullType.isEmpty() && wrapperType.isEmpty();
+	}
+	
 	/**
 	 * Returns the original neutral type (before conversion to specific language type)
 	 * @return

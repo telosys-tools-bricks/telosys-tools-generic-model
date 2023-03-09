@@ -26,54 +26,104 @@ import java.util.List;
  */
 public class TypeConverterForPHP extends TypeConverter {
 
+	private static final String PHP_STRING = "string" ;
+	private static final String PHP_BOOL   = "bool" ;
+	private static final String PHP_INT    = "int" ;
+	private static final String PHP_FLOAT  = "float" ;
+
 	public TypeConverterForPHP() {
 		super("PHP");
-		// No type for PHP => all types are "" (void string")
-		//--- Pseudo types :
-		declarePrimitiveType( buildType(NeutralType.STRING ) );
-		declarePrimitiveType( buildType(NeutralType.BOOLEAN ) );
-		declarePrimitiveType( buildType(NeutralType.BYTE ) );
-		declarePrimitiveType( buildType(NeutralType.SHORT) );
-		declarePrimitiveType( buildType(NeutralType.INTEGER) );
-		declarePrimitiveType( buildType(NeutralType.LONG ) );
-		declarePrimitiveType( buildType(NeutralType.FLOAT ) );
-		declarePrimitiveType( buildType(NeutralType.DOUBLE ) );
-		declarePrimitiveType( buildType(NeutralType.DECIMAL ) );
-		declarePrimitiveType( buildType(NeutralType.DATE ) );
-		declarePrimitiveType( buildType(NeutralType.TIME ) );
-		declarePrimitiveType( buildType(NeutralType.TIMESTAMP ) );
-		declarePrimitiveType( buildType(NeutralType.BINARY ) ); 		
+		//--- PHP types added in ver 4.1.0 :
+		//--- PHP types added in ver 4.1.0 :
+		declarePrimitiveType( buildPrimitiveType(NeutralType.STRING,  PHP_STRING ) );
+		declarePrimitiveType( buildPrimitiveType(NeutralType.BOOLEAN, PHP_BOOL   ) );
+		declarePrimitiveType( buildPrimitiveType(NeutralType.BYTE,    PHP_INT) );
+		declarePrimitiveType( buildPrimitiveType(NeutralType.SHORT,   PHP_INT) );
+		declarePrimitiveType( buildPrimitiveType(NeutralType.INTEGER, PHP_INT) );
+		declarePrimitiveType( buildPrimitiveType(NeutralType.LONG,    PHP_INT ) );
+		declarePrimitiveType( buildPrimitiveType(NeutralType.FLOAT,   PHP_FLOAT ) );
+		declarePrimitiveType( buildPrimitiveType(NeutralType.DOUBLE,  PHP_FLOAT ) );
+		declarePrimitiveType( buildPrimitiveType(NeutralType.DECIMAL, PHP_FLOAT ) );
+		
+		declareObjectType( buildObjectType(NeutralType.DATE,      "", "" ) ); 
+		declareObjectType( buildObjectType(NeutralType.TIME,      "", "" ) );
+		declareObjectType( buildObjectType(NeutralType.TIMESTAMP, "DateTime", "\\DateTime" ) ); // backslash is "global namespace" 
+		declareObjectType( buildObjectType(NeutralType.BINARY,    "", "" ) ); 		
 	}
-	private LanguageType buildType(String neutralType) {
+	
+	private LanguageType buildPrimitiveType(String neutralType, String primitiveType)  {
 		return new LanguageType(neutralType, 
-				"",   // String simpleType, 
-				"",   // String fullType, 
+				primitiveType,   // String simpleType, 
+				primitiveType,   // String fullType, 
 				true, // boolean isPrimitiveType, 
-				"" ); // String wrapperType
+				primitiveType ); // String wrapperType
+	}
+
+	private LanguageType buildObjectType(String neutralType, String simpleType, String fullType)  {
+		return new LanguageType(neutralType, 
+				simpleType,   // String simpleType, 
+				fullType,   // String fullType, 
+				false, // boolean isPrimitiveType, 
+				simpleType ); // String wrapperType
 	}
 
 	@Override
 	public List<String> getComments() {
 		List<String> l = new LinkedList<>();
-		l.add("PHP is dynamically typed, there are no types in the source code.");
-		l.add("Hence the type conversion always return a void string.");
+		l.add("Typed class properties have been added in PHP 7.4");
+		l.add("Telosys returns the type usable for class properties");
 		return l ;
 	}
-
+	
 	@Override
 	public LanguageType getType(AttributeTypeInfo attributeTypeInfo) {
-		log("type info : " + attributeTypeInfo );		
-		return getPrimitiveType( attributeTypeInfo.getNeutralType() );
+		LanguageType lt = getPhpType(attributeTypeInfo) ;
+		if ( lt.isEmpty() ) {
+			return lt;
+		}
+		else {
+			// add "?" if "nullable"
+			if ( attributeTypeInfo.isNotNull() ) {
+				// return type as is : "string", "int", etc
+				return lt;
+			}
+			else { // nullable 
+				// add "?"
+				return nullableType(lt); 
+			}
+		}
 	}
+	private LanguageType getPhpType(AttributeTypeInfo attributeTypeInfo) {
+		// Search a "primitive type" first 
+		LanguageType languageType = getPrimitiveType(attributeTypeInfo.getNeutralType() ) ; 
+		if ( languageType != null ) { // FOUND
+			return languageType ;
+		}
+		else {
+			// if "primitive type" not found search an "object type" : date, timestamp
+			languageType = getObjectType(attributeTypeInfo.getNeutralType() ) ;
+			if ( languageType != null ) { // FOUND
+				return languageType ;
+			}
+		}
+		throwTypeNotFoundException(attributeTypeInfo);
+		return null ;  // just to avoid compilation error
+	}
+	private LanguageType nullableType(LanguageType t) {	
+		return new LanguageType(t.getNeutralType(), 
+				nullableType(t.getSimpleType()), 
+				nullableType(t.getFullType()), 
+				t.isPrimitiveType(), 
+				nullableType(t.getWrapperType()) );
+	}
+	private String nullableType(String type) {
+		return "?" + type;
+	}	
 	
 	//--------------------------------------------------------------------------------------------
 	// Collection type ( since v 3.3.0 )
 	//--------------------------------------------------------------------------------------------
 	// NOT APPLICABLE FOR 'PHP' :
-	// /**
-	//  * @ORM\OneToMany(targetEntity="Yoda\EventBundle\Entity\Event", mappedBy="owner")
-	//  */
-	// protected $events;
 	// 
 	private static final String STANDARD_COLLECTION_SIMPLE_TYPE = "" ; 
 	private static final String STANDARD_COLLECTION_FULL_TYPE   = "" ; 
