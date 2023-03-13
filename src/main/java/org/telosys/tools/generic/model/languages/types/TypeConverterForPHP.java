@@ -79,23 +79,6 @@ public class TypeConverterForPHP extends TypeConverter {
 	
 	@Override
 	public LanguageType getType(AttributeTypeInfo attributeTypeInfo) {
-		LanguageType lt = getPhpType(attributeTypeInfo) ;
-		if ( lt.isEmpty() ) {
-			return lt;
-		}
-		else {
-			// add "?" if "nullable"
-			if ( attributeTypeInfo.isNotNull() ) {
-				// return type as is : "string", "int", etc
-				return lt;
-			}
-			else { // nullable 
-				// add "?"
-				return nullableType(lt); 
-			}
-		}
-	}
-	private LanguageType getPhpType(AttributeTypeInfo attributeTypeInfo) {
 		// Search a "primitive type" first 
 		LanguageType languageType = getPrimitiveType(attributeTypeInfo.getNeutralType() ) ; 
 		if ( languageType != null ) { // FOUND
@@ -110,16 +93,6 @@ public class TypeConverterForPHP extends TypeConverter {
 		}
 		throw new TelosysTypeNotFoundException(getLanguageName(), attributeTypeInfo);
 	}
-	private LanguageType nullableType(LanguageType t) {	
-		return new LanguageType(t.getNeutralType(), 
-				nullableType(t.getSimpleType()), 
-				nullableType(t.getFullType()), 
-				t.isPrimitiveType(), 
-				nullableType(t.getWrapperType()) );
-	}
-	private String nullableType(String type) {
-		return "?" + type;
-	}	
 	
 	//--------------------------------------------------------------------------------------------
 	// Collection type ( since v 3.3.0 )

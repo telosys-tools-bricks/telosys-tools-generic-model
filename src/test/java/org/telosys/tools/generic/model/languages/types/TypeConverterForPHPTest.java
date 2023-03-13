@@ -33,15 +33,6 @@ public class TypeConverterForPHPTest  {
 		return getTypeConverter().getType(typeInfo);
 	}
 	
-	
-	private void checkPrimitiveType( LanguageType lt, String primitiveType) {
-		assertNotNull(lt);
-		assertTrue ( lt.isPrimitiveType() ) ;
-		assertEquals(primitiveType, lt.getSimpleType() );
-		assertEquals(primitiveType, lt.getFullType() );
-		assertEquals(primitiveType, lt.getWrapperType() );
-	}
-
 	private void checkObjectType( LanguageType lt, String simpleType, String fullType) {
 		assertNotNull(lt);
 		assertFalse ( lt.isPrimitiveType() ) ;
@@ -50,13 +41,15 @@ public class TypeConverterForPHPTest  {
 		assertEquals(simpleType, lt.getWrapperType() );
 	}
 
-	private void checkPrimitiveTypeExpected(String neutralType, String targetType) {
-		String nullableTargetType = "?" + targetType;
-		checkPrimitiveType( getType( neutralType, NONE ),               nullableTargetType );
-		checkPrimitiveType( getType( neutralType, PRIMITIVE_TYPE ),     nullableTargetType );
-		checkPrimitiveType( getType( neutralType, OBJECT_TYPE),         nullableTargetType );
-		checkPrimitiveType( getType( neutralType, UNSIGNED_TYPE ),      nullableTargetType);
+	private void checkPrimitiveType( LanguageType lt, String primitiveType) {
+		assertNotNull(lt);
+		assertTrue ( lt.isPrimitiveType() ) ;
+		assertEquals(primitiveType, lt.getSimpleType() );
+		assertEquals(primitiveType, lt.getFullType() );
+		assertEquals(primitiveType, lt.getWrapperType() );
+	}
 
+	private void checkPrimitiveTypeExpected(String neutralType, String targetType) {
 		checkPrimitiveType( getType( neutralType, NOT_NULL ),                  targetType );
 		checkPrimitiveType( getType( neutralType, NOT_NULL + PRIMITIVE_TYPE),  targetType );
 		checkPrimitiveType( getType( neutralType, NOT_NULL + OBJECT_TYPE ),    targetType );
@@ -109,11 +102,6 @@ public class TypeConverterForPHPTest  {
 	}
 
 	private void checkDateTimeExpected(String neutralType) {
-		checkObjectType( getType( neutralType, NONE ),                  "?DateTime", "?\\DateTime" );
-		checkObjectType( getType( neutralType, PRIMITIVE_TYPE ),        "?DateTime", "?\\DateTime");
-		checkObjectType( getType( neutralType, OBJECT_TYPE),            "?DateTime", "?\\DateTime" );
-		checkObjectType( getType( neutralType, UNSIGNED_TYPE ),         "?DateTime", "?\\DateTime");
-
 		checkObjectType( getType( neutralType, NOT_NULL ),                 "DateTime", "\\DateTime");
 		checkObjectType( getType( neutralType, NOT_NULL + PRIMITIVE_TYPE), "DateTime", "\\DateTime" );
 		checkObjectType( getType( neutralType, NOT_NULL + OBJECT_TYPE),    "DateTime", "\\DateTime" );

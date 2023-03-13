@@ -3,8 +3,6 @@ package org.telosys.tools.generic.model.languages.literals;
 import static org.telosys.tools.generic.model.languages.types.AttributeTypeInfo.NONE;
 
 import org.junit.Test;
-import org.telosys.tools.generic.model.languages.literals.LiteralValuesProvider;
-import org.telosys.tools.generic.model.languages.literals.LiteralValuesProviderForPHP;
 import org.telosys.tools.generic.model.languages.types.AttributeTypeInfo;
 import org.telosys.tools.generic.model.languages.types.LanguageType;
 import org.telosys.tools.generic.model.languages.types.TypeConverter;
@@ -24,8 +22,7 @@ public class LiteralValuesProviderForPHPTest {
 	}
 	private LanguageType getLanguageType(AttributeTypeInfo typeInfo ) {
 		System.out.println( typeInfo + " --> " + typeInfo );
-		LanguageType lt = getTypeConverter().getType(typeInfo);
-		return lt ;
+		return getTypeConverter().getType(typeInfo);
 	}
 	private LanguageType getLanguageType(String neutralType, int typeInfo ) {
 		AttributeTypeInfo attributeTypeInfo = new AttributeTypeInfo(neutralType, typeInfo);
