@@ -89,7 +89,7 @@ public class TypeConverterForCSharp extends TypeConverter {
 		l.add("'@UnsignedType'  has effect only for byte, short, int, long ");
 		l.add("'@ObjectType'  switches to .Net types ( System.Int64, System.Boolean, etc) ");
 		l.add("");
-		l.add("'@NotNull'  has no effect ");
+		l.add("'@NotNull'  has no effect, use '$csharp' object for 'nullable type' with '?' ");
 		l.add("'@PrimitiveType'  has no effect ");
 		return l ;
 	}
