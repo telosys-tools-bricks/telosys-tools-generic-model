@@ -170,4 +170,16 @@ public class TypeConverterForKotlinTest  {
 		checkObjectType( getType( NeutralType.TIMESTAMP, NOT_NULL ),       KOTLIN_LOCALDATETIME,  KOTLIN_LOCALDATETIME_FULLTYPE );
 	}
 
+	private static final String KOTLIN_BYTEARRAY = "ByteArray";
+	@Test
+	public void testByteArray() {
+		checkPrimitiveType( getType( NeutralType.BINARY, NONE ),                           KOTLIN_BYTEARRAY, KOTLIN_BYTEARRAY );
+		checkPrimitiveType( getType( NeutralType.BINARY, NOT_NULL ),                       KOTLIN_BYTEARRAY, KOTLIN_BYTEARRAY );
+		checkPrimitiveType( getType( NeutralType.BINARY, PRIMITIVE_TYPE ),                 KOTLIN_BYTEARRAY, KOTLIN_BYTEARRAY );
+		checkPrimitiveType( getType( NeutralType.BINARY, UNSIGNED_TYPE ),                  KOTLIN_BYTEARRAY, KOTLIN_BYTEARRAY );
+		checkPrimitiveType( getType( NeutralType.BINARY, PRIMITIVE_TYPE + UNSIGNED_TYPE ), KOTLIN_BYTEARRAY, KOTLIN_BYTEARRAY );
+		checkPrimitiveType( getType( NeutralType.BINARY, OBJECT_TYPE),                     KOTLIN_BYTEARRAY, KOTLIN_BYTEARRAY );
+		checkPrimitiveType( getType( NeutralType.BINARY, NOT_NULL + OBJECT_TYPE),          KOTLIN_BYTEARRAY, KOTLIN_BYTEARRAY );
+	}
+
 }

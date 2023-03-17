@@ -29,21 +29,22 @@ import org.telosys.tools.generic.model.types.NeutralType;
  */
 public class TypeConverterForKotlin extends TypeConverter {
 
-	private static final String KOTLIN_STRING    = "String" ;
-	private static final String KOTLIN_BOOLEAN   = "Boolean" ;
-	private static final String KOTLIN_BYTE      = "Byte" ;
-	private static final String KOTLIN_UBYTE     = "UByte" ;  // literal with "u" : 12u
-	private static final String KOTLIN_SHORT     = "Short" ;
-	private static final String KOTLIN_USHORT    = "UShort" ; // literal with "u" : 12u
-	private static final String KOTLIN_INT       = "Int" ;
-	private static final String KOTLIN_UINT      = "UInt" ; // literal with "u" : 12u
-	private static final String KOTLIN_LONG      = "Long" ; // literal (nothing special) : 12
-	private static final String KOTLIN_ULONG     = "ULong" ; // literal 12u
-	private static final String KOTLIN_FLOAT     = "Float" ; // literal with "f" : var ff: Float = 123.45f
-	private static final String KOTLIN_DOUBLE    = "Double" ; // literal (nothing special) : var dd: Double = 123.45
-	private static final String KOTLIN_BYTEARRAY = "ByteArray " ;
+	// Pseudo "primitive types" (no import)
+	public static final String KOTLIN_STRING    = "String" ;
+	public static final String KOTLIN_BOOLEAN   = "Boolean" ;
+	public static final String KOTLIN_BYTE      = "Byte" ;
+	public static final String KOTLIN_UBYTE     = "UByte" ;  // literal with "u" : 12u
+	public static final String KOTLIN_SHORT     = "Short" ;
+	public static final String KOTLIN_USHORT    = "UShort" ; // literal with "u" : 12u
+	public static final String KOTLIN_INT       = "Int" ;
+	public static final String KOTLIN_UINT      = "UInt" ; // literal with "u" : 12u
+	public static final String KOTLIN_LONG      = "Long" ; // literal (nothing special) : 12
+	public static final String KOTLIN_ULONG     = "ULong" ; // literal 12u
+	public static final String KOTLIN_FLOAT     = "Float" ; // literal with "f" : var ff: Float = 123.45f
+	public static final String KOTLIN_DOUBLE    = "Double" ; // literal (nothing special) : var dd: Double = 123.45
+	public static final String KOTLIN_BYTEARRAY = "ByteArray" ;
 
-	
+	// Object types ( Java objects => import required )	
 	public static final String JAVA_BIGDECIMAL    = "java.math.BigDecimal" ; // import java.math.BigDecimal
 	public static final String JAVA_LOCALDATE     = "java.time.LocalDate" ;  // import java.time.LocalDateTime
 	public static final String JAVA_LOCALTIME     = "java.time.LocalTime" ;
@@ -97,7 +98,7 @@ public class TypeConverterForKotlin extends TypeConverter {
 	public List<String> getComments() {
 		List<String> l = new LinkedList<>();
 		l.add("'@UnsignedType' :  <br>&nbsp;  has effect only for 'byte', 'short', 'int' and 'long' ");
-		l.add("'@NotNull' :       <br>&nbsp;  no effect, use '$kotlin' object for 'nullable type' with '?'  ");
+		l.add("'@NotNull' :       <br>&nbsp;  no effect on types, use '$kotlin' object for 'nullable type' with '?'  ");
 		l.add("'@PrimitiveType' : <br>&nbsp;  no effect ");
 		l.add("'@ObjectType' :    <br>&nbsp;  no effect ");
 		return l ;
@@ -112,7 +113,7 @@ public class TypeConverterForKotlin extends TypeConverter {
 			return lt ;
 		}
 		else { // NOT FOUND in primitive types
-			// try to found in object types
+			// Search in object types
 			lt = getObjectType(attributeTypeInfo.getNeutralType() ) ;
 			if ( lt != null ) { // FOUND
 				return lt ;

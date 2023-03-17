@@ -124,6 +124,45 @@ public abstract class LiteralValuesProvider {
 	protected boolean buildBooleanValue(int step) {
 		return step % 2 != 0 ;
 	}
+
+	/**
+	 * Builds a date in ISO format, eg "2001-06-22" 
+	 * @param step
+	 * @return
+	 */
+	protected String buildDateISO(int step) {
+		return buildYearValue(step) + "-06-22" ; 
+	}
+	
+	/**
+	 * Builds a time in ISO format, eg "15:46:52"
+	 * @param step
+	 * @return
+	 */
+	protected String buildTimeISO(int step) {
+		return buildHourValue(step) + ":46:52" ; 
+	}
+	
+	/**
+	 * Builds a date+time in ISO format, eg "2001-05-21T15:47:53"
+	 * @param step
+	 * @return
+	 */
+	protected String buildDateTimeISO(int step) {
+		return buildYearValue(step) + "-05-21" 
+				+ "T" 
+				+ buildHourValue(step) + ":47:53" ;  
+	}
+	
+	private String buildYearValue(int step) {
+		int year = 2000 + ( step % 1000 ) ;  // between 2000 and 2999 
+		return "" + year ;
+	}
+	private String buildHourValue(int step) {
+		int hour = step % 24 ;
+		return String.format("%02d", hour) ; // between 0 and 23		
+	}
+	
 	
 	//------------------------------------------------------------------------------------
 	// ABSTRACT METHODS
