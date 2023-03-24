@@ -4,10 +4,12 @@ import org.junit.Test;
 import org.telosys.tools.generic.model.languages.TargetLanguageProvider;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class TargetLanguageProviderTest  {
 
 	private void check(String languageName) {
+		assertTrue(TargetLanguageProvider.isDefinedLanguage(languageName));
 		assertNotNull( TargetLanguageProvider.getTargetLanguage(languageName) );
 		assertNotNull( TargetLanguageProvider.getTargetLanguage(languageName).getTypeConverter() );
 		assertNotNull( TargetLanguageProvider.getTargetLanguage(languageName).getLiteralValuesProvider() );
@@ -15,6 +17,19 @@ public class TargetLanguageProviderTest  {
 		assertNotNull( TargetLanguageProvider.getLiteralValuesProvider(languageName) );
 	}
 	
+	@Test(expected=IllegalArgumentException.class)
+	public void testGetTargetLanguageWithNull() {
+		TargetLanguageProvider.getTargetLanguage(null);
+	}
+	@Test(expected=IllegalArgumentException.class)
+	public void testGetTypeConverterWithNull() {
+		TargetLanguageProvider.getTypeConverter(null);
+	}
+	@Test(expected=IllegalArgumentException.class)
+	public void testGetLiteralValuesProviderWithNull() {
+		TargetLanguageProvider.getLiteralValuesProvider(null);
+	}
+
 	@Test
 	public void testCPlusPlus() {
 		check("C++");
@@ -46,6 +61,13 @@ public class TargetLanguageProviderTest  {
 		check("JavaScript");
 		check(" javascript");
 		check("JAVASCRIPT  ");
+	}
+
+	@Test
+	public void testKotlin() {
+		check("KOTLIN");
+		check(" Kotlin");
+		check("kotlin ");
 	}
 
 	@Test

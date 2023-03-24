@@ -35,6 +35,7 @@ public final class TargetLanguageProvider {
 		languages.put("GO",         new TargetLanguageForGo() );
 		languages.put("JAVA",       new TargetLanguageForJava() );
 		languages.put("JAVASCRIPT", new TargetLanguageForJavaScript() );
+		languages.put("KOTLIN",     new TargetLanguageForKotlin() );
 		languages.put("PHP",        new TargetLanguageForPHP() );
 		languages.put("PYTHON",     new TargetLanguageForPython() );
 		languages.put("SCALA",      new TargetLanguageForScala() );
