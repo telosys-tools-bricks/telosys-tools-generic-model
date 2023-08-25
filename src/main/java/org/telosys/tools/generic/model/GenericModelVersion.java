@@ -23,7 +23,7 @@ package org.telosys.tools.generic.model;
  */
 public class GenericModelVersion {
 
-	public static final String VERSION = "4.0.0" ;
+	public static final String VERSION = "4.1.0" ;
 	
 	private GenericModelVersion() {
 	}

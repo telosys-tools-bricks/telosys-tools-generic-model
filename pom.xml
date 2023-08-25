@@ -12,7 +12,7 @@
 
 	<name>telosys-tools-generic-model</name>
 	<artifactId>telosys-tools-generic-model</artifactId>
-	<version>4.0.0</version> <!-- also update version in GenericModelVersion.java  -->
+	<version>4.1.0</version> <!-- also update version in GenericModelVersion.java  -->
 	<packaging>jar</packaging>
 	
 	<dependencies>
