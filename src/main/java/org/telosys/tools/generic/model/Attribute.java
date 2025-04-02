@@ -510,4 +510,7 @@ public interface Attribute {
 	 */
 	public boolean isUnique() ; // v 3.4.0
 
+
+	public Integer getScale();  // 2025-04-02
+	public Integer getPrecision(); // 2025-04-02
 }
