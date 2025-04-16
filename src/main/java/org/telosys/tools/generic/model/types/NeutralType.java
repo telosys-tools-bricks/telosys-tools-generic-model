@@ -45,7 +45,8 @@ public final class NeutralType {
     public static final String DATE      = "date";
     public static final String TIME      = "time";
     public static final String TIMESTAMP = "timestamp";
-    
+    public static final String TIMESTAMPZ = "timestampz";
+
     public static final String BINARY   = "binary";   // BLOB
     // public static final String LONGTEXT = "longtext"; // CLOB
     
@@ -72,7 +73,8 @@ public final class NeutralType {
     	list.add(DATE);
     	list.add(TIME);
     	list.add(TIMESTAMP);
-    	
+        list.add(TIMESTAMPZ);
+
     	list.add(BINARY);
     	
     	return list ;
