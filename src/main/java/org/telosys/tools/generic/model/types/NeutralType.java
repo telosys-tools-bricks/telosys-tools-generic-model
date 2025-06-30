@@ -42,12 +42,17 @@ public final class NeutralType {
     
     public static final String BOOLEAN   = "boolean";
     
-    public static final String DATE      = "date";
-    public static final String TIME      = "time";
-    public static final String TIMESTAMP = "timestamp";
+    public static final String DATE       = "date";
+    public static final String TIME       = "time";
+    public static final String TIMESTAMP  = "timestamp";  // 4.3.0 deprecated (kept as 'datetime' synonym) 
+    public static final String DATETIME   = "datetime";   // since ver 4.3.0
+    public static final String DATETIMETZ = "datetimetz"; // since ver 4.3.0
+    public static final String TIMETZ     = "timetz";     // since ver 4.3.0
+
+    public static final String UUID       = "uuid";     // since ver 4.3.0
     
     public static final String BINARY   = "binary";   // BLOB
-    // public static final String LONGTEXT = "longtext"; // CLOB
+    //  "longtext"; // CLOB not used (string is enough)
     
     /**
      * Returns all the neutral types
@@ -71,8 +76,13 @@ public final class NeutralType {
     	
     	list.add(DATE);
     	list.add(TIME);
-    	list.add(TIMESTAMP);
+    	list.add(TIMETZ);      // ver 4.3.0
+    	list.add(DATETIME);    // ver 4.3.0
+    	list.add(DATETIMETZ);  // ver 4.3.0
+    	list.add(TIMESTAMP);   // deprecated in ver 4.3.0
     	
+    	list.add(UUID);  // ver 4.3.0
+
     	list.add(BINARY);
     	
     	return list ;
