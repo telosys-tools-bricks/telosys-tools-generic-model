@@ -15,9 +15,7 @@
  */
 package org.telosys.tools.generic.model;
 
-import java.util.*;
-
-import org.telosys.tools.generic.model.enums.ModelType;
+import java.util.List;
 
 /**
  * This interface describe an abstract model that must be implemented 
@@ -37,24 +35,6 @@ public interface Model {
      */
     public String getName() ;
     
-	/**
-     * Returns the model folder name if it exists for the type of model<br>
-     * For example 'xxx_model' for model 'xxx' or '' (void) for a 'db-model' <br>
-	 * This information is MANDATORY, it must be provided by all models implementations <br> 
-	 * It cannot be null, but can be void if not applicable
-	 * @return
-	 */
-	public String getFolderName() ;
-
-    /**
-     * Returns the Telosys model type <br>
-	 * This information is MANDATORY, it must be provided by all models implementations <br>
-	 * It cannot be null or void
-	 * 
-     * @return
-     */
-    public ModelType getType() ;
-
     /**
      * Returns the Telosys model version <br>
 	 * This information is MANDATORY, it must be provided by all models implementations <br>
