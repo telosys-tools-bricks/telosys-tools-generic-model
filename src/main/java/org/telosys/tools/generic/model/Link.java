@@ -49,13 +49,6 @@ public interface Link {
 	 */
 	public String getFieldName() ;
 
-// removed in v 4.1.0
-//	/**
-//	 * Returns TRUE if the link is the 'Owning Side' of the relationship between 2 entities
-//	 * @return
-//	 */
-//	public boolean isOwningSide() ;
-
 	/**
 	 * Returns the name of the link in the 'owning side' <br>
 	 * Typically for JPA 'mappedBy' <br>
@@ -64,19 +57,13 @@ public interface Link {
 	 */
 	public String getMappedBy() ;
 
-	/**
-	 * Returns TRUE if the link is selected (check-box checked in the GUI)
-	 * @return
-	 */
-	public boolean isSelected() ; 
-	
-// removed in v 4.1.0
+// removed in v 4.3.0
 //	/**
-//	 * Returns TRUE if the link is the 'Inverse Side' of the relationship between 2 entities
+//	 * Returns TRUE if the link is selected (check-box checked in the GUI)
 //	 * @return
 //	 */
-//	public boolean isInverseSide() ;
-
+//	public boolean isSelected() ; 
+	
 	/**
 	 * Returns Optional value for this link 
 	 * @return
