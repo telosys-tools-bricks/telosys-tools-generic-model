@@ -84,19 +84,21 @@ public interface Attribute {
 	 */
 	public String getDatabaseType();
 
-	/**
-	 * Returns the 'date after' value (for date validation)<br> 
-	 * If not supported by the model implementation : 'null'
-	 * @return
-	 */
-	public String getDateAfterValue() ;
+// removed in ver 4.3.0
+//	/**
+//	 * Returns the 'date after' value (for date validation)<br> 
+//	 * If not supported by the model implementation : 'null'
+//	 * @return
+//	 */
+//	public String getDateAfterValue() ;
 
-	/**
-	 * Returns the 'date before' value (for date validation)<br> 
-	 * If not supported by the model implementation : 'null'
-	 * @return
-	 */
-	public String getDateBeforeValue() ;
+// removed in ver 4.3.0
+//	/**
+//	 * Returns the 'date before' value (for date validation)<br> 
+//	 * If not supported by the model implementation : 'null'
+//	 * @return
+//	 */
+//	public String getDateBeforeValue() ;
 
 	/**
 	 * Returns the default value for the attribute (or null if none) <br> 
